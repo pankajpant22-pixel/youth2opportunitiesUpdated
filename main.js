@@ -79,4 +79,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+
+  // get all forms. This is to handle multiple forms in the same page
+  let forms = document.querySelectorAll(".launchlist-form-popup");
+  // submit form
+  forms.forEach((form) => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get the action url of the form
+      let action = form.getAttribute("action");
+
+      // Get the form data
+      let formData = new FormData(form);
+
+      // Submit the form
+      fetch(action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json"
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok) {
+            // replace iframe src
+            let iframe = document.querySelector(".launchlist-iframe");
+            iframe.src = data.embeddedLink;
+            // show modal
+            toggleModal();
+          } else {
+            // You can catch error here
+            alert(data.error);
+          }
+        })
+        .catch((error) => {
+          // You can catch error here
+          console.error(error);
+        });
+    });
+  });
+
 });
