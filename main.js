@@ -1,86 +1,119 @@
 /* ============================================
    Y2O — Youth2Opportunities
-   Main JavaScript
+   Complete JavaScript
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- Navbar scroll effect ---
+  /* --- Nav scroll effect --- */
   const nav = document.querySelector('.nav');
-  const scrollThreshold = 60;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  function handleScroll() {
-    if (window.scrollY > scrollThreshold) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  }
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll(); // run on load
-
-
-  // --- Mobile hamburger menu ---
+  /* --- Mobile hamburger --- */
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
-
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       navLinks.classList.toggle('mobile-open');
       document.body.style.overflow = navLinks.classList.contains('mobile-open') ? 'hidden' : '';
     });
-
-    // Close mobile menu when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('mobile-open');
-        document.body.style.overflow = '';
-      });
-    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('mobile-open');
+      document.body.style.overflow = '';
+    }));
   }
 
-
-  // --- Scroll reveal animations ---
-  const revealElements = document.querySelectorAll('.reveal');
-
+  /* --- Scroll reveal --- */
+  const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
-    revealElements.forEach(el => observer.observe(el));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => obs.observe(el));
   } else {
-    // Fallback: just show everything
-    revealElements.forEach(el => el.classList.add('visible'));
+    revealEls.forEach(el => el.classList.add('visible'));
   }
 
-
-  // --- Smooth scroll for anchor links ---
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
+  /* --- Smooth anchor scroll --- */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        const offset = nav.offsetHeight + 20;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        const top = target.getBoundingClientRect().top + window.scrollY - (nav.offsetHeight + 20);
         window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });
 
+  /* --- Portfolio preview toggle --- */
+  const ppStudentView = document.getElementById('pp-student-view');
+  const ppExternalView = document.getElementById('pp-external-view');
+  const ppBtns = document.querySelectorAll('.pp-toggle-btn');
 
+  if (ppBtns.length && ppStudentView && ppExternalView) {
+    ppBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.dataset.view;
+        ppBtns.forEach(b => b.classList.toggle('active', b.dataset.view === view));
+        ppStudentView.style.display = view === 'student' ? '' : 'none';
+        ppExternalView.style.display = view === 'external' ? '' : 'none';
+      });
+    });
+  }
 
+  /* --- Growth wheel SVG rings --- */
+  const wheels = [
+    { name: 'Leadership', pct: 72, color: 'var(--teal)' },
+    { name: 'Communication', pct: 85, color: 'var(--navy)' },
+    { name: 'Teamwork', pct: 68, color: 'var(--maroon)' },
+    { name: 'Problem Solving', pct: 55, color: 'var(--gold)' },
+    { name: 'Initiative', pct: 90, color: 'var(--teal)' },
+    { name: 'Self-Management', pct: 60, color: 'var(--navy)' },
+  ];
+  const wheelContainer = document.getElementById('pp-wheel');
+  if (wheelContainer) {
+    wheels.forEach(w => {
+      const d = document.createElement('div');
+      d.className = 'pp-wheel-item';
+      d.innerHTML = `<div class="pp-wheel-ring"><svg viewBox="0 0 36 36"><path class="bg" d="M18 2.0845a15.9155 15.9155 0 010 31.831 15.9155 15.9155 0 010-31.831"/><path class="fg" style="stroke:${w.color};stroke-dasharray:${w.pct},100" d="M18 2.0845a15.9155 15.9155 0 010 31.831 15.9155 15.9155 0 010-31.831"/></svg><div class="pp-wheel-label"><span class="pct">${w.pct}</span><span class="nm">${w.name}</span></div></div>`;
+      wheelContainer.appendChild(d);
+    });
+  }
+
+  /* --- Learn More accordions --- */
+  const lmCards = document.querySelectorAll('.lm-card');
+  lmCards.forEach(card => {
+    const header = card.querySelector('.lm-card-header');
+    const body = card.querySelector('.lm-card-body');
+    if (header && body) {
+      body.style.display = 'none';
+      header.addEventListener('click', () => {
+        const isOpen = card.classList.contains('open');
+        // Close all
+        lmCards.forEach(c => {
+          c.classList.remove('open');
+          const b = c.querySelector('.lm-card-body');
+          if (b) b.style.display = 'none';
+          const chev = c.querySelector('.lm-chevron');
+          if (chev) chev.textContent = '+';
+        });
+        // Open clicked (if was closed)
+        if (!isOpen) {
+          card.classList.add('open');
+          body.style.display = '';
+          const chev = card.querySelector('.lm-chevron');
+          if (chev) chev.textContent = '−';
+        }
+      });
+    }
+  });
+
+  /* --- Waitlist form --- */
   // get all forms. This is to handle multiple forms in the same page
   let forms = document.querySelectorAll(".launchlist-form-popup");
   // submit form
