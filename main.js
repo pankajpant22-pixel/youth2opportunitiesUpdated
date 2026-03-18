@@ -155,4 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: {
+      delay: 3000, // 3 seconds
+      disableOnInteraction: false, // keep autoplay after user interaction
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
 });
