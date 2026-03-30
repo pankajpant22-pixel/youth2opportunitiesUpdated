@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Y2O — Your Growth Record</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#7B2D26;--navy:#1F2B6C;--teal:#1A9E8F;--gold:#D4A843;
+  --coral:#D85A30;--purple:#534AB7;
+  --bg:#F7F6F3;--surface:#FFFFFF;--border:rgba(31,43,108,0.08);
+  --text-primary:#111827;--text-secondary:#4B5563;--text-muted:#9CA3AF;
+  --green-light:#E1F5EE;--green-mid:#1A9E8F;--green-dark:#0F6E56;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-primary);-webkit-font-smoothing:antialiased}
+
+/* NAV */
+.topnav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:100}
+.wordmark{font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:var(--maroon);letter-spacing:-.5px}
+.wordmark span{color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:10px}
+
+/* TABS */
+.view-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.vtab{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:7px 16px;border:none;background:var(--surface);color:var(--text-muted);cursor:pointer;transition:all .15s}
+.vtab.on{background:var(--navy);color:#fff}
+.vtab:not(:last-child){border-right:1px solid var(--border)}
+
+/* VIEW TOGGLE mobile/web */
+.device-toggle{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.dtab{font-size:11px;font-weight:500;padding:6px 12px;border:none;background:var(--surface);color:var(--text-muted);cursor:pointer;transition:all .15s}
+.dtab.on{background:var(--maroon);color:#fff}
+
+.nav-btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--maroon);color:#fff;cursor:pointer;transition:all .15s}
+.nav-btn:hover{background:#6a2520}
+
+/* SCREENS */
+.screen{display:none}.screen.on{display:block}
+.layout{max-width:1140px;margin:0 auto;padding:20px 20px 48px}
+
+/* WEB LAYOUT */
+.web-layout{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start}
+.sidebar{background:var(--surface);border-radius:16px;border:1px solid var(--border);overflow:hidden;position:sticky;top:74px}
+
+/* SIDEBAR PARTS */
+.sb-profile{padding:20px 18px;text-align:center;border-bottom:1px solid var(--border)}
+.avatar-ring{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--teal) 0%,var(--navy) 100%);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:#fff;margin:0 auto 10px}
+.av-sm{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
+.sb-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:2px}
+.sb-meta{font-size:10px;color:var(--text-muted);line-height:1.6}
+.sb-sec{padding:14px 18px;border-bottom:1px solid var(--border)}
+.sb-sec:last-child{border-bottom:none}
+.sec-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px}
+
+/* SCORE RING */
+.score-ring-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+.score-ring-svg{width:100px;height:100px}
+.score-ring-num{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--text-primary);line-height:1}
+.score-ring-lbl{font-size:10px;color:var(--text-muted)}
+.score-explainer{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:11px;color:var(--text-secondary);line-height:1.5}
+.score-explainer strong{color:var(--navy);font-weight:600}
+
+/* PROFILE BAR */
+.prog-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:11px;color:var(--text-secondary)}
+.prog-pct{font-weight:600;color:var(--text-primary);font-family:'Sora',sans-serif}
+.pbar{height:5px;background:var(--bg);border-radius:3px;overflow:hidden}
+.pfill{height:5px;border-radius:3px;background:var(--teal)}
+.prog-hint{font-size:10px;color:var(--text-muted);margin-top:5px}
+.prog-hint strong{color:var(--teal);cursor:pointer}
+
+/* PEER RANKING */
+.peer-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.peer-row:last-child{margin-bottom:0}
+.peer-rank{font-family:'Sora',sans-serif;font-size:10px;font-weight:600;color:var(--text-muted);width:14px;flex-shrink:0}
+.peer-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.peer-name{font-size:11px;color:var(--text-secondary);flex:1}
+.peer-bar-wrap{width:50px;height:4px;background:var(--bg);border-radius:2px;overflow:hidden}
+.peer-bar-fill{height:4px;border-radius:2px;background:#D3D1C7}
+.peer-score{font-size:11px;font-weight:600;color:var(--text-primary);width:22px;text-align:right}
+.you-row .peer-name{color:var(--green-dark);font-weight:600}
+.you-row .peer-bar-fill{background:var(--teal)}
+.you-row .peer-score{color:var(--green-dark)}
+
+/* PILLAR MINI */
+.pillar-mini-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.pillar-mini-row:last-child{margin-bottom:0}
+.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pm-name{font-size:11px;color:var(--text-secondary);flex:1}
+.pm-bar{width:54px;height:4px;background:var(--bg);border-radius:2px;overflow:hidden}
+.pm-fill{height:4px;border-radius:2px}
+.pm-score{font-size:11px;font-weight:600;color:var(--text-primary);width:22px;text-align:right}
+
+/* MAIN */
+.main-content{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--surface);border-radius:14px;border:1px solid var(--border);overflow:hidden;animation:fadeUp .3s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.1s}
+.card:nth-child(3){animation-delay:.15s}.card:nth-child(4){animation-delay:.2s}
+.card-body{padding:14px 16px}
+.section-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:12px}
+
+/* NUDGE */
+.nudge{background:var(--green-light);border:1px solid rgba(26,158,143,.2);border-radius:11px;padding:10px 13px;display:flex;align-items:center;gap:9px}
+.ndot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+.ntext{font-size:12px;color:var(--green-dark);font-weight:500;flex:1}
+.ncta{font-size:11px;color:var(--teal);font-weight:600;cursor:pointer;white-space:nowrap}
+
+/* HOURS */
+.hour-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.hcard{background:var(--bg);border-radius:12px;padding:12px 11px;cursor:pointer;transition:all .2s;border:1px solid transparent}
+.hcard:hover{background:var(--surface);border-color:var(--border);transform:translateY(-1px)}
+.hcard.open{background:var(--surface);border-color:var(--border)}
+.hnum{font-family:'Sora',sans-serif;font-size:26px;font-weight:700;line-height:1}
+.hunit{font-size:10px;color:var(--text-muted);font-weight:500}
+.hlbl{font-size:10px;color:var(--text-secondary);margin-top:3px}
+.hchev{width:13px;height:13px;margin-top:5px;transition:transform .2s;stroke:var(--text-muted);fill:none;stroke-width:1.5;stroke-linecap:round}
+.hcard.open .hchev{transform:rotate(180deg)}
+.hdrop{display:none;margin-top:8px;border-top:1px solid var(--border);padding-top:8px}
+.hcard.open .hdrop{display:block}
+.hd-row{display:flex;justify-content:space-between;padding:2px 0;font-size:10px;color:var(--text-secondary)}
+.hd-h{font-weight:600;color:var(--text-primary)}
+
+/* PILLARS */
+.pillar-card{background:var(--bg);border-radius:12px;border:1px solid transparent;overflow:hidden;cursor:pointer;transition:all .2s;margin-bottom:9px}
+.pillar-card:last-child{margin-bottom:0}
+.pillar-card:hover{background:var(--surface);border-color:var(--border)}
+.pillar-card.open{background:var(--surface);border-color:var(--border)}
+.ph{display:flex;align-items:center;gap:11px;padding:12px 13px}
+.picon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pinfo{flex:1}
+.pname{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:1px}
+.pdesc-sm{font-size:10px;color:var(--text-muted);line-height:1.4}
+.pscore{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary)}
+.pscore-unit{font-size:9px;color:var(--text-muted);font-weight:400}
+.pbody{display:none;padding:0 13px 13px;border-top:1px solid var(--border)}
+.pillar-card.open .pbody{display:block}
+.pillar-note{background:var(--bg);border-radius:9px;padding:10px 12px;margin:10px 0 8px;font-size:11px;color:var(--text-secondary);line-height:1.55}
+.pillar-note strong{color:var(--text-primary);font-weight:600}
+.more-btn{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--text-muted);border:1px solid var(--border);border-radius:20px;padding:3px 9px;cursor:not-allowed;opacity:.6;margin-top:2px}
+.comp-row{display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid var(--border)}
+.comp-row:last-of-type{border-bottom:none}
+.comp-name{font-size:11px;color:var(--text-secondary);flex:1}
+.comp-bar{height:4px;background:var(--bg);border-radius:2px;overflow:hidden;width:76px}
+.comp-fill{height:4px;border-radius:2px}
+.comp-pct{font-size:11px;font-weight:600;color:var(--text-primary);width:30px;text-align:right}
+.paid-lock{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--gold);background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.25);border-radius:20px;padding:3px 9px;margin-top:8px;cursor:pointer}
+.research-line{font-size:9px;color:var(--text-muted);margin:6px 0 0;font-style:italic}
+
+/* RADAR */
+.radar-wrap{display:flex;justify-content:center;padding:6px 0 2px}
+
+/* MIX */
+.mix-card{background:var(--bg);border-radius:11px;padding:13px}
+.mix-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px}
+.mix-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--text-primary)}
+.mix-sub{font-size:10px;color:var(--text-muted);margin-top:2px}
+.mix-share{font-size:10px;font-weight:600;color:var(--teal);cursor:pointer;padding:3px 9px;border:1px solid rgba(26,158,143,.3);border-radius:20px;transition:all .15s;white-space:nowrap}
+.mix-share:hover{background:var(--green-light)}
+.mix-track{height:7px;background:#E5E3DB;border-radius:5px;position:relative}
+.mix-fill{position:absolute;top:0;left:0;height:100%;border-radius:5px;background:var(--teal)}
+.mix-marker{position:absolute;top:-4px;width:3px;height:15px;background:var(--navy);border-radius:2px}
+.mix-ends{display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);margin-top:4px}
+
+/* ACTIVITY */
+.act-item{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)}
+.act-item:last-child{border-bottom:none}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.abody{flex:1}
+.atitle{font-size:12px;font-weight:500;color:var(--text-primary)}
+.ameta{font-size:10px;color:var(--text-muted);margin-top:1px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.verified-badge{font-size:9px;font-weight:600;color:var(--green-dark);background:var(--green-light);padding:1px 5px;border-radius:4px}
+.self-badge{font-size:9px;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:1px 5px;border-radius:4px}
+.atags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.atag{font-size:9px;padding:2px 6px;border-radius:20px}
+.tg{background:#E1F5EE;color:#085041}.tb{background:#E6EDF8;color:#1F2B6C}
+.ta{background:#FDF3DC;color:#7A5C0E}.tc{background:#FAECE7;color:#993C1D}
+.tp{background:#EEEDFE;color:#3C3489}
+.ahrs{font-size:11px;font-weight:600;color:var(--text-muted);flex-shrink:0;margin-top:3px}
+.verify-btn{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;color:var(--navy);border:1px solid rgba(31,43,108,.2);border-radius:6px;padding:3px 8px;margin-top:5px;cursor:pointer;background:transparent;transition:all .15s}
+.verify-btn:hover{background:rgba(31,43,108,.05)}
+.verify-btn.sent{color:var(--green-dark);border-color:rgba(26,158,143,.3);cursor:default}
+
+/* TEASER */
+.teaser{background:var(--bg);border:1px dashed rgba(31,43,108,.15);border-radius:11px;padding:13px;text-align:center}
+.teaser-title{font-size:12px;font-weight:500;color:var(--text-secondary)}
+.teaser-sub{font-size:10px;color:var(--text-muted);margin-top:3px}
+.teaser-lock{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--navy);background:rgba(31,43,108,.06);border-radius:20px;padding:3px 9px;margin-top:7px}
+
+/* LOG BTN */
+.log-btn{width:100%;padding:12px;background:var(--maroon);color:#fff;border:none;border-radius:11px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.log-btn:hover{background:#6a2520;transform:translateY(-1px)}
+
+/* MOBILE */
+.mobile-wrap{max-width:400px;margin:0 auto}
+.phone{background:var(--surface);border-radius:36px;border:1px solid var(--border);overflow:hidden;box-shadow:0 16px 48px rgba(31,43,108,.09)}
+.phone-sb{display:flex;justify-content:space-between;padding:10px 20px 5px;font-size:11px;color:var(--text-muted);font-weight:500}
+.phone-scroll{max-height:700px;overflow-y:auto;padding-bottom:70px}
+.phone-scroll::-webkit-scrollbar{display:none}
+
+/* MOBILE HEADER */
+.m-hdr{display:flex;align-items:center;gap:11px;padding:12px 15px;border-bottom:1px solid var(--border)}
+.m-hdr-info{flex:1}
+.m-hdr-name{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--text-primary);line-height:1}
+.m-hdr-meta{font-size:10px;color:var(--text-muted);margin-top:2px;line-height:1.5}
+.score-badge{display:inline-flex;align-items:center;gap:4px;background:var(--green-light);border-radius:20px;padding:4px 10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--green-dark)}
+
+/* MOBILE SECTIONS */
+.ms{padding:12px 14px}
+.ms-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:9px}
+.mdiv{height:1px;background:var(--border)}
+
+/* MOBILE HOURS */
+.m-hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.m-hcard{background:var(--bg);border-radius:11px;padding:10px 9px;cursor:pointer;border:1px solid transparent;transition:all .2s}
+.m-hcard:hover,.m-hcard.open{background:var(--surface);border-color:var(--border)}
+.m-hnum{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;line-height:1}
+.m-hunit{font-size:9px;color:var(--text-muted);font-weight:500}
+.m-hlbl{font-size:9px;color:var(--text-secondary);margin-top:2px}
+.m-hdrop{display:none;margin-top:7px;border-top:1px solid var(--border);padding-top:7px}
+.m-hcard.open .m-hdrop{display:block}
+.m-hd-row{display:flex;justify-content:space-between;padding:2px 0;font-size:9px;color:var(--text-secondary)}
+.m-hd-h{font-weight:600;color:var(--text-primary)}
+
+/* MOBILE PILLARS */
+.m-pcard{background:var(--bg);border-radius:11px;border:1px solid transparent;overflow:hidden;cursor:pointer;transition:all .2s;margin-bottom:8px}
+.m-pcard:last-child{margin-bottom:0}
+.m-pcard:hover,.m-pcard.open{background:var(--surface);border-color:var(--border)}
+.m-ph{display:flex;align-items:center;gap:10px;padding:10px 11px}
+.m-picon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.m-pinfo{flex:1}
+.m-pname{font-family:'Sora',sans-serif;font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:1px}
+.m-pdesc{font-size:9px;color:var(--text-muted)}
+.m-pscore{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary)}
+.m-pbody{display:none;padding:0 11px 11px;border-top:1px solid var(--border)}
+.m-pcard.open .m-pbody{display:block}
+.m-pillar-note{background:var(--bg);border-radius:8px;padding:8px 10px;margin:8px 0 7px;font-size:10px;color:var(--text-secondary);line-height:1.5}
+.m-more-btn{display:inline-flex;align-items:center;gap:3px;font-size:9px;color:var(--text-muted);border:1px solid var(--border);border-radius:20px;padding:2px 7px;opacity:.6;cursor:not-allowed;margin-top:1px}
+.m-comp-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border)}
+.m-comp-row:last-of-type{border-bottom:none}
+.m-comp-name{font-size:10px;color:var(--text-secondary);flex:1}
+.m-comp-bar{height:3px;background:var(--bg);border-radius:2px;overflow:hidden;width:56px}
+.m-comp-fill{height:3px;border-radius:2px}
+.m-comp-pct{font-size:10px;font-weight:600;color:var(--text-primary);width:26px;text-align:right}
+.m-paid-lock{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:var(--gold);background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.25);border-radius:20px;padding:2px 7px;margin-top:6px}
+.m-research-line{font-size:9px;color:var(--text-muted);margin-top:4px;font-style:italic}
+
+/* MOBILE FRIENDS */
+.m-friend-strip{display:flex;gap:7px;align-items:flex-end}
+.m-fc{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1}
+.m-fscore{font-size:10px;font-weight:600;color:var(--text-primary)}
+.m-fbar{width:22px;background:var(--bg);border-radius:3px 3px 0 0;position:relative;overflow:hidden}
+.m-ffill{position:absolute;bottom:0;left:0;width:100%;border-radius:3px 3px 0 0;background:#D3D1C7}
+.m-fav{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600}
+.m-fyou .m-fscore{color:var(--green-dark);font-size:11px;font-weight:700}
+.m-fyou .m-ffill{background:var(--teal)}
+.m-fyou .m-fav{width:32px;height:32px;border:2px solid var(--teal);font-size:11px}
+.m-fyou-lbl{font-size:8px;color:var(--teal);font-weight:600}
+
+/* MOBILE ACT */
+.m-act-item{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border)}
+.m-act-item:last-child{border-bottom:none}
+.m-atitle{font-size:11px;font-weight:500;color:var(--text-primary)}
+.m-ameta{font-size:9px;color:var(--text-muted);margin-top:1px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.m-atags{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
+.m-atag{font-size:8px;padding:1px 5px;border-radius:20px}
+.m-ahrs{font-size:10px;font-weight:600;color:var(--text-muted);flex-shrink:0;margin-top:3px}
+.m-verify-btn{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:500;color:var(--navy);border:1px solid rgba(31,43,108,.2);border-radius:5px;padding:2px 6px;margin-top:4px;cursor:pointer;background:transparent;transition:all .15s}
+.m-verify-btn.sent{color:var(--green-dark);border-color:rgba(26,158,143,.3)}
+
+/* MOBILE MIX */
+.m-mix{background:var(--bg);border-radius:10px;padding:11px}
+.m-mix-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.m-mix-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:600;color:var(--text-primary)}
+.m-mix-sub{font-size:9px;color:var(--text-muted);margin-top:1px}
+.m-mix-share{font-size:9px;font-weight:600;color:var(--teal);cursor:pointer;padding:2px 8px;border:1px solid rgba(26,158,143,.3);border-radius:20px}
+.m-mix-track{height:6px;background:#E5E3DB;border-radius:4px;position:relative}
+.m-mix-fill{position:absolute;top:0;left:0;height:100%;border-radius:4px;background:var(--teal)}
+.m-mix-marker{position:absolute;top:-3px;width:2px;height:12px;background:var(--navy);border-radius:2px}
+.m-mix-ends{display:flex;justify-content:space-between;font-size:8px;color:var(--text-muted);margin-top:3px}
+
+/* MOBILE BOTTOM NAV */
+.m-bnav{display:flex;background:var(--surface);border-top:1px solid var(--border);padding:7px 0 11px}
+.m-bnt{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:3px 0;border:none;background:transparent}
+.m-bnt svg{width:20px;height:20px;stroke:var(--text-muted);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
+.m-bnt span{font-size:9px;color:var(--text-muted);transition:color .15s}
+.m-bnt.on svg{stroke:var(--maroon)}
+.m-bnt.on span{color:var(--maroon);font-weight:600}
+
+/* FAB */
+.m-fab-wrap{position:sticky;bottom:70px;left:0;right:0;padding:0 15px;pointer-events:none;display:flex;justify-content:flex-end;margin-bottom:-60px}
+.m-fab{pointer-events:all;width:50px;height:50px;border-radius:50%;background:var(--maroon);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(123,45,38,.35);transition:transform .15s}
+.m-fab:hover{transform:scale(1.05)}
+
+/* PARENT VIEW */
+.parent-banner{background:rgba(31,43,108,.05);border:1px solid rgba(31,43,108,.12);border-radius:11px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.parent-banner-text{font-size:12px;color:var(--navy);font-weight:500}
+.parent-banner-sub{font-size:10px;color:var(--text-muted);margin-top:1px}
+.nudge-parent{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--maroon);border:1px solid rgba(123,45,38,.25);border-radius:8px;padding:6px 12px;cursor:pointer;background:transparent;transition:all .15s;white-space:nowrap}
+.nudge-parent:hover{background:rgba(123,45,38,.05)}
+.nudge-parent.sent{color:var(--green-dark);border-color:rgba(26,158,143,.3)}
+
+/* ORG VIEW */
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.org-card{background:var(--surface);border-radius:12px;border:1px solid var(--border);padding:14px}
+.org-card-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:8px}
+.org-num{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--text-primary);line-height:1}
+.org-num-sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+.queue-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.queue-item:last-child{border-bottom:none}
+.queue-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.queue-info{flex:1}
+.queue-name{font-size:12px;font-weight:500;color:var(--text-primary)}
+.queue-meta{font-size:10px;color:var(--text-muted);margin-top:1px}
+.confirm-btn{font-size:10px;font-weight:600;color:var(--green-dark);background:var(--green-light);border:none;border-radius:6px;padding:5px 10px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.confirm-btn:hover{background:#c5edde}
+.confirm-btn.done{background:#E5E3DB;color:var(--text-muted);cursor:default}
+.org-category-row{display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid var(--border)}
+.org-category-row:last-child{border-bottom:none}
+.org-cat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.org-cat-name{font-size:11px;color:var(--text-secondary);flex:1}
+.org-cat-bar{width:80px;height:4px;background:var(--bg);border-radius:2px;overflow:hidden}
+.org-cat-fill{height:4px;border-radius:2px}
+.org-cat-h{font-size:11px;font-weight:600;color:var(--text-primary);width:26px;text-align:right}
+.alert-row{display:flex;align-items:center;gap:9px;padding:8px;background:#FDF3DC;border-radius:8px;margin-bottom:7px}
+.alert-row:last-child{margin-bottom:0}
+.alert-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.alert-text{font-size:11px;color:#7A5C0E}
+.match-card{background:var(--navy);border-radius:12px;padding:16px;text-align:center;color:#fff}
+.match-num{font-family:'Sora',sans-serif;font-size:36px;font-weight:700;line-height:1}
+.match-lbl{font-size:12px;opacity:.7;margin-top:3px}
+.match-sub{font-size:10px;opacity:.5;margin-top:5px}
+
+/* RADAR TOOLTIP */
+.radar-container{position:relative;display:inline-block}
+.radar-coming-soon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(31,43,108,.88);color:#fff;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;padding:8px 16px;border-radius:20px;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap}
+.radar-container:hover .radar-coming-soon{opacity:1}
+.radar-container:hover svg{opacity:.35;transition:opacity .2s}
+.radar-container svg{transition:opacity .2s}
+
+/* LOG MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border-radius:20px;padding:0;width:100%;max-width:480px;margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(31,43,108,.18);animation:modalIn .2s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border)}
+.modal-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--text-primary)}
+.modal-close{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:18px;line-height:1;transition:all .15s}
+.modal-close:hover{background:var(--bg)}
+.modal-body{padding:20px}
+.modal-step-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px}
+.cat-grid-modal{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.cat-btn-modal{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px 11px;cursor:pointer;text-align:left;transition:all .15s}
+.cat-btn-modal.sel{border-color:var(--maroon);background:rgba(123,45,38,.05)}
+.cat-btn-modal:hover{background:var(--surface)}
+.cat-btn-name{font-size:12px;font-weight:500;color:var(--text-primary);margin-top:3px}
+.cat-btn-eg{font-size:10px;color:var(--text-muted);margin-top:1px}
+.hrs-row-modal{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.hrs-step-modal{width:38px;height:38px;border:1px solid var(--border);background:var(--bg);border-radius:9px;font-size:18px;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.hrs-step-modal:hover{background:var(--surface)}
+.hrs-num-modal{font-family:'Sora',sans-serif;font-size:26px;font-weight:700;color:var(--text-primary);min-width:30px;text-align:center}
+.chip-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.chip-modal{font-size:11px;padding:5px 11px;border-radius:20px;border:1px solid var(--border);background:var(--bg);cursor:pointer;color:var(--text-secondary);transition:all .15s}
+.chip-modal.sel{background:var(--navy);border-color:var(--navy);color:#fff}
+.reflect-modal{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--text-primary);font-family:'DM Sans',sans-serif;resize:none;height:70px;outline:none;transition:border-color .15s;margin-bottom:5px}
+.reflect-modal:focus{border-color:var(--teal)}
+.reflect-modal::placeholder{color:var(--text-muted)}
+.reflect-hint{font-size:10px;color:var(--text-muted);margin-bottom:18px}
+.modal-save-btn{width:100%;padding:13px;background:var(--maroon);color:#fff;border:none;border-radius:12px;font-family:'Sora',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.modal-save-btn:hover{background:#6a2520}
+.modal-success{display:none;text-align:center;padding:32px 20px}
+.modal-success-icon{width:52px;height:52px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.modal-success-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:6px}
+.modal-success-sub{font-size:12px;color:var(--text-muted)}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wordmark">
+    <svg width="52" height="28" viewBox="0 0 52 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="22" font-family="Sora,sans-serif" font-weight="700" font-size="22" fill="#7B2D26" letter-spacing="-0.5">Y</text>
+      <rect x="14" y="4" width="16" height="16" rx="4" fill="#1F2B6C"/>
+      <text x="16.5" y="17" font-family="Sora,sans-serif" font-weight="700" font-size="13" fill="#fff">2</text>
+      <text x="32" y="22" font-family="Sora,sans-serif" font-weight="700" font-size="22" fill="#1A9E8F" letter-spacing="-0.5">O</text>
+    </svg>
+  </div>
+  <div class="nav-right">
+    <div class="view-tabs">
+      <button class="vtab on" onclick="showTab('student')">Student</button>
+      <button class="vtab" onclick="showTab('parent')">Parent</button>
+      <button class="vtab" onclick="showTab('org')">Organization</button>
+    </div>
+    <div class="device-toggle" id="device-toggle">
+      <button class="dtab on" id="dt-web" onclick="showDevice('web')">Web</button>
+      <button class="dtab" id="dt-mobile" onclick="showDevice('mobile')">Mobile</button>
+    </div>
+    <button class="nav-btn" id="log-btn" onclick="openLogModal()">+ Log activity</button>
+  </div>
+</nav>
+
+
+<!-- ═══ STUDENT VIEW ═══ -->
+<div class="screen on" id="tab-student">
+
+  <!-- WEB -->
+  <div class="screen on" id="sw-web">
+  <div class="layout">
+  <div class="web-layout">
+
+    <aside class="sidebar">
+      <!-- Profile -->
+      <div class="sb-profile">
+        <div class="avatar-ring">P</div>
+        <div class="sb-name">Priya Sharma</div>
+        <div class="sb-meta">Grade 11 · Oakville Trafalgar HS<br>Halton District School Board</div>
+      </div>
+
+      <!-- Score ring -->
+      <div class="sb-sec">
+        <div class="sec-lbl">Y2O Score</div>
+        <div class="score-ring-wrap">
+          <svg class="score-ring-svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--bg)" stroke-width="10"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--teal)" stroke-width="10"
+              stroke-dasharray="251.2" stroke-dashoffset="80.4"
+              stroke-linecap="round" transform="rotate(-90 50 50)"/>
+            <text x="50" y="45" text-anchor="middle" font-family="Sora,sans-serif" font-size="20" font-weight="700" fill="var(--text-primary)">68</text>
+            <text x="50" y="59" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="var(--text-muted)">/100</text>
+          </svg>
+        </div>
+        <div class="score-explainer">
+          Your Y2O Score is a <strong>proprietary criterion-referenced score</strong> built on your verified growth record. A 68 today means the same to a university in 2026 as it does in 2030 — it doesn't shift based on what others score. <em style="font-size:10px;color:var(--text-muted)">Informed by global research on future of work skills and youth development. Not an academic assessment.</em>
+        </div>
+      </div>
+
+      <!-- Growth Pillars mini -->
+      <div class="sb-sec">
+        <div class="sec-lbl">Growth pillars</div>
+        <div class="pillar-mini-row">
+          <div class="pdot" style="background:var(--navy)"></div>
+          <div class="pm-name">How you think</div>
+          <div class="pm-bar"><div class="pm-fill" style="width:75%;background:var(--navy)"></div></div>
+          <div class="pm-score">75</div>
+        </div>
+        <div class="pillar-mini-row">
+          <div class="pdot" style="background:var(--teal)"></div>
+          <div class="pm-name">How you connect</div>
+          <div class="pm-bar"><div class="pm-fill" style="width:62%;background:var(--teal)"></div></div>
+          <div class="pm-score">62</div>
+        </div>
+        <div class="pillar-mini-row">
+          <div class="pdot" style="background:var(--maroon)"></div>
+          <div class="pm-name">How you show up</div>
+          <div class="pm-bar"><div class="pm-fill" style="width:80%;background:var(--maroon)"></div></div>
+          <div class="pm-score">80</div>
+        </div>
+      </div>
+
+      <!-- Profile completion -->
+      <div class="sb-sec">
+        <div class="sec-lbl">Profile completion</div>
+        <div class="prog-row"><span style="font-size:11px;color:var(--text-secondary)">Completeness</span><span class="prog-pct">68%</span></div>
+        <div class="pbar"><div class="pfill" style="width:68%"></div></div>
+        <div class="prog-hint">Add <strong>2 reflections</strong> to unlock your shareable profile</div>
+      </div>
+
+      <!-- Peer ranking -->
+      <div class="sb-sec">
+        <div class="sec-lbl">Peer ranking</div>
+        <div class="peer-row"><span class="peer-rank">1</span><div class="peer-av" style="background:#FBEAF0;color:#72243E">Z</div><div class="peer-name">Zara H.</div><div class="peer-bar-wrap"><div class="peer-bar-fill" style="width:82%"></div></div><div class="peer-score">82</div></div>
+        <div class="peer-row"><span class="peer-rank">2</span><div class="peer-av" style="background:#E6EDF8;color:#1F2B6C">K</div><div class="peer-name">Kwame A.</div><div class="peer-bar-wrap"><div class="peer-bar-fill" style="width:79%"></div></div><div class="peer-score">79</div></div>
+        <div class="peer-row"><span class="peer-rank">3</span><div class="peer-av" style="background:#FAECE7;color:#993C1D">M</div><div class="peer-name">Min-Ji L.</div><div class="peer-bar-wrap"><div class="peer-bar-fill" style="width:71%"></div></div><div class="peer-score">71</div></div>
+        <div class="peer-row you-row"><span class="peer-rank" style="color:var(--teal)">4</span><div class="peer-av" style="background:var(--green-light);color:var(--green-dark)">P</div><div class="peer-name">Priya S. (you)</div><div class="peer-bar-wrap"><div class="peer-bar-fill" style="width:68%;background:var(--teal)"></div></div><div class="peer-score">68</div></div>
+        <div class="peer-row"><span class="peer-rank">5</span><div class="peer-av" style="background:#FAEEDA;color:#633806">J</div><div class="peer-name">Jordan K.</div><div class="peer-bar-wrap"><div class="peer-bar-fill" style="width:63%"></div></div><div class="peer-score">63</div></div>
+        <div class="peer-row"><span class="peer-rank">6</span><div class="peer-av" style="background:#EEEDFE;color:#3C3489">A</div><div class="peer-name">Aisha M.</div><div class="peer-bar-wrap"><div class="peer-bar-fill" style="width:58%"></div></div><div class="peer-score">58</div></div>
+      </div>
+
+      <div class="sb-sec">
+        <button class="log-btn" onclick="openLogModal()">+ Log an activity</button>
+      </div>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="nudge">
+        <div class="ndot"></div>
+        <div class="ntext">2 reflections away from your shareable profile</div>
+        <div class="ncta">Add now →</div>
+      </div>
+
+      <!-- Hours -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">Your hours this year</div>
+          <div class="hour-grid">
+            <div class="hcard" id="w-hc-proj" onclick="toggleHour('w-proj')">
+              <div class="hnum" style="color:var(--navy)">26</div>
+              <div class="hunit">hrs</div>
+              <div class="hlbl">Projects & passions</div>
+              <svg class="hchev" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4"/></svg>
+              <div class="hdrop" id="hd-w-proj">
+                <div class="hd-row"><span>Robotics club</span><span class="hd-h">12h</span></div>
+                <div class="hd-row"><span>Student council</span><span class="hd-h">8h</span></div>
+                <div class="hd-row"><span>Science fair</span><span class="hd-h">6h</span></div>
+              </div>
+            </div>
+            <div class="hcard" id="w-hc-work" onclick="toggleHour('w-work')">
+              <div class="hnum" style="color:var(--maroon)">22</div>
+              <div class="hunit">hrs</div>
+              <div class="hlbl">Work & experience</div>
+              <svg class="hchev" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4"/></svg>
+              <div class="hdrop" id="hd-w-work">
+                <div class="hd-row"><span>Sobeys — cashier</span><span class="hd-h">18h</span></div>
+                <div class="hd-row"><span>Math tutoring</span><span class="hd-h">4h</span></div>
+              </div>
+            </div>
+            <div class="hcard" id="w-hc-vol" onclick="toggleHour('w-vol')">
+              <div class="hnum" style="color:var(--teal)">34</div>
+              <div class="hunit">hrs</div>
+              <div class="hlbl">Volunteering</div>
+              <svg class="hchev" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4"/></svg>
+              <div class="hdrop" id="hd-w-vol">
+                <div class="hd-row"><span>Healthcare</span><span class="hd-h">14h</span></div>
+                <div class="hd-row"><span>Community services</span><span class="hd-h">12h</span></div>
+                <div class="hd-row"><span>Environment</span><span class="hd-h">8h</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillars -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">Growth pillars</div>
+          <div>
+            <!-- Pillar 1 -->
+            <div class="pillar-card" id="wp1" onclick="togglePillar('wp1')">
+              <div class="ph">
+                <div class="picon" style="background:rgba(31,43,108,.08)">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l2.5 2.5"/></svg>
+                </div>
+                <div class="pinfo">
+                  <div class="pname">How you think</div>
+                  <div class="pdesc-sm">Problem-solving · Communication</div>
+                </div>
+                <div class="pscore">75 <span class="pscore-unit">/100</span></div>
+              </div>
+              <div class="pbody">
+                <div class="pillar-note">
+                  <strong>Why this matters:</strong> The world's #1 demanded skill (WEF 2025) is analytical thinking. Combined with communication — how clearly you express ideas and listen — this pillar is what makes you someone others trust to solve real problems. It's the cognitive engine every university and employer looks for first.
+                </div>
+                <div class="more-btn">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="5" r="4"/><path d="M5 3v2.5L6.5 7"/></svg>
+                  More — coming soon
+                </div>
+                <div style="margin-top:10px">
+                  <div class="comp-row">
+                    <div class="comp-name">Problem-Solving</div>
+                    <div class="comp-bar"><div class="comp-fill" style="width:78%;background:var(--navy)"></div></div>
+                    <div class="comp-pct">78%</div>
+                  </div>
+                  <div class="comp-row">
+                    <div class="comp-name">Communication</div>
+                    <div class="comp-bar"><div class="comp-fill" style="width:72%;background:var(--navy)"></div></div>
+                    <div class="comp-pct">72%</div>
+                  </div>
+                </div>
+                <div class="paid-lock">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4.5" width="6" height="4" rx="1"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg>
+                  Unlock driver insight — what's powering this pillar most
+                </div>
+                <div class="research-line">Informed by global research on future of work skills — WEF, OECD, Conference Board of Canada. Y2O scoring is proprietary.</div>
+              </div>
+            </div>
+            <!-- Pillar 2 -->
+            <div class="pillar-card" id="wp2" onclick="togglePillar('wp2')">
+              <div class="ph">
+                <div class="picon" style="background:rgba(26,158,143,.08)">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><path d="M13 15v-1a4 4 0 00-8 0v1M9 11a3 3 0 100-6 3 3 0 000 6zM15 8a2 2 0 012 2v1"/><circle cx="15" cy="5.5" r="2"/></svg>
+                </div>
+                <div class="pinfo">
+                  <div class="pname">How you connect</div>
+                  <div class="pdesc-sm">Leadership · Teamwork</div>
+                </div>
+                <div class="pscore">62 <span class="pscore-unit">/100</span></div>
+              </div>
+              <div class="pbody">
+                <div class="pillar-note">
+                  <strong>Why this matters:</strong> Deloitte's 2025 Gen Z survey found that as AI grows, developing empathy and leadership is more important than ever — not less. The ability to lead people, collaborate genuinely, and build trust is the one thing no technology can replicate. This is the human layer that opens doors grades never will.
+                </div>
+                <div class="more-btn">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="5" r="4"/><path d="M5 3v2.5L6.5 7"/></svg>
+                  More — coming soon
+                </div>
+                <div style="margin-top:10px">
+                  <div class="comp-row">
+                    <div class="comp-name">Leadership</div>
+                    <div class="comp-bar"><div class="comp-fill" style="width:70%;background:var(--teal)"></div></div>
+                    <div class="comp-pct">70%</div>
+                  </div>
+                  <div class="comp-row">
+                    <div class="comp-name">Teamwork</div>
+                    <div class="comp-bar"><div class="comp-fill" style="width:54%;background:var(--teal)"></div></div>
+                    <div class="comp-pct">54%</div>
+                  </div>
+                </div>
+                <div class="paid-lock">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4.5" width="6" height="4" rx="1"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg>
+                  Unlock driver insight
+                </div>
+                <div class="research-line">Informed by global research on human skills for the future of work. Y2O scoring is proprietary.</div>
+              </div>
+            </div>
+            <!-- Pillar 3 -->
+            <div class="pillar-card" id="wp3" onclick="togglePillar('wp3')">
+              <div class="ph">
+                <div class="picon" style="background:rgba(123,45,38,.08)">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--maroon)" stroke-width="1.5" stroke-linecap="round"><path d="M10 2v4M10 14v4M4.2 4.2l2.8 2.8M13 13l2.8 2.8M2 10h4M14 10h4"/></svg>
+                </div>
+                <div class="pinfo">
+                  <div class="pname">How you show up</div>
+                  <div class="pdesc-sm">Self-Management · Initiative & Community</div>
+                </div>
+                <div class="pscore">80 <span class="pscore-unit">/100</span></div>
+              </div>
+              <div class="pbody">
+                <div class="pillar-note">
+                  <strong>Why this matters:</strong> 89% of Gen Z say purpose drives their work satisfaction (Deloitte 2025). Resilience, initiative, and community impact are the character signals that no grade or test can measure — but every admissions officer and employer looks for. This pillar tracks who you are when it's hard, and what you choose to do when nobody is watching.
+                </div>
+                <div class="more-btn">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="5" r="4"/><path d="M5 3v2.5L6.5 7"/></svg>
+                  More — coming soon
+                </div>
+                <div style="margin-top:10px">
+                  <div class="comp-row">
+                    <div class="comp-name">Self-Management</div>
+                    <div class="comp-bar"><div class="comp-fill" style="width:76%;background:var(--maroon)"></div></div>
+                    <div class="comp-pct">76%</div>
+                  </div>
+                  <div class="comp-row">
+                    <div class="comp-name">Initiative & Community</div>
+                    <div class="comp-bar"><div class="comp-fill" style="width:84%;background:var(--maroon)"></div></div>
+                    <div class="comp-pct">84%</div>
+                  </div>
+                </div>
+                <div class="paid-lock">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4.5" width="6" height="4" rx="1"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg>
+                  Unlock driver insight
+                </div>
+                <div class="research-line">Informed by global youth development research. Y2O scoring algorithm is proprietary.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Radar -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">Activity shape</div>
+          <div class="radar-wrap">
+            <div class="radar-container">
+            <div class="radar-coming-soon">Coming soon — interactive radar</div>
+            <svg width="310" height="270" viewBox="0 0 310 270">
+              <g opacity="0.1">
+                <polygon points="155,18 258,75 258,188 155,245 52,188 52,75" fill="none" stroke="#1F2B6C" stroke-width="1"/>
+                <polygon points="155,46 224,86 224,168 155,208 86,168 86,86" fill="none" stroke="#1F2B6C" stroke-width="1"/>
+                <polygon points="155,74 190,96 190,148 155,170 120,148 120,96" fill="none" stroke="#1F2B6C" stroke-width="1"/>
+                <line x1="155" y1="18" x2="155" y2="245" stroke="#1F2B6C" stroke-width="0.5"/>
+                <line x1="52" y1="75" x2="258" y2="188" stroke="#1F2B6C" stroke-width="0.5"/>
+                <line x1="258" y1="75" x2="52" y2="188" stroke="#1F2B6C" stroke-width="0.5"/>
+              </g>
+              <polygon points="155,30 244,80 238,182 155,234 58,178 66,80" fill="var(--navy)" fill-opacity="0.07" stroke="var(--navy)" stroke-width="1.5" stroke-linejoin="round"/>
+              <circle cx="155" cy="30" r="6" fill="#1A9E8F"/>
+              <circle cx="244" cy="80" r="6" fill="#D85A30"/>
+              <circle cx="238" cy="182" r="6" fill="#534AB7"/>
+              <circle cx="155" cy="234" r="6" fill="#1F2B6C"/>
+              <circle cx="58" cy="178" r="6" fill="#D4A843"/>
+              <circle cx="66" cy="80" r="6" fill="#7B2D26"/>
+              <text x="155" y="14" text-anchor="middle" font-family="Sora,sans-serif" font-size="10" font-weight="600" fill="#1A9E8F">Community 34h</text>
+              <text x="254" y="78" text-anchor="start" font-family="DM Sans,sans-serif" font-size="9.5" fill="#D85A30">Sports 10h</text>
+              <text x="248" y="193" text-anchor="start" font-family="DM Sans,sans-serif" font-size="9.5" fill="#534AB7">Arts 8h</text>
+              <text x="155" y="260" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#1F2B6C">Academic 18h</text>
+              <text x="48" y="192" text-anchor="end" font-family="DM Sans,sans-serif" font-size="9.5" fill="#D4A843">Work 22h</text>
+              <text x="54" y="76" text-anchor="end" font-family="DM Sans,sans-serif" font-size="9.5" fill="#7B2D26">Initiative 14h</text>
+            </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mix -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">Your mix</div>
+          <div class="mix-card">
+            <div class="mix-head">
+              <div>
+                <div class="mix-title">72% hustle · 28% life</div>
+                <div class="mix-sub">Log something fun to balance your profile — admissions officers notice</div>
+              </div>
+              <div class="mix-share">Share</div>
+            </div>
+            <div class="mix-track">
+              <div class="mix-fill" style="width:72%"></div>
+              <div class="mix-marker" style="left:calc(72% - 1.5px)"></div>
+            </div>
+            <div class="mix-ends"><span>All life</span><span>All hustle</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity feed -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">Recent activity</div>
+          <div class="act-item">
+            <div class="adot" style="background:var(--teal)"></div>
+            <div class="abody">
+              <div class="atitle">Habitat for Humanity build day</div>
+              <div class="ameta">6h <span class="verified-badge">Org verified</span> · 3 days ago</div>
+              <div class="atags"><span class="atag tg">Teamwork</span><span class="atag ta">Initiative</span><span class="atag tb">Self-Mgmt</span></div>
+            </div>
+            <div class="ahrs">+6h</div>
+          </div>
+          <div class="act-item">
+            <div class="adot" style="background:var(--maroon)"></div>
+            <div class="abody">
+              <div class="atitle">Sobeys — cashier shift</div>
+              <div class="ameta">4h <span class="self-badge">Self-logged</span> · 5 days ago</div>
+              <div class="atags"><span class="atag tb">Communication</span><span class="atag tc">Self-Mgmt</span></div>
+            </div>
+            <div class="ahrs">+4h</div>
+          </div>
+          <div class="act-item">
+            <div class="adot" style="background:var(--teal)"></div>
+            <div class="abody">
+              <div class="atitle">Burlington Food Bank — shift</div>
+              <div class="ameta">3h <span class="self-badge">Self-logged</span> · 1 week ago</div>
+              <div class="atags"><span class="atag tg">Initiative</span><span class="atag tg">Teamwork</span></div>
+              <button class="verify-btn" id="vbtn-w1" onclick="requestVerify(event,'vbtn-w1')">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5.5l2.5 2.5 3.5-4"/></svg>
+                Request verification
+              </button>
+            </div>
+            <div class="ahrs">+3h</div>
+          </div>
+          <div class="act-item">
+            <div class="adot" style="background:var(--navy)"></div>
+            <div class="abody">
+              <div class="atitle">Robotics club — competition prep</div>
+              <div class="ameta">3h <span class="verified-badge">Teacher verified</span> · 1 week ago</div>
+              <div class="atags"><span class="atag tb">Problem-Solving</span><span class="atag tg">Teamwork</span></div>
+            </div>
+            <div class="ahrs">+3h</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evidence & Opportunities -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="card">
+          <div class="card-body">
+            <div class="section-title">Evidence vault</div>
+            <div class="teaser">
+              <div class="teaser-title">Upload your proof</div>
+              <div class="teaser-sub">Letters, certificates, grades, project files</div>
+              <div class="teaser-lock">Upload evidence</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="section-title">Matched opportunities</div>
+            <div class="teaser">
+              <div class="teaser-title">Unlocks at 75%</div>
+              <div class="teaser-sub">Matched to orgs that fit your gaps</div>
+              <div class="teaser-lock">+2 reflections to unlock</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- MOBILE STUDENT -->
+  <div class="screen" id="sw-mobile">
+  <div class="layout" style="padding:16px 16px 40px;max-width:420px;margin:0 auto">
+  <div class="phone">
+    <div class="phone-sb"><span>9:41</span><span>●●●</span></div>
+    <div class="phone-scroll">
+
+      <!-- Header -->
+      <div class="m-hdr">
+        <div class="av-sm" style="background:linear-gradient(135deg,var(--teal),var(--navy))">P</div>
+        <div class="m-hdr-info">
+          <div class="m-hdr-name">Priya Sharma</div>
+          <div class="m-hdr-meta">Grade 11 · Oakville Trafalgar HS<br>Halton District School Board</div>
+        </div>
+        <div class="score-badge">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1.5v7M2 4.5l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          68
+        </div>
+      </div>
+
+      <!-- Hours -->
+      <div class="ms">
+        <div class="ms-lbl">Your hours this year</div>
+        <div class="m-hgrid">
+          <div class="m-hcard" id="m-hc-proj" onclick="toggleHour('m-proj')">
+            <div class="m-hnum" style="color:var(--navy)">26</div>
+            <div class="m-hunit">hrs</div>
+            <div class="m-hlbl">Projects</div>
+            <svg style="width:12px;height:12px;margin-top:4px;stroke:var(--text-muted);fill:none;stroke-width:1.5;stroke-linecap:round;transition:transform .2s" id="chev-m-proj" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4"/></svg>
+            <div class="m-hdrop" id="hd-m-proj">
+              <div class="m-hd-row"><span>Robotics</span><span class="m-hd-h">12h</span></div>
+              <div class="m-hd-row"><span>Council</span><span class="m-hd-h">8h</span></div>
+              <div class="m-hd-row"><span>Sci. fair</span><span class="m-hd-h">6h</span></div>
+            </div>
+          </div>
+          <div class="m-hcard" id="m-hc-work" onclick="toggleHour('m-work')">
+            <div class="m-hnum" style="color:var(--maroon)">22</div>
+            <div class="m-hunit">hrs</div>
+            <div class="m-hlbl">Work</div>
+            <svg style="width:12px;height:12px;margin-top:4px;stroke:var(--text-muted);fill:none;stroke-width:1.5;stroke-linecap:round;transition:transform .2s" id="chev-m-work" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4"/></svg>
+            <div class="m-hdrop" id="hd-m-work">
+              <div class="m-hd-row"><span>Sobeys</span><span class="m-hd-h">18h</span></div>
+              <div class="m-hd-row"><span>Tutoring</span><span class="m-hd-h">4h</span></div>
+            </div>
+          </div>
+          <div class="m-hcard" id="m-hc-vol" onclick="toggleHour('m-vol')">
+            <div class="m-hnum" style="color:var(--teal)">34</div>
+            <div class="m-hunit">hrs</div>
+            <div class="m-hlbl">Volunteer</div>
+            <svg style="width:12px;height:12px;margin-top:4px;stroke:var(--text-muted);fill:none;stroke-width:1.5;stroke-linecap:round;transition:transform .2s" id="chev-m-vol" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4"/></svg>
+            <div class="m-hdrop" id="hd-m-vol">
+              <div class="m-hd-row"><span>Healthcare</span><span class="m-hd-h">14h</span></div>
+              <div class="m-hd-row"><span>Community</span><span class="m-hd-h">12h</span></div>
+              <div class="m-hd-row"><span>Environment</span><span class="m-hd-h">8h</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mdiv"></div>
+
+      <!-- Pillars -->
+      <div class="ms">
+        <div class="ms-lbl">Growth pillars</div>
+        <div class="m-pcard" id="mp1" onclick="togglePillar('mp1')">
+          <div class="m-ph">
+            <div class="m-picon" style="background:rgba(31,43,108,.08)">
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l2 2"/></svg>
+            </div>
+            <div class="m-pinfo">
+              <div class="m-pname">How you think</div>
+              <div class="m-pdesc">Problem-solving · Communication</div>
+            </div>
+            <div class="m-pscore">75</div>
+          </div>
+          <div class="m-pbody" id="mpb1">
+            <div class="m-pillar-note"><strong>Why this matters:</strong> The world's #1 demanded skill is analytical thinking. With communication, this is your cognitive engine — what every uni and employer looks for first.</div>
+            <div class="m-more-btn">More — coming soon</div>
+            <div style="margin-top:8px">
+              <div class="m-comp-row"><div class="m-comp-name">Problem-Solving</div><div class="m-comp-bar"><div class="m-comp-fill" style="width:78%;background:var(--navy)"></div></div><div class="m-comp-pct">78%</div></div>
+              <div class="m-comp-row"><div class="m-comp-name">Communication</div><div class="m-comp-bar"><div class="m-comp-fill" style="width:72%;background:var(--navy)"></div></div><div class="m-comp-pct">72%</div></div>
+            </div>
+            <div class="m-paid-lock"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4.5" width="6" height="4" rx="1"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg>Unlock driver insight</div>
+            <div class="m-research-line">Informed by global future of work research. Y2O scoring is proprietary.</div>
+          </div>
+        </div>
+        <div class="m-pcard" id="mp2" onclick="togglePillar('mp2')">
+          <div class="m-ph">
+            <div class="m-picon" style="background:rgba(26,158,143,.08)">
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><path d="M13 15v-1a4 4 0 00-8 0v1M9 11a3 3 0 100-6 3 3 0 000 6z"/></svg>
+            </div>
+            <div class="m-pinfo">
+              <div class="m-pname">How you connect</div>
+              <div class="m-pdesc">Leadership · Teamwork</div>
+            </div>
+            <div class="m-pscore">62</div>
+          </div>
+          <div class="m-pbody" id="mpb2">
+            <div class="m-pillar-note"><strong>Why this matters:</strong> As AI grows, empathy and leadership matter more than ever. The human layer — the ability to lead, collaborate, and build trust — is what no technology can replace.</div>
+            <div class="m-more-btn">More — coming soon</div>
+            <div style="margin-top:8px">
+              <div class="m-comp-row"><div class="m-comp-name">Leadership</div><div class="m-comp-bar"><div class="m-comp-fill" style="width:70%;background:var(--teal)"></div></div><div class="m-comp-pct">70%</div></div>
+              <div class="m-comp-row"><div class="m-comp-name">Teamwork</div><div class="m-comp-bar"><div class="m-comp-fill" style="width:54%;background:var(--teal)"></div></div><div class="m-comp-pct">54%</div></div>
+            </div>
+            <div class="m-paid-lock"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4.5" width="6" height="4" rx="1"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg>Unlock driver insight</div>
+            <div class="m-research-line">Informed by global human skills research. Y2O scoring is proprietary.</div>
+          </div>
+        </div>
+        <div class="m-pcard" id="mp3" onclick="togglePillar('mp3')">
+          <div class="m-ph">
+            <div class="m-picon" style="background:rgba(123,45,38,.08)">
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="var(--maroon)" stroke-width="1.5" stroke-linecap="round"><path d="M10 2v4M10 14v4M4.2 4.2l2.8 2.8M13 13l2.8 2.8M2 10h4M14 10h4"/></svg>
+            </div>
+            <div class="m-pinfo">
+              <div class="m-pname">How you show up</div>
+              <div class="m-pdesc">Self-Management · Initiative</div>
+            </div>
+            <div class="m-pscore">80</div>
+          </div>
+          <div class="m-pbody" id="mpb3">
+            <div class="m-pillar-note"><strong>Why this matters:</strong> 89% of Gen Z say purpose drives their satisfaction. Resilience and initiative are what every admissions officer looks for and no grade can measure. This is who you are when it's hard.</div>
+            <div class="m-more-btn">More — coming soon</div>
+            <div style="margin-top:8px">
+              <div class="m-comp-row"><div class="m-comp-name">Self-Management</div><div class="m-comp-bar"><div class="m-comp-fill" style="width:76%;background:var(--maroon)"></div></div><div class="m-comp-pct">76%</div></div>
+              <div class="m-comp-row"><div class="m-comp-name">Initiative & Community</div><div class="m-comp-bar"><div class="m-comp-fill" style="width:84%;background:var(--maroon)"></div></div><div class="m-comp-pct">84%</div></div>
+            </div>
+            <div class="m-paid-lock"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4.5" width="6" height="4" rx="1"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg>Unlock driver insight</div>
+            <div class="m-research-line">Informed by global youth development research. Y2O scoring is proprietary.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mdiv"></div>
+
+      <!-- Radar -->
+      <div class="ms">
+        <div class="ms-lbl">Activity shape</div>
+        <div style="display:flex;justify-content:center">
+          <div class="radar-container">
+          <div class="radar-coming-soon">Coming soon</div>
+          <svg width="250" height="222" viewBox="0 0 250 222">
+            <g opacity="0.1">
+              <polygon points="125,14 208,62 208,158 125,206 42,158 42,62" fill="none" stroke="#1F2B6C" stroke-width="1"/>
+              <polygon points="125,38 184,73 184,137 125,172 66,137 66,73" fill="none" stroke="#1F2B6C" stroke-width="1"/>
+              <polygon points="125,62 160,84 160,118 125,140 90,118 90,84" fill="none" stroke="#1F2B6C" stroke-width="1"/>
+              <line x1="125" y1="14" x2="125" y2="206" stroke="#1F2B6C" stroke-width="0.5"/>
+              <line x1="42" y1="62" x2="208" y2="158" stroke="#1F2B6C" stroke-width="0.5"/>
+              <line x1="208" y1="62" x2="42" y2="158" stroke="#1F2B6C" stroke-width="0.5"/>
+            </g>
+            <polygon points="125,24 198,64 194,152 125,194 44,148 52,64" fill="var(--navy)" fill-opacity="0.07" stroke="var(--navy)" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="125" cy="24" r="5" fill="#1A9E8F"/>
+            <circle cx="198" cy="64" r="5" fill="#D85A30"/>
+            <circle cx="194" cy="152" r="5" fill="#534AB7"/>
+            <circle cx="125" cy="194" r="5" fill="#1F2B6C"/>
+            <circle cx="44" cy="148" r="5" fill="#D4A843"/>
+            <circle cx="52" cy="64" r="5" fill="#7B2D26"/>
+            <text x="125" y="10" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="600" fill="#1A9E8F">Community 34h</text>
+            <text x="206" y="62" text-anchor="start" font-family="DM Sans,sans-serif" font-size="8.5" fill="#D85A30">Sports 10h</text>
+            <text x="202" y="158" text-anchor="start" font-family="DM Sans,sans-serif" font-size="8.5" fill="#534AB7">Arts 8h</text>
+            <text x="125" y="212" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#1F2B6C">Academic 18h</text>
+            <text x="36" y="152" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8.5" fill="#D4A843">Work 22h</text>
+            <text x="44" y="60" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8.5" fill="#7B2D26">Initiative 14h</text>
+          </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="mdiv"></div>
+
+      <!-- Mix -->
+      <div class="ms">
+        <div class="ms-lbl">Your mix</div>
+        <div class="m-mix">
+          <div class="m-mix-head">
+            <div><div class="m-mix-title">72% hustle · 28% life</div><div class="m-mix-sub">Log something fun to balance</div></div>
+            <div class="m-mix-share">Share</div>
+          </div>
+          <div class="m-mix-track"><div class="m-mix-fill" style="width:72%"></div><div class="m-mix-marker" style="left:calc(72% - 1px)"></div></div>
+          <div class="m-mix-ends"><span>All life</span><span>All hustle</span></div>
+        </div>
+      </div>
+
+      <div class="mdiv"></div>
+
+      <!-- Friends -->
+      <div class="ms">
+        <div class="ms-lbl">Your circle</div>
+        <div class="m-friend-strip">
+          <div class="m-fc"><div class="m-fscore">58</div><div class="m-fbar" style="height:50px"><div class="m-ffill" style="height:58%"></div></div><div class="m-fav" style="background:#EEEDFE;color:#3C3489">A</div></div>
+          <div class="m-fc"><div class="m-fscore">63</div><div class="m-fbar" style="height:50px"><div class="m-ffill" style="height:63%"></div></div><div class="m-fav" style="background:#FAEEDA;color:#633806">J</div></div>
+          <div class="m-fc m-fyou"><div class="m-fscore">68</div><div class="m-fbar" style="height:50px"><div class="m-ffill" style="height:68%"></div></div><div class="m-fav" style="background:var(--green-light);color:var(--green-dark)">P</div><div class="m-fyou-lbl">you</div></div>
+          <div class="m-fc"><div class="m-fscore">71</div><div class="m-fbar" style="height:50px"><div class="m-ffill" style="height:71%"></div></div><div class="m-fav" style="background:#FAECE7;color:#993C1D">M</div></div>
+          <div class="m-fc"><div class="m-fscore">79</div><div class="m-fbar" style="height:50px"><div class="m-ffill" style="height:79%"></div></div><div class="m-fav" style="background:#E6EDF8;color:#1F2B6C">K</div></div>
+          <div class="m-fc"><div class="m-fscore">82</div><div class="m-fbar" style="height:50px"><div class="m-ffill" style="height:82%"></div></div><div class="m-fav" style="background:#FBEAF0;color:#72243E">Z</div></div>
+        </div>
+      </div>
+
+      <div class="mdiv"></div>
+
+      <!-- Activity -->
+      <div class="ms">
+        <div class="ms-lbl">Recent activity</div>
+        <div class="m-act-item">
+          <div class="adot" style="background:var(--teal)"></div>
+          <div class="abody">
+            <div class="m-atitle">Habitat for Humanity</div>
+            <div class="m-ameta">6h <span class="verified-badge">Org verified</span> · 3 days ago</div>
+            <div class="m-atags"><span class="m-atag tg">Teamwork</span><span class="m-atag ta">Initiative</span></div>
+          </div>
+          <div class="m-ahrs">+6h</div>
+        </div>
+        <div class="m-act-item">
+          <div class="adot" style="background:var(--maroon)"></div>
+          <div class="abody">
+            <div class="m-atitle">Sobeys — cashier shift</div>
+            <div class="m-ameta">4h <span class="self-badge">Self-logged</span> · 5 days ago</div>
+            <div class="m-atags"><span class="m-atag tb">Communication</span></div>
+          </div>
+          <div class="m-ahrs">+4h</div>
+        </div>
+        <div class="m-act-item">
+          <div class="adot" style="background:var(--teal)"></div>
+          <div class="abody">
+            <div class="m-atitle">Burlington Food Bank</div>
+            <div class="m-ameta">3h <span class="self-badge">Self-logged</span> · 1 week ago</div>
+            <div class="m-atags"><span class="m-atag tg">Initiative</span></div>
+            <button class="m-verify-btn" id="mvbtn1" onclick="requestVerify(event,'mvbtn1')">
+              <svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5.5l2.5 2.5 3.5-4"/></svg>
+              Request verification
+            </button>
+          </div>
+          <div class="m-ahrs">+3h</div>
+        </div>
+      </div>
+
+      <!-- Profile completion -->
+      <div class="ms" style="padding-bottom:14px">
+        <div class="ms-lbl">Profile completion</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:11px;color:var(--text-secondary)"><span>Completeness</span><span style="font-family:Sora,sans-serif;font-weight:700;font-size:13px;color:var(--text-primary)">68%</span></div>
+        <div class="pbar"><div class="pfill" style="width:68%"></div></div>
+        <div class="prog-hint" style="font-size:10px">Add <strong>2 reflections</strong> to unlock your shareable profile</div>
+      </div>
+
+      <div class="m-fab-wrap">
+        <button class="m-fab" onclick="openLogModal()">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="10" y1="4" x2="10" y2="16"/><line x1="4" y1="10" x2="16" y2="10"/></svg>
+        </button>
+      </div>
+
+    </div>
+    <div class="m-bnav">
+      <button class="m-bnt on"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></button>
+      <button class="m-bnt"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg><span>Log</span></button>
+      <button class="m-bnt"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Circle</span></button>
+      <button class="m-bnt"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Profile</span></button>
+    </div>
+  </div>
+  </div>
+  </div>
+
+</div><!-- /student tab -->
+
+
+<!-- ═══ PARENT VIEW ═══ -->
+<div class="screen" id="tab-parent">
+<div class="layout">
+<div class="web-layout">
+
+  <aside class="sidebar">
+    <div class="sb-profile">
+      <div class="avatar-ring" style="background:linear-gradient(135deg,var(--gold),var(--maroon))">R</div>
+      <div class="sb-name">Ramesh Sharma</div>
+      <div class="sb-meta">Parent of Priya Sharma<br>Read-only access · Magic link</div>
+    </div>
+
+    <!-- Score ring - parent context -->
+    <div class="sb-sec">
+      <div class="sec-lbl">Priya's Y2O Score</div>
+      <div class="score-ring-wrap">
+        <svg class="score-ring-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="var(--bg)" stroke-width="10"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="var(--teal)" stroke-width="10"
+            stroke-dasharray="251.2" stroke-dashoffset="80.4"
+            stroke-linecap="round" transform="rotate(-90 50 50)"/>
+          <text x="50" y="45" text-anchor="middle" font-family="Sora,sans-serif" font-size="20" font-weight="700" fill="var(--text-primary)">68</text>
+          <text x="50" y="59" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="var(--text-muted)">/100</text>
+        </svg>
+      </div>
+      <div class="score-explainer">
+        A score of <strong>68</strong> means Priya is actively building a verified growth record. The score reflects <strong>hours across three buckets</strong>, <strong>growth in all three pillars</strong>, <strong>verification rate</strong>, and <strong>consistency over time</strong>. It's criterion-referenced — it means the same thing to a university as it does to an employer.
+      </div>
+    </div>
+
+    <!-- Profile completion -->
+    <div class="sb-sec">
+      <div class="sec-lbl">Profile completion</div>
+      <div class="prog-row"><span style="font-size:11px;color:var(--text-secondary)">Priya's profile</span><span class="prog-pct">68%</span></div>
+      <div class="pbar"><div class="pfill" style="width:68%"></div></div>
+      <div class="prog-hint">2 more reflections unlocks the shareable profile link</div>
+    </div>
+
+    <!-- Pillars mini -->
+    <div class="sb-sec">
+      <div class="sec-lbl">Growth pillars</div>
+      <div class="pillar-mini-row">
+        <div class="pdot" style="background:var(--navy)"></div>
+        <div class="pm-name">How you think</div>
+        <div class="pm-bar"><div class="pm-fill" style="width:75%;background:var(--navy)"></div></div>
+        <div class="pm-score">75</div>
+      </div>
+      <div class="pillar-mini-row">
+        <div class="pdot" style="background:var(--teal)"></div>
+        <div class="pm-name">How you connect</div>
+        <div class="pm-bar"><div class="pm-fill" style="width:62%;background:var(--teal)"></div></div>
+        <div class="pm-score">62</div>
+      </div>
+      <div class="pillar-mini-row">
+        <div class="pdot" style="background:var(--maroon)"></div>
+        <div class="pm-name">How you show up</div>
+        <div class="pm-bar"><div class="pm-fill" style="width:80%;background:var(--maroon)"></div></div>
+        <div class="pm-score">80</div>
+      </div>
+    </div>
+
+    <!-- Nudge -->
+    <div class="sb-sec">
+      <div class="sec-lbl">Send a nudge</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;line-height:1.5">Send Priya a silent signal that you checked her profile. No message — just presence.</div>
+      <button class="nudge-parent" id="nudge-parent-btn" onclick="sendNudge()">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 1.5a5 5 0 100 10 5 5 0 000-10zM4 7s.5 1.5 2.5 1.5S9 7 9 7"/><circle cx="4.5" cy="5" r=".6" fill="currentColor"/><circle cx="8.5" cy="5" r=".6" fill="currentColor"/></svg>
+        Nudge Priya
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+
+    <!-- Parent banner -->
+    <div class="parent-banner">
+      <div>
+        <div class="parent-banner-text">You're viewing Priya's growth profile</div>
+        <div class="parent-banner-sub">Read-only · Updated in real time · Friend circle is private to Priya</div>
+      </div>
+    </div>
+
+    <!-- Hours -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Priya's hours this year</div>
+        <div class="hour-grid">
+          <div class="hcard open">
+            <div class="hnum" style="color:var(--navy)">26</div>
+            <div class="hunit">hrs</div>
+            <div class="hlbl">Projects & passions</div>
+            <div class="hdrop" style="display:block">
+              <div class="hd-row"><span>Robotics club</span><span class="hd-h">12h</span></div>
+              <div class="hd-row"><span>Student council</span><span class="hd-h">8h</span></div>
+              <div class="hd-row"><span>Science fair</span><span class="hd-h">6h</span></div>
+            </div>
+          </div>
+          <div class="hcard open">
+            <div class="hnum" style="color:var(--maroon)">22</div>
+            <div class="hunit">hrs</div>
+            <div class="hlbl">Work & experience</div>
+            <div class="hdrop" style="display:block">
+              <div class="hd-row"><span>Sobeys — cashier</span><span class="hd-h">18h</span></div>
+              <div class="hd-row"><span>Math tutoring</span><span class="hd-h">4h</span></div>
+            </div>
+          </div>
+          <div class="hcard open">
+            <div class="hnum" style="color:var(--teal)">34</div>
+            <div class="hunit">hrs</div>
+            <div class="hlbl">Volunteering</div>
+            <div class="hdrop" style="display:block">
+              <div class="hd-row"><span>Healthcare</span><span class="hd-h">14h</span></div>
+              <div class="hd-row"><span>Community</span><span class="hd-h">12h</span></div>
+              <div class="hd-row"><span>Environment</span><span class="hd-h">8h</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillars parent view -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Growth pillars</div>
+        <div>
+          <div class="pillar-card open" style="cursor:default">
+            <div class="ph">
+              <div class="picon" style="background:rgba(31,43,108,.08)"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l2 2"/></svg></div>
+              <div class="pinfo"><div class="pname">How you think</div><div class="pdesc-sm">Problem-solving · Communication</div></div>
+              <div class="pscore">75 <span class="pscore-unit">/100</span></div>
+            </div>
+            <div class="pbody" style="display:block">
+              <div class="pillar-note"><strong>What this means for Priya:</strong> Priya is performing above average in critical thinking and communication. Activities like Robotics and Science Fair are driving this. Strong foundation for STEM and business programs.</div>
+              <div class="more-btn">More — coming soon</div>
+              <div style="margin-top:10px">
+                <div class="comp-row"><div class="comp-name">Problem-Solving</div><div class="comp-bar"><div class="comp-fill" style="width:78%;background:var(--navy)"></div></div><div class="comp-pct">78%</div></div>
+                <div class="comp-row"><div class="comp-name">Communication</div><div class="comp-bar"><div class="comp-fill" style="width:72%;background:var(--navy)"></div></div><div class="comp-pct">72%</div></div>
+              </div>
+              <div class="paid-lock"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4.5" width="6" height="4" rx="1"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg>Unlock driver insight — upgrade to family plan</div>
+            </div>
+          </div>
+          <div class="pillar-card open" style="cursor:default">
+            <div class="ph">
+              <div class="picon" style="background:rgba(26,158,143,.08)"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><path d="M13 15v-1a4 4 0 00-8 0v1M9 11a3 3 0 100-6 3 3 0 000 6z"/></svg></div>
+              <div class="pinfo"><div class="pname">How you connect</div><div class="pdesc-sm">Leadership · Teamwork</div></div>
+              <div class="pscore">62 <span class="pscore-unit">/100</span></div>
+            </div>
+            <div class="pbody" style="display:block">
+              <div class="pillar-note"><strong>What this means for Priya:</strong> Teamwork is growing but Leadership needs more experience. Encouraging Priya to take on a lead role in an existing activity — rather than joining new ones — would push this score significantly.</div>
+              <div class="more-btn">More — coming soon</div>
+              <div style="margin-top:10px">
+                <div class="comp-row"><div class="comp-name">Leadership</div><div class="comp-bar"><div class="comp-fill" style="width:70%;background:var(--teal)"></div></div><div class="comp-pct">70%</div></div>
+                <div class="comp-row"><div class="comp-name">Teamwork</div><div class="comp-bar"><div class="comp-fill" style="width:54%;background:var(--teal)"></div></div><div class="comp-pct">54%</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="pillar-card open" style="cursor:default">
+            <div class="ph">
+              <div class="picon" style="background:rgba(123,45,38,.08)"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--maroon)" stroke-width="1.5" stroke-linecap="round"><path d="M10 2v4M10 14v4M4.2 4.2l2.8 2.8M13 13l2.8 2.8M2 10h4M14 10h4"/></svg></div>
+              <div class="pinfo"><div class="pname">How you show up</div><div class="pdesc-sm">Self-Management · Initiative & Community</div></div>
+              <div class="pscore">80 <span class="pscore-unit">/100</span></div>
+            </div>
+            <div class="pbody" style="display:block">
+              <div class="pillar-note"><strong>What this means for Priya:</strong> This is Priya's strongest pillar. Her consistent volunteering and initiative across community activities shows strong character development. Universities cite this as a top differentiator for borderline candidates.</div>
+              <div class="more-btn">More — coming soon</div>
+              <div style="margin-top:10px">
+                <div class="comp-row"><div class="comp-name">Self-Management</div><div class="comp-bar"><div class="comp-fill" style="width:76%;background:var(--maroon)"></div></div><div class="comp-pct">76%</div></div>
+                <div class="comp-row"><div class="comp-name">Initiative & Community</div><div class="comp-bar"><div class="comp-fill" style="width:84%;background:var(--maroon)"></div></div><div class="comp-pct">84%</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mix parent -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Priya's mix</div>
+        <div class="mix-card">
+          <div class="mix-head">
+            <div><div class="mix-title">72% hustle · 28% life</div><div class="mix-sub">Priya could balance with one more personal or creative activity</div></div>
+          </div>
+          <div class="mix-track"><div class="mix-fill" style="width:72%"></div><div class="mix-marker" style="left:calc(72% - 1.5px)"></div></div>
+          <div class="mix-ends"><span>All life</span><span>All hustle</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity feed parent -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Recent activity</div>
+        <div class="act-item">
+          <div class="adot" style="background:var(--teal)"></div>
+          <div class="abody">
+            <div class="atitle">Habitat for Humanity build day</div>
+            <div class="ameta">6h <span class="verified-badge">Org verified</span> · 3 days ago</div>
+            <div class="atags"><span class="atag tg">Teamwork</span><span class="atag ta">Initiative</span></div>
+          </div>
+          <div class="ahrs">+6h</div>
+        </div>
+        <div class="act-item">
+          <div class="adot" style="background:var(--maroon)"></div>
+          <div class="abody">
+            <div class="atitle">Sobeys — cashier shift</div>
+            <div class="ameta">4h <span class="self-badge">Self-logged</span> · 5 days ago</div>
+            <div class="atags"><span class="atag tb">Communication</span><span class="atag tc">Self-Mgmt</span></div>
+          </div>
+          <div class="ahrs">+4h</div>
+        </div>
+        <div class="act-item">
+          <div class="adot" style="background:var(--navy)"></div>
+          <div class="abody">
+            <div class="atitle">Robotics club — competition prep</div>
+            <div class="ameta">3h <span class="verified-badge">Teacher verified</span> · 1 week ago</div>
+            <div class="atags"><span class="atag tb">Problem-Solving</span><span class="atag tg">Teamwork</span></div>
+          </div>
+          <div class="ahrs">+3h</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div><!-- /parent tab -->
+
+
+<!-- ═══ ORG VIEW ═══ -->
+<div class="screen" id="tab-org">
+<div class="layout">
+
+  <!-- Org header -->
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:16px 20px">
+    <div class="av-sm" style="width:48px;height:48px;background:linear-gradient(135deg,var(--teal),var(--navy));font-size:16px">H</div>
+    <div>
+      <div style="font-family:Sora,sans-serif;font-size:16px;font-weight:600;color:var(--text-primary)">Habitat for Humanity — Halton</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Volunteer organization · Burlington, ON · Soft login — magic link</div>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:10px">
+      <div style="text-align:center;padding:10px 18px;background:var(--green-light);border-radius:10px">
+        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:var(--green-dark)">12</div>
+        <div style="font-size:10px;color:var(--green-dark)">Active students</div>
+      </div>
+      <div style="text-align:center;padding:10px 18px;background:var(--bg);border-radius:10px">
+        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:var(--text-primary)">148</div>
+        <div style="font-size:10px;color:var(--text-muted)">Total hours logged</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+
+    <!-- Verification queue -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Verification queue</div>
+        <div class="queue-item">
+          <div class="queue-av" style="background:var(--green-light);color:var(--green-dark)">P</div>
+          <div class="queue-info">
+            <div class="queue-name">Priya Sharma</div>
+            <div class="queue-meta">Burlington Food Bank · 3h · Requested today</div>
+          </div>
+          <button class="confirm-btn" id="qbtn1" onclick="confirmVerify('qbtn1')">Confirm</button>
+        </div>
+        <div class="queue-item">
+          <div class="queue-av" style="background:#FAEEDA;color:#633806">J</div>
+          <div class="queue-info">
+            <div class="queue-name">Jordan Kim</div>
+            <div class="queue-meta">Build day — Oakville · 6h · Requested 2 days ago</div>
+          </div>
+          <button class="confirm-btn" id="qbtn2" onclick="confirmVerify('qbtn2')">Confirm</button>
+        </div>
+        <div class="queue-item">
+          <div class="queue-av" style="background:#EEEDFE;color:#3C3489">A</div>
+          <div class="queue-info">
+            <div class="queue-name">Aisha Mohammed</div>
+            <div class="queue-meta">Admin support · 4h · Requested 3 days ago</div>
+          </div>
+          <button class="confirm-btn" id="qbtn3" onclick="confirmVerify('qbtn3')">Confirm</button>
+        </div>
+        <div class="queue-item">
+          <div class="queue-av" style="background:#E6EDF8;color:#1F2B6C">K</div>
+          <div class="queue-info">
+            <div class="queue-name">Kwame Asante</div>
+            <div class="queue-meta">Community build · 5h · Requested 4 days ago</div>
+          </div>
+          <button class="confirm-btn" id="qbtn4" onclick="confirmVerify('qbtn4')">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity intake -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Where students are active</div>
+        <div class="org-category-row"><div class="org-cat-dot" style="background:var(--teal)"></div><div class="org-cat-name">Community services</div><div class="org-cat-bar"><div class="org-cat-fill" style="width:85%;background:var(--teal)"></div></div><div class="org-cat-h">62h</div></div>
+        <div class="org-category-row"><div class="org-cat-dot" style="background:var(--navy)"></div><div class="org-cat-name">Healthcare support</div><div class="org-cat-bar"><div class="org-cat-fill" style="width:60%;background:var(--navy)"></div></div><div class="org-cat-h">44h</div></div>
+        <div class="org-category-row"><div class="org-cat-dot" style="background:var(--coral)"></div><div class="org-cat-name">Environment</div><div class="org-cat-bar"><div class="org-cat-fill" style="width:40%;background:var(--coral)"></div></div><div class="org-cat-h">28h</div></div>
+        <div class="org-category-row"><div class="org-cat-dot" style="background:var(--gold)"></div><div class="org-cat-name">Education & tutoring</div><div class="org-cat-bar"><div class="org-cat-fill" style="width:20%;background:var(--gold)"></div></div><div class="org-cat-h">14h</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
+
+    <!-- Engagement signals -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Engagement signals</div>
+        <div class="alert-row">
+          <div class="alert-dot"></div>
+          <div class="alert-text"><strong>Education & tutoring</strong> is lagging — only 14h this term. Consider posting a specific opportunity in this category.</div>
+        </div>
+        <div class="alert-row">
+          <div class="alert-dot"></div>
+          <div class="alert-text"><strong>3 students</strong> have not logged any activity in the last 30 days. They may need a re-engagement nudge.</div>
+        </div>
+        <div style="background:var(--green-light);border-radius:8px;padding:8px;margin-top:7px;display:flex;align-items:center;gap:8px">
+          <div style="width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0"></div>
+          <div style="font-size:11px;color:var(--green-dark)"><strong>Community services</strong> is your strongest category. 5 students are returning for a second term — a strong reliability signal.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Potential matches -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">Potential matches</div>
+        <div class="match-card">
+          <div class="match-num">47</div>
+          <div class="match-lbl">Students in the GTA</div>
+          <div class="match-sub">whose competency gaps align with your open roles</div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;line-height:1.5">Student matching unlocks when your org posts a verified opportunity. Coming soon.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div><!-- /org tab -->
+
+<script>
+function showTab(t) {
+  ['student','parent','org'].forEach(function(id){
+    document.getElementById('tab-'+id).classList.toggle('on', id===t);
+  });
+  document.querySelectorAll('.vtab').forEach(function(b,i){
+    b.classList.toggle('on', ['student','parent','org'][i]===t);
+  });
+  var dt = document.getElementById('device-toggle');
+  var lb = document.getElementById('log-btn');
+  if(t==='org'){dt.style.display='none';lb.style.display='none';}
+  else if(t==='parent'){dt.style.display='none';lb.style.display='none';}
+  else{dt.style.display='flex';lb.style.display='block';}
+}
+
+function showDevice(d) {
+  document.getElementById('sw-web').classList.toggle('on', d==='web');
+  document.getElementById('sw-mobile').classList.toggle('on', d==='mobile');
+  document.getElementById('dt-web').classList.toggle('on', d==='web');
+  document.getElementById('dt-mobile').classList.toggle('on', d==='mobile');
+}
+
+function toggleHour(id) {
+  var card = document.getElementById('w-hc-'+id) || document.getElementById('m-hc-'+id);
+  if(!card) return;
+  card.classList.toggle('open');
+  var drop = document.getElementById('hd-w-'+id) || document.getElementById('hd-m-'+id);
+  if(drop) drop.style.display = card.classList.contains('open') ? 'block' : 'none';
+}
+
+function togglePillar(id) {
+  var card = document.getElementById(id);
+  if(!card) return;
+  card.classList.toggle('open');
+  var body = card.querySelector('.pbody') || card.querySelector('.m-pbody');
+  if(body) body.style.display = card.classList.contains('open') ? 'block' : 'none';
+}
+
+function requestVerify(e, btnId) {
+  e.stopPropagation();
+  var btn = document.getElementById(btnId);
+  if(btn.classList.contains('sent')) return;
+  btn.classList.add('sent');
+  btn.innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5.5l2.5 2.5 3.5-4"/></svg> Sent — org will be notified';
+  btn.style.pointerEvents = 'none';
+}
+
+function confirmVerify(btnId) {
+  var btn = document.getElementById(btnId);
+  btn.classList.add('done');
+  btn.textContent = 'Confirmed';
+  btn.style.pointerEvents = 'none';
+}
+
+function sendNudge() {
+  var btn = document.getElementById('nudge-parent-btn');
+  btn.classList.add('sent');
+  btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 6.5l3.5 3.5 5.5-6"/></svg> Nudge sent to Priya';
+  btn.style.pointerEvents = 'none';
+}
+
+// init
+document.querySelectorAll('.pbody,.m-pbody').forEach(function(b){b.style.display='none'});
+document.querySelectorAll('.hdrop,.m-hdrop').forEach(function(b){b.style.display='none'});
+
+var logHrs = 2;
+var logCat = 'vol';
+
+function openLogModal() {
+  document.getElementById('log-modal').classList.add('open');
+  document.getElementById('log-form').style.display='block';
+  document.getElementById('log-success').style.display='none';
+  logHrs = 2;
+  document.getElementById('log-hrs-num').textContent = logHrs;
+}
+
+function closeLogModal() {
+  document.getElementById('log-modal').classList.remove('open');
+}
+
+function selCat(el, cat) {
+  document.querySelectorAll('.cat-btn-modal').forEach(function(b){b.classList.remove('sel')});
+  el.classList.add('sel');
+  logCat = cat;
+  var suggestions = {
+    vol: ['Teamwork','Initiative & Community','Self-Management'],
+    work: ['Communication','Self-Management','Problem-Solving'],
+    proj: ['Problem-Solving','Teamwork','Leadership'],
+    life: ['Self-Management','Initiative & Community','Communication']
+  };
+  document.querySelectorAll('.chip-modal').forEach(function(c){c.classList.remove('sel')});
+  var chips = document.querySelectorAll('.chip-modal');
+  var sug = suggestions[cat] || [];
+  chips.forEach(function(c){
+    if(sug.indexOf(c.textContent.trim()) > -1) c.classList.add('sel');
+  });
+  var prompts = {
+    vol: 'e.g. I learned how to work with seniors and manage my time differently...',
+    work: 'e.g. Dealing with a difficult customer taught me to stay calm under pressure...',
+    proj: 'e.g. Leading our robotics team through a technical problem showed me...',
+    life: 'e.g. Playing in the band every week has taught me discipline and...'
+  };
+  document.getElementById('reflect-input').placeholder = prompts[cat] || 'One thing you took away from this...';
+}
+
+function chgHrs(d) {
+  logHrs = Math.max(1, Math.min(20, logHrs + d));
+  document.getElementById('log-hrs-num').textContent = logHrs;
+}
+
+function togChip(el) { el.classList.toggle('sel'); }
+
+function saveActivity() {
+  document.getElementById('log-form').style.display='none';
+  document.getElementById('log-success').style.display='block';
+  setTimeout(function(){ closeLogModal(); }, 2200);
+}
+
+document.getElementById('log-modal').addEventListener('click', function(e){
+  if(e.target === this) closeLogModal();
+});
+</script>
+
+<!-- LOG ACTIVITY MODAL -->
+<div class="modal-overlay" id="log-modal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">Log an activity</div>
+      <button class="modal-close" onclick="closeLogModal()">×</button>
+    </div>
+
+    <div id="log-form">
+    <div class="modal-body">
+
+      <div class="modal-step-lbl">What type of activity?</div>
+      <div class="cat-grid-modal">
+        <button class="cat-btn-modal" onclick="selCat(this,'proj')">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round"><path d="M11 3H5a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V9l-6-6z"/><path d="M11 3v6h6"/></svg>
+          <div class="cat-btn-name">Project / passion</div>
+          <div class="cat-btn-eg">Club, side hustle, competition</div>
+        </button>
+        <button class="cat-btn-modal" onclick="selCat(this,'work')">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--maroon)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="6" width="16" height="12" rx="2"/><path d="M13 6V4a2 2 0 00-2-2H9a2 2 0 00-2 2v2"/></svg>
+          <div class="cat-btn-name">Work / experience</div>
+          <div class="cat-btn-eg">Job, internship, freelance</div>
+        </button>
+        <button class="cat-btn-modal sel" onclick="selCat(this,'vol')">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"><path d="M10 18s-7-4.5-7-9a7 7 0 0114 0c0 4.5-7 9-7 9z"/></svg>
+          <div class="cat-btn-name">Volunteering</div>
+          <div class="cat-btn-eg">Community, charity, hospital</div>
+        </button>
+        <button class="cat-btn-modal" onclick="selCat(this,'life')">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><polygon points="10,2 12.4,7.5 18.5,8.2 14,12.5 15.3,18.5 10,15.6 4.7,18.5 6,12.5 1.5,8.2 7.6,7.5"/></svg>
+          <div class="cat-btn-name">Life / hobby</div>
+          <div class="cat-btn-eg">Sport, art, music, travel</div>
+        </button>
+      </div>
+
+      <div class="modal-step-lbl">Hours</div>
+      <div class="hrs-row-modal" style="margin-bottom:18px">
+        <button class="hrs-step-modal" onclick="chgHrs(-1)">−</button>
+        <div class="hrs-num-modal" id="log-hrs-num">2</div>
+        <div style="font-size:12px;color:var(--text-muted)">hours</div>
+        <button class="hrs-step-modal" onclick="chgHrs(1)">+</button>
+      </div>
+
+      <div class="modal-step-lbl">Competencies this built — adjust as needed</div>
+      <div class="chip-wrap">
+        <div class="chip-modal" onclick="togChip(this)">Problem-Solving</div>
+        <div class="chip-modal" onclick="togChip(this)">Communication</div>
+        <div class="chip-modal" onclick="togChip(this)">Leadership</div>
+        <div class="chip-modal" onclick="togChip(this)">Teamwork</div>
+        <div class="chip-modal sel" onclick="togChip(this)">Initiative & Community</div>
+        <div class="chip-modal sel" onclick="togChip(this)">Self-Management</div>
+      </div>
+
+      <div class="modal-step-lbl">One thing you took away</div>
+      <textarea class="reflect-modal" id="reflect-input" placeholder="e.g. I learned how to work with seniors and manage my time differently..."></textarea>
+      <div class="reflect-hint">Optional · 30 seconds · This is what makes your profile stand out</div>
+
+      <button class="modal-save-btn" onclick="saveActivity()">Save activity</button>
+
+    </div>
+    </div>
+
+    <div id="log-success" class="modal-success">
+      <div class="modal-success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <div class="modal-success-title">Activity logged</div>
+      <div class="modal-success-sub">Your score and pillar scores have been updated</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
