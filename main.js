@@ -155,15 +155,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const swiper = new Swiper('.swiper', {
+  const swiper = new Swiper('.portfolio-swiper', {
     loop: true,
     autoplay: {
       delay: 3000, // 3 seconds
       disableOnInteraction: false, // keep autoplay after user interaction
     },
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: '.portfolio-swiper .swiper-button-next',
+      prevEl: '.portfolio-swiper .swiper-button-prev',
+    },
+  });
+
+  const demoSwiper = new Swiper('.demo-swiper', {
+    loop: false,
+    pagination: {
+      el: '.demo-swiper .swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.demo-swiper .swiper-button-next',
+      prevEl: '.demo-swiper .swiper-button-prev',
     },
   });
 
