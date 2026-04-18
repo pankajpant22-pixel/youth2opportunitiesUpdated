@@ -223,7 +223,6 @@ ul {
 }
 
 @keyframes pulse {
-
   0%,
   100% {
     opacity: 1;
@@ -410,9 +409,11 @@ ul {
   right: -8%;
   width: 55%;
   height: 75%;
-  background: radial-gradient(ellipse at center,
-      var(--teal-glow) 0%,
-      transparent 65%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--teal-glow) 0%,
+    transparent 65%
+  );
   pointer-events: none;
   animation: drift 20s ease-in-out infinite alternate;
 }
@@ -424,9 +425,11 @@ ul {
   left: -5%;
   width: 35%;
   height: 45%;
-  background: radial-gradient(ellipse at center,
-      var(--coral-soft) 0%,
-      transparent 65%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--coral-soft) 0%,
+    transparent 65%
+  );
   pointer-events: none;
   animation: drift 25s ease-in-out infinite alternate-reverse;
 }
@@ -533,9 +536,11 @@ ul {
   position: absolute;
   inset: -1px;
   border-radius: 21px;
-  background: linear-gradient(135deg,
-      rgba(26, 158, 143, 0.15),
-      rgba(255, 107, 74, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(26, 158, 143, 0.15),
+    rgba(255, 107, 74, 0.1)
+  );
   z-index: -1;
 }
 
@@ -683,9 +688,11 @@ ul {
   position: absolute;
   inset: -1px;
   border-radius: 21px;
-  background: linear-gradient(135deg,
-      rgba(26, 158, 143, 0.15),
-      rgba(123, 45, 38, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(26, 158, 143, 0.15),
+    rgba(123, 45, 38, 0.08)
+  );
   z-index: -1;
 }
 
@@ -1488,7 +1495,7 @@ ul {
   margin-bottom: 0.15rem;
 }
 
-.pp-ext-info>p {
+.pp-ext-info > p {
   font-size: 0.85rem;
   color: var(--text-muted);
   margin-bottom: 0.65rem;
@@ -2286,6 +2293,10 @@ ul {
   overflow: hidden;
 }
 
+.partner-embed {
+  padding: var(--section-pad) 0;
+}
+
 .survey-embed::before {
   content: "";
   position: absolute;
@@ -2293,9 +2304,11 @@ ul {
   right: -15%;
   width: 50%;
   height: 80%;
-  background: radial-gradient(ellipse,
-      rgba(26, 158, 143, 0.1) 0%,
-      transparent 60%);
+  background: radial-gradient(
+    ellipse,
+    rgba(26, 158, 143, 0.1) 0%,
+    transparent 60%
+  );
   pointer-events: none;
 }
 
@@ -2380,9 +2393,11 @@ ul {
   right: -15%;
   width: 50%;
   height: 80%;
-  background: radial-gradient(ellipse,
-      rgba(26, 158, 143, 0.12) 0%,
-      transparent 60%);
+  background: radial-gradient(
+    ellipse,
+    rgba(26, 158, 143, 0.12) 0%,
+    transparent 60%
+  );
   pointer-events: none;
 }
 
