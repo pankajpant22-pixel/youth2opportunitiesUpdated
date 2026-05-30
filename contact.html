@@ -637,7 +637,10 @@
         setIcon("success-ic", "check-circle", 28);
 
         /* Ref code */
-        const ref = new URLSearchParams(window.location.search).get("ref");
+        const ref =
+          new URLSearchParams(window.location.search).get("ref") ||
+          sessionStorage.getItem("ref");
+
         if (ref) document.getElementById("f-ref").value = ref;
 
         /* Role picker — toggle extra fields */
