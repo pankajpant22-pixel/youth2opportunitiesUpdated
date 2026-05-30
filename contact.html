@@ -664,6 +664,19 @@
         var success = document.getElementById("success");
         var resetBtn = document.getElementById("reset-btn");
 
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            if (!form.checkValidity()) {
+              e.preventDefault();
+              form.reportValidity();
+              return;
+            }
+            // don't preventDefault here — let the form POST normally
+            form.style.display = "none";
+            success.classList.add("show");
+          });
+        }
+
         if (resetBtn) {
           resetBtn.addEventListener("click", function () {
             // Reset success content
