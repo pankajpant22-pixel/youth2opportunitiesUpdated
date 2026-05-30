@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact · Join the waitlist | Y2O</title>
+    <meta
+      name="description"
+      content="Join the Y2O waitlist · students, parents, partners and institutions across the GTA · or message the team directly"
+    />
+    <link rel="stylesheet" href="brand.css" />
+    <script src="https://getlaunchlist.com/js/widget-diy.js" defer></script>
+    <style>
+      .c-hero {
+        position: relative;
+        overflow: hidden;
+      }
+      .c-hero::before {
+        content: "";
+        position: absolute;
+        top: -180px;
+        right: -180px;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(
+          closest-side,
+          rgba(26, 158, 143, 0.1),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .c-hero .container {
+        position: relative;
+      }
+      .c-hero h1 {
+        margin-top: 16px;
+        max-width: 18ch;
+      }
+      .c-hero .lead {
+        margin-top: 20px;
+        max-width: 56ch;
+      }
+
+      .c-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 56px;
+        align-items: flex-start;
+      }
+      @media (max-width: 980px) {
+        .c-layout {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      .c-side h3 {
+        font-size: 1.25rem;
+        color: var(--deepNavy);
+        margin-bottom: 14px;
+      }
+      .c-side .why {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 24px;
+      }
+      .c-side .why li {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .c-side .why .ic {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--lightTeal);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+      .c-side .why .ic svg {
+        width: 18px;
+        height: 18px;
+      }
+      .c-side .why .lbl {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 0.9375rem;
+      }
+      .c-side .why .sub {
+        font-size: 0.875rem;
+        color: var(--warmGrey);
+        margin-top: 2px;
+      }
+
+      .c-direct {
+        margin-top: 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .c-direct a {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 14px;
+        align-items: center;
+        background: var(--white);
+        border: 1px solid var(--coolGrey);
+        border-radius: var(--radius-md);
+        padding: 14px 18px;
+        transition:
+          border-color 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .c-direct a:hover {
+        border-color: rgba(26, 158, 143, 0.4);
+        box-shadow: var(--shadow-card);
+      }
+      .c-direct .ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--lightTeal);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+      }
+      .c-direct .ic.alt {
+        background: rgba(31, 43, 108, 0.08);
+        color: var(--navy);
+      }
+      .c-direct .lbl {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--warmGrey);
+        margin-bottom: 2px;
+      }
+      .c-direct .email {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 0.9375rem;
+        word-break: break-all;
+      }
+
+      /* Form card */
+      .c-card {
+        background: var(--white);
+        border: 1px solid var(--coolGrey);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow:
+          0 24px 60px -24px rgba(21, 29, 72, 0.18),
+          0 8px 24px rgba(31, 43, 108, 0.06);
+      }
+      @media (min-width: 768px) {
+        .c-card {
+          padding: 40px;
+        }
+      }
+
+      .c-card .label {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--warmGrey);
+        margin-bottom: 12px;
+      }
+
+      /* Role picker */
+      .role-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      @media (max-width: 640px) {
+        .role-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .role-btn {
+        padding: 14px 10px;
+        border-radius: var(--radius-md);
+        background: var(--white);
+        border: 1.5px solid var(--coolGrey);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 0.875rem;
+        transition: all 0.18s ease;
+        text-align: center;
+        cursor: pointer;
+      }
+      .role-btn:hover {
+        border-color: rgba(26, 158, 143, 0.4);
+      }
+      .role-btn.active {
+        border-color: var(--teal);
+        background: var(--lightTeal);
+        color: var(--teal);
+      }
+
+      /* Form fields */
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      @media (max-width: 640px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+      .field label {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 0.8125rem;
+        color: var(--deepNavy);
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--coolGrey);
+        border-radius: var(--radius-md);
+        background: var(--white);
+        font: inherit;
+        color: var(--nearBlack);
+        transition:
+          border-color 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        outline: 0;
+        border-color: var(--teal);
+        box-shadow: 0 0 0 3px rgba(26, 158, 143, 0.12);
+      }
+      .field textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .role-extra {
+        display: none;
+      }
+      .role-extra.show {
+        display: block;
+      }
+
+      .consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 18px 0 4px;
+        font-size: 0.8125rem;
+        color: var(--warmGrey);
+        cursor: pointer;
+      }
+      .consent input {
+        margin-top: 3px;
+        accent-color: var(--teal);
+      }
+
+      .submit-btn {
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .success {
+        display: none;
+        text-align: center;
+        padding: 24px 0;
+      }
+      .success.show {
+        display: block;
+      }
+      .success .ic {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--lightTeal);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+        margin: 0 auto 18px;
+      }
+      .success .ic svg {
+        width: 28px;
+        height: 28px;
+      }
+      .success h3 {
+        color: var(--deepNavy);
+        margin-bottom: 8px;
+      }
+      .success p {
+        color: var(--warmGrey);
+        max-width: 38ch;
+        margin: 0 auto;
+      }
+      .success .reset {
+        margin-top: 24px;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 0.8125rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--teal);
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+      .success .reset:hover {
+        color: var(--deepNavy);
+      }
+
+      /* FAQ section */
+      .c-faq .layout {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 64px;
+        align-items: flex-start;
+      }
+      @media (max-width: 900px) {
+        .c-faq .layout {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div data-navbar></div>
+
+    <main>
+      <!-- Hero + form -->
+      <section
+        class="c-hero bg-warmIvory section-pad-lg"
+        data-screen-label="01 Contact hero"
+      >
+        <div class="container">
+          <div class="c-layout">
+            <div class="c-side">
+              <span class="eyebrow">Join Early</span>
+              <h1>Join the waitlist</h1>
+              <p class="lead">
+                Students, parents, partners, and institutions across the GTA.
+                Early access opens in stages.
+              </p>
+
+              <ul class="why">
+                <li>
+                  <span class="ic" id="why-1-ic"></span>
+                  <div>
+                    <div class="lbl">First access in the GTA</div>
+                    <div class="sub">
+                      Students in Grades 9 to 12 go first as access opens.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <span class="ic" id="why-2-ic"></span>
+                  <div>
+                    <div class="lbl">No spam. No selling.</div>
+                    <div class="sub">
+                      Occasional updates only. We do not sell your data.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <span class="ic" id="why-3-ic"></span>
+                  <div>
+                    <div class="lbl">Built in Canada</div>
+                    <div class="sub">
+                      Y2O Growth Inc. Launching first across the GTA.
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="c-direct">
+                <a href="mailto:hello@youth2opportunities.ca">
+                  <span class="ic" id="dir-1-ic"></span>
+                  <div>
+                    <div class="lbl">General</div>
+                    <div class="email">hello@youth2opportunities.ca</div>
+                  </div>
+                </a>
+                <a href="mailto:privacy@youth2opportunities.ca">
+                  <span class="ic alt" id="dir-2-ic"></span>
+                  <div>
+                    <div class="lbl">Privacy</div>
+                    <div class="email">privacy@youth2opportunities.ca</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="c-card">
+              <form
+                class="launchlist-form"
+                action="https://getlaunchlist.com/s/odlthU"
+                method="POST"
+                id="waitlist-form"
+                novalidate
+              >
+                <div class="label">I am a</div>
+                <div
+                  class="role-grid"
+                  role="tablist"
+                  aria-label="Choose your role"
+                >
+                  <button
+                    type="button"
+                    class="role-btn active"
+                    data-role="student"
+                  >
+                    Student
+                  </button>
+                  <button type="button" class="role-btn" data-role="parent">
+                    Parent
+                  </button>
+                  <button type="button" class="role-btn" data-role="partner">
+                    Partner
+                  </button>
+                  <button
+                    type="button"
+                    class="role-btn"
+                    data-role="institution"
+                  >
+                    Institution
+                  </button>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="f-first">First name</label>
+                    <input
+                      type="text"
+                      id="f-first"
+                      name="first_name"
+                      required
+                      autocomplete="given-name"
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="f-email">Email</label>
+                    <input
+                      type="email"
+                      id="f-email"
+                      name="email"
+                      required
+                      autocomplete="email"
+                    />
+                  </div>
+                </div>
+
+                <div class="field role-extra show" data-extra="student">
+                  <label for="f-grade">Grade</label>
+                  <select id="f-grade" name="grade">
+                    <option>Grade 9</option>
+                    <option>Grade 10</option>
+                    <option>Grade 11</option>
+                    <option>Grade 12</option>
+                  </select>
+                </div>
+
+                <div class="field role-extra" data-extra="parent">
+                  <label for="f-child-grade">Child's grade</label>
+                  <select id="f-child-grade" name="child_grade">
+                    <option>Grade 9</option>
+                    <option>Grade 10</option>
+                    <option>Grade 11</option>
+                    <option>Grade 12</option>
+                    <option>Not in high school yet</option>
+                  </select>
+                </div>
+
+                <div class="field role-extra" data-extra="partner">
+                  <label for="f-org">Organization</label>
+                  <input
+                    type="text"
+                    id="f-org"
+                    name="org"
+                    placeholder="Club, business, charity, program"
+                  />
+                </div>
+
+                <div class="field role-extra" data-extra="institution">
+                  <label for="f-inst">Institution</label>
+                  <input
+                    type="text"
+                    id="f-inst"
+                    name="institution"
+                    placeholder="University, college, employer, scholarship office"
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="f-city">City or school board</label>
+                  <input
+                    type="text"
+                    id="f-city"
+                    name="city"
+                    placeholder="e.g. Oakville · Halton DSB"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="f-note">Anything we should know (optional)</label>
+                  <textarea id="f-note" name="note" rows="3"></textarea>
+                </div>
+
+                <label class="consent">
+                  <input type="checkbox" required />
+                  <span
+                    >I agree to receive occasional Y2O updates · I can
+                    unsubscribe at any time</span
+                  >
+                </label>
+
+                <input type="hidden" id="f-ref" name="ref" />
+
+                <button type="submit" class="btn-primary submit-btn">
+                  Join the waitlist
+                </button>
+              </form>
+
+              <div class="success" id="success">
+                <span class="ic" id="success-ic"></span>
+                <h3>You're on the list</h3>
+                <p>
+                  We'll be in touch when GTA early access opens for your group
+                </p>
+                <button type="button" class="reset" id="reset-btn">
+                  Send another
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section
+        class="bg-white section-pad-lg c-faq"
+        data-screen-label="02 Contact FAQ"
+      >
+        <div class="container">
+          <div class="layout">
+            <div>
+              <span class="eyebrow">Common questions</span>
+              <h2 class="mt-16">Before you reach out</h2>
+              <p class="lead">
+                Clear answers for students, families, partners, and
+                institutions.
+              </p>
+            </div>
+            <div id="faq-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section
+        class="bg-deepNavy section-pad-md final-cta"
+        data-screen-label="03 Final CTA"
+      >
+        <div class="container">
+          <span class="eyebrow">Help shape Y2O</span>
+          <h2 class="mt-16">Build the record with us</h2>
+          <p class="lead">
+            Students, families, and partners helping shape what gets logged,
+            what gets confirmed, and how it travels.
+          </p>
+          <div
+            class="row"
+            style="
+              margin-top: 28px;
+              display: flex;
+              gap: 12px;
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <a href="partners.html" class="btn-primary">For partners</a>
+            <a href="institutions.html" class="btn-secondary"
+              >For institutions</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div data-footer></div>
+
+    <script src="icons.js"></script>
+    <script src="partials.js"></script>
+    <script src="faq.js"></script>
+    <script src="data.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function setIcon(id, name, size) {
+          var el = document.getElementById(id);
+          if (el && window.icon) el.innerHTML = window.icon(name, size || 20);
+        }
+
+        setIcon("why-1-ic", "star", 18);
+        setIcon("why-2-ic", "lock", 18);
+        setIcon("why-3-ic", "shield", 18);
+        setIcon("dir-1-ic", "mail", 20);
+        setIcon("dir-2-ic", "shield", 20);
+        setIcon("success-ic", "check-circle", 28);
+
+        /* Ref code */
+        const ref = new URLSearchParams(window.location.search).get("ref");
+        if (ref) document.getElementById("f-ref").value = ref;
+
+        /* Role picker — toggle extra fields */
+        var roleBtns = document.querySelectorAll(".role-btn");
+        var extras = document.querySelectorAll(".role-extra");
+        roleBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            roleBtns.forEach(function (b) {
+              b.classList.remove("active");
+            });
+            btn.classList.add("active");
+            var role = btn.getAttribute("data-role");
+            extras.forEach(function (ex) {
+              ex.classList.toggle(
+                "show",
+                ex.getAttribute("data-extra") === role,
+              );
+            });
+          });
+        });
+
+        /* Submit — show success state */
+        var form = document.getElementById("waitlist-form");
+        var success = document.getElementById("success");
+        var resetBtn = document.getElementById("reset-btn");
+
+        if (resetBtn) {
+          resetBtn.addEventListener("click", function () {
+            // Reset success content
+            document.querySelector("#success h3").textContent =
+              "You're on the list";
+            document.querySelector("#success p").textContent =
+              "We'll be in touch when GTA early access opens for your group";
+
+            // Remove dynamically added referral link
+            const referral = document.querySelector("#success a");
+            if (referral) referral.remove();
+            success.classList.remove("show");
+            form.style.display = "";
+            form.reset();
+            roleBtns.forEach(function (b) {
+              b.classList.remove("active");
+            });
+            roleBtns[0].classList.add("active");
+            extras.forEach(function (ex) {
+              ex.classList.toggle(
+                "show",
+                ex.getAttribute("data-extra") === "student",
+              );
+            });
+          });
+        }
+
+        /* FAQ */
+        if (window.buildFAQ && window.FAQ && window.FAQ.contact) {
+          window.buildFAQ("#faq-list", window.FAQ.contact);
+        }
+      });
+    </script>
+  </body>
+</html>

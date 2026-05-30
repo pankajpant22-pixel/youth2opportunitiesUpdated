@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Growth Score · Y2O</title>
+<meta name="description" content="See your Growth Score · four quick questions show how strong your record looks today · Y2O is the verified growth record for high school students" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  .s-hero { position: relative; overflow: hidden; }
+  .s-hero::before {
+    content: ""; position: absolute;
+    top: -180px; right: -180px;
+    width: 520px; height: 520px;
+    background: radial-gradient(closest-side, rgba(26,158,143,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .s-hero .container { position: relative; }
+  .s-hero h1 { margin-top: 16px; max-width: 16ch; }
+  .s-hero .lead { margin-top: 20px; max-width: 56ch; }
+  .s-hero .center { text-align: center; max-width: 760px; margin: 0 auto; }
+
+  /* Quiz card */
+  .quiz-wrap { max-width: 880px; margin: 0 auto; }
+  .quiz-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 24px 60px -24px rgba(21,29,72,0.18), 0 8px 24px rgba(31,43,108,0.06);
+  }
+  @media (min-width: 768px) { .quiz-card { padding: 48px; } }
+
+  .progress-bar {
+    display: flex; gap: 8px; margin-bottom: 40px;
+  }
+  .progress-seg {
+    flex: 1; height: 6px;
+    background: var(--coolGrey);
+    border-radius: 999px;
+    transition: background 0.3s ease;
+  }
+  .progress-seg.active { background: var(--teal); }
+
+  .quiz-step { display: none; min-height: 280px; }
+  .quiz-step.active { display: block; }
+
+  .step-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .step-q {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--deepNavy);
+    font-size: clamp(1.375rem, 1vw + 1rem, 1.75rem);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .step-sub {
+    color: var(--warmGrey);
+    font-size: 0.9375rem;
+    margin-bottom: 28px;
+  }
+
+  /* Option grids */
+  .opt-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .opt-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+  .opt-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .opt-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 768px) {
+    .opt-grid.cols-5, .opt-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+    .opt-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .opt-btn {
+    padding: 22px 16px;
+    background: var(--white);
+    border: 1.5px solid var(--coolGrey);
+    border-radius: var(--radius-md);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--deepNavy);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-align: center;
+    min-height: 64px;
+  }
+  .opt-btn:hover {
+    border-color: var(--teal);
+    background: var(--lightTeal);
+  }
+  .opt-btn.selected {
+    border-color: var(--teal);
+    background: var(--lightTeal);
+    color: var(--teal);
+  }
+
+  .step-nav {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 32px;
+  }
+  .step-nav .back-btn {
+    background: transparent;
+    color: var(--warmGrey);
+    border: 0;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 0.875rem;
+    padding: 12px 4px;
+    cursor: pointer;
+  }
+  .step-nav .back-btn:hover { color: var(--deepNavy); }
+  .step-nav .next-btn { min-width: 160px; }
+
+  /* Result screen */
+  .result { text-align: center; padding-top: 8px; }
+  .result-ring {
+    position: relative;
+    width: 220px; height: 220px;
+    margin: 0 auto 28px;
+  }
+  .result-ring svg { transform: rotate(-90deg); display: block; }
+  .result-ring .center {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+    gap: 2px;
+  }
+  .result-ring .num {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy);
+    font-size: 3.5rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .result-ring .out {
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 0.8125rem;
+    color: var(--warmGrey);
+    line-height: 1;
+    margin-top: 6px;
+  }
+  .result-ring .band {
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--navy);
+    line-height: 1;
+    margin-top: 8px;
+  }
+
+  .result-summary {
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 1rem;
+    color: var(--deepNavy);
+    margin-bottom: 24px;
+    max-width: 44ch;
+    margin-left: auto; margin-right: auto;
+  }
+
+  .result-bars {
+    max-width: 380px;
+    margin: 0 auto 32px;
+    display: flex; flex-direction: column; gap: 14px;
+    text-align: left;
+  }
+  .result-bar .top {
+    display: flex; justify-content: space-between;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--deepNavy);
+    margin-bottom: 6px;
+  }
+  .result-bar .top span:last-child { color: var(--warmGrey); font-weight: 500; }
+  .result-bar .track {
+    height: 6px;
+    background: var(--coolGrey);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .result-bar .fill {
+    height: 100%; border-radius: 999px;
+    transition: width 0.9s cubic-bezier(.4,.2,.2,1);
+    width: 0;
+  }
+  .result-bar.hours .fill       { background: var(--teal); }
+  .result-bar.variety .fill     { background: var(--maroon); }
+  .result-bar.confirm .fill     { background: var(--gold); }
+  .result-bar.consistency .fill { background: var(--navy); }
+
+  .result-disclaimer {
+    font-size: 0.875rem; color: var(--warmGrey);
+    font-style: italic;
+    margin-bottom: 28px;
+    max-width: 52ch;
+    margin-left: auto; margin-right: auto;
+  }
+  .result-actions {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+
+  /* How score works */
+  .score-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 56px;
+  }
+  @media (max-width: 980px) { .score-pillars { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .score-pillars { grid-template-columns: 1fr; } }
+
+  .pillar-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 18px;
+    padding: 32px 26px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .pillar-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .pillar-card .ic {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center;
+    margin-bottom: 20px;
+  }
+  .pillar-card .ic svg { width: 28px; height: 28px; }
+  .pillar-card h4 {
+    color: var(--deepNavy);
+    font-size: 1.0625rem;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .pillar-card p {
+    font-size: 0.9375rem;
+    color: var(--warmGrey);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .pillars-note {
+    margin-top: 28px;
+    font-size: 0.8125rem;
+    color: var(--warmGrey);
+    font-style: italic;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div data-navbar></div>
+
+<main>
+
+  <!-- Hero -->
+  <section class="s-hero bg-warmIvory section-pad-md" data-screen-label="01 Score hero">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Growth Check</span>
+        <h1>What&rsquo;s your Growth Score?</h1>
+        <p class="lead">Answer four quick questions to estimate the strength of your current record.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="bg-warmIvory" style="padding-bottom: 96px;" data-screen-label="02 Score quiz">
+    <div class="container">
+      <div class="quiz-wrap">
+        <div class="quiz-card">
+
+          <div class="progress-bar" aria-label="Quiz progress">
+            <div class="progress-seg active"></div>
+            <div class="progress-seg"></div>
+            <div class="progress-seg"></div>
+            <div class="progress-seg"></div>
+          </div>
+
+          <!-- Step 1: Hours -->
+          <div class="quiz-step active" data-step="1">
+            <div class="step-eyebrow">Step 01 · Hours</div>
+            <h2 class="step-q">How many hours have you completed outside school?</h2>
+            <p class="step-sub">Across work, volunteering, clubs, sports, side projects, and community activities.</p>
+            <div class="opt-grid cols-5" id="opt-hours">
+              <button type="button" class="opt-btn" data-val="5">0 to 20</button>
+              <button type="button" class="opt-btn" data-val="12">21 to 50</button>
+              <button type="button" class="opt-btn" data-val="25">51 to 100</button>
+              <button type="button" class="opt-btn" data-val="35">101 to 200</button>
+              <button type="button" class="opt-btn" data-val="40">200 or more</button>
+            </div>
+            <div class="step-nav">
+              <span></span>
+              <button type="button" class="btn-primary next-btn" data-next disabled>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Variety -->
+          <div class="quiz-step" data-step="2">
+            <div class="step-eyebrow">Step 02 · Activity Variety</div>
+            <h2 class="step-q">What kinds of things have you done?</h2>
+            <p class="step-sub">Tap all that apply.</p>
+            <div class="opt-grid cols-3" id="opt-types">
+              <button type="button" class="opt-btn" data-val="Volunteering">Volunteering</button>
+              <button type="button" class="opt-btn" data-val="Work">Work</button>
+              <button type="button" class="opt-btn" data-val="Clubs">Clubs</button>
+              <button type="button" class="opt-btn" data-val="Sports and Competitions">Sports and Competitions</button>
+              <button type="button" class="opt-btn" data-val="Side Projects">Side Projects</button>
+              <button type="button" class="opt-btn" data-val="Community">Community</button>
+            </div>
+            <div class="step-nav">
+              <button type="button" class="back-btn" data-back>← Back</button>
+              <button type="button" class="btn-primary next-btn" data-next disabled>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Confirmation -->
+          <div class="quiz-step" data-step="3">
+            <div class="step-eyebrow">Step 03 · Confirmation</div>
+            <h2 class="step-q">How much of it can someone else confirm?</h2>
+            <p class="step-sub">A coach, employer, teacher, supervisor, or club lead who saw the work.</p>
+            <div class="opt-grid cols-4" id="opt-confirm">
+              <button type="button" class="opt-btn" data-val="0">None yet</button>
+              <button type="button" class="opt-btn" data-val="10">Some of it</button>
+              <button type="button" class="opt-btn" data-val="20">Most of it</button>
+              <button type="button" class="opt-btn" data-val="30">All of it</button>
+            </div>
+            <div class="step-nav">
+              <button type="button" class="back-btn" data-back>← Back</button>
+              <button type="button" class="btn-primary next-btn" data-next disabled>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Consistency -->
+          <div class="quiz-step" data-step="4">
+            <div class="step-eyebrow">Step 04 · Consistency</div>
+            <h2 class="step-q">How long have you been building this record?</h2>
+            <p class="step-sub">A longer run shows commitment beyond a single year.</p>
+            <div class="opt-grid cols-4" id="opt-time">
+              <button type="button" class="opt-btn" data-val="0">Just started</button>
+              <button type="button" class="opt-btn" data-val="4">6 months</button>
+              <button type="button" class="opt-btn" data-val="7">1 year</button>
+              <button type="button" class="opt-btn" data-val="10">2 or more years</button>
+            </div>
+            <div class="step-nav">
+              <button type="button" class="back-btn" data-back>← Back</button>
+              <button type="button" class="btn-primary next-btn" data-next disabled>See my score</button>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div class="quiz-step" data-step="5">
+            <div class="result">
+              <div class="result-ring">
+                <svg width="220" height="220" viewBox="0 0 220 220">
+                  <circle cx="110" cy="110" r="96" fill="none" stroke="#E5E9F2" stroke-width="14"></circle>
+                  <circle id="result-ring-fill" cx="110" cy="110" r="96" fill="none" stroke="#1F2B6C" stroke-width="14"
+                          stroke-linecap="round"
+                          stroke-dasharray="603.19"
+                          stroke-dashoffset="603.19"
+                          style="transition: stroke-dashoffset 0.9s cubic-bezier(.4,.2,.2,1);"></circle>
+                </svg>
+                <div class="center">
+                  <div class="num" id="result-num">0</div>
+                  <div class="out">of 100</div>
+                  <div class="band" id="result-band">Developing</div>
+                </div>
+              </div>
+
+              <p class="result-summary">Your estimate reflects activity, variety, confirmation, and consistency.</p>
+              <p class="result-disclaimer" style="font-style: normal; margin-top: -16px; margin-bottom: 28px;">A real Y2O profile grows as activities are logged and confirmed.</p>
+
+              <div class="result-bars" id="result-bars">
+                <div class="result-bar hours">
+                  <div class="top"><span>Hours</span><span id="hb-val"></span></div>
+                  <div class="track"><div class="fill" data-pct="0"></div></div>
+                </div>
+                <div class="result-bar variety">
+                  <div class="top"><span>Activity Variety</span><span id="vb-val"></span></div>
+                  <div class="track"><div class="fill" data-pct="0"></div></div>
+                </div>
+                <div class="result-bar confirm">
+                  <div class="top"><span>Confirmation</span><span id="cb-val"></span></div>
+                  <div class="track"><div class="fill" data-pct="0"></div></div>
+                </div>
+                <div class="result-bar consistency">
+                  <div class="top"><span>Consistency</span><span id="tb-val"></span></div>
+                  <div class="track"><div class="fill" data-pct="0"></div></div>
+                </div>
+              </div>
+
+              <div class="result-actions">
+                <button type="button" class="btn-secondary" id="restart-btn">Start over</button>
+                <a href="contact.html" class="btn-primary">Join the waitlist</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How the score works -->
+  <section class="bg-white section-pad-lg" data-screen-label="03 How the score works">
+    <div class="container">
+      <div class="section-header center">
+        <span class="eyebrow">How the score works</span>
+        <h2>Four pillars. One score.</h2>
+        <p class="lead">The Y2O Growth Score looks at hours, activity variety, confirmation, and consistency.</p>
+      </div>
+
+      <div class="score-pillars">
+        <div class="pillar-card">
+          <div class="ic" id="p-1-ic"></div>
+          <h4>Hours</h4>
+          <p>How much experience you have built outside school.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="ic" id="p-2-ic"></div>
+          <h4>Activity Variety</h4>
+          <p>How many different kinds of activity show up in your record.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="ic" id="p-3-ic"></div>
+          <h4>Confirmation</h4>
+          <p>How much of your record has been confirmed by others.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="ic" id="p-4-ic"></div>
+          <h4>Consistency</h4>
+          <p>How steadily your record is built over time.</p>
+        </div>
+      </div>
+
+      <p class="pillars-note">The detailed scoring formula is proprietary and may evolve as Y2O develops.</p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="bg-deepNavy section-pad-md final-cta" data-screen-label="04 Final CTA">
+    <div class="container">
+      <span class="eyebrow">Make it real</span>
+      <h2 class="mt-16">Turn the estimate into a verified record</h2>
+      <p class="lead">Join the waitlist and we&rsquo;ll share next steps as Y2O becomes available.</p>
+      <div class="row" style="margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="contact.html" class="btn-primary">Join the waitlist</a>
+        <a href="students.html" class="btn-secondary">For students</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+<script src="icons.js"></script>
+<script src="partials.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function setIcon(id, name, size) {
+      var el = document.getElementById(id);
+      if (el && window.icon) el.innerHTML = window.icon(name, size || 22);
+    }
+    setIcon("p-1-ic", "clock",       28);
+    setIcon("p-2-ic", "layers",      28);
+    setIcon("p-3-ic", "badge-check", 28);
+    setIcon("p-4-ic", "calendar",    28);
+
+    /* State */
+    var state = {
+      step: 1,
+      hours: null,            // single value
+      types: [],              // array
+      confirm: null,
+      time: null
+    };
+
+    var steps = document.querySelectorAll(".quiz-step");
+    var segs  = document.querySelectorAll(".progress-seg");
+
+    function showStep(n) {
+      state.step = n;
+      steps.forEach(function (s) {
+        s.classList.toggle("active", parseInt(s.getAttribute("data-step"), 10) === n);
+      });
+      segs.forEach(function (seg, i) {
+        seg.classList.toggle("active", i < n);
+      });
+      if (n === 5) animateResult();
+    }
+
+    function gateNext(stepEl, ok) {
+      var btn = stepEl.querySelector("[data-next]");
+      if (btn) btn.disabled = !ok;
+    }
+
+    /* Step 1 — single-select Hours */
+    var hoursStep = document.querySelector('.quiz-step[data-step="1"]');
+    document.querySelectorAll("#opt-hours .opt-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.querySelectorAll("#opt-hours .opt-btn").forEach(function (x) { x.classList.remove("selected"); });
+        b.classList.add("selected");
+        state.hours = parseInt(b.getAttribute("data-val"), 10);
+        gateNext(hoursStep, true);
+      });
+    });
+
+    /* Step 2 — multi-select Types */
+    var typesStep = document.querySelector('.quiz-step[data-step="2"]');
+    document.querySelectorAll("#opt-types .opt-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = b.getAttribute("data-val");
+        var idx = state.types.indexOf(v);
+        if (idx >= 0) {
+          state.types.splice(idx, 1);
+          b.classList.remove("selected");
+        } else {
+          state.types.push(v);
+          b.classList.add("selected");
+        }
+        gateNext(typesStep, state.types.length > 0);
+      });
+    });
+
+    /* Step 3 — Confirmation */
+    var confirmStep = document.querySelector('.quiz-step[data-step="3"]');
+    document.querySelectorAll("#opt-confirm .opt-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.querySelectorAll("#opt-confirm .opt-btn").forEach(function (x) { x.classList.remove("selected"); });
+        b.classList.add("selected");
+        state.confirm = parseInt(b.getAttribute("data-val"), 10);
+        gateNext(confirmStep, true);
+      });
+    });
+
+    /* Step 4 — Consistency */
+    var timeStep = document.querySelector('.quiz-step[data-step="4"]');
+    document.querySelectorAll("#opt-time .opt-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.querySelectorAll("#opt-time .opt-btn").forEach(function (x) { x.classList.remove("selected"); });
+        b.classList.add("selected");
+        state.time = parseInt(b.getAttribute("data-val"), 10);
+        gateNext(timeStep, true);
+      });
+    });
+
+    /* Next / Back navigation */
+    document.querySelectorAll("[data-next]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (state.step < 5) showStep(state.step + 1);
+      });
+    });
+    document.querySelectorAll("[data-back]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (state.step > 1) showStep(state.step - 1);
+      });
+    });
+
+    /* Score computation */
+    function computeScore() {
+      var h = state.hours || 0;            // max 40
+      var v = state.types.length;          // 0–6
+      var c = state.confirm || 0;          // max 30
+      var t = state.time || 0;             // max 10
+
+      var hScore = (h / 40) * 35;
+      var vScore = Math.min(v * 5, 25);
+      var cScore = c;
+      var tScore = t;
+
+      return Math.min(Math.round(hScore + vScore + cScore + tScore), 100);
+    }
+
+    function animateResult() {
+      var score = computeScore();
+      var num = document.getElementById("result-num");
+      var ring = document.getElementById("result-ring-fill");
+      var band = document.getElementById("result-band");
+      var total = 603.19;
+      ring.style.strokeDashoffset = total * (1 - score / 100);
+
+      /* Band label + ring colour */
+      var bandLabel, ringColor;
+      if (score <= 40) {
+        bandLabel = "Building"; ringColor = "#1A9E8F";
+      } else if (score <= 70) {
+        bandLabel = "Developing"; ringColor = "#1F2B6C";
+      } else {
+        bandLabel = "Strong"; ringColor = "#D4A843";
+      }
+      if (band) band.textContent = bandLabel;
+      if (ring) ring.setAttribute("stroke", ringColor);
+
+      /* Animate counter */
+      var start = 0;
+      var dur = 800;
+      var t0 = performance.now();
+      function tick(now) {
+        var p = Math.min((now - t0) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        num.textContent = Math.round(start + (score - start) * eased);
+        if (p < 1) requestAnimationFrame(tick);
+        else num.textContent = score;
+      }
+      requestAnimationFrame(tick);
+
+      /* Pillar bars */
+      var pcts = [
+        Math.min((state.hours || 0) / 40 * 100, 100),
+        Math.min(state.types.length / 5 * 100, 100),
+        Math.min((state.confirm || 0) / 30 * 100, 100),
+        Math.min((state.time || 0) / 10 * 100, 100)
+      ];
+      var labels = [
+        (state.hours || 0) + " h",
+        state.types.length + " kinds",
+        (state.confirm || 0) + "%",
+        ["Just started","6 months","1 year","2+ years"][[0,4,7,10].indexOf(state.time)] || "—"
+      ];
+      var ids = ["hb-val","vb-val","cb-val","tb-val"];
+      ids.forEach(function (id, i) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = labels[i];
+      });
+
+      var fills = document.querySelectorAll("#result-bars .fill");
+      setTimeout(function () {
+        fills.forEach(function (f, i) {
+          f.style.width = pcts[i] + "%";
+        });
+      }, 60);
+    }
+
+    /* Restart */
+    document.getElementById("restart-btn").addEventListener("click", function () {
+      state = { step: 1, hours: null, types: [], confirm: null, time: null };
+      document.querySelectorAll(".opt-btn").forEach(function (b) { b.classList.remove("selected"); });
+      document.querySelectorAll("[data-next]").forEach(function (b) { b.disabled = true; });
+      document.querySelectorAll("#result-bars .fill").forEach(function (f) { f.style.width = "0%"; });
+      var ring = document.getElementById("result-ring-fill");
+      if (ring) ring.style.strokeDashoffset = "603.19";
+      showStep(1);
+    });
+  });
+</script>
+</body>
+</html>

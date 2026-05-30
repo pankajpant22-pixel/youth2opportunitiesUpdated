@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Y2O · For partners · Confirm what you saw · in one tap</title>
+<meta name="description" content="Coaches, employers, club leads, charities, community programs and more confirm student work in one tap · no account required · your role matters" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  .section-header .lead { color: var(--warmGrey); font-size: 1.0625rem; }
+  .bg-navy .section-header .lead,
+  .bg-deepNavy .section-header .lead { color: rgba(255,255,255,0.78); }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute;
+    top: -180px; right: -180px;
+    width: 520px; height: 520px;
+    background: radial-gradient(closest-side, rgba(26,158,143,0.10), transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero > .container { position: relative; z-index: 1; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1.05fr;
+    gap: 56px; align-items: center;
+  }
+  @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(123,45,38,0.06); color: var(--maroon);
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero h1 { margin-top: 22px; }
+  .hero .locked-sub {
+    margin-top: 22px;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: clamp(1.125rem, 0.8vw + 1rem, 1.4375rem);
+    color: var(--navy);
+  }
+  .hero .locked-sub .sep { color: var(--teal); margin: 0 6px; }
+  .hero .support { margin-top: 20px; font-size: 1.125rem; color: var(--warmGrey); max-width: 52ch; }
+  .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .trust-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .trust-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    background: var(--lightTeal); color: var(--deepNavy);
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 0.8125rem;
+    border: 1px solid rgba(26,158,143,0.18);
+  }
+  .trust-pill svg { width: 14px; height: 14px; color: var(--teal); stroke-width: 2; }
+
+  /* Confirmation request mockup */
+  .req {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px -24px rgba(21,29,72,0.25), 0 8px 24px rgba(31,43,108,0.06);
+    overflow: hidden;
+    max-width: 480px; margin-left: auto;
+  }
+  @media (max-width: 1024px) { .req { margin-left: 0; max-width: none; } }
+  .req-head {
+    padding: 16px 22px;
+    background: linear-gradient(180deg, #fcfdfe, var(--white));
+    border-bottom: 1px solid var(--coolGrey);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .req-head .from {
+    font-family: var(--font-heading); font-weight: 600; color: var(--warmGrey);
+    font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .req-head .time { font-size: 11px; color: var(--warmGrey); }
+  .req-body { padding: 22px; }
+  .req-greeting { font-size: 0.875rem; color: var(--warmGrey); margin-bottom: 14px; }
+  .req-student {
+    display: flex; align-items: center; gap: 12px;
+    padding-bottom: 18px; border-bottom: 1px solid var(--coolGrey);
+    margin-bottom: 18px;
+  }
+  .req-student .av {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    color: var(--white); display: grid; place-items: center;
+    font-family: var(--font-heading); font-weight: 700;
+  }
+  .req-student .n { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 0.9375rem; }
+  .req-student .s { font-size: 12px; color: var(--warmGrey); }
+  .req-activity { margin-bottom: 18px; }
+  .req-activity .title {
+    font-family: var(--font-heading); font-weight: 700; color: var(--deepNavy);
+    font-size: 1.125rem; line-height: 1.3; margin-bottom: 10px;
+  }
+  .req-rows { display: flex; flex-direction: column; gap: 8px; }
+  .req-row {
+    display: grid; grid-template-columns: 28px 1fr; gap: 10px;
+    align-items: center; font-size: 0.875rem;
+  }
+  .req-row .ic {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center;
+  }
+  .req-row .ic svg { width: 14px; height: 14px; }
+  .req-row strong { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); }
+  .req-witness {
+    padding: 12px 14px;
+    background: var(--lightTeal);
+    border: 1px solid rgba(26,158,143,0.18);
+    border-radius: 10px;
+    font-size: 0.8125rem; color: var(--deepNavy);
+    margin-bottom: 18px;
+  }
+  .req-witness strong { font-family: var(--font-heading); font-weight: 700; color: var(--teal); }
+  .req-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .req-actions .confirm {
+    background: var(--teal); color: var(--white);
+    padding: 14px; border-radius: 10px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.9375rem;
+    display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  }
+  .req-actions .decline {
+    background: var(--white); color: var(--deepNavy);
+    border: 1px solid var(--coolGrey);
+    padding: 14px; border-radius: 10px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.9375rem;
+    display: inline-flex; justify-content: center; align-items: center;
+  }
+  .req-actions .confirm svg { width: 16px; height: 16px; stroke-width: 2.2; }
+  .req-foot {
+    padding: 12px 22px;
+    background: #fcfdfe;
+    border-top: 1px solid var(--coolGrey);
+    font-size: 11px; color: var(--warmGrey);
+    display: flex; align-items: center; gap: 8px; justify-content: center;
+  }
+  .req-foot svg { width: 12px; height: 12px; }
+
+  /* Who confirms (navy) */
+  .who-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    margin-top: 48px;
+  }
+  @media (max-width: 980px) { .who-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .who-grid { grid-template-columns: 1fr; } }
+  .who-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px; padding: 24px;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+  .who-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(26,158,143,0.4); }
+  .who-card .ic {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(26,158,143,0.15); color: var(--teal);
+    display: grid; place-items: center; margin-bottom: 16px;
+  }
+  .who-card h4 {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--white); font-size: 1.0625rem; margin-bottom: 8px;
+  }
+  .who-card p { color: rgba(255,255,255,0.72); font-size: 0.9375rem; margin: 0; }
+  .who-card .examples {
+    margin-top: 14px;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Wide partner pills (lightTeal) — NEW */
+  .pills-band {
+    margin-top: 40px;
+    display: flex; flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .partner-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--deepNavy);
+    border: 1px solid var(--coolGrey);
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 0.9375rem;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+    cursor: default;
+  }
+  .partner-pill:hover {
+    transform: translateY(-2px);
+    border-color: var(--teal);
+    background: var(--teal);
+    color: var(--white);
+  }
+  .partner-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--teal);
+    transition: background 0.18s ease;
+  }
+  .partner-pill:hover .dot { background: var(--white); }
+
+  .pills-foot {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 0.9375rem;
+    color: var(--deepNavy);
+  }
+  .pills-foot strong { font-family: var(--font-heading); font-weight: 700; color: var(--teal); }
+
+  /* How it works (deepNavy) */
+  .partner-flow {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin-top: 48px;
+  }
+  @media (max-width: 980px) { .partner-flow { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .partner-flow { grid-template-columns: 1fr; } }
+  .partner-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px; padding: 22px;
+  }
+  .partner-step .n {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--gold); font-size: 11px; letter-spacing: 0.08em;
+  }
+  .partner-step .ic {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: rgba(26,158,143,0.15); color: var(--teal);
+    display: grid; place-items: center; margin: 12px 0 14px;
+  }
+  .partner-step h4 {
+    color: var(--white); font-family: var(--font-heading); font-weight: 600;
+    font-size: 1rem; line-height: 1.25; margin-bottom: 8px;
+  }
+  .partner-step p { font-size: 0.875rem; color: rgba(255,255,255,0.72); margin: 0; }
+
+  .callout-band {
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  @media (max-width: 900px) { .callout-band { grid-template-columns: 1fr; } }
+  .callout {
+    background: var(--white);
+    border-radius: 18px; padding: 32px;
+    color: var(--nearBlack);
+    box-shadow: 0 16px 40px -16px rgba(0,0,0,0.4);
+  }
+  .callout .ic {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center; margin-bottom: 18px;
+  }
+  .callout .ic svg { width: 26px; height: 26px; }
+  .callout h3 { color: var(--deepNavy); font-size: 1.375rem; margin-bottom: 14px; }
+  .callout ul { display: flex; flex-direction: column; gap: 10px; }
+  .callout li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.9375rem; color: var(--nearBlack);
+  }
+  .callout li svg { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; margin-top: 4px; }
+
+  /* Partner views (lightTeal — adjacency safe because separated by white) — keep as lightTeal */
+  .views-2 {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 32px;
+    margin-top: 40px; align-items: stretch;
+  }
+  @media (max-width: 980px) { .views-2 { grid-template-columns: 1fr; } }
+  .view-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 18px; overflow: hidden;
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column;
+  }
+  .view-head {
+    padding: 16px 22px; border-bottom: 1px solid var(--coolGrey);
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fcfdfe;
+  }
+  .view-head h4 {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 0.9375rem;
+  }
+  .view-head .tag {
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 11px; padding: 4px 10px; border-radius: 999px;
+    background: rgba(26,158,143,0.10); color: var(--teal);
+  }
+  .view-body { padding: 22px; flex: 1; }
+
+  .focus-act {
+    padding: 16px;
+    background: #fafbfd; border: 1px solid var(--coolGrey);
+    border-radius: 12px;
+  }
+  .focus-act .label {
+    font-family: var(--font-heading); font-weight: 600; color: var(--warmGrey);
+    font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .focus-act .title {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 1rem; margin-bottom: 8px;
+  }
+  .focus-act .meta {
+    display: flex; flex-direction: column; gap: 4px;
+    font-size: 0.8125rem; color: var(--warmGrey);
+    margin-bottom: 14px;
+  }
+  .focus-act .meta strong { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); }
+  .focus-act .row-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .focus-act .row-btns .confirm {
+    background: var(--teal); color: var(--white);
+    padding: 10px; border-radius: 8px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.8125rem;
+    display: inline-flex; justify-content: center; align-items: center; gap: 6px;
+  }
+  .focus-act .row-btns .decline {
+    background: var(--white); color: var(--deepNavy);
+    border: 1px solid var(--coolGrey);
+    padding: 10px; border-radius: 8px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.8125rem;
+    display: inline-flex; justify-content: center; align-items: center;
+  }
+  .focus-act .row-btns .confirm svg { width: 13px; height: 13px; stroke-width: 2.2; }
+  .focus-note {
+    margin-top: 14px;
+    font-size: 12px; color: var(--warmGrey);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .focus-note svg { width: 14px; height: 14px; }
+
+  .program-head {
+    display: grid; grid-template-columns: 44px 1fr auto;
+    gap: 12px; align-items: center;
+    padding-bottom: 14px; border-bottom: 1px solid var(--coolGrey);
+    margin-bottom: 14px;
+  }
+  .program-head .lg {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center;
+    font-family: var(--font-heading); font-weight: 700; font-size: 1rem;
+  }
+  .program-head .n { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 0.9375rem; }
+  .program-head .s { font-size: 12px; color: var(--warmGrey); }
+  .program-head .qty {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--maroon); font-size: 0.875rem;
+    background: rgba(123,45,38,0.08); padding: 6px 12px; border-radius: 999px;
+  }
+  .inbox-row {
+    display: grid; grid-template-columns: 1fr auto auto;
+    gap: 12px; align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--coolGrey);
+  }
+  .inbox-row:last-child { border-bottom: 0; }
+  .inbox-row .who { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 0.875rem; }
+  .inbox-row .what { font-size: 0.75rem; color: var(--warmGrey); margin-top: 2px; }
+  .inbox-row .hours {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy); font-size: 0.8125rem;
+    padding: 3px 8px; border-radius: 6px;
+    background: rgba(26,158,143,0.10); color: var(--teal);
+  }
+  .inbox-row .quick-confirm {
+    background: var(--teal); color: var(--white);
+    padding: 6px 12px; border-radius: 8px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.75rem;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .inbox-row .quick-confirm svg { width: 12px; height: 12px; stroke-width: 2.2; }
+  .inbox-bottom {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid var(--coolGrey);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px;
+  }
+  .inbox-bottom .summary { color: var(--warmGrey); }
+  .inbox-bottom .bulk-btn {
+    background: var(--deepNavy); color: var(--white);
+    padding: 8px 14px; border-radius: 8px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.75rem;
+  }
+
+  /* Trust (white) */
+  .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  @media (max-width: 980px) { .trust-grid { grid-template-columns: 1fr; } }
+  .trust-list { display: flex; flex-direction: column; gap: 18px; margin-top: 32px; }
+  .trust-list li { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: flex-start; }
+  .trust-list .ic {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .trust-list .ic svg { width: 20px; height: 20px; }
+  .trust-list h4 { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 1.0625rem; margin-bottom: 4px; }
+  .trust-list p { color: var(--warmGrey); font-size: 0.9375rem; margin: 0; }
+
+  .partner-img {
+    position: relative;
+    background: linear-gradient(160deg, #fcfdfe 0%, var(--lightTeal) 100%);
+    border-radius: 24px;
+    padding: 28px;
+    border: 1px solid rgba(26,158,143,0.18);
+    box-shadow: 0 30px 60px -30px rgba(21,29,72,0.25);
+    overflow: hidden;
+  }
+  .partner-img::before {
+    content: ""; position: absolute;
+    top: -90px; right: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(closest-side, rgba(26,158,143,0.18), transparent 70%);
+    pointer-events: none;
+  }
+  .partner-img::after {
+    content: ""; position: absolute;
+    bottom: -120px; left: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(closest-side, rgba(123,45,38,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .pmock {
+    position: relative; z-index: 1;
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid rgba(31,43,108,0.06);
+    box-shadow: 0 16px 40px -20px rgba(21,29,72,0.20);
+    overflow: hidden;
+  }
+  .pmock-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--coolGrey);
+    background: linear-gradient(180deg, #fcfdfe, var(--white));
+  }
+  .pmock-head .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--teal);
+  }
+  .pmock-head .tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  .pmock-head .who { font-size: 11px; color: var(--warmGrey); }
+  .pmock-body { padding: 18px; }
+  .pmock-card {
+    border: 1px solid var(--coolGrey);
+    border-radius: 12px;
+    padding: 16px;
+    background: #fafbfd;
+  }
+  .pmock-card .label {
+    font-family: var(--font-heading); font-weight: 600; color: var(--warmGrey);
+    font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pmock-card .title {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 1rem; margin-bottom: 6px;
+  }
+  .pmock-card .meta {
+    font-size: 0.8125rem; color: var(--warmGrey);
+  }
+  .pmock-card .meta strong { color: var(--deepNavy); font-family: var(--font-heading); font-weight: 600; }
+  .pmock-actions {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    margin-top: 14px;
+  }
+  .pmock-actions .confirm {
+    background: var(--teal); color: var(--white);
+    padding: 10px; border-radius: 8px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.8125rem;
+    display: inline-flex; justify-content: center; align-items: center; gap: 6px;
+  }
+  .pmock-actions .decline {
+    background: var(--white); color: var(--deepNavy);
+    border: 1px solid var(--coolGrey);
+    padding: 10px; border-radius: 8px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.8125rem;
+    display: inline-flex; justify-content: center; align-items: center;
+  }
+  .pmock-actions .confirm svg { width: 13px; height: 13px; stroke-width: 2.2; }
+  .pmock-locked {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: rgba(31,43,108,0.04);
+    border: 1px dashed rgba(31,43,108,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pmock-locked .ic {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: rgba(31,43,108,0.06); color: var(--warmGrey);
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .pmock-locked .ic svg { width: 16px; height: 16px; }
+  .pmock-locked .txt {
+    font-size: 0.8125rem; color: var(--warmGrey); line-height: 1.4;
+  }
+  .pmock-locked .txt strong { color: var(--deepNavy); font-family: var(--font-heading); font-weight: 600; }
+  .pmock-foot {
+    padding: 12px 18px;
+    border-top: 1px solid var(--coolGrey);
+    background: #fcfdfe;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--warmGrey);
+  }
+  .pmock-foot .lock {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--deepNavy);
+    font-family: var(--font-heading); font-weight: 600;
+  }
+  .pmock-foot .lock svg { width: 12px; height: 12px; }
+
+  /* FAQ + Final CTA */
+  .faq-section .layout {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 64px; align-items: flex-start;
+  }
+  @media (max-width: 900px) { .faq-section .layout { grid-template-columns: 1fr; gap: 32px; } }
+  .faq-section h2 { font-size: clamp(2.25rem, 3vw + 1rem, 3.25rem); }
+
+  .final-cta { text-align: center; }
+  .final-cta h2 { color: var(--white); }
+  .final-cta .lead { margin: 18px auto 0; color: rgba(255,255,255,0.78); max-width: 60ch; }
+  .final-cta .row { margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div data-navbar></div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero bg-white section-pad-lg" data-screen-label="01 Hero">
+    <div class="container">
+      <div class="hero-grid">
+
+        <div>
+          <span class="hero-eyebrow">For coaches, employers, clubs, charities, and programs</span>
+          <h1>Your role matters. We just made it easier to confirm.</h1>
+          <p class="support">
+            Students already come to you. Y2O gives them a simple way to record the work and ask you to confirm it. No spreadsheets, no PDFs, no chasing paper forms.
+          </p>
+
+          <div class="hero-actions">
+            <a href="contact.html" class="btn-primary">
+              Partner with us
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#how" class="btn-secondary">See how it works</a>
+          </div>
+
+          <div class="trust-pills">
+            <span class="trust-pill" id="tp-1"></span>
+            <span class="trust-pill" id="tp-2"></span>
+            <span class="trust-pill" id="tp-3"></span>
+          </div>
+        </div>
+
+        <!-- Confirmation request mockup -->
+        <aside class="req" aria-label="Confirmation request preview">
+          <div class="req-head">
+            <span class="from">Confirmation request</span>
+            <span class="time">2 min ago</span>
+          </div>
+
+          <div class="req-body">
+            <p class="req-greeting">Hi Ellen,</p>
+
+            <div class="req-student">
+              <div class="av">AK</div>
+              <div>
+                <div class="n">Aanya Kapoor</div>
+                <div class="s">Grade 11 · Iroquois Ridge HS</div>
+              </div>
+            </div>
+
+            <div class="req-activity">
+              <div class="title">Reading buddy session</div>
+              <div class="req-rows">
+                <div class="req-row">
+                  <span class="ic" id="rr-1-ic"></span>
+                  <span><strong>Where</strong> · Oakville Public Library</span>
+                </div>
+                <div class="req-row">
+                  <span class="ic" id="rr-2-ic"></span>
+                  <span><strong>When</strong> · Saturday, May 9</span>
+                </div>
+                <div class="req-row">
+                  <span class="ic" id="rr-3-ic"></span>
+                  <span><strong>Hours</strong> · 3h this session · 24h total</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="req-witness">
+              You witnessed this · <strong>Aanya says you signed her in at the desk</strong>
+            </div>
+
+            <div class="req-actions">
+              <button class="confirm" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Confirm
+              </button>
+              <button class="decline" type="button">Decline</button>
+            </div>
+          </div>
+
+          <div class="req-foot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            No account required · takes under a minute
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO CONFIRMS (navy) -->
+  <section class="bg-navy section-pad-lg" data-screen-label="02 Who confirms">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Who counts as a partner</span>
+        <h2>If you saw the work, you can confirm it.</h2>
+        <p class="lead">Y2O works for the people and organizations students already learn from, work with, and serve.</p>
+      </div>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <div class="ic" id="wh-1-ic"></div>
+          <h4>Coaches and team leads</h4>
+          <p>Sports, music, debate, robotics, drama, and camps.</p>
+        </div>
+        <div class="who-card">
+          <div class="ic" id="wh-2-ic"></div>
+          <h4>Employers and supervisors</h4>
+          <p>Cafés, retail, summer jobs, co-op placements, and internships.</p>
+        </div>
+        <div class="who-card">
+          <div class="ic" id="wh-3-ic"></div>
+          <h4>Teachers and program leads</h4>
+          <p>Clubs, libraries, after-school programs, tutors, and workshops.</p>
+        </div>
+        <div class="who-card">
+          <div class="ic" id="wh-4-ic"></div>
+          <h4>Community organizations</h4>
+          <p>Charities, councils, churches, neighbourhood projects, and local events.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDE PILLS (lightTeal) — NEW -->
+  <section class="bg-lightTeal section-pad-lg" data-screen-label="03 Who counts">
+    <div class="container">
+      <div class="section-header center">
+        <span class="eyebrow">All the people students learn from</span>
+        <h2>A student names you. You confirm what happened.</h2>
+        <p class="lead">The list keeps growing because student growth happens in many places.</p>
+      </div>
+
+      <div class="pills-band">
+        <span class="partner-pill"><span class="dot"></span>Charities</span>
+        <span class="partner-pill"><span class="dot"></span>Non-profits</span>
+        <span class="partner-pill"><span class="dot"></span>Small businesses</span>
+        <span class="partner-pill"><span class="dot"></span>Education providers</span>
+        <span class="partner-pill"><span class="dot"></span>Sports camps</span>
+        <span class="partner-pill"><span class="dot"></span>Community centres</span>
+        <span class="partner-pill"><span class="dot"></span>Faith groups</span>
+        <span class="partner-pill"><span class="dot"></span>Clubs</span>
+        <span class="partner-pill"><span class="dot"></span>Coaches</span>
+        <span class="partner-pill"><span class="dot"></span>Teachers</span>
+        <span class="partner-pill"><span class="dot"></span>Guidance counsellors</span>
+        <span class="partner-pill"><span class="dot"></span>Parent councils</span>
+        <span class="partner-pill"><span class="dot"></span>Student councils</span>
+        <span class="partner-pill"><span class="dot"></span>Employers</span>
+        <span class="partner-pill"><span class="dot"></span>Libraries</span>
+        <span class="partner-pill"><span class="dot"></span>Arts programs</span>
+        <span class="partner-pill"><span class="dot"></span>Tutoring services</span>
+        <span class="partner-pill"><span class="dot"></span>Mentorship programs</span>
+        <span class="partner-pill"><span class="dot"></span>Youth shelters</span>
+        <span class="partner-pill"><span class="dot"></span>Food banks</span>
+      </div>
+
+      <p class="pills-foot">
+        <strong>Confirming is never extra work.</strong> Students already come to you. We just made signing off take under a minute.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (deepNavy) -->
+  <section id="how" class="bg-deepNavy section-pad-lg" data-screen-label="04 How it works">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">How it works</span>
+        <h2>From request to confirmation in under a minute</h2>
+        <p class="lead">A simple flow with no extra software, no login, and no paper.</p>
+      </div>
+
+      <div class="partner-flow">
+        <div class="partner-step">
+          <div class="n">01</div>
+          <div class="ic" id="ps-1-ic"></div>
+          <h4>Student logs the activity</h4>
+          <p>They enter what happened, where it happened, and how long it took.</p>
+        </div>
+        <div class="partner-step">
+          <div class="n">02</div>
+          <div class="ic" id="ps-2-ic"></div>
+          <h4>You get a short request</h4>
+          <p>The request arrives by email, SMS, or another supported channel.</p>
+        </div>
+        <div class="partner-step">
+          <div class="n">03</div>
+          <div class="ic" id="ps-3-ic"></div>
+          <h4>You confirm or decline</h4>
+          <p>One tap confirms what you saw. Declining marks it as self-reported.</p>
+        </div>
+        <div class="partner-step">
+          <div class="n">04</div>
+          <div class="ic" id="ps-4-ic"></div>
+          <h4>The record updates</h4>
+          <p>The student’s activity record updates automatically.</p>
+        </div>
+      </div>
+
+      <!-- Callout band -->
+      <div class="callout-band">
+
+        <article class="callout">
+          <div class="ic" id="co-1-ic"></div>
+          <h3>What verification means</h3>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              You confirm only what the student says you witnessed.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              You do not see grades, private profile details, or unrelated activity.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              If something is wrong, you can decline.
+            </li>
+          </ul>
+        </article>
+
+        <article class="callout">
+          <div class="ic" id="co-2-ic"></div>
+          <h3>Volunteer tracking made easier</h3>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Students log their own hours.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              You confirm what you saw.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              The record updates automatically.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              No spreadsheets, PDFs, or paper forms.
+            </li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER VIEWS (white) -->
+  <section class="bg-white section-pad-lg" data-screen-label="05 Two ways to confirm">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Two ways to confirm</span>
+        <h2>One-off or in bulk. Whichever fits your work.</h2>
+        <p class="lead">Confirm a single request or manage several students through a simple program view.</p>
+      </div>
+
+      <div class="views-2">
+
+        <div class="view-card">
+          <div class="view-head">
+            <h4>Single confirmation</h4>
+            <span class="tag">No account needed</span>
+          </div>
+          <div class="view-body">
+            <div class="focus-act">
+              <div class="label">Request from Aanya Kapoor</div>
+              <div class="title">Reading buddy · 3h this session</div>
+              <div class="meta">
+                <span><strong>When</strong> · Saturday, May 9</span>
+                <span><strong>Where</strong> · Oakville Public Library</span>
+                <span><strong>Total hours</strong> · 24h to date</span>
+              </div>
+              <div class="row-btns">
+                <button class="confirm" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Confirm
+                </button>
+                <button class="decline" type="button">Decline</button>
+              </div>
+              <div class="focus-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Takes under a minute · works on phone or laptop
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="view-card">
+          <div class="view-head">
+            <h4>Program inbox</h4>
+            <span class="tag">For partner accounts</span>
+          </div>
+          <div class="view-body">
+            <div class="program-head">
+              <div class="lg">OL</div>
+              <div>
+                <div class="n">Oakville Public Library</div>
+                <div class="s">Reading buddy program · 14 active students</div>
+              </div>
+              <span class="qty">6 pending</span>
+            </div>
+
+            <div class="inbox-row">
+              <div>
+                <div class="who">Aanya Kapoor</div>
+                <div class="what">Reading buddy · session 9</div>
+              </div>
+              <span class="hours">3h</span>
+              <button class="quick-confirm" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Confirm
+              </button>
+            </div>
+            <div class="inbox-row">
+              <div>
+                <div class="who">Marcus Lee</div>
+                <div class="what">Tech help desk · drop-in</div>
+              </div>
+              <span class="hours">2h</span>
+              <button class="quick-confirm" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Confirm
+              </button>
+            </div>
+            <div class="inbox-row">
+              <div>
+                <div class="who">Priya Shah</div>
+                <div class="what">Story time setup</div>
+              </div>
+              <span class="hours">1.5h</span>
+              <button class="quick-confirm" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Confirm
+              </button>
+            </div>
+
+            <div class="inbox-bottom">
+              <span class="summary">3 of 6 shown · 14 students this month</span>
+              <button class="bulk-btn" type="button">Confirm all visible</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST (lightTeal) -->
+  <section class="bg-lightTeal section-pad-lg" data-screen-label="06 Trust">
+    <div class="container">
+      <div class="trust-grid">
+
+        <div>
+          <span class="eyebrow">Privacy for partners</span>
+          <h2 class="mt-16">You only see what you witnessed.</h2>
+          <p class="lead mt-16">Y2O is designed so confirming a student’s work never gives you the rest of their record.</p>
+
+          <ul class="trust-list">
+            <li>
+              <span class="ic" id="tr-1-ic"></span>
+              <div>
+                <h4>No full profile access</h4>
+                <p>You see only the activity in the request.</p>
+              </div>
+            </li>
+            <li>
+              <span class="ic" id="tr-2-ic"></span>
+              <div>
+                <h4>One-tap confirm or decline</h4>
+                <p>If something is off, decline it. The activity stays self-reported on the student’s record.</p>
+              </div>
+            </li>
+            <li>
+              <span class="ic" id="tr-3-ic"></span>
+              <div>
+                <h4>Audit trail kept</h4>
+                <p>Your name stays connected to the confirmed activity for trust and accountability.</p>
+              </div>
+            </li>
+            <li>
+              <span class="ic" id="tr-4-ic"></span>
+              <div>
+                <h4>Free for partners</h4>
+                <p>Confirming student activity is free for partners.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="partner-img" aria-label="What a partner sees">
+          <div class="pmock">
+            <div class="pmock-head">
+              <span class="tag"><span class="dot"></span> What you see</span>
+              <span class="who">Request from a student</span>
+            </div>
+            <div class="pmock-body">
+              <div class="pmock-card">
+                <div class="label">Activity to confirm</div>
+                <div class="title">Reading buddy session</div>
+                <div class="meta">
+                  <div><strong>When</strong> · Saturday, May 9</div>
+                  <div><strong>Where</strong> · Oakville Public Library</div>
+                  <div><strong>Hours</strong> · 3h this session</div>
+                </div>
+                <div class="pmock-actions">
+                  <button class="confirm" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Confirm
+                  </button>
+                  <button class="decline" type="button">Decline</button>
+                </div>
+              </div>
+
+              <div class="pmock-locked">
+                <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
+                <div class="txt"><strong>Hidden from partners</strong> · grades, other activities, contact info, and the rest of the student’s record.</div>
+              </div>
+            </div>
+            <div class="pmock-foot">
+              <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Audit trail kept</span>
+              <span>Free for partners</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (white) -->
+  <section id="faq" class="bg-white section-pad-lg faq-section" data-screen-label="07 FAQ">
+    <div class="container">
+      <div class="layout">
+        <div>
+          <span class="eyebrow">Common questions</span>
+          <h2 class="mt-16">For partners</h2>
+          <p class="lead">Clear answers for partners, programs, employers, and community organizations.</p>
+          <a href="contact.html" class="btn-secondary" style="margin-top: 24px;">Talk to our team</a>
+        </div>
+        <div id="faq-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA (deepNavy) -->
+  <section class="bg-deepNavy section-pad-md final-cta" data-screen-label="08 Final CTA">
+    <div class="container">
+      <span class="eyebrow">Run a program in the GTA</span>
+      <h2 class="mt-16">Confirm the work. The rest stays with the student.</h2>
+      <p class="lead">For clubs, teams, charities, employers, and programs that already work with high school students.</p>
+      <div class="row">
+        <a href="contact.html" class="btn-primary">Partner with us</a>
+        <a href="about.html" class="btn-secondary">About Y2O</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+<script src="icons.js"></script>
+<script src="partials.js"></script>
+<script src="faq.js"></script>
+<script src="data.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function setIcon(id, name, size) {
+      var el = document.getElementById(id);
+      if (el && window.icon) el.innerHTML = window.icon(name, size || 20);
+    }
+    function setHTML(id, html) {
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
+
+    setHTML("tp-1", window.icon("badge-check", 14) + " No account required");
+    setHTML("tp-2", window.icon("clock",       14) + " Under a minute");
+    setHTML("tp-3", window.icon("shield",      14) + " You see only the activity");
+
+    setIcon("rr-1-ic", "home",     14);
+    setIcon("rr-2-ic", "calendar", 14);
+    setIcon("rr-3-ic", "clock",    14);
+
+    setIcon("wh-1-ic", "target",    20);
+    setIcon("wh-2-ic", "briefcase", 20);
+    setIcon("wh-3-ic", "book-open", 20);
+    setIcon("wh-4-ic", "users",     20);
+
+    setIcon("ps-1-ic", "file-text",   22);
+    setIcon("ps-2-ic", "mail",        22);
+    setIcon("ps-3-ic", "badge-check", 22);
+    setIcon("ps-4-ic", "database",    22);
+
+    setIcon("co-1-ic", "badge-check", 26);
+    setIcon("co-2-ic", "heart",       26);
+
+    setIcon("tr-1-ic", "eye",         20);
+    setIcon("tr-2-ic", "badge-check", 20);
+    setIcon("tr-3-ic", "shield",      20);
+    setIcon("tr-4-ic", "heart",       20);
+
+    if (window.buildFAQ && window.FAQ && window.FAQ.partners) {
+      window.buildFAQ("#faq-list", window.FAQ.partners);
+    }
+  });
+</script>
+</body>
+</html>

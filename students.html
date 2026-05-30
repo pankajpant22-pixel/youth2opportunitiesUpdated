@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Y2O · For students · Build the record beyond grades</title>
+<meta name="description" content="Y2O is the student-owned growth record for Canadian high schoolers · log what you do · get it confirmed by people who saw the work · carry it forward" />
+<link rel="stylesheet" href="brand.css" />
+
+<style>
+  /* =====================================================================
+     SHARED — pulled from homepage
+     ===================================================================== */
+  .eyebrow-row { margin-bottom: 12px; }
+  .section-header .lead { color: var(--warmGrey); font-size: 1.0625rem; }
+  .bg-navy .section-header .lead,
+  .bg-deepNavy .section-header .lead { color: rgba(255,255,255,0.78); }
+
+  /* =====================================================================
+     HERO
+     ===================================================================== */
+  .hero {
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    top: -180px; right: -180px;
+    width: 520px; height: 520px;
+    background: radial-gradient(closest-side, rgba(26,158,143,0.10), transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero > .container { position: relative; z-index: 1; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1.05fr;
+    gap: 56px; align-items: center;
+  }
+  @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(123,45,38,0.06); color: var(--maroon);
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero h1 { margin-top: 22px; }
+  .hero .locked-sub {
+    margin-top: 22px;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: clamp(1.125rem, 0.8vw + 1rem, 1.4375rem);
+    color: var(--navy);
+  }
+  .hero .locked-sub .sep { color: var(--teal); margin: 0 6px; }
+  .hero .support {
+    margin-top: 20px; font-size: 1.125rem;
+    color: var(--warmGrey); max-width: 52ch;
+  }
+  .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+
+  /* Activity logger mockup */
+  .logger {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px -24px rgba(21,29,72,0.25),
+                0 8px 24px rgba(31,43,108,0.06);
+    overflow: hidden;
+  }
+  .logger-head {
+    padding: 16px 22px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--coolGrey);
+    background: linear-gradient(180deg, #fcfdfe, var(--white));
+  }
+  .logger-head h4 {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 1rem;
+  }
+  .logger-head .step {
+    font-family: var(--font-heading); font-weight: 500;
+    color: var(--warmGrey); font-size: 12px;
+  }
+  .logger-head .step span { color: var(--teal); font-weight: 600; }
+
+  .logger-body { padding: 22px; }
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .input {
+    background: #fafbfd;
+    border: 1px solid var(--coolGrey);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: var(--font-body); font-size: 0.9375rem;
+    color: var(--deepNavy);
+  }
+  .input.with-icon {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .input svg { width: 16px; height: 16px; color: var(--warmGrey); flex-shrink: 0; }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .chip-row {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+  }
+  .pickable {
+    padding: 6px 10px; border-radius: 999px;
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 12px;
+    border: 1px solid var(--coolGrey);
+    background: var(--white); color: var(--navy);
+    cursor: default;
+  }
+  .pickable.on {
+    background: var(--lightTeal); color: var(--teal);
+    border-color: rgba(26,158,143,0.4);
+  }
+
+  .verifier-card {
+    margin-top: 4px;
+    background: var(--lightTeal);
+    border: 1px solid rgba(26,158,143,0.18);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: grid; grid-template-columns: 36px 1fr auto;
+    gap: 12px; align-items: center;
+  }
+  .verifier-card .av {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--navy); color: var(--white);
+    display: grid; place-items: center;
+    font-family: var(--font-heading); font-weight: 700; font-size: 13px;
+  }
+  .verifier-card .name {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 0.875rem;
+  }
+  .verifier-card .role { font-size: 11px; color: var(--warmGrey); }
+  .verifier-card .send {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 12px; border-radius: 8px;
+    background: var(--teal); color: var(--white);
+    font-family: var(--font-heading); font-weight: 600; font-size: 12px;
+  }
+  .verifier-card .send svg { width: 12px; height: 12px; stroke-width: 2.2; }
+
+  .logger-foot {
+    padding: 14px 22px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--coolGrey);
+    background: #fcfdfe;
+    font-size: 12px; color: var(--warmGrey);
+  }
+  .logger-foot .save {
+    background: var(--deepNavy); color: var(--white);
+    padding: 10px 18px; border-radius: 8px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 13px;
+  }
+
+  .trust-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .trust-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    background: var(--lightTeal); color: var(--deepNavy);
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 0.8125rem;
+    border: 1px solid rgba(26,158,143,0.18);
+  }
+  .trust-pill svg { width: 14px; height: 14px; color: var(--teal); stroke-width: 2; }
+
+  /* =====================================================================
+     PROMISE (navy)
+     ===================================================================== */
+  .promise-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    margin-top: 48px;
+  }
+  @media (max-width: 980px) { .promise-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .promise-grid { grid-template-columns: 1fr; } }
+  .promise {
+    background: var(--white);
+    border: 1px solid rgba(31, 43, 108, 0.04);
+    box-shadow: var(--shadow-card);
+    border-radius: 14px; padding: 24px;
+  }
+  .promise .ic {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center; margin-bottom: 16px;
+  }
+  .promise h4 {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 1.0625rem; margin-bottom: 8px;
+  }
+  .promise p {
+    font-size: 0.9375rem; color: var(--warmGrey); margin: 0;
+  }
+
+  /* =====================================================================
+     STEPS (deep navy)
+     ===================================================================== */
+  .student-steps {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    margin-top: 48px;
+  }
+  @media (max-width: 1024px) { .student-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px)  { .student-steps { grid-template-columns: 1fr; } }
+  .student-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px; padding: 22px;
+    position: relative;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+  .student-step:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .student-step .n {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--gold); font-size: 11px; letter-spacing: 0.08em;
+  }
+  .student-step .ic {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: rgba(26,158,143,0.15); color: var(--teal);
+    display: grid; place-items: center;
+    margin: 12px 0 14px;
+  }
+  .student-step h4 {
+    color: var(--white); font-family: var(--font-heading); font-weight: 600;
+    font-size: 1rem; line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .student-step p { font-size: 0.875rem; color: rgba(255,255,255,0.72); margin: 0; }
+
+  /* =====================================================================
+     DASHBOARD (lightTeal)
+     ===================================================================== */
+  .pillar-tags {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    margin-top: 36px; margin-bottom: 48px;
+  }
+  .pillar {
+    flex: 1; min-width: 240px;
+    background: var(--white);
+    border: 1px solid rgba(26,158,143,0.18);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .pillar .ic {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center; margin-bottom: 12px;
+  }
+  .pillar .name {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy); font-size: 1.0625rem;
+  }
+  .pillar .sub { margin-top: 4px; font-size: 0.8125rem; color: var(--warmGrey); }
+  .pillar .sub .sep { color: var(--teal); margin: 0 4px; }
+  .pillar .pct {
+    margin-top: 14px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .pillar .pct .v {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy); font-size: 1.5rem;
+  }
+  .pillar .pct .l { font-size: 11px; color: var(--warmGrey); }
+  .pillar .bar {
+    height: 6px; background: var(--coolGrey); border-radius: 999px;
+    overflow: hidden; margin-top: 6px;
+  }
+  .pillar .bar i {
+    display: block; height: 100%;
+    background: linear-gradient(90deg, var(--teal), #178a7d);
+    border-radius: 999px;
+  }
+  .pillar.depth .bar i  { background: linear-gradient(90deg, var(--navy), #2d3d92); }
+  .pillar.cred .bar i   { background: linear-gradient(90deg, var(--maroon), #9d3a32); }
+
+  /* Profile card */
+  .profile-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .profile-head {
+    padding: 24px 28px;
+    display: grid; grid-template-columns: 64px 1fr auto;
+    gap: 18px; align-items: center;
+    border-bottom: 1px solid var(--coolGrey);
+    background: linear-gradient(180deg, #fcfdfe, var(--white));
+  }
+  .profile-head .av {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    color: var(--white); display: grid; place-items: center;
+    font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem;
+  }
+  .profile-head .n {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 1.125rem;
+  }
+  .profile-head .s { font-size: 0.875rem; color: var(--warmGrey); margin-top: 2px; }
+  .share-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 10px;
+    background: var(--deepNavy); color: var(--white);
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem;
+  }
+  .share-btn svg { width: 14px; height: 14px; stroke-width: 2; }
+
+  .profile-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 720px) { .profile-grid { grid-template-columns: 1fr; } }
+
+  .profile-left { padding: 24px 28px; border-right: 1px solid var(--coolGrey); }
+  @media (max-width: 720px) { .profile-left { border-right: 0; border-bottom: 1px solid var(--coolGrey); } }
+
+  .profile-right { padding: 24px 28px; background: #fcfdfe; }
+
+  .profile-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-bottom: 18px;
+  }
+  .profile-stats .stat {
+    background: var(--lightTeal); border-radius: 10px; padding: 12px; text-align: center;
+  }
+  .profile-stats .v {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy); font-size: 1.25rem;
+  }
+  .profile-stats .l { font-size: 11px; color: var(--warmGrey); }
+
+  .timeline-mini { display: flex; flex-direction: column; gap: 10px; }
+  .tl-mini {
+    display: grid; grid-template-columns: 32px 1fr auto;
+    gap: 10px; align-items: center;
+    padding: 10px; border-radius: 10px;
+    background: #fafbfd; border: 1px solid var(--coolGrey);
+  }
+  .tl-mini .ic {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--white); border: 1px solid var(--coolGrey);
+    display: grid; place-items: center; color: var(--navy);
+  }
+  .tl-mini .ic svg { width: 16px; height: 16px; }
+  .tl-mini .t {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 0.875rem;
+  }
+  .tl-mini .s { font-size: 11px; color: var(--warmGrey); margin-top: 1px; }
+
+  .skill-list { display: flex; flex-direction: column; gap: 12px; }
+  .skill-row .top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 4px;
+    font-size: 0.8125rem;
+  }
+  .skill-row .lbl {
+    font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy);
+  }
+  .skill-row .v {
+    font-family: var(--font-heading); font-weight: 700; color: var(--teal);
+  }
+  .skill-row .bar { height: 6px; background: var(--coolGrey); border-radius: 999px; overflow: hidden; }
+  .skill-row .bar i {
+    display: block; height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, var(--teal), #178a7d);
+  }
+  .skill-row.s-2 .bar i { background: linear-gradient(90deg, var(--navy), #2d3d92); }
+  .skill-row.s-3 .bar i { background: linear-gradient(90deg, var(--maroon), #9d3a32); }
+  .skill-row.s-4 .bar i { background: linear-gradient(90deg, var(--gold), #b58a2a); }
+
+  /* =====================================================================
+     ALL OF IT COUNTS — reused
+     ===================================================================== */
+  .counts-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin-top: 36px;
+  }
+  @media (max-width: 900px) { .counts-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .count-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 14px;
+    padding: 22px;
+    min-height: 160px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+  .count-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .count-card .ic {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center;
+    margin-bottom: 14px;
+  }
+  .count-card .t {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 1rem;
+  }
+  .count-card .reveal {
+    margin-top: 8px;
+    font-size: 0.8125rem; color: var(--warmGrey);
+  }
+
+  .helper-line {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.875rem; color: var(--warmGrey);
+    font-style: italic;
+  }
+
+  /* =====================================================================
+     PORTFOLIO (lightTeal) — NEW
+     ===================================================================== */
+  .portfolio-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
+  .portfolio-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 32px;
+    border: 1px solid rgba(31,43,108,0.06);
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column; gap: 16px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-3px); box-shadow: var(--shadow-card-hover);
+  }
+  .portfolio-card .ic {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center;
+  }
+  .portfolio-card .ic svg { width: 26px; height: 26px; }
+  .portfolio-card h3 { font-size: 1.25rem; }
+  .portfolio-card p { color: var(--warmGrey); font-size: 0.9375rem; margin: 0; }
+  .portfolio-card .visual {
+    margin-top: auto;
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--lightTeal);
+    border: 1px solid rgba(26,158,143,0.15);
+    font-size: 0.8125rem; color: var(--deepNavy);
+  }
+  .portfolio-card .visual .row {
+    display: flex; justify-content: space-between; padding: 4px 0;
+  }
+  .portfolio-card .visual .row strong {
+    font-family: var(--font-heading); font-weight: 700; color: var(--teal);
+  }
+
+  /* =====================================================================
+     BADGES (white) — NEW
+     ===================================================================== */
+  .badges-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    margin-top: 40px;
+  }
+  @media (max-width: 980px) { .badges-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .badges-grid { grid-template-columns: 1fr; } }
+
+  .badge-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 18px;
+    padding: 28px;
+    text-align: center;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .badge-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .badge-medal {
+    margin: 0 auto 18px;
+    width: 84px; height: 84px;
+    position: relative;
+    display: grid; place-items: center;
+  }
+  .badge-medal .ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(var(--teal) 0deg, var(--teal) 270deg, var(--coolGrey) 270deg);
+    padding: 4px;
+  }
+  .badge-medal .ring::after {
+    content: ""; position: absolute; inset: 4px;
+    border-radius: 50%; background: var(--white);
+  }
+  .badge-medal .ic-wrap {
+    position: relative; z-index: 1;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--deepNavy));
+    color: var(--white);
+    display: grid; place-items: center;
+  }
+  .badge-medal .ic-wrap svg { width: 28px; height: 28px; }
+
+  /* Tier styling */
+  .badge-card.tier-1 .badge-medal .ring { background: conic-gradient(var(--teal) 0deg, var(--teal) 90deg, var(--coolGrey) 90deg); }
+  .badge-card.tier-1 .badge-medal .ic-wrap { background: linear-gradient(135deg, var(--teal), #1a7c70); }
+
+  .badge-card.tier-2 .badge-medal .ring { background: conic-gradient(#b58a2a 0deg, var(--gold) 180deg, var(--coolGrey) 180deg); }
+  .badge-card.tier-2 .badge-medal .ic-wrap { background: linear-gradient(135deg, var(--gold), #b58a2a); }
+
+  .badge-card.tier-3 .badge-medal .ring { background: conic-gradient(var(--maroon) 0deg, var(--maroon) 270deg, var(--coolGrey) 270deg); }
+  .badge-card.tier-3 .badge-medal .ic-wrap { background: linear-gradient(135deg, var(--maroon), #9d3a32); }
+
+  .badge-card.tier-4 .badge-medal .ring { background: conic-gradient(var(--deepNavy) 0deg, var(--deepNavy) 359deg, var(--deepNavy) 360deg); }
+  .badge-card.tier-4 .badge-medal .ic-wrap { background: linear-gradient(135deg, var(--deepNavy), var(--navy)); }
+
+  .badge-card h3 {
+    font-size: 1.125rem; margin-bottom: 8px;
+  }
+  .badge-card p {
+    color: var(--warmGrey); font-size: 0.875rem; margin: 0;
+  }
+  .badge-card .level {
+    margin-top: 14px;
+    display: inline-block;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 11px; letter-spacing: 0.08em;
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--lightTeal); color: var(--teal);
+  }
+  .badge-card.tier-2 .level { background: rgba(212,168,67,0.14); color: #8c6f1f; }
+  .badge-card.tier-3 .level { background: rgba(123,45,38,0.10); color: var(--maroon); }
+  .badge-card.tier-4 .level { background: rgba(21,29,72,0.08); color: var(--deepNavy); }
+
+  /* =====================================================================
+     FAQ
+     ===================================================================== */
+  .faq-section .layout {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 64px; align-items: flex-start;
+  }
+  @media (max-width: 900px) {
+    .faq-section .layout { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .faq-section h2 { font-size: clamp(2.25rem, 3vw + 1rem, 3.25rem); }
+
+  /* =====================================================================
+     FINAL CTA
+     ===================================================================== */
+  .final-cta { text-align: center; }
+  .final-cta h2 { color: var(--white); }
+  .final-cta .lead { margin: 18px auto 0; color: rgba(255,255,255,0.78); max-width: 80ch; }
+  .final-cta .row { margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div data-navbar></div>
+
+<main>
+
+  <!-- ====================================================================
+       SECTION 1 — HERO
+       ==================================================================== -->
+  <section class="hero bg-white section-pad-lg" data-screen-label="01 Hero">
+    <div class="container">
+      <div class="hero-grid">
+
+        <div>
+          <span class="hero-eyebrow">For students · Grades 9 to 12</span>
+          <h1>Show what you actually do</h1>
+
+          <p class="locked-sub">
+            Track it <span class="sep">·</span> Verify it <span class="sep">·</span> Carry it forward
+          </p>
+
+          <p class="support">
+            Log activities in two minutes. Ask a coach, teacher, employer, or organizer to confirm the work. Build one profile that follows you to applications, scholarships, jobs, and beyond.
+          </p>
+
+          <div class="hero-actions">
+            <a href="contact.html" class="btn-primary">
+              Join the waitlist
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="score.html" class="btn-secondary">See your score</a>
+          </div>
+
+          <div class="trust-pills">
+            <span class="trust-pill" id="tp-1"></span>
+            <span class="trust-pill" id="tp-2"></span>
+            <span class="trust-pill" id="tp-3"></span>
+          </div>
+        </div>
+
+        <!-- Activity logger mockup -->
+        <aside class="logger" aria-label="Log a new activity">
+          <div class="logger-head">
+            <h4>Log activity</h4>
+            <div class="step">Step <span>2</span> of 3</div>
+          </div>
+
+          <div class="logger-body">
+
+            <div class="field">
+              <label>What did you do</label>
+              <div class="input">Reading buddy session</div>
+            </div>
+
+            <div class="row-2">
+              <div class="field">
+                <label>Where</label>
+                <div class="input with-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Oakville Public Library
+                </div>
+              </div>
+              <div class="field">
+                <label>Hours</label>
+                <div class="input with-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  3h this session
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Skills used</label>
+              <div class="chip-row">
+                <span class="pickable on">Communication</span>
+                <span class="pickable on">Teaching</span>
+                <span class="pickable on">Patience</span>
+                <span class="pickable">+ add</span>
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom: 4px;">
+              <label>Send to confirmer</label>
+              <div class="verifier-card">
+                <div class="av">EM</div>
+                <div>
+                  <div class="name">Ellen Marwick</div>
+                  <div class="role">Programs Lead · Oakville Library</div>
+                </div>
+                <span class="send">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  Send
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="logger-foot">
+            <span>Autosaved · 2 sec ago</span>
+            <button class="save" type="button">Save and request</button>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION 2 — WHAT YOU GET (navy)
+       ==================================================================== -->
+  <section class="bg-lightTeal section-pad-lg" data-screen-label="02 What You Get">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">What you get</span>
+        <h2>One record for life outside grades</h2>
+        <p class="lead">No more screenshots, lost forms, or last-minute scrambling in Grade 12.</p>
+      </div>
+
+      <div class="promise-grid">
+        <div class="promise">
+          <div class="ic" id="pr-1-ic"></div>
+          <h4>Two minutes to log</h4>
+          <p>Record what you did, where it happened, and how long it took.</p>
+        </div>
+        <div class="promise">
+          <div class="ic" id="pr-2-ic"></div>
+          <h4>One-tap confirmation</h4>
+          <p>Ask a coach, teacher, employer, or organizer to confirm the work.</p>
+        </div>
+        <div class="promise">
+          <div class="ic" id="pr-3-ic"></div>
+          <h4>Track every hour</h4>
+          <p>Verified hours, roles, and activities stay organized in one place.</p>
+        </div>
+        <div class="promise">
+          <div class="ic" id="pr-4-ic"></div>
+          <h4>Yours to share</h4>
+          <p>Export, share, or keep private. You decide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION 3 — HOW IT WORKS (deep navy)
+       ==================================================================== -->
+  <section class="bg-deepNavy section-pad-lg" data-screen-label="03 How it works">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">The flow</span>
+        <h2>From activity to confirmed profile</h2>
+        <p class="lead">Five simple steps. One record that grows with you.</p>
+      </div>
+
+      <div class="student-steps">
+        <div class="student-step">
+          <div class="n">01</div>
+          <div class="ic" id="st-1-ic"></div>
+          <h4>Log Activity</h4>
+          <p>Add what you did, where, and how long.</p>
+        </div>
+        <div class="student-step">
+          <div class="n">02</div>
+          <div class="ic" id="st-2-ic"></div>
+          <h4>Send a Request</h4>
+          <p>Choose the person who saw the work.</p>
+        </div>
+        <div class="student-step">
+          <div class="n">03</div>
+          <div class="ic" id="st-3-ic"></div>
+          <h4>Get Confirmed</h4>
+          <p>One tap. No account required.</p>
+        </div>
+        <div class="student-step">
+          <div class="n">04</div>
+          <div class="ic" id="st-4-ic"></div>
+          <h4>Update Profile</h4>
+          <p>Hours, skills, and proof move into your record.</p>
+        </div>
+        <div class="student-step">
+          <div class="n">05</div>
+          <div class="ic" id="st-5-ic"></div>
+          <h4>Share When Ready</h4>
+          <p>Use your profile when opportunities open.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION 4 — INSIDE THE DASHBOARD (lightTeal)
+       ==================================================================== -->
+  <section class="bg-lightTeal section-pad-lg" data-screen-label="04 Inside the dashboard">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Your dashboard</span>
+        <h2>Three pillars.<br>One student-owned profile.</h2>
+        <p class="lead">Aanya’s profile shows her work, hours, confirmations, and skills.</p>
+      </div>
+
+      <div class="pillar-tags">
+        <div class="pillar">
+          <div class="ic" id="pl-1-ic"></div>
+          <div class="name">Think Sharp</div>
+          <div class="sub">Problem-Solving <span class="sep">·</span> Communication</div>
+          <div class="pct"><span class="v">75%</span><span class="l">Above target</span></div>
+          <div class="bar"><i style="width:75%"></i></div>
+        </div>
+        <div class="pillar depth">
+          <div class="ic" id="pl-2-ic"></div>
+          <div class="name">People Strong</div>
+          <div class="sub">Leadership <span class="sep">·</span> Teamwork</div>
+          <div class="pct"><span class="v" style="color: var(--navy);">68%</span><span class="l">Growing</span></div>
+          <div class="bar"><i style="width:68%; background: linear-gradient(90deg, var(--navy), #2d3d92);"></i></div>
+        </div>
+        <div class="pillar cred">
+          <div class="ic" id="pl-3-ic"></div>
+          <div class="name">Future Ready</div>
+          <div class="sub">Self-Management <span class="sep">·</span> Initiative</div>
+          <div class="pct"><span class="v" style="color: var(--maroon);">72%</span><span class="l">On track</span></div>
+          <div class="bar"><i style="width:72%; background: linear-gradient(90deg, var(--maroon), #9d3a32);"></i></div>
+        </div>
+      </div>
+
+      <!-- Profile card -->
+      <div class="profile-card">
+
+        <div class="profile-head">
+          <div class="av">AK</div>
+          <div>
+            <div class="n">Aanya Kapoor</div>
+            <div class="s">Grade 11 · Iroquois Ridge HS · Halton DSB · 8 activities · 103 hours</div>
+          </div>
+          <button class="share-btn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            Share
+          </button>
+        </div>
+
+        <div class="profile-grid">
+          <div class="profile-left">
+            <div class="profile-stats">
+              <div class="stat"><div class="v">67</div><div class="l">Growth Score</div></div>
+              <div class="stat"><div class="v">103</div><div class="l">Hours logged</div></div>
+              <div class="stat"><div class="v">5/6</div><div class="l">Verified</div></div>
+            </div>
+
+            <div class="timeline-mini">
+              <div class="tl-mini">
+                <span class="ic" id="tl-1-ic"></span>
+                <div><div class="t">Reading buddy · library</div><div class="s">24h · confirmed by Ellen Marwick</div></div>
+                <span class="verified-badge" id="vb-1"></span>
+              </div>
+              <div class="tl-mini">
+                <span class="ic" id="tl-2-ic"></span>
+                <div><div class="t">Saturday shift · Café Rosa</div><div class="s">48h · confirmed by D Costa</div></div>
+                <span class="verified-badge" id="vb-2"></span>
+              </div>
+              <div class="tl-mini">
+                <span class="ic" id="tl-3-ic"></span>
+                <div><div class="t">Robotics build lead</div><div class="s">31h · confirmed by Ms Pham</div></div>
+                <span class="verified-badge" id="vb-3"></span>
+              </div>
+              <div class="tl-mini">
+                <span class="ic" id="tl-4-ic"></span>
+                <div><div class="t">Math competition</div><div class="s">Awaiting Mr Patel</div></div>
+                <span class="pending-badge" id="pb-1"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-right">
+            <div style="font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warmGrey); margin-bottom: 14px;">
+              Skills built
+            </div>
+            <div class="skill-list">
+              <div class="skill-row">
+                <div class="top"><span class="lbl">Communication</span><span class="v">High</span></div>
+                <div class="bar"><i style="width:82%"></i></div>
+              </div>
+              <div class="skill-row s-2">
+                <div class="top"><span class="lbl">Leadership</span><span class="v" style="color: var(--navy);">Growing</span></div>
+                <div class="bar"><i style="width:64%"></i></div>
+              </div>
+              <div class="skill-row s-3">
+                <div class="top"><span class="lbl">Customer service</span><span class="v" style="color: var(--maroon);">Strong</span></div>
+                <div class="bar"><i style="width:74%"></i></div>
+              </div>
+              <div class="skill-row s-4">
+                <div class="top"><span class="lbl">Initiative</span><span class="v" style="color: #b58a2a;">Solid</span></div>
+                <div class="bar"><i style="width:70%"></i></div>
+              </div>
+              <div class="skill-row">
+                <div class="top"><span class="lbl">Teamwork</span><span class="v">High</span></div>
+                <div class="bar"><i style="width:78%"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION 5 — ALL OF IT COUNTS (white)
+       ==================================================================== -->
+  <section class="bg-white section-pad-lg" data-screen-label="05 All of it counts">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">All of it counts</span>
+        <h2>All of it counts</h2>
+        <p class="lead">Not just volunteering. Not just grades. One record beyond report cards.</p>
+      </div>
+
+      <div class="counts-grid">
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-1-ic"></div><div class="t">Work</div><div class="reveal">Part-time jobs, shifts, paid roles.</div></div>
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-2-ic"></div><div class="t">Volunteering</div><div class="reveal">Service hours, events, community support.</div></div>
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-3-ic"></div><div class="t">Clubs</div><div class="reveal">School clubs, teams, leadership roles.</div></div>
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-4-ic"></div><div class="t">Sports and competitions</div><div class="reveal">Training, tournaments, challenges.</div></div>
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-5-ic"></div><div class="t">Side projects</div><div class="reveal">Personal projects, creative work, ventures.</div></div>
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-6-ic"></div><div class="t">Community</div><div class="reveal">Local involvement and contribution.</div></div>
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-7-ic"></div><div class="t">Skills</div><div class="reveal">Practice, learning, certificates.</div></div>
+        <div class="count-card" tabindex="0"><div class="ic" id="cnt-8-ic"></div><div class="t">More coming</div><div class="reveal">New activity types as Y2O grows.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION 6 — YOUR PORTFOLIO (lightTeal)
+       ==================================================================== -->
+  <section class="bg-lightTeal section-pad-lg" data-screen-label="06 Your portfolio">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Your portfolio</span>
+        <h2>A Living Record That Grows With You</h2>
+        <p class="lead">Every confirmed activity strengthens one profile you control.</p>
+      </div>
+
+      <div class="portfolio-grid">
+
+        <article class="portfolio-card">
+          <div class="ic" id="po-1-ic"></div>
+          <h3>Builds as you go</h3>
+          <p>Your record grows from Grade 9 to Grade 12.</p>
+
+          <div class="visual">
+            <div class="row"><span>Grade 9</span><strong>2 activities</strong></div>
+            <div class="row"><span>Grade 10</span><strong>5 activities</strong></div>
+            <div class="row"><span>Grade 11</span><strong>8 activities</strong></div>
+            <div class="row"><span>Grade 12</span><strong>Growing</strong></div>
+          </div>
+        </article>
+
+        <article class="portfolio-card">
+          <div class="ic" id="po-2-ic"></div>
+          <h3>You own it</h3>
+          <p>Decide what to share, with whom, and when.</p>
+
+          <div class="visual">
+            <div class="row"><span>Profile link</span><strong>Private</strong></div>
+            <div class="row"><span>Universities</span><strong>On request</strong></div>
+            <div class="row"><span>Scholarships</span><strong>Custom export</strong></div>
+            <div class="row"><span>Family view</span><strong>Read only</strong></div>
+          </div>
+        </article>
+
+        <article class="portfolio-card">
+          <div class="ic" id="po-3-ic"></div>
+          <h3>Travels with you</h3>
+          <p>Share your profile for programs, scholarships, jobs, and applications.</p>
+
+          <div class="visual">
+            <div class="row"><span>University applications</span><strong>PDF ready</strong></div>
+            <div class="row"><span>Scholarships</span><strong>Verified hours</strong></div>
+            <div class="row"><span>Jobs and co-op</span><strong>Confirmed work</strong></div>
+            <div class="row"><span>Programs and grants</span><strong>One link</strong></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION 7 — BADGES (white)
+       ==================================================================== -->
+  <section class="bg-white section-pad-lg" data-screen-label="07 Badges">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Proof you earned</span>
+        <h2>Badges that mean something</h2>
+        <p class="lead">Real accomplishments. Confirmed by real people.</p>
+      </div>
+
+      <div class="badges-grid">
+
+        <article class="badge-card tier-1">
+          <div class="badge-medal">
+            <div class="ring"></div>
+            <div class="ic-wrap" id="bd-1-ic"></div>
+          </div>
+          <h3>First confirmation</h3>
+          <p>Your first activity verified by someone who saw the work.</p>
+        </article>
+
+        <article class="badge-card tier-2">
+          <div class="badge-medal">
+            <div class="ring"></div>
+            <div class="ic-wrap" id="bd-2-ic"></div>
+          </div>
+          <h3>Forty verified hours</h3>
+          <p>Forty hours of confirmed activity logged across your record.</p>
+        </article>
+
+        <article class="badge-card tier-3">
+          <div class="badge-medal">
+            <div class="ring"></div>
+            <div class="ic-wrap" id="bd-3-ic"></div>
+          </div>
+          <h3>Multi-pillar growth</h3>
+          <p>Activity across more than one pillar in a single school year.</p>
+        </article>
+
+        <article class="badge-card tier-4">
+          <div class="badge-medal">
+            <div class="ring"></div>
+            <div class="ic-wrap" id="bd-4-ic"></div>
+          </div>
+          <h3>Long-run commitment</h3>
+          <p>A confirmed activity logged steadily over multiple terms.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FAQ (lightTeal)
+       ==================================================================== -->
+  <section id="faq" class="bg-lightTeal section-pad-lg faq-section" data-screen-label="08 FAQ">
+    <div class="container">
+      <div class="layout">
+        <div>
+          <span class="eyebrow">Common questions</span>
+          <h2 class="mt-16">For students</h2>
+          <p class="lead">Clear answers about logging, verification, and owning your record.</p>
+          <a href="contact.html" class="btn-secondary" style="margin-top: 24px;">Ask a question</a>
+        </div>
+        <div id="faq-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FINAL CTA (deepNavy)
+       ==================================================================== -->
+  <section class="bg-deepNavy section-pad-md final-cta" data-screen-label="09 Final CTA">
+    <div class="container">
+      <span class="eyebrow">Start in Grade 9</span>
+      <h2 class="mt-16">Start before the record is needed</h2>
+      <p class="lead">Grade 9 is the right time. Grade 12 is too late. The record grows with you.</p>
+      <div class="row">
+        <a href="contact.html" class="btn-primary">Join the waitlist</a>
+        <a href="score.html" class="btn-secondary">See your score</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+<script src="icons.js"></script>
+<script src="partials.js"></script>
+<script src="faq.js"></script>
+<script src="data.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function setIcon(id, name, size) {
+      var el = document.getElementById(id);
+      if (el && window.icon) el.innerHTML = window.icon(name, size || 20);
+    }
+    function setHTML(id, html) {
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
+
+    // Trust pills
+    setHTML("tp-1", window.icon("badge-check", 14) + " Student-owned");
+    setHTML("tp-2", window.icon("lock",        14) + " Private by default");
+    setHTML("tp-3", window.icon("users",       14) + " Confirmed by people");
+
+    // Promise icons
+    setIcon("pr-1-ic", "clock",       20);
+    setIcon("pr-2-ic", "badge-check", 20);
+    setIcon("pr-3-ic", "award",       20);
+    setIcon("pr-4-ic", "shield",      20);
+
+    // Steps icons
+    setIcon("st-1-ic", "file-text",   22);
+    setIcon("st-2-ic", "send",        22);
+    setIcon("st-3-ic", "badge-check", 22);
+    setIcon("st-4-ic", "trending-up", 22);
+    setIcon("st-5-ic", "layers",      22);
+
+    // Pillar icons
+    setIcon("pl-1-ic", "sparkles",       18);
+    setIcon("pl-2-ic", "users",          18);
+    setIcon("pl-3-ic", "target",         18);
+
+    // Profile timeline icons + badges
+    setIcon("tl-1-ic", "book-open",  16);
+    setIcon("tl-2-ic", "briefcase",  16);
+    setIcon("tl-3-ic", "zap",        16);
+    setIcon("tl-4-ic", "trending-up",16);
+    setHTML("vb-1", window.icon("check-circle", 11) + " Verified");
+    setHTML("vb-2", window.icon("check-circle", 11) + " Verified");
+    setHTML("vb-3", window.icon("check-circle", 11) + " Verified");
+    setHTML("pb-1", window.icon("clock",        11) + " Pending");
+
+    // All of it counts
+    setIcon("cnt-1-ic", "briefcase",     20);
+    setIcon("cnt-2-ic", "heart",         20);
+    setIcon("cnt-3-ic", "users",         20);
+    setIcon("cnt-4-ic", "target",        20);
+    setIcon("cnt-5-ic", "zap",           20);
+    setIcon("cnt-6-ic", "home",          20);
+    setIcon("cnt-7-ic", "sparkles",      20);
+    setIcon("cnt-8-ic", "layers",        20);
+
+    // Portfolio icons
+    setIcon("po-1-ic", "trending-up",  26);
+    setIcon("po-2-ic", "shield",       26);
+    setIcon("po-3-ic", "send",         26);
+
+    // Badge icons
+    setIcon("bd-1-ic", "check-circle", 28);
+    setIcon("bd-2-ic", "award",        28);
+    setIcon("bd-3-ic", "trending-up",  28);
+    setIcon("bd-4-ic", "star",         28);
+
+    // FAQ
+    if (window.buildFAQ && window.FAQ && window.FAQ.students) {
+      window.buildFAQ("#faq-list", window.FAQ.students);
+    }
+  });
+</script>
+</body>
+</html>

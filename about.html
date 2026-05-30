@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Y2O · About · Built by family, shaped by students</title>
+<meta name="description" content="Y2O Growth Inc. is a Canadian company building a student-owned record for the work students do beyond grades, launching first in the GTA, then Ontario and Canada" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  /* ============================================================
+     Overflow + responsive hardening
+     ============================================================ */
+  html, body { max-width: 100%; overflow-x: hidden; }
+
+  section, .container, .grid, .card { min-width: 0; }
+
+  /* Heading scale */
+  h1 { font-size: clamp(44px, 6vw, 74px); line-height: 1.02; letter-spacing: -0.04em; }
+  h2 { font-size: clamp(34px, 4.5vw, 56px); line-height: 1.06; letter-spacing: -0.035em; }
+  h3 { font-size: clamp(22px, 2vw, 28px); line-height: 1.15; }
+  @media (max-width: 640px) {
+    h1 { font-size: clamp(40px, 10vw, 54px); line-height: 1.04; }
+    h2 { font-size: clamp(32px, 8vw, 44px); line-height: 1.06; }
+  }
+
+  .section-header .lead { color: var(--warmGrey); }
+  .bg-navy .section-header .lead,
+  .bg-deepNavy .section-header .lead { color: rgba(255,255,255,0.78); }
+
+  /* ============================================================
+     Hero — text-led, facts row, no image panel
+     ============================================================ */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute;
+    top: -200px; right: -160px;
+    width: 540px; height: 540px;
+    background: radial-gradient(closest-side, rgba(26,158,143,0.10), transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero > .container { position: relative; z-index: 1; }
+  .hero-inner { max-width: 880px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(123,45,38,0.06); color: var(--maroon);
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero h1 { margin-top: 22px; }
+  .hero .support {
+    margin-top: 22px;
+    font-size: clamp(17px, 1.4vw, 19px);
+    color: var(--warmGrey); max-width: 62ch;
+  }
+  .hero-actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+
+  .facts-row {
+    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px; background: var(--coolGrey);
+    border: 1px solid var(--coolGrey); border-radius: 18px; overflow: hidden;
+  }
+  .fact { background: var(--white); padding: 26px 24px; min-width: 0; }
+  .fact strong {
+    display: block; font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy); font-size: clamp(28px, 3vw, 40px);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .fact .l { margin-top: 10px; font-size: 0.875rem; color: var(--warmGrey); }
+  @media (max-width: 640px) { .facts-row { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ============================================================
+     What we are building (navy)
+     ============================================================ */
+  .build-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 900px) { .build-grid { grid-template-columns: 1fr; gap: 28px; } }
+  .build-grid .eyebrow { display: block; margin-bottom: 14px; }
+  .build-grid h2 { color: var(--white); max-width: 13ch; }
+  .build-body p { color: rgba(255,255,255,0.82); font-size: clamp(17px, 1.4vw, 19px); }
+  .build-list { margin-top: 22px; display: flex; flex-direction: column; gap: 13px; }
+  .build-list li {
+    display: flex; gap: 13px; align-items: flex-start;
+    color: rgba(255,255,255,0.82); font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.45; text-wrap: pretty;
+  }
+  .build-list li::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--teal); margin-top: 9px; flex-shrink: 0;
+  }
+  .locked-line {
+    margin-top: 26px;
+    font-family: var(--font-heading); font-weight: 600; color: var(--white);
+    font-size: clamp(18px, 1.6vw, 22px); letter-spacing: -0.01em;
+  }
+  .locked-line .sep { color: var(--teal); margin: 0 8px; }
+
+  /* ============================================================
+     Founders (white) — clean cards, no images
+     ============================================================ */
+  .founders-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px; margin-top: 48px;
+  }
+  @media (max-width: 900px) { .founders-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .founders-grid { grid-template-columns: 1fr; } }
+
+  .founder {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-top: 3px solid var(--coolGrey);
+    border-radius: 18px; padding: 32px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-width: 0;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .founder:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
+  .founder .label {
+    font-family: var(--font-heading); font-weight: 700;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .founder .name {
+    font-family: var(--font-heading); font-weight: 700; color: var(--deepNavy);
+    font-size: clamp(24px, 2vw, 30px); line-height: 1; letter-spacing: -0.01em;
+  }
+  .founder .quote {
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 1.0625rem; line-height: 1.4; color: var(--deepNavy);
+    padding-left: 16px; border-left: 3px solid; margin: 2px 0 4px;
+  }
+  .founder .desc { color: var(--warmGrey); font-size: 0.9375rem; margin: 0; }
+  .founder.gold { border-top-color: var(--gold); }
+  .founder.gold .label, .founder.gold .quote { border-color: var(--gold); color: #8c6f1f; }
+  .founder.gold .quote { color: var(--deepNavy); }
+  .founder.teal { border-top-color: var(--teal); }
+  .founder.teal .label { color: var(--teal); }
+  .founder.teal .quote { border-color: var(--teal); }
+  .founder.navy { border-top-color: var(--navy); }
+  .founder.navy .label { color: var(--navy); }
+  .founder.navy .quote { border-color: var(--navy); }
+
+  /* ============================================================
+     Origin (lightTeal) — text + quote, no images
+     ============================================================ */
+  .origin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 900px) { .origin-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .origin-text p { color: var(--nearBlack); font-size: clamp(17px, 1.4vw, 19px); }
+  .origin-text p + p { margin-top: 16px; }
+  .origin-text .close { margin-top: 18px; }
+  .origin-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 28px; padding: 10px 16px; border-radius: 999px;
+    background: var(--teal); color: var(--white);
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem;
+    white-space: nowrap;
+  }
+  .origin-tag:hover { background: #178a7d; color: var(--white); }
+  .origin-tag svg { width: 15px; height: 15px; }
+  .origin-quote {
+    background: var(--white); border: 1px solid rgba(26,158,143,0.22);
+    border-radius: 22px; padding: 40px;
+    box-shadow: 0 24px 60px -28px rgba(21,29,72,0.20);
+  }
+  .origin-quote .mark {
+    font-family: var(--font-heading); font-weight: 700; color: var(--teal);
+    font-size: 3.5rem; line-height: 0.6; height: 32px; display: block;
+  }
+  .origin-quote p {
+    font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy);
+    font-size: clamp(24px, 2.4vw, 34px); line-height: 1.2; margin-top: 8px;
+  }
+  .origin-quote .who {
+    margin-top: 20px; font-size: 0.875rem; color: var(--warmGrey);
+    font-family: var(--font-heading); font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+
+  /* ============================================================
+     Values (white) — 3 + 2 larger cards
+     ============================================================ */
+  .values-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    gap: 20px; margin-top: 48px;
+  }
+  .value {
+    grid-column: span 2;
+    background: var(--white);
+    border: 1px solid var(--coolGrey); border-radius: 20px;
+    padding: 34px; min-width: 0;
+    display: flex; flex-direction: column; gap: 14px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .value:nth-child(4), .value:nth-child(5) { grid-column: span 3; }
+  .value:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
+  .value .n {
+    font-family: var(--font-heading); font-weight: 700; color: var(--maroon);
+    font-size: clamp(40px, 4vw, 56px); line-height: 1; letter-spacing: -0.03em;
+  }
+  .value h3 { font-size: clamp(20px, 1.6vw, 24px); margin: 0; }
+  .value p { color: var(--warmGrey); font-size: clamp(15px, 1.1vw, 16px); margin: 0; max-width: 48ch; }
+  @media (max-width: 900px) {
+    .values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .value, .value:nth-child(4), .value:nth-child(5) { grid-column: auto; }
+  }
+  @media (max-width: 600px) { .values-grid { grid-template-columns: 1fr; } }
+
+  /* ============================================================
+     Expansion (deepNavy) — roadmap cards
+     ============================================================ */
+  .road-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; margin-top: 48px;
+  }
+  .road-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 18px; padding: 32px; min-width: 0;
+  }
+  .road-card .step {
+    font-family: var(--font-heading); font-weight: 700; color: var(--gold);
+    font-size: 0.75rem; letter-spacing: 0.10em;
+  }
+  .road-card .big {
+    font-family: var(--font-heading); font-weight: 700; color: var(--white);
+    font-size: clamp(30px, 3vw, 42px); line-height: 1; letter-spacing: -0.02em;
+    margin-top: 12px;
+  }
+  .road-card .sub {
+    color: var(--teal); font-family: var(--font-heading); font-weight: 600;
+    font-size: 0.9375rem; margin-top: 10px;
+  }
+  .road-card .desc { color: rgba(255,255,255,0.72); font-size: 0.9375rem; margin-top: 14px; }
+  .proof-row { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .proof {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 9px 15px; border-radius: 999px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.85);
+    font-family: var(--font-heading); font-weight: 500; font-size: 0.8125rem;
+  }
+  .proof .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  /* ============================================================
+     FAQ + Final CTA
+     ============================================================ */
+  .faq-section .layout {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 64px; align-items: flex-start;
+  }
+  @media (max-width: 900px) { .faq-section .layout { grid-template-columns: 1fr; gap: 32px; } }
+  .faq-question {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px; align-items: center;
+  }
+  .faq-question > span { overflow-wrap: break-word; }
+
+  .final-cta { text-align: center; }
+  .final-cta h2 { color: var(--white); }
+  .final-cta .lead { margin: 18px auto 0; color: rgba(255,255,255,0.78); max-width: 62ch; }
+  .final-cta .row { margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div data-navbar></div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero bg-white section-pad-lg" data-screen-label="01 Hero">
+    <div class="container">
+      <div class="hero-inner">
+        <span class="hero-eyebrow">About Y2O</span>
+        <h1>Built in Canada for the work students actually do</h1>
+        <p class="support">
+          Y2O Growth Inc. is building a student-owned record for the effort, skills, service, work, and leadership young people build beyond grades.<br>We are launching first in the GTA, then expanding across Ontario and Canada.
+        </p>
+
+        <div class="hero-actions">
+          <a href="contact.html" class="btn-primary">
+            Get in touch
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="research.html" class="btn-secondary">Research base</a>
+        </div>
+      </div>
+
+      <div class="facts-row">
+        <div class="fact"><strong>2026</strong><div class="l">Founded</div></div>
+        <div class="fact"><strong>GTA</strong><div class="l">First launch market</div></div>
+        <div class="fact"><strong>Ontario</strong><div class="l">Next expansion</div></div>
+        <div class="fact"><strong>Canada</strong><div class="l">Built to scale</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE ARE BUILDING -->
+  <section class="bg-navy section-pad-lg" data-screen-label="02 What we are building">
+    <div class="container">
+      <div class="build-grid">
+        <div>
+          <span class="eyebrow">What we are building</span>
+          <h2>One record for the work students actually do</h2>
+        </div>
+        <div class="build-body">
+          <p>Grades show one part of a student. Y2O shows the verified effort behind the student.</p>
+          <ul class="build-list">
+            <li>Activities and hours, logged as they happen.</li>
+            <li>Skills shown in the context where they were built.</li>
+            <li>Named confirmations from the people who saw the work.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDERS -->
+  <section class="bg-white section-pad-lg" data-screen-label="03 Founders">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">The people behind Y2O</span>
+        <h2>Built by family. Shaped by students.</h2>
+        <p class="lead">Y2O started with one student question and became a family-built platform for students, families, schools, employers, and communities.</p>
+      </div>
+
+      <div class="founders-grid">
+
+        <article class="founder gold">
+          <div class="label">The business voice</div>
+          <div class="name">Vinay</div>
+          <p class="quote">If a student can prove what they did, the record becomes the leverage.</p>
+          <p class="desc">Vinay brings experience across entrepreneurship, hiring, innovation, and early-career pathways. He grounds Y2O in the realities of work, trust, and opportunity.</p>
+        </article>
+
+        <article class="founder teal">
+          <div class="label">The student voice</div>
+          <div class="name">Varya</div>
+          <p class="quote">If grades do not show all the work, where does the work go?</p>
+          <p class="desc">Varya's experience shaped the original question behind Y2O: students do real work outside class, but much of it has no clear place to live.</p>
+        </article>
+
+        <article class="founder navy">
+          <div class="label">The tech voice</div>
+          <div class="name">Pankaj</div>
+          <p class="quote">The record has to be simple enough to use and strong enough to trust.</p>
+          <p class="desc">Pankaj leads the product and technical thinking behind a record built for privacy, verification, portability, and scale.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN -->
+  <section class="bg-lightTeal section-pad-lg" data-screen-label="04 Origin">
+    <div class="container">
+      <div class="origin-grid">
+
+        <div class="origin-text">
+          <span class="eyebrow">The origin</span>
+          <h2 class="mt-16">The question we could not answer clearly</h2>
+          <p class="mt-24">Varya was doing what many students do: tutoring, working, helping at home, joining teams, and building real skills. The problem was simple. Most of that work did not appear on a transcript, résumé, or application in a trusted way.</p>
+          <p class="close">The honest answer was nowhere. So we started building Y2O: a record students can own, update, verify, and carry forward.</p>
+          <a href="contact.html" class="origin-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            Be part of the first GTA cohort
+          </a>
+        </div>
+
+        <figure class="origin-quote">
+          <span class="mark">&ldquo;</span>
+          <p>If grades do not show all the work, where does the work go?</p>
+          <figcaption class="who">Varya · the question that started Y2O</figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="bg-white section-pad-lg" data-screen-label="05 Values">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">What we believe</span>
+        <h2>Five values we will not compromise</h2>
+        <p class="lead">Every product decision starts here. If a choice does not pass these values, it does not ship.</p>
+      </div>
+
+      <div class="values-grid">
+
+        <article class="value">
+          <div class="n">01</div>
+          <h3>Student-owned</h3>
+          <p>The record belongs to the student, across schools, applications, and life after graduation.</p>
+        </article>
+
+        <article class="value">
+          <div class="n">02</div>
+          <h3>Verified by people</h3>
+          <p>Confirmation by a real person beats an unverified claim or black-box algorithm.</p>
+        </article>
+
+        <article class="value">
+          <div class="n">03</div>
+          <h3>Built with students</h3>
+          <p>Students test the product. If they would not use it, we redesign it.</p>
+        </article>
+
+        <article class="value">
+          <div class="n">04</div>
+          <h3>Built with partners</h3>
+          <p>Schools, employers, programs, and communities shape what verification looks like in practice.</p>
+        </article>
+
+        <article class="value">
+          <div class="n">05</div>
+          <h3>Built for what comes next</h3>
+          <p>Y2O must work beyond Grade 12 for scholarships, jobs, admissions, and early talent pathways.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPANSION -->
+  <section class="bg-deepNavy section-pad-lg" data-screen-label="06 Expansion">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Built in Canada</span>
+        <h2>Starting in the GTA. Built for Canada.</h2>
+        <p class="lead">Y2O is launching where the student, school, employer, and community ecosystem is dense enough to test properly.<br>The rollout starts in the GTA, expands across Ontario, and then scales across Canada.</p>
+      </div>
+
+      <div class="road-grid">
+
+        <article class="road-card">
+          <div class="step">STEP 01</div>
+          <div class="big">GTA</div>
+          <div class="sub">First launch market</div>
+          <p class="desc">Students, families, schools, employers, and community partners in the Greater Toronto Area.</p>
+        </article>
+
+        <article class="road-card">
+          <div class="step">STEP 02</div>
+          <div class="big">Ontario</div>
+          <div class="sub">Next expansion</div>
+          <p class="desc">Broader school, employer, scholarship, and youth program partnerships across the province.</p>
+        </article>
+
+        <article class="road-card">
+          <div class="step">STEP 03</div>
+          <div class="big">Canada</div>
+          <div class="sub">Built to scale</div>
+          <p class="desc">A portable student-owned record designed for students beyond one city, school board, or province.</p>
+        </article>
+
+      </div>
+
+      <div class="proof-row">
+        <span class="proof"><span class="dot"></span> Data and operations in Canada</span>
+        <span class="proof"><span class="dot"></span> PIPEDA-aligned privacy design</span>
+        <span class="proof"><span class="dot"></span> No ads served to students</span>
+        <span class="proof"><span class="dot"></span> Student-controlled sharing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="bg-lightTeal section-pad-lg faq-section" data-screen-label="07 FAQ">
+    <div class="container">
+      <div class="layout">
+        <div>
+          <span class="eyebrow">Common questions</span>
+          <h2 class="mt-16">About Y2O</h2>
+          <p class="lead">Who we are, why we exist, and where we are headed.</p>
+          <a href="contact.html" class="btn-secondary" style="margin-top: 24px;">Ask a question</a>
+        </div>
+        <div id="faq-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="bg-deepNavy section-pad-md final-cta" data-screen-label="08 Final CTA">
+    <div class="container">
+      <span class="eyebrow">Get involved</span>
+      <h2 class="mt-16">Help us build this right</h2>
+      <p class="lead">The GTA waitlist is open for students and families.<br>We are also speaking with schools, universities, employers, scholarship teams, and community partners.</p>
+      <div class="row">
+        <a href="contact.html" class="btn-primary">Get in touch</a>
+        <a href="research.html" class="btn-secondary">Research base</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+<script src="icons.js"></script>
+<script src="partials.js"></script>
+<script src="faq.js"></script>
+<script src="data.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.buildFAQ && window.FAQ && window.FAQ.about) {
+      window.buildFAQ("#faq-list", window.FAQ.about);
+    }
+  });
+</script>
+</body>
+</html>

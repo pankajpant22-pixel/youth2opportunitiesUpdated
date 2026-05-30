@@ -1,848 +1,1492 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Y2O — Where Youth Explore, Build & Grow | Youth2Opportunities Canada
-  </title>
-  <meta name="description"
-    content="Y2O helps Canadian high school students build real-world portfolios, earn credentials, and connect to opportunities — beyond grades. Free early access now open." />
-  <meta property="og:title" content="Y2O — Career Readiness for Canadian High School Students" />
-  <meta property="og:description"
-    content="Build your portfolio. Earn credentials. Get discovered. Free early access for students and families." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.youth2opportunities.ca" />
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://getlaunchlist.com/js/widget-diy.js" defer></script>
-  <script src="https://getlaunchlist.com/js/popup.js" defer></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Y2O · Every effort matters</title>
+<meta name="description" content="Y2O is the student-owned verified growth record for Canadian high schoolers — track what you do, confirm it with the people who saw the work, carry it forward." />
+<link rel="stylesheet" href="brand.css" />
+
+<style>
+  /* =====================================================================
+     Shared local utilities
+     ===================================================================== */
+  .eyebrow-row { margin-bottom: 12px; }
+  .section-header h2 { margin-bottom: 14px; }
+  .section-header .lead { color: var(--warmGrey); font-size: 1.0625rem; }
+  .bg-navy .section-header .lead,
+  .bg-deepNavy .section-header .lead { color: rgba(255,255,255,0.78); }
+
+  .trust-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .trust-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    background: var(--lightTeal); color: var(--deepNavy);
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 0.8125rem;
+    border: 1px solid rgba(26,158,143,0.18);
+  }
+  .trust-pill svg { width: 14px; height: 14px; color: var(--teal); stroke-width: 2; }
+
+  .icon-square {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+
+  /* =====================================================================
+     HERO
+     ===================================================================== */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute;
+    top: -180px; right: -180px; width: 520px; height: 520px;
+    background: radial-gradient(closest-side, rgba(26,158,143,0.10), transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero > .container { position: relative; z-index: 1; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 56px; align-items: center;
+  }
+  @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(123,45,38,0.06); color: var(--maroon);
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero-eyebrow .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
+    animation: hpulse 2.4s infinite; box-shadow: 0 0 0 0 rgba(26,158,143,0.5);
+  }
+  @keyframes hpulse {
+    0% { box-shadow: 0 0 0 0 rgba(26,158,143,0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(26,158,143,0); }
+    100% { box-shadow: 0 0 0 0 rgba(26,158,143,0); }
+  }
+  .hero h1 { margin-top: 22px; }
+  .hero .locked-sub {
+    margin-top: 22px;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: clamp(1.125rem, 0.8vw + 1rem, 1.4375rem);
+    color: var(--navy);
+  }
+  .hero .locked-sub .sep { color: var(--teal); margin: 0 6px; }
+  .hero .support {
+    margin-top: 20px; font-size: 1.125rem;
+    color: var(--warmGrey); max-width: 50ch;
+  }
+  .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  @media (max-width: 480px) {
+    .hero-actions .btn-primary, .hero-actions .btn-secondary { width: 100%; }
+  }
+
+  /* Dashboard card */
+  .dash {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px -24px rgba(21,29,72,0.25),
+                0 8px 24px rgba(31,43,108,0.06);
+    overflow: hidden;
+  }
+  .dash-head {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--coolGrey);
+    display: grid; grid-template-columns: 48px 1fr auto;
+    gap: 14px; align-items: center;
+    background: linear-gradient(180deg, #fcfdfe, var(--white));
+  }
+  .dash-head .avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    color: var(--white); display: grid; place-items: center;
+    font-family: var(--font-heading); font-weight: 700;
+  }
+  .dash-head .name {
+    font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy);
+    font-size: 1rem;
+  }
+  .dash-head .sub { font-size: 12px; color: var(--warmGrey); margin-top: 2px; }
+  .live-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(26,158,143,0.10); color: var(--teal);
+    font-family: var(--font-heading); font-weight: 600; font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .live-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+    animation: hpulse 2s infinite;
+  }
+
+  .score-block {
+    display: grid;
+    grid-template-columns: 156px 1fr;
+    gap: 26px; align-items: center;
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--coolGrey);
+  }
+  @media (max-width: 420px) {
+    .score-block { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  }
+  .score-ring { position: relative; width: 156px; height: 156px; }
+  .score-ring svg { transform: rotate(-90deg); display: block; }
+  .score-ring .center {
+    position: absolute; inset: 0; display: flex;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; gap: 2px;
+    padding: 0 18px;
+  }
+  .score-ring .num {
+    font-family: var(--font-heading); font-weight: 700;
+    font-size: 2.25rem; color: var(--deepNavy); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .score-ring .out {
+    font-size: 0.6875rem; color: var(--warmGrey);
+    letter-spacing: 0.04em; line-height: 1;
+    margin-top: 4px;
+  }
+  .score-ring .band {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--navy); font-size: 0.8125rem;
+    line-height: 1;
+    margin-top: 6px;
+  }
+  .score-ring .label-mini {
+    position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+    background: var(--white);
+    padding: 0 8px;
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 10px; color: var(--teal);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .score-block .title {
+    font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy);
+    font-size: 1rem;
+  }
+  .score-block .factors-label {
+    font-size: 12px; color: var(--warmGrey); margin-top: 2px; margin-bottom: 14px;
+  }
+  .score-explainer {
+    padding: 14px 24px 18px;
+    font-size: 0.75rem;
+    color: var(--warmGrey);
+    line-height: 1.5;
+    border-bottom: 1px solid var(--coolGrey);
+  }
+  .score-explainer strong {
+    color: var(--deepNavy);
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .factors { display: flex; flex-direction: column; gap: 12px; }
+  .factor .top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 12px;
+  }
+  .factor .lbl {
+    font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy);
+  }
+  .factor .wt {
+    font-family: var(--font-heading); font-weight: 500;
+    color: var(--warmGrey); margin-left: 4px;
+  }
+  .factor .pct { font-family: var(--font-heading); font-weight: 700; color: var(--teal); }
+  .factor .track {
+    height: 6px; background: var(--coolGrey); border-radius: 999px; overflow: hidden;
+    margin-top: 5px;
+  }
+  .factor .fill {
+    height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, var(--teal), #178a7d);
+    width: 0; transition: width 1.4s cubic-bezier(.4,.2,.2,1);
+  }
+  .factor.depth .fill { background: linear-gradient(90deg, var(--navy), #2d3d92); }
+  .factor.proof .fill { background: linear-gradient(90deg, var(--maroon), #9d3a32); }
+  .factor.consistency .fill { background: linear-gradient(90deg, var(--gold), #b58a2a); }
+
+  .quick-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--coolGrey);
+  }
+  .quick-stats .qs {
+    padding: 14px 8px; text-align: center;
+    border-right: 1px solid var(--coolGrey);
+  }
+  .quick-stats .qs:last-child { border-right: 0; }
+  .quick-stats .v {
+    font-family: var(--font-heading); font-weight: 700; color: var(--deepNavy);
+    font-size: 1.125rem;
+  }
+  .quick-stats .l { font-size: 11px; color: var(--warmGrey); letter-spacing: 0.02em; }
+
+  .feed { padding: 16px 22px 22px; }
+  .feed-title {
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--warmGrey); margin-bottom: 12px;
+  }
+  .feed-row {
+    display: grid; grid-template-columns: 32px 1fr auto;
+    gap: 12px; align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--coolGrey);
+  }
+  .feed-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .feed-row .ic {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center;
+  }
+  .feed-row .ic svg { width: 16px; height: 16px; }
+  .feed-row .t {
+    font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy);
+    font-size: 0.875rem;
+  }
+  .feed-row .s { font-size: 12px; color: var(--warmGrey); margin-top: 1px; }
+  .verified-badge, .pending-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 999px;
+    font-family: var(--font-heading); font-weight: 600; font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+  .verified-badge { background: rgba(26,158,143,0.12); color: var(--teal); }
+  .pending-badge { background: rgba(212,168,67,0.16); color: #8c6f1f; }
+  .verified-badge svg, .pending-badge svg { width: 11px; height: 11px; stroke-width: 2.2; }
+
+  /* =====================================================================
+     RESEARCH BASE
+     ===================================================================== */
+  .research-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
+  .research-pill {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: var(--white);
+    font-family: var(--font-heading); font-weight: 500;
+    font-size: 0.9375rem;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+  .research-pill:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.28);
+  }
+  .research-disclaimer {
+    margin-top: 28px;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.55);
+    font-style: italic;
+  }
+
+  /* =====================================================================
+     WHO IT HELPS
+     ===================================================================== */
+  .helps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 900px) { .helps-grid { grid-template-columns: 1fr; } }
+
+  .help-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 18px;
+    padding: 32px;
+    display: flex; flex-direction: column; gap: 18px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .help-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .help-num {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--maroon); font-size: 0.875rem; letter-spacing: 0.08em;
+  }
+  .help-card h3 { font-size: 1.5rem; }
+  .help-card .desc { color: var(--warmGrey); font-size: 0.9375rem; }
+
+  .mini-tile {
+    margin-top: auto;
+    background: var(--lightTeal);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .mini-tile.alt-ivory { background: var(--warmIvory); }
+  .mini-tile.alt-cool  { background: #f5f7fb; }
+
+  .mini-progress {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px;
+  }
+  .mini-progress .v {
+    font-family: var(--font-heading); font-weight: 700; color: var(--deepNavy);
+    font-size: 1.125rem;
+  }
+  .mini-progress .l { font-size: 11px; color: var(--warmGrey); }
+  .mini-progress .bar {
+    height: 6px; background: var(--white); border-radius: 999px; flex: 1;
+    margin: 0 12px; overflow: hidden;
+  }
+  .mini-progress .bar > i {
+    display: block; height: 100%; width: 78%;
+    background: linear-gradient(90deg, var(--teal), #178a7d);
+    border-radius: 999px;
+  }
+  .mini-row {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--deepNavy);
+  }
+  .mini-row strong { color: var(--deepNavy); font-family: var(--font-heading); font-weight: 700; }
+  .mini-row + .mini-row { margin-top: 6px; }
+
+  .mini-tap {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--coolGrey);
+  }
+  .mini-tap .tt {
+    font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy);
+    font-size: 0.875rem;
+  }
+  .mini-tap .ss { font-size: 12px; color: var(--warmGrey); margin-top: 2px; margin-bottom: 12px; }
+  .mini-tap .confirm-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    width: 100%;
+    padding: 10px 14px; border-radius: 8px;
+    background: var(--teal); color: var(--white);
+    font-family: var(--font-heading); font-weight: 600; font-size: 0.8125rem;
+  }
+  .mini-tap .confirm-btn svg { width: 14px; height: 14px; stroke-width: 2.2; }
+
+  /* =====================================================================
+     HOW Y2O WORKS — timeline
+     ===================================================================== */
+  .timeline {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 30px; left: 4%; right: 4%;
+    height: 2px;
+    background: linear-gradient(90deg,
+      rgba(26,158,143,0.0),
+      rgba(26,158,143,0.45) 12%,
+      rgba(26,158,143,0.45) 88%,
+      rgba(26,158,143,0.0));
+    z-index: 0;
+  }
+  @media (max-width: 980px) {
+    .timeline { grid-template-columns: repeat(2, 1fr); }
+    .timeline::before { display: none; }
+  }
+  @media (max-width: 540px) { .timeline { grid-template-columns: 1fr; } }
+
+  .step {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px;
+    padding: 22px 18px 20px;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  }
+  .step:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(26,158,143,0.4);
+    transform: translateY(-2px);
+  }
+  .step .dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--teal); color: var(--white);
+    display: grid; place-items: center;
+    font-family: var(--font-heading); font-weight: 700; font-size: 0.8125rem;
+    margin: 0 auto 18px;
+    box-shadow: 0 0 0 6px rgba(21,29,72,1), 0 0 0 7px rgba(26,158,143,0.25);
+  }
+  .bg-deepNavy .step .dot { box-shadow: 0 0 0 6px var(--deepNavy), 0 0 0 7px rgba(26,158,143,0.25); }
+  .step .ic {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(26,158,143,0.15); color: var(--teal);
+    display: grid; place-items: center;
+    margin: 0 auto 14px;
+  }
+  .step h4 {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--white); font-size: 1rem; line-height: 1.25;
+    margin-bottom: 8px; text-align: center;
+  }
+  .step p {
+    font-size: 0.8125rem; color: rgba(255,255,255,0.72);
+    margin: 0; text-align: center;
+  }
+
+  /* =====================================================================
+     THREE VIEWS
+     ===================================================================== */
+  .views-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 980px) { .views-grid { grid-template-columns: 1fr; } }
+
+  .view-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .view-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--coolGrey);
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fcfdfe;
+  }
+  .view-head .tag {
+    font-family: var(--font-heading); font-weight: 600;
+    font-size: 11px; color: var(--teal);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .view-head .who { font-size: 11px; color: var(--warmGrey); }
+  .view-body { padding: 18px; }
+
+  .stu-top {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 14px; align-items: center; margin-bottom: 14px;
+  }
+  .stu-ring-mini { width: 56px; height: 56px; position: relative; }
+  .stu-ring-mini .center {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy); font-size: 0.875rem;
+  }
+  .stu-title {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 0.9375rem;
+  }
+  .stu-sub { font-size: 12px; color: var(--warmGrey); margin-top: 2px; }
+
+  .stu-stats {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+    margin-bottom: 14px;
+  }
+  .stu-stats .stat { background: var(--lightTeal); border-radius: 8px; padding: 8px 10px; }
+  .stu-stats .v {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--deepNavy); font-size: 1rem;
+  }
+  .stu-stats .l { font-size: 11px; color: var(--warmGrey); }
+
+  .stu-acts { display: flex; flex-direction: column; gap: 8px; }
+  .stu-act {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 10px; border-radius: 8px;
+    background: #fafbfd; border: 1px solid var(--coolGrey);
+    font-size: 0.8125rem;
+  }
+  .stu-act .t { font-family: var(--font-heading); font-weight: 500; color: var(--deepNavy); }
+
+  .parent-block { display: flex; flex-direction: column; gap: 10px; }
+  .parent-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 12px; border-radius: 10px;
+    background: #fafbfd; border: 1px solid var(--coolGrey);
+  }
+  .parent-row .lbl {
+    font-family: var(--font-heading); font-weight: 500;
+    color: var(--deepNavy); font-size: 0.875rem;
+  }
+  .parent-row .v {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--teal); font-size: 1rem;
+  }
+  .parent-block .shared-note {
+    margin-top: 6px;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--warmGrey); font-style: italic;
+  }
+  .parent-block .shared-note svg { width: 12px; height: 12px; }
+
+  .partner-card {
+    border: 1px solid var(--coolGrey);
+    border-radius: 12px; padding: 14px; background: #fafbfd;
+  }
+  .partner-card .from { font-size: 11px; color: var(--warmGrey); margin-bottom: 8px; }
+  .partner-card .a-title {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 0.9375rem;
+  }
+  .partner-card .details {
+    margin: 12px 0;
+    font-size: 0.8125rem; color: var(--warmGrey);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .partner-card .details span strong {
+    color: var(--deepNavy); font-family: var(--font-heading); font-weight: 600;
+  }
+  .partner-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .partner-btns .confirm {
+    background: var(--teal); color: var(--white);
+    padding: 10px; border-radius: 8px; font-size: 0.8125rem;
+    font-family: var(--font-heading); font-weight: 600;
+    display: inline-flex; justify-content: center; align-items: center; gap: 6px;
+  }
+  .partner-btns .decline {
+    background: var(--white); color: var(--deepNavy);
+    border: 1px solid var(--coolGrey);
+    padding: 10px; border-radius: 8px; font-size: 0.8125rem;
+    font-family: var(--font-heading); font-weight: 600;
+    display: inline-flex; justify-content: center; align-items: center;
+  }
+  .partner-btns .confirm svg { width: 13px; height: 13px; stroke-width: 2.2; }
+
+  /* =====================================================================
+     RECORD GETS MESSY — before/after
+     ===================================================================== */
+  .messy-grid {
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px;
+    align-items: start;
+  }
+  @media (max-width: 980px) { .messy-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+  .messy-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+  @media (max-width: 540px) { .messy-cards { grid-template-columns: 1fr; } }
+  .messy-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 14px; padding: 20px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .messy-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .messy-card .ic {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center; margin-bottom: 12px;
+  }
+  .messy-card h4 {
+    font-size: 0.9375rem; color: var(--deepNavy); margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .messy-card p { font-size: 0.8125rem; color: var(--warmGrey); margin: 0; }
+
+  /* before/after panel */
+  .ba-panel {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .ba-col {
+    padding: 22px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .ba-col + .ba-col {
+    border-top: 1px dashed var(--coolGrey);
+  }
+  .ba-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 6px;
+  }
+  .ba-head .badge {
+    font-family: var(--font-heading); font-weight: 700;
+    font-size: 10px; letter-spacing: 0.1em;
+    padding: 4px 10px; border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .ba-col.before .badge { background: rgba(123,45,38,0.10); color: var(--maroon); }
+  .ba-col.after .badge { background: rgba(26,158,143,0.14); color: var(--teal); }
+  .ba-head .label {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 0.9375rem;
+  }
+  .ba-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 9px;
+    background: #fafbfd;
+    border: 1px solid var(--coolGrey);
+    font-size: 0.875rem; color: var(--deepNavy);
+  }
+  .ba-item .ic {
+    width: 26px; height: 26px; border-radius: 7px;
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .ba-col.before .ba-item .ic {
+    background: rgba(123,45,38,0.08); color: var(--maroon);
+  }
+  .ba-col.before .ba-item {
+    text-decoration: line-through;
+    text-decoration-color: rgba(123,45,38,0.35);
+    color: var(--warmGrey);
+  }
+  .ba-col.after .ba-item .ic {
+    background: rgba(26,158,143,0.12); color: var(--teal);
+  }
+  .ba-col.after .ba-item .ic svg { width: 14px; height: 14px; stroke-width: 2.2; }
+
+  /* =====================================================================
+     ALL OF IT COUNTS
+     ===================================================================== */
+  .counts-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin-top: 36px;
+  }
+  @media (max-width: 900px) { .counts-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .count-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 14px;
+    padding: 22px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .count-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .count-card .ic {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center;
+    margin-bottom: 4px;
+  }
+  .count-card .ic svg { width: 20px; height: 20px; }
+  .count-card .t {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--deepNavy); font-size: 1rem; line-height: 1.25;
+  }
+  .count-card .body {
+    font-size: 0.8125rem; color: var(--warmGrey);
+    line-height: 1.45; margin: 0;
+  }
+
+  /* =====================================================================
+     WHAT STUDENTS ARE ASKED TO SHOW — stat cards
+     ===================================================================== */
+  .why-now-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    margin-top: 36px;
+  }
+  @media (max-width: 980px) { .why-now-stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .why-now-stats { grid-template-columns: 1fr; } }
+
+  .why-stat {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px; padding: 26px;
+    transition: background 0.18s ease;
+    display: flex; flex-direction: column;
+  }
+  .why-stat:hover { background: rgba(255,255,255,0.08); }
+  .why-stat .accent {
+    width: 32px; height: 3px; background: var(--gold);
+    border-radius: 999px; margin-bottom: 18px;
+  }
+  .why-stat:nth-child(2) .accent { background: var(--teal); }
+  .why-stat:nth-child(3) .accent { background: var(--maroon); }
+  .why-stat:nth-child(4) .accent { background: var(--gold); }
+  .why-stat .topic {
+    font-family: var(--font-heading); font-weight: 600;
+    color: var(--white); font-size: 0.9375rem;
+    letter-spacing: 0.02em; margin-bottom: 12px;
+  }
+  .why-stat .l {
+    font-family: var(--font-body); font-weight: 400;
+    color: rgba(255,255,255,0.82);
+    font-size: 0.9375rem; line-height: 1.5;
+  }
+  .why-stat .src {
+    margin-top: auto; padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    font-size: 0.75rem; color: rgba(255,255,255,0.55);
+  }
+  .why-stat .src a {
+    color: rgba(255,255,255,0.75);
+    border-bottom: 1px dashed rgba(255,255,255,0.25);
+  }
+  .why-stat .src a:hover { color: var(--white); }
+
+  /* =====================================================================
+     WHY Y2O
+     ===================================================================== */
+  .why-y2o-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 1024px) { .why-y2o-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px)  { .why-y2o-grid { grid-template-columns: 1fr; } }
+
+  .why-card {
+    background: var(--white);
+    border: 1px solid var(--coolGrey);
+    border-radius: 16px;
+    padding: 26px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(26,158,143,0.4);
+  }
+  .why-card .n {
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--maroon); font-size: 0.8125rem;
+    letter-spacing: 0.08em; margin-bottom: 14px;
+  }
+  .why-card .ic {
+    width: 44px; height: 44px; border-radius: 11px;
+    background: var(--lightTeal); color: var(--teal);
+    display: grid; place-items: center; margin-bottom: 16px;
+  }
+  .why-card .ic svg { width: 22px; height: 22px; }
+  .why-card h3 { font-size: 1.0625rem; margin-bottom: 8px; line-height: 1.3; }
+  .why-card p { color: var(--warmGrey); font-size: 0.9375rem; margin: 0; }
+
+  /* =====================================================================
+     FINAL CTA
+     ===================================================================== */
+  .final-cta { text-align: center; }
+  .final-cta h2 { color: var(--white); }
+  .final-cta .lead { margin: 18px auto 0; color: rgba(255,255,255,0.78); max-width: 60ch; }
+  .final-cta .row {
+    margin-top: 36px;
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+
+  /* =====================================================================
+     FAQ
+     ===================================================================== */
+  .faq-section .layout {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 64px; align-items: flex-start;
+  }
+  @media (max-width: 900px) {
+    .faq-section .layout { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .faq-section h2 { font-size: clamp(2.25rem, 3vw + 1rem, 3.25rem); }
+  .faq-note {
+    margin-top: 20px;
+    font-size: 0.875rem;
+    color: var(--warmGrey);
+    max-width: 48ch;
+    line-height: 1.5;
+  }
+
+  /* Subhead "one line on desktop" guard */
+  .one-line-desktop { white-space: nowrap; }
+  @media (max-width: 780px) { .one-line-desktop { white-space: normal; } }
+</style>
 </head>
-
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#" class="logo" style="width: 20%">
-        <img src="logo/logo-color.png" alt="Logo" style="width: 30%" />
-      </a>
-      <ul class="nav-links">
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#who">Who It's For</a></li>
-        <li><a href="#survey">Demo</a></li>
-        <li><a href="#partner">Partner</a></li>
-        <li><a href="#learn-more">Learn More</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#waitlist">Join Waitlist</a></li>
-      </ul>
-      <a href="https://forms.gle/b9ncwwvwt8unM8n88" target="_blank"
-        class="btn btn-primary btn-sm nav-cta background-maroon">Take Survey →
-      </a>
-      <button class="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
 
-  <section class="hero" id="hero">
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <div class="badge background-maroon">
-          <span class="badge-dot"></span>
-          <span class="text-white">Early Access Now Open</span>
+<div data-navbar></div>
+
+<main>
+
+  <!-- ====================================================================
+       1 — HERO
+       ==================================================================== -->
+  <section class="hero bg-white section-pad-lg" data-screen-label="01 Hero">
+    <div class="container">
+      <div class="hero-grid">
+
+        <div>
+          <span class="hero-eyebrow">
+            <span class="pulse"></span>
+            Student-Owned Growth Record
+          </span>
+
+          <h1>Every effort matters</h1>
+
+          <p class="locked-sub">
+            Track it <span class="sep">·</span> Verify it <span class="sep">·</span> Carry it forward
+          </p>
+
+          <p class="support">
+            One trusted record for what students do beyond grades.
+          </p>
+
+          <div class="hero-actions">
+            <a href="contact.html" class="btn-primary">Join the waitlist</a>
+            <a href="score.html" class="btn-secondary">See your score</a>
+          </div>
+
+          <div class="trust-pills">
+            <span class="trust-pill" id="tp-1"></span>
+            <span class="trust-pill" id="tp-2"></span>
+            <span class="trust-pill" id="tp-3"></span>
+          </div>
         </div>
-        <h1>
-          Every student has a story.
-          <span class="accent">Y2O makes it visible.</span>
-        </h1>
-        <p class="hero-sub">
-          Y2O is the platform where Canadian high school students explore new
-          interests, build real-world skills, and grow through community
-          impact — all captured in one verified profile that opens doors to
-          scholarships, jobs, and post-secondary.
-        </p>
-        <div class="hero-ctas">
-          <a href="https://forms.gle/b9ncwwvwt8unM8n88" target="_blank" class="btn btn-primary background-maroon">Take
-            the Early Access Survey →</a><a href="#waitlist" class="btn btn-secondary">Join the Waitlist</a>
-        </div>
-        <p class="social-proof">
-          Join 20+ students and families already shaping Y2O.
-        </p>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-visual-card">
-          <div class="profile-header">
-            <div class="profile-avatar">JD</div>
+
+        <!-- Dashboard preview -->
+        <aside class="dash" aria-label="Student preview">
+
+          <div class="dash-head">
+            <div class="avatar">AK</div>
             <div>
-              <div class="profile-name">Jane Doe</div>
-              <div class="profile-role">
-                Grade 9 · Halton Region · IB Candidate
+              <div class="name">Aanya Kapoor</div>
+              <div class="sub">Grade 11 · Iroquois Ridge HS · Halton DSB</div>
+            </div>
+            <span class="live-pill"><span class="dot"></span> Live preview</span>
+          </div>
+
+          <div class="score-block">
+            <div class="score-ring" aria-label="Growth Score 67 of 100, Developing band">
+              <svg width="156" height="156" viewBox="0 0 156 156">
+                <circle cx="78" cy="78" r="66" fill="none" stroke="#E5E9F2" stroke-width="10"></circle>
+                <circle cx="78" cy="78" r="66" fill="none" stroke="#1F2B6C" stroke-width="10"
+                        stroke-linecap="round"
+                        stroke-dasharray="414.69"
+                        stroke-dashoffset="136.85"></circle>
+              </svg>
+              <div class="center">
+                <div class="num">67</div>
+                <div class="out">of 100</div>
+                <div class="band">Developing</div>
               </div>
             </div>
-            <span class="profile-verified-badge">✓ Verified</span>
-          </div>
-          <div class="profile-stats">
-            <div class="profile-stat">
-              <span class="profile-stat-num">12</span><span class="profile-stat-label">Skills</span>
-            </div>
-            <div class="profile-stat">
-              <span class="profile-stat-num">48</span><span class="profile-stat-label">Hours</span>
-            </div>
-            <div class="profile-stat">
-              <span class="profile-stat-num">3</span><span class="profile-stat-label">Projects</span>
-            </div>
-            <div class="profile-stat">
-              <span class="profile-stat-num">6</span><span class="profile-stat-label">Credentials</span>
-            </div>
-          </div>
-          <div class="profile-competencies">
-            <div class="competency-bar">
-              <span class="competency-label">Leadership</span>
-              <div class="competency-track">
-                <div class="competency-fill" style="width: 72%"></div>
+
+            <div>
+              <div class="title">Growth Score</div>
+              <div class="factors-label">Four factors</div>
+
+              <div class="factors">
+                <div class="factor breadth">
+                  <div class="top">
+                    <span class="lbl">Activity Breadth</span>
+                    <span class="pct">75%</span>
+                  </div>
+                  <div class="track"><div class="fill" data-w="75"></div></div>
+                </div>
+                <div class="factor depth">
+                  <div class="top">
+                    <span class="lbl">Skill Depth</span>
+                    <span class="pct" style="color: var(--navy);">62%</span>
+                  </div>
+                  <div class="track"><div class="fill" data-w="62"></div></div>
+                </div>
+                <div class="factor proof">
+                  <div class="top">
+                    <span class="lbl">Proof Strength</span>
+                    <span class="pct" style="color: var(--maroon);">72%</span>
+                  </div>
+                  <div class="track"><div class="fill" data-w="72"></div></div>
+                </div>
+                <div class="factor consistency">
+                  <div class="top">
+                    <span class="lbl">Consistency</span>
+                    <span class="pct" style="color: #b58a2a;">75%</span>
+                  </div>
+                  <div class="track"><div class="fill" data-w="75"></div></div>
+                </div>
               </div>
             </div>
-            <div class="competency-bar">
-              <span class="competency-label">Communication</span>
-              <div class="competency-track">
-                <div class="competency-fill" style="width: 85%"></div>
+          </div>
+
+          <div class="score-explainer">
+            Your Y2O Score reflects <strong>verified activity</strong>, breadth, consistency, and competency growth. Not a grade or academic assessment.
+          </div>
+
+          <div class="quick-stats">
+            <div class="qs"><div class="v">103</div><div class="l">Hours</div></div>
+            <div class="qs"><div class="v">8</div><div class="l">Activities</div></div>
+            <div class="qs"><div class="v">5</div><div class="l">Verified</div></div>
+            <div class="qs"><div class="v">1</div><div class="l">In Review</div></div>
+          </div>
+
+          <div class="feed">
+            <div class="feed-title">Latest activity</div>
+
+            <div class="feed-row">
+              <span class="ic" id="feed-1-ic"></span>
+              <div>
+                <div class="t">Reading buddy · Public library</div>
+                <div class="s">24h logged</div>
               </div>
+              <span class="verified-badge" id="vb-1"></span>
             </div>
-            <div class="competency-bar">
-              <span class="competency-label">Community Engagement</span>
-              <div class="competency-track">
-                <div class="competency-fill gold" style="width: 90%"></div>
+
+            <div class="feed-row">
+              <span class="ic" id="feed-2-ic"></span>
+              <div>
+                <div class="t">Saturday shift · Café Rosa</div>
+                <div class="s">48h logged</div>
               </div>
+              <span class="verified-badge" id="vb-2"></span>
+            </div>
+
+            <div class="feed-row">
+              <span class="ic" id="feed-3-ic"></span>
+              <div>
+                <div class="t">Math competition</div>
+                <div class="s">Awaiting confirmation</div>
+              </div>
+              <span class="pending-badge" id="pb-1"></span>
             </div>
           </div>
-          <div class="profile-tags">
-            <span class="profile-tag">Creative Writing</span><span class="profile-tag">Community Service</span><span
-              class="profile-tag">Visual Arts</span><span class="profile-tag">Student Leadership</span><span
-              class="profile-tag accent">IB Program</span>
-          </div>
-        </div>
+
+        </aside>
       </div>
     </div>
   </section>
 
-  <section class="problem" id="why">
+  <!-- ====================================================================
+       2 — RESEARCH BASE
+       ==================================================================== -->
+  <section class="bg-navy section-pad-lg" data-screen-label="02 Research base">
     <div class="container">
-      <div class="reveal">
-        <span class="section-label">Why Y2O?</span>
-        <h2 class="section-title">
-          Young people are ready. The system isn't.
-        </h2>
-        <p class="section-body">
-          Across Canada, youth are creative, ambitious, and driven — yet the
-          systems meant to support them still reward transcripts over talent,
-          and test scores over real-world capability. Students graduate with
-          grades but without the skills, portfolios, or connections that
-          actually open doors.
-        </p>
+      <div class="section-header">
+        <span class="eyebrow">Research base</span>
+        <h2>Built on research shaping learning and work</h2>
+        <p class="lead">Y2O is shaped by research on skills, youth pathways, learning, and the future of work.</p>
       </div>
-      <div class="stats-grid">
-        <div class="stat-card reveal reveal-delay-1">
-          <span class="stat-number">$18.5B</span><span class="stat-label">Projected cost of youth unemployment in Canada
-            by 2034</span>
-        </div>
-        <div class="stat-card reveal reveal-delay-2">
-          <span class="stat-number">14.2%</span><span class="stat-label">Youth unemployment rate (ages 15–24) —
-            recession-level
-            numbers</span>
-        </div>
-        <div class="stat-card reveal reveal-delay-3">
-          <span class="stat-number">42%</span><span class="stat-label">Of tasks in youth-dominated roles are at risk of
-            automation</span>
-        </div>
-        <div class="stat-card reveal reveal-delay-1">
-          <span class="stat-number">56%</span><span class="stat-label">Of youth report a skills mismatch between school
-            and employer
-            needs</span>
-        </div>
-        <div class="stat-card reveal reveal-delay-2">
-          <span class="stat-number">1 in 5</span><span class="stat-label">High school students feel their passions and
-            talents go
-            unnoticed</span>
-        </div>
+
+      <div class="research-pills">
+        <a class="research-pill" target="_blank" rel="noopener noreferrer" href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/">World Economic Forum</a>
+        <a class="research-pill" target="_blank" rel="noopener noreferrer" href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005">Government of Canada / ESDC</a>
+        <a class="research-pill" target="_blank" rel="noopener noreferrer" href="https://www.ontario.ca/page/get-your-high-school-volunteer-hours">Ontario Ministry of Education</a>
+        <a class="research-pill" target="_blank" rel="noopener noreferrer" href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities">Fraser Institute</a>
+        <a class="research-pill" target="_blank" rel="noopener noreferrer" href="https://macleans.ca/education/student-hub/getting-in/canadas-university-admissions-process-is-burning-students-out/">Maclean's</a>
       </div>
-      <p class="problem-closing reveal">
-        Young people are ready to contribute. Y2O gives them the platform to
-        prove it.
+
+      <p class="research-disclaimer">
+        Informed by public research · Not endorsed by these organizations.
       </p>
     </div>
   </section>
 
-  <section class="how-it-works" id="how-it-works">
+  <!-- ====================================================================
+       3 — WHO Y2O HELPS
+       ==================================================================== -->
+  <section class="bg-white section-pad-lg" data-screen-label="03 Who Y2O helps">
     <div class="container">
-      <div class="how-header reveal">
-        <span class="section-label">How It Works</span>
-        <h2 class="section-title">Explore · Build · Grow</h2>
-        <p class="section-body">
-          Y2O meets students where they are and helps them move forward — at
-          their own pace, in their own way.
+      <div class="section-header">
+        <span class="eyebrow">Who Y2O Helps</span>
+        <h2>Y2O Is For Everyone</h2>
+        <p class="lead">
+          <span class="one-line-desktop">Students build the record <span class="dot-sep">·</span> Families see progress <span class="dot-sep">·</span> Partners confirm the work</span>
         </p>
       </div>
-      <div class="ebg-grid">
-        <div class="ebg-card reveal reveal-delay-1">
-          <div class="ebg-icon">🧭</div>
-          <h3>Explore</h3>
-          <p>
-            <strong>Discover your direction.</strong> Start by exploring who
-            you are and what excites you — from causes you care about to
-            career paths you've never considered. Y2O helps you uncover
-            strengths and interests through guided challenges, curated
-            content, and peer connections.
-          </p>
-        </div>
-        <div class="ebg-card reveal reveal-delay-2">
-          <div class="ebg-icon">🛠️</div>
-          <h3>Build</h3>
-          <p>
-            <strong>Turn curiosity into capability.</strong> Take on real
-            projects, earn micro-credentials, and develop skills that matter.
-            Whether it's a community initiative, a creative portfolio piece,
-            or a team challenge — you're building something that counts.
-          </p>
-        </div>
-        <div class="ebg-card reveal reveal-delay-3">
-          <div class="ebg-icon">🚀</div>
-          <h3>Grow</h3>
-          <p>
-            <strong>Get recognized for what you've done.</strong> Your Y2O
-            profile captures your journey — skills, projects, volunteering,
-            and leadership — in one verified, shareable space. Schools,
-            employers, and scholarship committees can see the real you.
-          </p>
-        </div>
-      </div>
-      <p class="how-closing reveal">
-        Your Y2O profile captures it all — your exploration, your creations,
-        and your growth — in one place that opens real doors.
-      </p>
-    </div>
-  </section>
 
-  <section class="portfolio-swiper" id="portfolio">
-    <div class="container">
-      <div class="pp-header reveal">
-        <span class="section-label">Your Y2O Profile</span>
-        <h2 class="section-title">See what your portfolio looks like.</h2>
-        <p class="section-body">
-          Every skill, project, and contribution you add builds a verified
-          profile that grows with you. Here's what it looks like — from your
-          side and from the outside.
-        </p>
-      </div>
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="images/Portfolio_1.jpeg" alt="Portfolio_1" />
-          </div>
-          <div class="swiper-slide">
-            <img src="images/Portfolio_2.jpeg" alt="Portfolio_2" />
-          </div>
-          <div class="swiper-slide">
-            <img src="images/Portfolio_3.jpeg" alt="Portfolio_3" />
-          </div>
-          <div class="swiper-slide">
-            <img src="images/Portfolio_4.jpeg" alt="Portfolio_4" />
-          </div>
-          <div class="swiper-slide">
-            <img src="images/Portfolio_5.jpeg" alt="Portfolio_5" />
-          </div>
-        </div>
+      <div class="helps-grid">
 
-        <!-- navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-      </div>
-    </div>
-    </div>
-  </section>
+        <article class="help-card">
+          <div class="help-num">01</div>
+          <h3>Student view</h3>
+          <p class="desc">A confirmed record of what you do beyond grades, owned by you.</p>
 
-  <section class="learn-more" id="learn-more">
-    <div class="container">
-      <div class="lm-header reveal">
-        <span class="section-label">Understanding Y2O</span>
-        <h2 class="section-title">What we mean and why it matters.</h2>
-        <p class="section-body">
-          Y2O uses a few key concepts that might be new. Here's a
-          plain-language guide to what they mean, how they work, and why they
-          matter for students, parents, and organizations.
-        </p>
-      </div>
-      <div class="lm-grid">
-        <div class="lm-card">
-          <button class="lm-card-header">
-            <div class="lm-icon teal">✓</div>
-            <div class="lm-card-text">
-              <h3>What Does "Verified" Mean?</h3>
-              <p class="lm-summary">
-                Information confirmed by someone other than the student — not
-                self-reported.
-              </p>
-            </div>
-            <span class="lm-chevron">+</span>
-          </button>
-          <div class="lm-card-body">
-            <p>
-              When we say verified, it means the information has been
-              confirmed by someone other than the student — such as the
-              organization they volunteered with, a teacher who supervised a
-              project, or a program coordinator who issued a certificate.
-            </p>
-            <p>
-              Y2O is designing a system where these third parties can directly
-              confirm a student's hours, work, or achievements on the platform
-              — replacing paper forms and self-reported claims.
-            </p>
-            <p>
-              This matters because universities, employers, and scholarship
-              programs increasingly want evidence they can trust. A verified
-              Y2O profile means what you see is what actually happened.
-            </p>
-            <div class="lm-why">
-              <strong>Why it matters:</strong> Self-reported activities carry
-              less weight. Verified activities carry proof.
-            </div>
-          </div>
-        </div>
-        <div class="lm-card">
-          <button class="lm-card-header">
-            <div class="lm-icon navy">📁</div>
-            <div class="lm-card-text">
-              <h3>What Is a Y2O Portfolio?</h3>
-              <p class="lm-summary">
-                A living digital résumé that grows with you — projects,
-                skills, achievements, all in one place.
-              </p>
-            </div>
-            <span class="lm-chevron">+</span>
-          </button>
-          <div class="lm-card-body">
-            <p>
-              A portfolio on Y2O is a digital collection of your projects,
-              skills, achievements, volunteer work, and certificates — all in
-              one place. Think of it as a living résumé that grows with you
-              and can be shared with universities, employers, or scholarship
-              programs.
-            </p>
-            <p>
-              Unlike a traditional résumé that you write from scratch every
-              time, your Y2O portfolio builds itself as you explore, build,
-              and grow. Every project completed, every hour logged, every
-              credential earned adds to your profile automatically.
-            </p>
-            <p>
-              You control what's visible. Private drafts and in-progress work
-              stay private. Only verified, completed items appear on your
-              public profile — and you choose which ones to feature.
-            </p>
-            <div class="lm-why">
-              <strong>Why it matters:</strong> Students shouldn't have to
-              start from zero every time they apply for something.
-            </div>
-          </div>
-        </div>
-        <div class="lm-card">
-          <button class="lm-card-header">
-            <div class="lm-icon maroon">🕐</div>
-            <div class="lm-card-text">
-              <h3>Volunteer Hour Tracking</h3>
-              <p class="lm-summary">
-                Digital logging and verification — replacing paper forms and
-                manual sign-offs.
-              </p>
-            </div>
-            <span class="lm-chevron">+</span>
-          </button>
-          <div class="lm-card-body">
-            <p>
-              Ontario requires 40 community service hours to earn the Ontario
-              Secondary School Diploma (OSSD). Students log these hours with
-              community organizations and submit them to their school for
-              verification — currently, most schools still use paper forms and
-              manual sign-offs.
-            </p>
-            <p>
-              Y2O is being designed to replace current tracking systems with a
-              more robust and secure digital platform. Students can log and
-              track their hours digitally, and the organizations they
-              volunteer with can verify them directly on the platform —
-              eliminating paper forms, manual sign-offs, and fragmented
-              record-keeping.
-            </p>
-            <p>
-              This means no more lost paper forms, no more chasing supervisors
-              for signatures, and no more discrepancies between what students
-              report and what organizations confirm.
-            </p>
-            <div class="lm-why">
-              <strong>Why it matters:</strong> Paper-based tracking is
-              error-prone, hard to audit, and creates unnecessary stress.
-            </div>
-          </div>
-        </div>
-        <div class="lm-card">
-          <button class="lm-card-header">
-            <div class="lm-icon gold">🏛️</div>
-            <div class="lm-card-text">
-              <h3>Minister's Certificate of Recognition</h3>
-              <p class="lm-summary">
-                A new Ontario provincial distinction for students who go
-                beyond 40 volunteer hours.
-              </p>
-            </div>
-            <span class="lm-chevron">+</span>
-          </button>
-          <div class="lm-card-body">
-            <p>
-              Starting with the 2025–2026 graduating class, the Ontario
-              Ministry of Education has introduced the Minister's Certificate
-              of Recognition for Community Involvement — a formal provincial
-              distinction that strengthens university, college, scholarship,
-              and job applications.
-            </p>
-            <p>
-              While 40 hours remains the requirement for the OSSD, students
-              who go above and beyond can now earn official recognition:
-            </p>
-            <div class="lm-tiers">
-              <div class="lm-tier bronze">
-                <span class="lm-tier-label">Bronze</span><span class="lm-tier-range">50–99 hours</span>
+          <div class="mini-tile">
+            <div class="stu-top" style="margin-bottom: 12px;">
+              <div class="stu-ring-mini">
+                <svg width="56" height="56" viewBox="0 0 56 56" style="transform: rotate(-90deg);">
+                  <circle cx="28" cy="28" r="22" fill="none" stroke="#ffffff" stroke-width="5"></circle>
+                  <circle cx="28" cy="28" r="22" fill="none" stroke="#1A9E8F" stroke-width="5"
+                          stroke-linecap="round" stroke-dasharray="138.23" stroke-dashoffset="45.62"></circle>
+                </svg>
+                <div class="center">67</div>
               </div>
-              <div class="lm-tier silver">
-                <span class="lm-tier-label">Silver</span><span class="lm-tier-range">100–199 hours</span>
-              </div>
-              <div class="lm-tier gold-tier">
-                <span class="lm-tier-label">Gold</span><span class="lm-tier-range">200+ hours</span>
+              <div>
+                <div class="stu-title">My record</div>
+                <div class="stu-sub">Growth Score · live</div>
               </div>
             </div>
-            <p>
-              The certificate recognizes civic engagement, leadership, and
-              community spirit. Because these tiers lead to a formal
-              government certificate, verified accuracy is now essential.
-            </p>
-            <p>
-              Y2O ensures that every hour logged is audit-ready and verified
-              by the community partner — helping students secure the
-              distinction they've earned without the paperwork stress.
-            </p>
-            <div class="lm-why">
-              <strong>Why it matters:</strong> 40 hours is now just the floor.
-              Students who go further deserve recognition that's properly
-              tracked.
+            <div class="mini-row"><span>Verified</span><strong>5</strong></div>
+            <div class="mini-row"><span>In review</span><strong>1</strong></div>
+          </div>
+        </article>
+
+        <article class="help-card">
+          <div class="help-num">02</div>
+          <h3>Family view</h3>
+          <p class="desc">See progress as it happens, without hovering or chasing forms.</p>
+
+          <div class="mini-tile alt-ivory">
+            <div class="mini-row" style="margin-bottom: 8px;">
+              <span style="font-family: var(--font-heading); font-weight: 600;">Hours this month</span>
+              <strong style="font-size: 1.125rem;">28h</strong>
+            </div>
+            <div class="mini-progress" style="margin: 8px 0 10px;">
+              <span class="bar" style="margin: 0;"><i></i></span>
+            </div>
+            <div class="mini-row"><span>New activities</span><strong>3</strong></div>
+            <div class="mini-row"><span>Newly verified</span><strong>2</strong></div>
+          </div>
+        </article>
+
+        <article class="help-card">
+          <div class="help-num">03</div>
+          <h3>Partner view</h3>
+          <p class="desc">Confirm what you witnessed in one tap, without full profile access.</p>
+
+          <div class="mini-tile alt-cool">
+            <div class="mini-tap">
+              <div class="tt">Math competition · regional</div>
+              <div class="ss">Apr 18 · Aanya Kapoor</div>
+              <button class="confirm-btn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Confirm
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       4 — FROM ACTIVITY TO CONFIRMED PROFILE
+       ==================================================================== -->
+  <section class="bg-deepNavy section-pad-lg" data-screen-label="04 The flow">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">The flow</span>
+        <h2>From activity to confirmed profile</h2>
+        <p class="lead">A simple path from activity to record.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="dot">1</div>
+          <div class="ic" id="flow-1-ic"></div>
+          <h4>Log it</h4>
+          <p>What, where, and how long.</p>
+        </div>
+
+        <div class="step">
+          <div class="dot">2</div>
+          <div class="ic" id="flow-2-ic"></div>
+          <h4>Send a request</h4>
+          <p>Choose the person who saw the work.</p>
+        </div>
+
+        <div class="step">
+          <div class="dot">3</div>
+          <div class="ic" id="flow-3-ic"></div>
+          <h4>They confirm</h4>
+          <p>One tap. No account needed.</p>
+        </div>
+
+        <div class="step">
+          <div class="dot">4</div>
+          <div class="ic" id="flow-4-ic"></div>
+          <h4>Profile updates</h4>
+          <p>Hours, skills, proof, and history move into the record.</p>
+        </div>
+
+        <div class="step">
+          <div class="dot">5</div>
+          <div class="ic" id="flow-5-ic"></div>
+          <h4>Share when ready</h4>
+          <p>The student decides when and where to use the profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6 — THE RECORD GETS MESSY FAST
+       ==================================================================== -->
+  <section class="bg-white section-pad-lg" data-screen-label="05 Record gets messy">
+    <div class="container">
+      <div class="messy-grid">
+
+        <div>
+          <span class="eyebrow">Before deadlines</span>
+          <h2 class="mt-16">The record gets messy fast</h2>
+          <p class="lead mt-16">
+            Forms, screenshots, dates, hours, and emails pile up before students need them.
+          </p>
+
+          <div class="messy-cards">
+            <div class="messy-card">
+              <div class="ic" id="pm-1-ic"></div>
+              <h4>No more chasing forms</h4>
+              <p>Every confirmation lives in the record.</p>
+            </div>
+            <div class="messy-card">
+              <div class="ic" id="pm-2-ic"></div>
+              <h4>No more rebuilding from memory</h4>
+              <p>Activities are logged while the details are fresh.</p>
+            </div>
+            <div class="messy-card">
+              <div class="ic" id="pm-3-ic"></div>
+              <h4>No more Grade 12 panic</h4>
+              <p>Students start before deadlines arrive.</p>
+            </div>
+            <div class="messy-card">
+              <div class="ic" id="pm-4-ic"></div>
+              <h4>Ready when needed</h4>
+              <p>Verified activity is easier to use when opportunities open.</p>
             </div>
           </div>
         </div>
-        <div class="lm-card">
-          <button class="lm-card-header">
-            <div class="lm-icon teal">🏅</div>
-            <div class="lm-card-text">
-              <h3>Badges & Certificates</h3>
-              <p class="lm-summary">
-                Digital credentials that prove what you've done — issued by
-                the organizations that supervised your work.
-              </p>
+
+        <div class="ba-panel" aria-label="Before and after comparison">
+
+          <div class="ba-col before">
+            <div class="ba-head">
+              <span class="badge">Before Y2O</span>
+              <span class="label">Scattered across the house</span>
             </div>
-            <span class="lm-chevron">+</span>
-          </button>
-          <div class="lm-card-body">
-            <p>
-              On Y2O, badges and certificates are digital credentials that
-              recognize a student's completed work — such as finishing a
-              volunteer milestone, completing a project, or demonstrating a
-              specific skill.
-            </p>
-            <p>
-              These are issued or confirmed by the organization, instructor,
-              or program that supervised the work — not generated by the
-              student. Think of them as verified proof of what you've done,
-              stored digitally and shareable with universities, employers, or
-              scholarship programs.
-            </p>
-            <p>
-              Y2O badges aren't participation trophies. They represent real
-              accomplishments, verified by real people, with real value for
-              your future applications.
-            </p>
-            <div class="lm-why">
-              <strong>Why it matters:</strong> A credential is only as
-              valuable as the trust behind it. Y2O badges carry third-party
-              verification.
+            <div class="ba-item">
+              <span class="ic" id="ba-b-1"></span>
+              Paper forms
+            </div>
+            <div class="ba-item">
+              <span class="ic" id="ba-b-2"></span>
+              Screenshots
+            </div>
+            <div class="ba-item">
+              <span class="ic" id="ba-b-3"></span>
+              Email threads
+            </div>
+            <div class="ba-item">
+              <span class="ic" id="ba-b-4"></span>
+              Forgotten dates
             </div>
           </div>
+
+          <div class="ba-col after">
+            <div class="ba-head">
+              <span class="badge">With Y2O</span>
+              <span class="label">One student-owned record</span>
+            </div>
+            <div class="ba-item">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              Logged activity
+            </div>
+            <div class="ba-item">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              Verifier confirmation
+            </div>
+            <div class="ba-item">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              Skills and hours
+            </div>
+            <div class="ba-item">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              Student-owned profile
+            </div>
+          </div>
+
         </div>
-      </div>
-      <div class="lm-bottom">
-        <p>
-          Have a question we didn't answer?
-          <a href="mailto:info@youth2opportunities.ca">Reach out to us</a> —
-          we'd love to hear from you.
-        </p>
+
       </div>
     </div>
   </section>
 
-  <section class="audience" id="who">
+  <!-- ====================================================================
+       7 — ALL OF IT COUNTS
+       ==================================================================== -->
+  <section class="bg-lightTeal section-pad-lg" data-screen-label="06 All of it counts">
     <div class="container">
-      <div class="audience-header reveal">
-        <span class="section-label">Who It's For</span>
-        <h2 class="section-title">Built for the people who matter most.</h2>
+      <div class="section-header">
+        <span class="eyebrow">What counts?</span>
+        <h2>All of it counts</h2>
+        <p class="lead">
+          <span class="one-line-desktop">Not just volunteering. Not just grades. One record beyond report cards.</span>
+        </p>
       </div>
-      <div class="audience-grid">
-        <div class="audience-card reveal reveal-delay-1">
-          <div class="audience-card-icon">🎓</div>
-          <h3>Students</h3>
-          <p class="tagline">Your story is more than your transcript.</p>
-          <ul>
-            <li>
-              Build a verified portfolio that showcases skills, projects, and
-              community impact
-            </li>
-            <li>
-              Earn credentials in areas that matter to you — from tech to
-              social innovation
-            </li>
-            <li>
-              Connect with mentors, peers, and opportunities matched to your
-              interests
-            </li>
-            <li>
-              Track your growth across academics, leadership, and volunteering
-              in one place
-            </li>
-            <li>
-              Stand out to universities, scholarship committees, and future
-              employers
-            </li>
-          </ul>
+
+      <div class="counts-grid">
+        <div class="count-card">
+          <div class="ic" id="cnt-1-ic"></div>
+          <div class="t">Work</div>
+          <p class="body">Part-time jobs, shifts, paid roles.</p>
         </div>
-        <div class="audience-card reveal reveal-delay-2">
-          <div class="audience-card-icon">👨‍👩‍👧</div>
-          <h3>Parents & Families</h3>
-          <p class="tagline">
-            See what your child is building — and help them go further.
-          </p>
-          <ul>
-            <li>
-              Get visibility into your child's skills development,
-              volunteering, and achievements
-            </li>
-            <li>
-              Support their journey with verified records that universities
-              and employers trust
-            </li>
-            <li>
-              Help them meet Ontario's 40-hour community involvement
-              requirement — and go beyond it
-            </li>
-            <li>Connect them to curated opportunities in your region</li>
-          </ul>
+        <div class="count-card">
+          <div class="ic" id="cnt-2-ic"></div>
+          <div class="t">Volunteering</div>
+          <p class="body">Service hours, events, community support.</p>
         </div>
-        <div class="audience-card reveal reveal-delay-1">
-          <div class="audience-card-icon">🏛️</div>
-          <h3>Organizations</h3>
-          <p class="tagline">
-            Engage youth who are ready to make a difference.
-          </p>
-          <ul>
-            <li>
-              Post volunteer and project opportunities that reach motivated
-              students
-            </li>
-            <li>
-              Verify hours and contributions digitally — no more paper forms
-            </li>
-            <li>Build your pipeline of community-minded young people</li>
-            <li>
-              Gain visibility as a youth-supporting organization in your
-              region
-            </li>
-          </ul>
+        <div class="count-card">
+          <div class="ic" id="cnt-3-ic"></div>
+          <div class="t">Clubs</div>
+          <p class="body">School clubs, teams, leadership roles.</p>
         </div>
-        <div class="audience-card coming-soon reveal reveal-delay-2">
-          <div class="audience-card-icon">🏫</div>
-          <h3>
-            Schools, Universities & Employers
-            <span class="coming-tag">Coming 2027</span>
-          </h3>
-          <p class="tagline">
-            Deeper integrations for institutional partners.
-          </p>
-          <ul>
-            <li>
-              Access verified student engagement data and skills analytics
-            </li>
-            <li>
-              Identify emerging talent through portfolios and project work
-            </li>
-            <li>Streamline admissions, hiring, and scholarship processes</li>
-          </ul>
-          <p style="
-                margin-top: 1rem;
-                font-size: 0.85rem;
-                color: var(--text-muted);
-              ">
-            Interested?
-            <a href="mailto:info@youth2opportunities.ca"
-              style="color: var(--teal); text-decoration: underline">info@youth2opportunities.ca</a>
-          </p>
+        <div class="count-card">
+          <div class="ic" id="cnt-4-ic"></div>
+          <div class="t">Sports and Competitions</div>
+          <p class="body">Training, tournaments, challenges.</p>
+        </div>
+        <div class="count-card">
+          <div class="ic" id="cnt-5-ic"></div>
+          <div class="t">Side Projects</div>
+          <p class="body">Personal projects, creative work, ventures.</p>
+        </div>
+        <div class="count-card">
+          <div class="ic" id="cnt-6-ic"></div>
+          <div class="t">Community</div>
+          <p class="body">Local involvement and contribution.</p>
+        </div>
+        <div class="count-card">
+          <div class="ic" id="cnt-7-ic"></div>
+          <div class="t">Skills</div>
+          <p class="body">Practice, learning, certificates.</p>
+        </div>
+        <div class="count-card">
+          <div class="ic" id="cnt-8-ic"></div>
+          <div class="t">More coming</div>
+          <p class="body">New activity types as Y2O grows.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="about" id="about">
+  <!-- ====================================================================
+       8 — WHAT STUDENTS ARE ASKED TO SHOW IS CHANGING
+       ==================================================================== -->
+  <section class="bg-navy section-pad-lg" data-screen-label="07 What's changing">
     <div class="container">
-      <div class="about-purpose reveal">
-        <span class="section-label">About Us</span>
-        <h2 class="section-title">
-          We exist to make youth potential visible.
-        </h2>
-        <p>
-          Y2O helps young people explore who they are, build what matters, and
-          grow into their future — with the support of families, educators,
-          and communities behind them.
+      <div class="section-header">
+        <span class="eyebrow">What's changing</span>
+        <h2>What students are asked to show is changing</h2>
+        <p class="lead">
+          <span class="one-line-desktop">Grades still matter. Skills, experience, proof, and consistency are becoming harder to ignore.</span>
         </p>
       </div>
-      <div class="story-block reveal">
-        <h3>Our Story</h3>
-        <p>
-          Y2O was born from a conversation between a father and his daughter
-          about uncertainty, purpose, and how young people can find their
-          place when the rules keep changing.
-        </p>
-        <p>
-          It started when Varya entered high school. She was filling out
-          applications for the IB program, volunteering positions, and student
-          leadership roles. Each one asked for statements of purpose, letters
-          of interest, and evidence of experience.
-        </p>
-        <p>One evening, she looked up from her laptop and asked:</p>
-        <blockquote class="story-quote">
-          "How am I supposed to show experience when I don't have any yet? And
-          how do I know what I want to study if the world's going to change by
-          the time I get there?"
-        </blockquote>
-        <p>
-          That question stuck. We realized there wasn't a space where young
-          people could capture who they're becoming — the ideas they're
-          exploring, the projects they're building, the ways they're growing —
-          before they have a résumé full of experience. So we decided to build
-          it.
-        </p>
-        <p>
-          Because every young person is more than their grades. They're ideas
-          in motion — full of curiosity, creativity, and courage. The problem
-          was never their uncertainty. It was a world that asks youth to prove
-          who they are before giving them the space to discover it.
-        </p>
-        <p>
-          Y2O exists to make that visible — and to help youth see themselves
-          before the world decides for them.
-        </p>
-      </div>
-    </div>
-  </section>
 
-  <section class="founders">
-    <div class="container">
-      <div class="founders-header reveal">
-        <span class="section-label">The Team</span>
-        <h2 class="section-title">Meet the Founders</h2>
-      </div>
-      <div class="founders-grid">
-        <div class="founder-card reveal reveal-delay-1">
-          <div class="founder-img-placeholder navy">VP</div>
-          <h3>Vinay Paramanand</h3>
-          <span class="founder-role">Co-Founder, Y2O</span>
-          <p>
-            I've spent my career helping people, ideas, and communities grow —
-            building programs that connect learning to opportunity. But Y2O is
-            different. It's personal.
-          </p>
-          <p>
-            It started as a conversation with my daughter, Varya, about how
-            young people are expected to know who they are before they've had
-            the chance to explore it. Her questions made me realize how
-            invisible potential can feel when the world keeps asking for
-            proof.
-          </p>
-          <p>
-            So together, we built Y2O — a space where youth can explore,
-            build, and grow without judgment. Where learning meets curiosity,
-            and curiosity becomes confidence.
-          </p>
-          <p class="founder-aside">
-            When I'm not working on Y2O, I'm listening to music, mentoring
-            students and founders, or losing philosophical debates to a
-            teenager who's never quite wrong.
-          </p>
+      <div class="why-now-stats">
+
+        <div class="why-stat">
+          <div class="accent"></div>
+          <div class="topic">Skills Are Changing</div>
+          <div class="l">39% of workers' core skills are expected to change by 2030.</div>
+          <div class="src">
+            Source ·
+            <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">World Economic Forum, Future of Jobs 2025</a>
+          </div>
         </div>
-        <div class="founder-card reveal reveal-delay-2">
-          <div class="founder-img-placeholder teal">VR</div>
-          <h3>Varya Paramanand</h3>
-          <span class="founder-role">Co-Founder, Y2O</span>
-          <p>
-            I'm a Grade 9 student, writer, and dreamer who loves exploring new
-            ideas — whether through stories, art, or just asking too many
-            questions. Y2O started with one of those questions.
-          </p>
-          <p>
-            While filling out applications for high school programs and
-            volunteering, I realized how hard it is to show who you are when
-            you're still figuring it out. I asked my dad why the world wants
-            experience before giving us a chance to gain it — and that became
-            Y2O.
-          </p>
-          <p>
-            For me, Y2O is a place where youth like me can express themselves,
-            find direction, and be seen for who they're becoming — not just
-            what they've done.
-          </p>
-          <p class="founder-aside">
-            When I'm not working on Y2O, I'm sketching, writing short stories,
-            or eating a brownie (or two).
-          </p>
+
+        <div class="why-stat">
+          <div class="accent"></div>
+          <div class="topic">Youth Pathways Are Under Pressure</div>
+          <div class="l">914,000 Canadian youth aged 15 to 29 are not in education, employment, or training.</div>
+          <div class="src">
+            Source ·
+            <a href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005" target="_blank" rel="noopener noreferrer">Government of Canada / ESDC, 2025</a>
+          </div>
         </div>
+
+        <div class="why-stat">
+          <div class="accent"></div>
+          <div class="topic">Grades Are Under More Scrutiny</div>
+          <div class="l">Grade inflation can make it harder to understand readiness from marks alone.</div>
+          <div class="src">
+            Source ·
+            <a href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities" target="_blank" rel="noopener noreferrer">Fraser Institute, 2024</a>
+          </div>
+        </div>
+
+        <div class="why-stat">
+          <div class="accent"></div>
+          <div class="topic">Admissions Pressure Is Rising</div>
+          <div class="l">Students report pressure around marks, applications, and what it takes to stand out.</div>
+          <div class="src">
+            Source ·
+            <a href="https://macleans.ca/education/student-hub/getting-in/canadas-university-admissions-process-is-burning-students-out/" target="_blank" rel="noopener noreferrer">Maclean's, 2025</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section class="survey-embed" id="survey">
+  <!-- ====================================================================
+       9 — WHY Y2O IS DIFFERENT
+       ==================================================================== -->
+  <section class="bg-white section-pad-lg" data-screen-label="08 Why Y2O">
     <div class="container">
-      <div class="survey-header reveal">
-        <span class="section-label" style="color: var(--teal-light)">Demo Page</span>
-        <h2 class="section-title">Explore Our Demo Page</h2>
-        <iframe src="demo/y2o-demo.html" style="width:100%; height:800px; border:none;"></iframe>
+      <div class="section-header">
+        <span class="eyebrow">Why Y2O</span>
+        <h2>One record students can build on</h2>
+        <p class="lead">One student-owned record for activities, proof, skills, and growth.</p>
+      </div>
+
+      <div class="why-y2o-grid">
+
+        <article class="why-card">
+          <div class="n">01</div>
+          <div class="ic" id="wy-1-ic"></div>
+          <h3>Single source of truth</h3>
+          <p>One record for activities, hours, skills, and proof.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="n">02</div>
+          <div class="ic" id="wy-2-ic"></div>
+          <h3>Confirmed by people</h3>
+          <p>Coaches, employers, teachers, and organizers confirm what they saw.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="n">03</div>
+          <div class="ic" id="wy-3-ic"></div>
+          <h3>Built beyond grades</h3>
+          <p>Y2O shows the work report cards and transcripts miss.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="n">04</div>
+          <div class="ic" id="wy-4-ic"></div>
+          <h3>Ready when needed</h3>
+          <p>Verified activity and hours are easier to use when opportunities open.</p>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <section class="partner-embed" id="partner">
+  <!-- ====================================================================
+       9 — FINAL CTA
+       ==================================================================== -->
+  <section class="bg-deepNavy section-pad-lg final-cta" data-screen-label="09 Final CTA">
     <div class="container">
-      <div class="survey-header reveal">
-        <span class="section-label" style="color: var(--teal-light)">Partner Page</span>
-        <h2 class="section-title" style="color: var(--navy-light);">Explore Our Partner Page</h2>
-        <iframe src="demo/partners_v2.html" style="width:100%; height:800px; border:none;"></iframe>
+      <span class="eyebrow">Join Y2O</span>
+      <h2 class="mt-16">Start before you need it</h2>
+      <p class="lead">Join students, families, and partners helping shape Y2O across the GTA.</p>
+      <div class="row">
+        <a href="contact.html" class="btn-primary">Join the waitlist</a>
+        <a href="score.html" class="btn-secondary">See your score</a>
       </div>
     </div>
   </section>
 
-  <section id="waitlist" style="padding: 4rem 0; background: var(--navy-light)">
-    <div class="container" style="max-width: 520px; text-align: center">
-      <h3 style="
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 0.5rem;
-          ">
-        Join the Waitlist
-      </h3>
-      <p style="
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.55);
-            margin-bottom: 2rem;
-          ">
-        Get early invites, sneak peeks, and the chance to help design the
-        platform.
-      </p>
-
-      <!-- TODO: Connect to your form handler (Formspree, Google Forms, custom backend) -->
-      <form action="https://getlaunchlist.com/s/odlthU" method="POST" class="launchlist-form-popup" style="
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            text-align: left;
-          ">
-        <input name="name" type="text" placeholder="Full name" style="
-              padding: 0.8rem 1rem;
-              border-radius: 10px;
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              background: rgba(255, 255, 255, 0.06);
-              color: white;
-              font-size: 0.9rem;
-              font-family: var(--font-body);
-              outline: none;
-            " onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-
-        <input name="email" type="email" placeholder="Email address" style="
-              padding: 0.8rem 1rem;
-              border-radius: 10px;
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              background: rgba(255, 255, 255, 0.06);
-              color: white;
-              font-size: 0.9rem;
-              font-family: var(--font-body);
-              outline: none;
-            " onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-
-        <select name="role" style="
-              padding: 0.8rem 1rem;
-              border-radius: 10px;
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              background: rgba(255, 255, 255, 0.06);
-              color: rgba(255, 255, 255, 0.6);
-              font-size: 0.9rem;
-              font-family: var(--font-body);
-              outline: none;
-              appearance: auto;
-            ">
-          <option value="" disabled selected>I am a...</option>
-          <option value="student">Student</option>
-          <option value="parent">Parent / Family Member</option>
-          <option value="organization">Organization</option>
-          <option value="educator">Educator / Administrator</option>
-        </select>
-
-        <input name="school" type="text" placeholder="School / Organization (optional)" style="
-              padding: 0.8rem 1rem;
-              border-radius: 10px;
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              background: rgba(255, 255, 255, 0.06);
-              color: white;
-              font-size: 0.9rem;
-              font-family: var(--font-body);
-              outline: none;
-            " onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-
-        <label style="
-              display: flex;
-              align-items: flex-start;
-              gap: 0.5rem;
-              font-size: 0.8rem;
-              color: rgba(255, 255, 255, 0.45);
-              margin-top: 0.25rem;
-            ">
-          <input name="optIn" type="checkbox" style="margin-top: 3px; accent-color: var(--teal)" />
-          Yes, I want early access and updates from Y2O.
-        </label>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem">
-          Sign Up for Early Access
-        </button>
-      </form>
+  <!-- ====================================================================
+       11 — FAQ
+       ==================================================================== -->
+  <section id="faq" class="bg-white section-pad-lg faq-section" data-screen-label="10 FAQ">
+    <div class="container">
+      <div class="layout">
+        <div>
+          <span class="eyebrow">FAQ</span>
+          <h2 class="mt-16">Questions people ask</h2>
+          <p class="lead">Clear answers for students, families, partners, and institutions.</p>
+          <p class="faq-note">
+            Y2O is in early launch preparation. Features, access, and pricing may evolve as the product is tested and improved.
+          </p>
+          <a href="contact.html" class="btn-secondary" style="margin-top: 24px;">Ask a question</a>
+        </div>
+        <div id="faq-list"></div>
+      </div>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-logo">
-        <img src="logo/logo-color.png" alt="Logo" style="width: 20%" />
-      </div>
-      <div class="footer-text">
-        © 2026 Youth2Opportunities. All rights reserved. ·
-        <a href="mailto:info@youth2opportunities.ca">info@youth2opportunities.ca</a>
-      </div>
-    </div>
-  </footer>
+</main>
 
-  <script src="main.js"></script>
+<div data-footer></div>
+
+<!-- ========================================================================
+     Scripts
+     ======================================================================== -->
+<script src="icons.js"></script>
+<script src="partials.js"></script>
+<script src="faq.js"></script>
+<script src="data.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    function setIcon(id, name, size) {
+      var el = document.getElementById(id);
+      if (el && window.icon) el.innerHTML = window.icon(name, size || 20);
+    }
+    function setHTML(id, html) {
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
+
+    /* Trust pills */
+    setHTML("tp-1", window.icon("badge-check", 14) + " Student-owned");
+    setHTML("tp-2", window.icon("lock",        14) + " Private by default");
+    setHTML("tp-3", window.icon("users",       14) + " Confirmed by people");
+
+    /* Hero feed */
+    setIcon("feed-1-ic", "book-open", 16);
+    setIcon("feed-2-ic", "briefcase", 16);
+    setIcon("feed-3-ic", "trending-up", 16);
+    setHTML("vb-1", window.icon("check-circle", 11) + " Verified");
+    setHTML("vb-2", window.icon("check-circle", 11) + " Verified");
+    setHTML("pb-1", window.icon("clock",        11) + " In review");
+
+    /* How it works */
+    setIcon("flow-1-ic", "file-text",   20);
+    setIcon("flow-2-ic", "send",        20);
+    setIcon("flow-3-ic", "badge-check", 20);
+    setIcon("flow-4-ic", "trending-up", 20);
+    setIcon("flow-5-ic", "share",       20);
+
+    /* Three views */
+    setHTML("sv-1", window.icon("check-circle", 11) + " Verified");
+    setHTML("sv-2", window.icon("check-circle", 11) + " Verified");
+    setHTML("sp-1", window.icon("clock",        11) + " In review");
+
+    /* Messy section */
+    setIcon("pm-1-ic", "file-text", 18);
+    setIcon("pm-2-ic", "clock",     18);
+    setIcon("pm-3-ic", "calendar",  18);
+    setIcon("pm-4-ic", "award",     18);
+
+    /* Before/after icons */
+    setIcon("ba-b-1", "file-text", 14);
+    setIcon("ba-b-2", "eye",       14);
+    setIcon("ba-b-3", "mail",      14);
+    setIcon("ba-b-4", "clock",     14);
+
+    /* All of it counts */
+    setIcon("cnt-1-ic", "briefcase", 20);
+    setIcon("cnt-2-ic", "heart",     20);
+    setIcon("cnt-3-ic", "users",     20);
+    setIcon("cnt-4-ic", "target",    20);
+    setIcon("cnt-5-ic", "zap",       20);
+    setIcon("cnt-6-ic", "home",      20);
+    setIcon("cnt-7-ic", "sparkles",  20);
+    setIcon("cnt-8-ic", "layers",    20);
+
+    /* Why Y2O */
+    setIcon("wy-1-ic", "database",    22);
+    setIcon("wy-2-ic", "badge-check", 22);
+    setIcon("wy-3-ic", "layers",      22);
+    setIcon("wy-4-ic", "award",       22);
+
+    /* FAQ */
+    if (window.buildFAQ && window.FAQ && window.FAQ.home) {
+      window.buildFAQ("#faq-list", window.FAQ.home);
+    }
+
+    /* Animate factor bars on view */
+    var bars = document.querySelectorAll(".factors .fill");
+    function animateBars() {
+      bars.forEach(function (b) {
+        var w = b.getAttribute("data-w");
+        if (w) b.style.width = w + "%";
+      });
+    }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { animateBars(); io.disconnect(); }
+        });
+      }, { threshold: 0.3 });
+      var dash = document.querySelector(".dash");
+      if (dash) io.observe(dash);
+    } else {
+      animateBars();
+    }
+  });
+</script>
 </body>
-
 </html>
