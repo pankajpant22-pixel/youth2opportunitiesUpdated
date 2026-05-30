@@ -1,906 +1,1601 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Y2O · For families · See progress · without hovering</title>
-<meta name="description" content="Y2O gives families clear visibility into the work their high schooler is doing · without taking the record away from them · GTA launch first" />
-<link rel="stylesheet" href="brand.css" />
-<style>
-  .section-header .lead { color: var(--warmGrey); font-size: 1.0625rem; }
-  .bg-navy .section-header .lead,
-  .bg-deepNavy .section-header .lead { color: rgba(255,255,255,0.78); }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Y2O · For families · See progress · without hovering</title>
+    <meta
+      name="description"
+      content="Y2O gives families clear visibility into the work their high schooler is doing · without taking the record away from them · GTA launch first"
+    />
+    <link rel="stylesheet" href="brand.css" />
+    <style>
+      .section-header .lead {
+        color: var(--warmGrey);
+        font-size: 1.0625rem;
+      }
+      .bg-navy .section-header .lead,
+      .bg-deepNavy .section-header .lead {
+        color: rgba(255, 255, 255, 0.78);
+      }
 
-  /* Hero */
-  .hero { position: relative; overflow: hidden; }
-  .hero::before {
-    content: ""; position: absolute;
-    top: -180px; right: -180px;
-    width: 520px; height: 520px;
-    background: radial-gradient(closest-side, rgba(26,158,143,0.10), transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
-  .hero > .container { position: relative; z-index: 1; }
-  .hero-grid {
-    display: grid; grid-template-columns: 1fr 1.05fr;
-    gap: 56px; align-items: center;
-  }
-  @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+      /* Hero */
+      .hero {
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -180px;
+        right: -180px;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(
+          closest-side,
+          rgba(26, 158, 143, 0.1),
+          transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+      .hero > .container {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+        gap: 56px;
+        align-items: center;
+      }
+      @media (max-width: 1024px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+      }
 
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 6px 14px; border-radius: 999px;
-    background: rgba(123,45,38,0.06); color: var(--maroon);
-    font-family: var(--font-heading); font-weight: 600;
-    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
-  }
-  .hero h1 { margin-top: 22px; }
-  .hero .locked-sub {
-    margin-top: 22px;
-    font-family: var(--font-heading); font-weight: 600;
-    font-size: clamp(1.125rem, 0.8vw + 1rem, 1.4375rem);
-    color: var(--navy);
-  }
-  .hero .locked-sub .sep { color: var(--teal); margin: 0 6px; }
-  .hero .support { margin-top: 20px; font-size: 1.125rem; color: var(--warmGrey); max-width: 52ch; }
-  .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
-  .trust-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-  .trust-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 8px 14px; border-radius: 999px;
-    background: var(--lightTeal); color: var(--deepNavy);
-    font-family: var(--font-heading); font-weight: 500;
-    font-size: 0.8125rem;
-    border: 1px solid rgba(26,158,143,0.18);
-  }
-  .trust-pill svg { width: 14px; height: 14px; color: var(--teal); stroke-width: 2; }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(123, 45, 38, 0.06);
+        color: var(--maroon);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        margin-top: 22px;
+      }
+      .hero .locked-sub {
+        margin-top: 22px;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: clamp(1.125rem, 0.8vw + 1rem, 1.4375rem);
+        color: var(--navy);
+      }
+      .hero .locked-sub .sep {
+        color: var(--teal);
+        margin: 0 6px;
+      }
+      .hero .support {
+        margin-top: 20px;
+        font-size: 1.125rem;
+        color: var(--warmGrey);
+        max-width: 52ch;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+      }
+      .trust-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+      .trust-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: var(--lightTeal);
+        color: var(--deepNavy);
+        font-family: var(--font-heading);
+        font-weight: 500;
+        font-size: 0.8125rem;
+        border: 1px solid rgba(26, 158, 143, 0.18);
+      }
+      .trust-pill svg {
+        width: 14px;
+        height: 14px;
+        color: var(--teal);
+        stroke-width: 2;
+      }
 
-  /* Parent dashboard mockup */
-  .pdash {
-    background: var(--white);
-    border: 1px solid var(--coolGrey);
-    border-radius: 20px;
-    box-shadow: 0 24px 60px -24px rgba(21,29,72,0.25), 0 8px 24px rgba(31,43,108,0.06);
-    overflow: hidden;
-  }
-  .pdash-head {
-    padding: 18px 22px;
-    border-bottom: 1px solid var(--coolGrey);
-    background: linear-gradient(180deg, #fcfdfe, var(--white));
-    display: grid; grid-template-columns: 44px 1fr auto;
-    gap: 14px; align-items: center;
-  }
-  .pdash-head .av {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal), var(--navy));
-    color: var(--white); display: grid; place-items: center;
-    font-family: var(--font-heading); font-weight: 700;
-  }
-  .pdash-head .name { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 1rem; }
-  .pdash-head .sub { font-size: 12px; color: var(--warmGrey); margin-top: 2px; }
-  .shared-chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 10px; border-radius: 999px;
-    background: rgba(26,158,143,0.10); color: var(--teal);
-    font-family: var(--font-heading); font-weight: 600; font-size: 11px;
-  }
-  .shared-chip svg { width: 12px; height: 12px; }
-  .pdash-body { padding: 22px; }
-  .pdash-section-label {
-    font-family: var(--font-heading); font-weight: 600; color: var(--warmGrey);
-    font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
-    margin: 18px 0 10px;
-  }
-  .pdash-section-label:first-child { margin-top: 0; }
-  .term-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .term-card { background: var(--lightTeal); border-radius: 12px; padding: 14px; }
-  .term-card .v {
-    font-family: var(--font-heading); font-weight: 700;
-    color: var(--deepNavy); font-size: 1.5rem; line-height: 1;
-  }
-  .term-card .l { font-size: 11px; color: var(--warmGrey); margin-top: 4px; }
-  .term-card .delta {
-    margin-top: 6px; font-size: 10px;
-    color: var(--teal); font-family: var(--font-heading); font-weight: 600;
-  }
-  .term-card .delta.up::before { content: "▲ "; }
-  .progress-card {
-    background: #fafbfd; border: 1px solid var(--coolGrey);
-    border-radius: 12px; padding: 14px;
-  }
-  .progress-card .top {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 8px;
-  }
-  .progress-card .lbl { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 0.9375rem; }
-  .progress-card .v { font-family: var(--font-heading); font-weight: 700; color: var(--teal); font-size: 1rem; }
-  .progress-card .bar { height: 8px; background: var(--coolGrey); border-radius: 999px; overflow: hidden; }
-  .progress-card .bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--teal), #178a7d); }
-  .progress-card .foot {
-    margin-top: 6px; font-size: 11px; color: var(--warmGrey);
-    display: flex; justify-content: space-between;
-  }
-  .new-feed { display: flex; flex-direction: column; gap: 8px; }
-  .new-row {
-    display: grid; grid-template-columns: 32px 1fr auto;
-    gap: 10px; align-items: center;
-    padding: 10px;
-    background: #fafbfd; border: 1px solid var(--coolGrey);
-    border-radius: 10px;
-  }
-  .new-row .ic {
-    width: 32px; height: 32px; border-radius: 8px;
-    background: var(--white); border: 1px solid var(--coolGrey);
-    display: grid; place-items: center; color: var(--navy);
-  }
-  .new-row .ic svg { width: 16px; height: 16px; }
-  .new-row .t { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 0.875rem; }
-  .new-row .s { font-size: 11px; color: var(--warmGrey); margin-top: 1px; }
-  .verified-badge, .pending-badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 8px; border-radius: 999px;
-    font-family: var(--font-heading); font-weight: 600; font-size: 10px;
-  }
-  .verified-badge { background: rgba(26,158,143,0.12); color: var(--teal); }
-  .pending-badge { background: rgba(212,168,67,0.16); color: #8c6f1f; }
-  .verified-badge svg, .pending-badge svg { width: 11px; height: 11px; stroke-width: 2.2; }
-  .pdash-foot {
-    padding: 12px 22px;
-    border-top: 1px solid var(--coolGrey);
-    background: #fcfdfe;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 12px; color: var(--warmGrey); font-style: italic;
-  }
-  .pdash-foot svg { width: 12px; height: 12px; }
+      /* Parent dashboard mockup */
+      .pdash {
+        background: var(--white);
+        border: 1px solid var(--coolGrey);
+        border-radius: 20px;
+        box-shadow:
+          0 24px 60px -24px rgba(21, 29, 72, 0.25),
+          0 8px 24px rgba(31, 43, 108, 0.06);
+        overflow: hidden;
+      }
+      .pdash-head {
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--coolGrey);
+        background: linear-gradient(180deg, #fcfdfe, var(--white));
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        gap: 14px;
+        align-items: center;
+      }
+      .pdash-head .av {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--teal), var(--navy));
+        color: var(--white);
+        display: grid;
+        place-items: center;
+        font-family: var(--font-heading);
+        font-weight: 700;
+      }
+      .pdash-head .name {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 1rem;
+      }
+      .pdash-head .sub {
+        font-size: 12px;
+        color: var(--warmGrey);
+        margin-top: 2px;
+      }
+      .shared-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(26, 158, 143, 0.1);
+        color: var(--teal);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 11px;
+      }
+      .shared-chip svg {
+        width: 12px;
+        height: 12px;
+      }
+      .pdash-body {
+        padding: 22px;
+      }
+      .pdash-section-label {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--warmGrey);
+        font-size: 0.6875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 18px 0 10px;
+      }
+      .pdash-section-label:first-child {
+        margin-top: 0;
+      }
+      .term-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .term-card {
+        background: var(--lightTeal);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .term-card .v {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--deepNavy);
+        font-size: 1.5rem;
+        line-height: 1;
+      }
+      .term-card .l {
+        font-size: 11px;
+        color: var(--warmGrey);
+        margin-top: 4px;
+      }
+      .term-card .delta {
+        margin-top: 6px;
+        font-size: 10px;
+        color: var(--teal);
+        font-family: var(--font-heading);
+        font-weight: 600;
+      }
+      .term-card .delta.up::before {
+        content: "▲ ";
+      }
+      .progress-card {
+        background: #fafbfd;
+        border: 1px solid var(--coolGrey);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .progress-card .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+      }
+      .progress-card .lbl {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 0.9375rem;
+      }
+      .progress-card .v {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--teal);
+        font-size: 1rem;
+      }
+      .progress-card .bar {
+        height: 8px;
+        background: var(--coolGrey);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .progress-card .bar i {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--teal), #178a7d);
+      }
+      .progress-card .foot {
+        margin-top: 6px;
+        font-size: 11px;
+        color: var(--warmGrey);
+        display: flex;
+        justify-content: space-between;
+      }
+      .new-feed {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .new-row {
+        display: grid;
+        grid-template-columns: 32px 1fr auto;
+        gap: 10px;
+        align-items: center;
+        padding: 10px;
+        background: #fafbfd;
+        border: 1px solid var(--coolGrey);
+        border-radius: 10px;
+      }
+      .new-row .ic {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--white);
+        border: 1px solid var(--coolGrey);
+        display: grid;
+        place-items: center;
+        color: var(--navy);
+      }
+      .new-row .ic svg {
+        width: 16px;
+        height: 16px;
+      }
+      .new-row .t {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 0.875rem;
+      }
+      .new-row .s {
+        font-size: 11px;
+        color: var(--warmGrey);
+        margin-top: 1px;
+      }
+      .verified-badge,
+      .pending-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 10px;
+      }
+      .verified-badge {
+        background: rgba(26, 158, 143, 0.12);
+        color: var(--teal);
+      }
+      .pending-badge {
+        background: rgba(212, 168, 67, 0.16);
+        color: #8c6f1f;
+      }
+      .verified-badge svg,
+      .pending-badge svg {
+        width: 11px;
+        height: 11px;
+        stroke-width: 2.2;
+      }
+      .pdash-foot {
+        padding: 12px 22px;
+        border-top: 1px solid var(--coolGrey);
+        background: #fcfdfe;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: var(--warmGrey);
+        font-style: italic;
+      }
+      .pdash-foot svg {
+        width: 12px;
+        height: 12px;
+      }
 
-  /* Why now (navy) */
-  .why-now-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
-  @media (max-width: 900px) { .why-now-stats { grid-template-columns: 1fr; } }
-  .why-stat {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 16px; padding: 28px;
-  }
-  .why-stat .accent { width: 32px; height: 3px; background: var(--gold); border-radius: 999px; margin-bottom: 18px; }
-  .why-stat:nth-child(2) .accent { background: var(--teal); }
-  .why-stat:nth-child(3) .accent { background: var(--maroon); }
-  .why-stat .v {
-    font-family: var(--font-heading); font-weight: 700;
-    color: var(--white); font-size: clamp(2.25rem, 3vw + 1rem, 3.5rem);
-    line-height: 1; letter-spacing: -0.03em;
-  }
-  .why-stat .l {
-    margin-top: 14px;
-    font-family: var(--font-heading); font-weight: 500;
-    color: rgba(255,255,255,0.88); font-size: 0.9375rem; line-height: 1.4;
-  }
-  .why-stat .src {
-    margin-top: 16px; padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.10);
-    font-size: 0.75rem; color: rgba(255,255,255,0.55);
-  }
-  .why-stat .src a {
-    color: rgba(255,255,255,0.85);
-    border-bottom: 1px dashed rgba(255,255,255,0.30);
-    transition: color 0.18s ease, border-color 0.18s ease;
-  }
-  .why-stat .src a:hover {
-    color: var(--white);
-    border-bottom-color: var(--white);
-  }
+      /* Why now (navy) */
+      .why-now-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 48px;
+      }
+      @media (max-width: 900px) {
+        .why-now-stats {
+          grid-template-columns: 1fr;
+        }
+      }
+      .why-stat {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 28px;
+      }
+      .why-stat .accent {
+        width: 32px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 999px;
+        margin-bottom: 18px;
+      }
+      .why-stat:nth-child(2) .accent {
+        background: var(--teal);
+      }
+      .why-stat:nth-child(3) .accent {
+        background: var(--maroon);
+      }
+      .why-stat .v {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--white);
+        font-size: clamp(2.25rem, 3vw + 1rem, 3.5rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      .why-stat .l {
+        margin-top: 14px;
+        font-family: var(--font-heading);
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.9375rem;
+        line-height: 1.4;
+      }
+      .why-stat .src {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .why-stat .src a {
+        color: rgba(255, 255, 255, 0.85);
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+        transition:
+          color 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .why-stat .src a:hover {
+        color: var(--white);
+        border-bottom-color: var(--white);
+      }
 
-  /* Parent clarity (lightTeal) */
-  .clarity-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-    margin-top: 48px;
-  }
-  @media (max-width: 980px) { .clarity-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px) { .clarity-grid { grid-template-columns: 1fr; } }
-  .clarity-card {
-    background: var(--white); border: 1px solid var(--coolGrey);
-    border-radius: 16px; padding: 24px;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-  }
-  .clarity-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
-  .clarity-card .ic {
-    width: 44px; height: 44px; border-radius: 10px;
-    background: var(--lightTeal); color: var(--teal);
-    display: grid; place-items: center; margin-bottom: 18px;
-  }
-  .clarity-card h3 { font-size: 1.0625rem; margin-bottom: 6px; line-height: 1.3; }
-  .clarity-card p { font-size: 0.875rem; color: var(--warmGrey); margin: 0; }
+      /* Parent clarity (lightTeal) */
+      .clarity-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 48px;
+      }
+      @media (max-width: 980px) {
+        .clarity-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .clarity-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .clarity-card {
+        background: var(--white);
+        border: 1px solid var(--coolGrey);
+        border-radius: 16px;
+        padding: 24px;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .clarity-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-card-hover);
+      }
+      .clarity-card .ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: var(--lightTeal);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+        margin-bottom: 18px;
+      }
+      .clarity-card h3 {
+        font-size: 1.0625rem;
+        margin-bottom: 6px;
+        line-height: 1.3;
+      }
+      .clarity-card p {
+        font-size: 0.875rem;
+        color: var(--warmGrey);
+        margin: 0;
+      }
 
-  /* Four-year timeline (white) — NEW */
-  .ty-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-    margin-top: 48px;
-  }
-  @media (max-width: 980px) { .ty-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 540px) { .ty-grid { grid-template-columns: 1fr; } }
+      /* Four-year timeline (white) — NEW */
+      .ty-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 48px;
+      }
+      @media (max-width: 980px) {
+        .ty-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 540px) {
+        .ty-grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
-  .ty-card {
-    background: var(--white);
-    border: 1px solid var(--coolGrey);
-    border-radius: 16px;
-    padding: 0;
-    overflow: hidden;
-    display: flex; flex-direction: column;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-  }
-  .ty-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
-  .ty-card .head {
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--coolGrey);
-    background: #fcfdfe;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .ty-card .grade {
-    font-family: var(--font-heading); font-weight: 700;
-    color: var(--deepNavy); font-size: 1.125rem;
-  }
-  .ty-card .age {
-    font-family: var(--font-heading); font-weight: 600;
-    font-size: 11px; color: var(--warmGrey);
-    letter-spacing: 0.04em;
-  }
-  .ty-card .body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
-  .ty-stat {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--coolGrey);
-  }
-  .ty-stat:last-of-type { border-bottom: 0; }
-  .ty-stat .l { font-size: 0.8125rem; color: var(--warmGrey); }
-  .ty-stat .v {
-    font-family: var(--font-heading); font-weight: 700;
-    color: var(--deepNavy); font-size: 0.9375rem;
-  }
-  .ty-card .focus {
-    margin-top: auto;
-    padding: 10px 12px;
-    background: var(--lightTeal);
-    border-radius: 8px;
-    font-size: 0.8125rem; color: var(--deepNavy);
-    line-height: 1.3;
-  }
-  .ty-card .focus strong { font-family: var(--font-heading); font-weight: 700; color: var(--teal); }
+      .ty-card {
+        background: var(--white);
+        border: 1px solid var(--coolGrey);
+        border-radius: 16px;
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .ty-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-card-hover);
+      }
+      .ty-card .head {
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--coolGrey);
+        background: #fcfdfe;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .ty-card .grade {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--deepNavy);
+        font-size: 1.125rem;
+      }
+      .ty-card .age {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 11px;
+        color: var(--warmGrey);
+        letter-spacing: 0.04em;
+      }
+      .ty-card .body {
+        padding: 18px 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .ty-stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 8px 0;
+        border-bottom: 1px dashed var(--coolGrey);
+      }
+      .ty-stat:last-of-type {
+        border-bottom: 0;
+      }
+      .ty-stat .l {
+        font-size: 0.8125rem;
+        color: var(--warmGrey);
+      }
+      .ty-stat .v {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--deepNavy);
+        font-size: 0.9375rem;
+      }
+      .ty-card .focus {
+        margin-top: auto;
+        padding: 10px 12px;
+        background: var(--lightTeal);
+        border-radius: 8px;
+        font-size: 0.8125rem;
+        color: var(--deepNavy);
+        line-height: 1.3;
+      }
+      .ty-card .focus strong {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--teal);
+      }
 
-  .ty-card.now { border-color: rgba(26,158,143,0.5); box-shadow: 0 6px 20px rgba(26,158,143,0.10); }
-  .ty-card.now .head { background: var(--lightTeal); }
-  .ty-card.now .grade { color: var(--teal); }
-  .ty-card .now-tag {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 8px; border-radius: 999px;
-    background: var(--teal); color: var(--white);
-    font-family: var(--font-heading); font-weight: 700; font-size: 10px;
-    letter-spacing: 0.04em;
-  }
-  .ty-card .now-tag svg { width: 10px; height: 10px; }
-  .ty-card.future { background: #fbfcfe; }
-  .ty-card.future .body, .ty-card.future .head { opacity: 0.7; }
-  .ty-card.future .focus { background: rgba(31,43,108,0.04); color: var(--warmGrey); }
-  .ty-card.future .focus strong { color: var(--navy); }
+      .ty-card.now {
+        border-color: rgba(26, 158, 143, 0.5);
+        box-shadow: 0 6px 20px rgba(26, 158, 143, 0.1);
+      }
+      .ty-card.now .head {
+        background: var(--lightTeal);
+      }
+      .ty-card.now .grade {
+        color: var(--teal);
+      }
+      .ty-card .now-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: var(--teal);
+        color: var(--white);
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 10px;
+        letter-spacing: 0.04em;
+      }
+      .ty-card .now-tag svg {
+        width: 10px;
+        height: 10px;
+      }
+      .ty-card.future {
+        background: #fbfcfe;
+      }
+      .ty-card.future .body,
+      .ty-card.future .head {
+        opacity: 0.7;
+      }
+      .ty-card.future .focus {
+        background: rgba(31, 43, 108, 0.04);
+        color: var(--warmGrey);
+      }
+      .ty-card.future .focus strong {
+        color: var(--navy);
+      }
 
-  /* How it works (deepNavy) */
-  .pflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
-  @media (max-width: 980px) { .pflow { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 540px) { .pflow { grid-template-columns: 1fr; } }
-  .pflow-step {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 14px; padding: 22px;
-  }
-  .pflow-step .n {
-    font-family: var(--font-heading); font-weight: 700;
-    color: var(--gold); font-size: 11px; letter-spacing: 0.08em;
-  }
-  .pflow-step .ic {
-    width: 42px; height: 42px; border-radius: 10px;
-    background: rgba(26,158,143,0.15); color: var(--teal);
-    display: grid; place-items: center; margin: 12px 0 14px;
-  }
-  .pflow-step h4 {
-    color: var(--white); font-family: var(--font-heading); font-weight: 600;
-    font-size: 1rem; line-height: 1.25; margin-bottom: 8px;
-  }
-  .pflow-step p { font-size: 0.875rem; color: rgba(255,255,255,0.72); margin: 0; }
+      /* How it works (deepNavy) */
+      .pflow {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 48px;
+      }
+      @media (max-width: 980px) {
+        .pflow {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 540px) {
+        .pflow {
+          grid-template-columns: 1fr;
+        }
+      }
+      .pflow-step {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 22px;
+      }
+      .pflow-step .n {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--gold);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+      }
+      .pflow-step .ic {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: rgba(26, 158, 143, 0.15);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+        margin: 12px 0 14px;
+      }
+      .pflow-step h4 {
+        color: var(--white);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.25;
+        margin-bottom: 8px;
+      }
+      .pflow-step p {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.72);
+        margin: 0;
+      }
 
-  /* Privacy (lightTeal) */
-  .privacy-grid {
-    display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px;
-    align-items: center;
-  }
-  @media (max-width: 980px) { .privacy-grid { grid-template-columns: 1fr; } }
-  .privacy-list { display: flex; flex-direction: column; gap: 18px; margin-top: 32px; }
-  .privacy-list li {
-    display: grid; grid-template-columns: 40px 1fr; gap: 16px;
-    align-items: flex-start;
-  }
-  .privacy-list .ic {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: var(--white); color: var(--teal);
-    border: 1px solid rgba(26,158,143,0.18);
-    display: grid; place-items: center; flex-shrink: 0;
-  }
-  .privacy-list .ic svg { width: 20px; height: 20px; }
-  .privacy-list h4 { font-family: var(--font-heading); font-weight: 600; color: var(--deepNavy); font-size: 1.0625rem; margin-bottom: 4px; }
-  .privacy-list p { color: var(--nearBlack); font-size: 0.9375rem; margin: 0; }
-  .privacy-img {
-    position: relative;
-    background: linear-gradient(160deg, #fcfdfe 0%, var(--lightTeal) 100%);
-    border-radius: 24px;
-    padding: 28px;
-    border: 1px solid rgba(26,158,143,0.18);
-    box-shadow: 0 30px 60px -30px rgba(21,29,72,0.25);
-    overflow: hidden;
-  }
-  .privacy-img::before {
-    content: ""; position: absolute;
-    top: -90px; right: -60px;
-    width: 280px; height: 280px;
-    background: radial-gradient(closest-side, rgba(26,158,143,0.18), transparent 70%);
-    pointer-events: none;
-  }
-  .privacy-img::after {
-    content: ""; position: absolute;
-    bottom: -120px; left: -80px;
-    width: 280px; height: 280px;
-    background: radial-gradient(closest-side, rgba(123,45,38,0.10), transparent 70%);
-    pointer-events: none;
-  }
-  .privacy-mock {
-    position: relative; z-index: 1;
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid rgba(31,43,108,0.06);
-    box-shadow: 0 16px 40px -20px rgba(21,29,72,0.20);
-    overflow: hidden;
-  }
-  .privacy-mock-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--coolGrey);
-    background: linear-gradient(180deg, #fcfdfe, var(--white));
-  }
-  .privacy-mock-head .tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--font-heading); font-weight: 600;
-    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--maroon);
-  }
-  .privacy-mock-head .tag .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--maroon);
-  }
-  .privacy-mock-head .who {
-    font-size: 11px; color: var(--warmGrey);
-  }
-  .privacy-mock-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-  .pm-row {
-    display: grid; grid-template-columns: 36px 1fr auto;
-    gap: 12px; align-items: center;
-    padding: 12px 14px;
-    background: #fafbfd;
-    border: 1px solid var(--coolGrey);
-    border-radius: 10px;
-  }
-  .pm-row .ic {
-    width: 36px; height: 36px; border-radius: 9px;
-    background: var(--lightTeal); color: var(--teal);
-    display: grid; place-items: center;
-  }
-  .pm-row .ic svg { width: 18px; height: 18px; }
-  .pm-row .t {
-    font-family: var(--font-heading); font-weight: 600;
-    color: var(--deepNavy); font-size: 0.875rem;
-  }
-  .pm-row .s { font-size: 11px; color: var(--warmGrey); margin-top: 2px; }
-  .pm-row .pill {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 4px 10px; border-radius: 999px;
-    font-family: var(--font-heading); font-weight: 600; font-size: 10px;
-    letter-spacing: 0.02em;
-  }
-  .pm-row .pill.on { background: rgba(26,158,143,0.12); color: var(--teal); }
-  .pm-row .pill.off { background: rgba(31,43,108,0.06); color: var(--warmGrey); }
-  .pm-row .pill svg { width: 11px; height: 11px; stroke-width: 2.2; }
-  .privacy-mock-foot {
-    padding: 12px 18px;
-    border-top: 1px solid var(--coolGrey);
-    background: #fcfdfe;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 11px; color: var(--warmGrey);
-  }
-  .privacy-mock-foot .lock {
-    display: inline-flex; align-items: center; gap: 6px;
-    color: var(--deepNavy);
-    font-family: var(--font-heading); font-weight: 600;
-  }
-  .privacy-mock-foot .lock svg { width: 12px; height: 12px; }
+      /* Privacy (lightTeal) */
+      .privacy-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+      @media (max-width: 980px) {
+        .privacy-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .privacy-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 32px;
+      }
+      .privacy-list li {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .privacy-list .ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--white);
+        color: var(--teal);
+        border: 1px solid rgba(26, 158, 143, 0.18);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+      .privacy-list .ic svg {
+        width: 20px;
+        height: 20px;
+      }
+      .privacy-list h4 {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 1.0625rem;
+        margin-bottom: 4px;
+      }
+      .privacy-list p {
+        color: var(--nearBlack);
+        font-size: 0.9375rem;
+        margin: 0;
+      }
+      .privacy-img {
+        position: relative;
+        background: linear-gradient(160deg, #fcfdfe 0%, var(--lightTeal) 100%);
+        border-radius: 24px;
+        padding: 28px;
+        border: 1px solid rgba(26, 158, 143, 0.18);
+        box-shadow: 0 30px 60px -30px rgba(21, 29, 72, 0.25);
+        overflow: hidden;
+      }
+      .privacy-img::before {
+        content: "";
+        position: absolute;
+        top: -90px;
+        right: -60px;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(
+          closest-side,
+          rgba(26, 158, 143, 0.18),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .privacy-img::after {
+        content: "";
+        position: absolute;
+        bottom: -120px;
+        left: -80px;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(
+          closest-side,
+          rgba(123, 45, 38, 0.1),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .privacy-mock {
+        position: relative;
+        z-index: 1;
+        background: var(--white);
+        border-radius: 16px;
+        border: 1px solid rgba(31, 43, 108, 0.06);
+        box-shadow: 0 16px 40px -20px rgba(21, 29, 72, 0.2);
+        overflow: hidden;
+      }
+      .privacy-mock-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--coolGrey);
+        background: linear-gradient(180deg, #fcfdfe, var(--white));
+      }
+      .privacy-mock-head .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--maroon);
+      }
+      .privacy-mock-head .tag .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--maroon);
+      }
+      .privacy-mock-head .who {
+        font-size: 11px;
+        color: var(--warmGrey);
+      }
+      .privacy-mock-body {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .pm-row {
+        display: grid;
+        grid-template-columns: 36px 1fr auto;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 14px;
+        background: #fafbfd;
+        border: 1px solid var(--coolGrey);
+        border-radius: 10px;
+      }
+      .pm-row .ic {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: var(--lightTeal);
+        color: var(--teal);
+        display: grid;
+        place-items: center;
+      }
+      .pm-row .ic svg {
+        width: 18px;
+        height: 18px;
+      }
+      .pm-row .t {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--deepNavy);
+        font-size: 0.875rem;
+      }
+      .pm-row .s {
+        font-size: 11px;
+        color: var(--warmGrey);
+        margin-top: 2px;
+      }
+      .pm-row .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 10px;
+        letter-spacing: 0.02em;
+      }
+      .pm-row .pill.on {
+        background: rgba(26, 158, 143, 0.12);
+        color: var(--teal);
+      }
+      .pm-row .pill.off {
+        background: rgba(31, 43, 108, 0.06);
+        color: var(--warmGrey);
+      }
+      .pm-row .pill svg {
+        width: 11px;
+        height: 11px;
+        stroke-width: 2.2;
+      }
+      .privacy-mock-foot {
+        padding: 12px 18px;
+        border-top: 1px solid var(--coolGrey);
+        background: #fcfdfe;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        color: var(--warmGrey);
+      }
+      .privacy-mock-foot .lock {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--deepNavy);
+        font-family: var(--font-heading);
+        font-weight: 600;
+      }
+      .privacy-mock-foot .lock svg {
+        width: 12px;
+        height: 12px;
+      }
 
-  /* FAQ + Final CTA */
-  .faq-section .layout {
-    display: grid; grid-template-columns: 1fr 1.4fr;
-    gap: 64px; align-items: flex-start;
-  }
-  @media (max-width: 900px) { .faq-section .layout { grid-template-columns: 1fr; gap: 32px; } }
-  .faq-section h2 { font-size: clamp(2.25rem, 3vw + 1rem, 3.25rem); }
-  .final-cta { text-align: center; }
-  .final-cta h2 { color: var(--white); }
-  .final-cta .lead { margin: 18px auto 0; color: rgba(255,255,255,0.78); max-width: 60ch; }
-  .final-cta .row { margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-</style>
-</head>
-<body>
+      /* FAQ + Final CTA */
+      .faq-section .layout {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 64px;
+        align-items: flex-start;
+      }
+      @media (max-width: 900px) {
+        .faq-section .layout {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+      }
+      .faq-section h2 {
+        font-size: clamp(2.25rem, 3vw + 1rem, 3.25rem);
+      }
+      .final-cta {
+        text-align: center;
+      }
+      .final-cta h2 {
+        color: var(--white);
+      }
+      .final-cta .lead {
+        margin: 18px auto 0;
+        color: rgba(255, 255, 255, 0.78);
+        max-width: 60ch;
+      }
+      .final-cta .row {
+        margin-top: 36px;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-navbar></div>
 
-<div data-navbar></div>
-
-<main>
-
-  <!-- HERO -->
-  <section class="hero bg-white section-pad-lg" data-screen-label="01 Hero">
-    <div class="container">
-      <div class="hero-grid">
-
-        <div>
-          <span class="hero-eyebrow">For parents and families</span>
-          <h1>Stay informed without the worry</h1>
-          <p class="support">
-            See what your teen is building beyond grades: activities, hours, skills, and confirmed effort.<br>All in one student-owned record they control.
-          </p>
-
-          <div class="hero-actions">
-            <a href="contact.html" class="btn-primary">
-              Join the waitlist
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-            <a href="#how-it-works" class="btn-secondary">See how it works</a>
-          </div>
-
-          <div class="trust-pills">
-            <span class="trust-pill" id="tp-1"></span>
-            <span class="trust-pill" id="tp-2"></span>
-            <span class="trust-pill" id="tp-3"></span>
-          </div>
-        </div>
-
-        <aside class="pdash" aria-label="Parent view preview">
-          <div class="pdash-head">
-            <div class="av">AK</div>
+    <main>
+      <!-- HERO -->
+      <section class="hero bg-white section-pad-lg" data-screen-label="01 Hero">
+        <div class="container">
+          <div class="hero-grid">
             <div>
-              <div class="name">Aanya · this term</div>
-              <div class="sub">Grade 11 · Iroquois Ridge HS · Halton DSB</div>
-            </div>
-            <span class="shared-chip">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Shared
-            </span>
-          </div>
+              <span class="hero-eyebrow">For parents and families</span>
+              <h1>Stay informed without the worry</h1>
+              <p class="support">
+                See what your teen is building beyond grades: activities, hours,
+                skills, and confirmed effort.<br />All in one student-owned
+                record they control.
+              </p>
 
-          <div class="pdash-body">
-            <div class="pdash-section-label">Progress this term</div>
-            <div class="term-grid">
-              <div class="term-card">
-                <div class="v">62h</div>
-                <div class="l">Hours logged</div>
-                <div class="delta up">+18h vs last term</div>
+              <div class="hero-actions">
+                <a href="contact.html" class="btn-primary">
+                  Join the waitlist
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+                <a href="#how-it-works" class="btn-secondary"
+                  >See how it works</a
+                >
               </div>
-              <div class="term-card">
-                <div class="v">3</div>
-                <div class="l">New activities</div>
-                <div class="delta up">2 already verified</div>
-              </div>
-            </div>
 
-            <div class="pdash-section-label">Ontario 40-hour requirement</div>
-            <div class="progress-card">
-              <div class="top">
-                <span class="lbl">Community involvement</span>
-                <span class="v">40 / 40h</span>
-              </div>
-              <div class="bar"><i style="width:100%"></i></div>
-              <div class="foot">
-                <span>Requirement met</span>
-                <span>Verified · ready to export</span>
+              <div class="trust-pills">
+                <span class="trust-pill" id="tp-1"></span>
+                <span class="trust-pill" id="tp-2"></span>
+                <span class="trust-pill" id="tp-3"></span>
               </div>
             </div>
 
-            <div class="pdash-section-label">New this week</div>
-            <div class="new-feed">
-              <div class="new-row">
-                <span class="ic" id="nf-1-ic"></span>
+            <aside class="pdash" aria-label="Parent view preview">
+              <div class="pdash-head">
+                <div class="av">AK</div>
                 <div>
-                  <div class="t">Reading buddy session</div>
-                  <div class="s">3h · Oakville Public Library</div>
+                  <div class="name">Aanya · this term</div>
+                  <div class="sub">
+                    Grade 11 · Iroquois Ridge HS · Halton DSB
+                  </div>
                 </div>
-                <span class="verified-badge" id="nf-1-vb"></span>
+                <span class="shared-chip">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Shared
+                </span>
               </div>
-              <div class="new-row">
-                <span class="ic" id="nf-2-ic"></span>
-                <div>
-                  <div class="t">Saturday shift</div>
-                  <div class="s">6h · Café Rosa</div>
+
+              <div class="pdash-body">
+                <div class="pdash-section-label">Progress this term</div>
+                <div class="term-grid">
+                  <div class="term-card">
+                    <div class="v">62h</div>
+                    <div class="l">Hours logged</div>
+                    <div class="delta up">+18h vs last term</div>
+                  </div>
+                  <div class="term-card">
+                    <div class="v">3</div>
+                    <div class="l">New activities</div>
+                    <div class="delta up">2 already verified</div>
+                  </div>
                 </div>
-                <span class="verified-badge" id="nf-2-vb"></span>
+
+                <div class="pdash-section-label">
+                  Ontario 40-hour requirement
+                </div>
+                <div class="progress-card">
+                  <div class="top">
+                    <span class="lbl">Community involvement</span>
+                    <span class="v">40 / 40h</span>
+                  </div>
+                  <div class="bar"><i style="width: 100%"></i></div>
+                  <div class="foot">
+                    <span>Requirement met</span>
+                    <span>Verified · ready to export</span>
+                  </div>
+                </div>
+
+                <div class="pdash-section-label">New this week</div>
+                <div class="new-feed">
+                  <div class="new-row">
+                    <span class="ic" id="nf-1-ic"></span>
+                    <div>
+                      <div class="t">Reading buddy session</div>
+                      <div class="s">3h · Oakville Public Library</div>
+                    </div>
+                    <span class="verified-badge" id="nf-1-vb"></span>
+                  </div>
+                  <div class="new-row">
+                    <span class="ic" id="nf-2-ic"></span>
+                    <div>
+                      <div class="t">Saturday shift</div>
+                      <div class="s">6h · Café Rosa</div>
+                    </div>
+                    <span class="verified-badge" id="nf-2-vb"></span>
+                  </div>
+                  <div class="new-row">
+                    <span class="ic" id="nf-3-ic"></span>
+                    <div>
+                      <div class="t">Math competition</div>
+                      <div class="s">Awaiting Mr Patel</div>
+                    </div>
+                    <span class="pending-badge" id="nf-3-pb"></span>
+                  </div>
+                </div>
               </div>
-              <div class="new-row">
-                <span class="ic" id="nf-3-ic"></span>
-                <div>
-                  <div class="t">Math competition</div>
-                  <div class="s">Awaiting Mr Patel</div>
-                </div>
-                <span class="pending-badge" id="nf-3-pb"></span>
+
+              <div class="pdash-foot">
+                <span>Read-only · shared by Aanya · not surveillance</span>
+                <span
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  Private</span
+                >
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY THIS MATTERS (navy) -->
+      <section
+        class="bg-navy section-pad-lg"
+        data-screen-label="02 Why this matters"
+      >
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Before Grade 12</span>
+            <h2>Start before the record is needed</h2>
+            <p class="lead">
+              Grades matter, but they do not show the full student.<br />Y2O
+              helps students prove what they have done beyond marks.
+            </p>
+          </div>
+
+          <div class="why-now-stats">
+            <div class="why-stat">
+              <div class="accent"></div>
+              <div class="v">87%</div>
+              <div class="l">
+                UBC average entrance grade today, up from 70% twenty years ago.
+              </div>
+              <div class="src">
+                Source:
+                <a
+                  href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Fraser Institute, 2024</a
+                >
+              </div>
+            </div>
+            <div class="why-stat">
+              <div class="accent"></div>
+              <div class="v">39%</div>
+              <div class="l">
+                Of workers’ core skills are expected to change by 2030.
+              </div>
+              <div class="src">
+                Source:
+                <a
+                  href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >World Economic Forum, 2025</a
+                >
+              </div>
+            </div>
+            <div class="why-stat">
+              <div class="accent"></div>
+              <div class="v">40h</div>
+              <div class="l">
+                Ontario community involvement required to graduate.
+              </div>
+              <div class="src">
+                Source:
+                <a
+                  href="https://www.ontario.ca/page/get-your-high-school-volunteer-hours"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Ontario Ministry of Education</a
+                >
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="pdash-foot">
-            <span>Read-only · shared by Aanya · not surveillance</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Private</span>
+      <!-- PARENT CLARITY (lightTeal) -->
+      <section
+        class="bg-lightTeal section-pad-lg"
+        data-screen-label="03 Parent clarity"
+      >
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Parent clarity</span>
+            <h2>No more scattered proof</h2>
+            <p class="lead">
+              Forms, screenshots, hours, and dates pile up fast.<br />Y2O keeps
+              your teen’s record organized from the start.
+            </p>
           </div>
-        </aside>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY THIS MATTERS (navy) -->
-  <section class="bg-navy section-pad-lg" data-screen-label="02 Why this matters">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Before Grade 12</span>
-        <h2>Start before the record is needed</h2>
-        <p class="lead">Grades matter, but they do not show the full student.<br>Y2O helps students prove what they have done beyond marks.</p>
-      </div>
-
-      <div class="why-now-stats">
-        <div class="why-stat">
-          <div class="accent"></div>
-          <div class="v">87%</div>
-          <div class="l">UBC average entrance grade today, up from 70% twenty years ago.</div>
-          <div class="src">Source: <a href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities" target="_blank" rel="noopener noreferrer">Fraser Institute, 2024</a></div>
-        </div>
-        <div class="why-stat">
-          <div class="accent"></div>
-          <div class="v">39%</div>
-          <div class="l">Of workers’ core skills are expected to change by 2030.</div>
-          <div class="src">Source: <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">World Economic Forum, 2025</a></div>
-        </div>
-        <div class="why-stat">
-          <div class="accent"></div>
-          <div class="v">40h</div>
-          <div class="l">Ontario community involvement required to graduate.</div>
-          <div class="src">Source: <a href="https://www.ontario.ca/page/get-your-high-school-volunteer-hours" target="_blank" rel="noopener noreferrer">Ontario Ministry of Education</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PARENT CLARITY (lightTeal) -->
-  <section class="bg-lightTeal section-pad-lg" data-screen-label="03 Parent clarity">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Parent clarity</span>
-        <h2>No more scattered proof</h2>
-        <p class="lead">Forms, screenshots, hours, and dates pile up fast.<br>Y2O keeps your teen’s record organized from the start.</p>
-      </div>
-
-      <div class="clarity-grid">
-        <div class="clarity-card">
-          <div class="ic" id="cl-1-ic"></div>
-          <h3>No more chasing paper forms</h3>
-          <p>Every confirmation lives in the record and can be found when needed.</p>
-        </div>
-        <div class="clarity-card">
-          <div class="ic" id="cl-2-ic"></div>
-          <h3>No more rebuilding from memory</h3>
-          <p>Activities are logged when they happen, not years later.</p>
-        </div>
-        <div class="clarity-card">
-          <div class="ic" id="cl-3-ic"></div>
-          <h3>No more Grade 12 panic</h3>
-          <p>The record is already there before deadlines arrive.</p>
-        </div>
-        <div class="clarity-card">
-          <div class="ic" id="cl-4-ic"></div>
-          <h3>Application ready</h3>
-          <p>Verified hours and activities are easier to organize and share.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOUR-YEAR TIMELINE (white) — NEW -->
-  <section class="bg-white section-pad-lg" data-screen-label="04 Four-year timeline">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Grades 9 to 12</span>
-        <h2>Aanya’s record across four high school years</h2>
-        <p class="lead">The record grows over time.<br>Each year adds verified work, hours, and skills.</p>
-      </div>
-
-      <div class="ty-grid">
-
-        <!-- Grade 9 -->
-        <article class="ty-card">
-          <div class="head">
-            <span class="grade">Grade 9</span>
-            <span class="age">Age 14 · Sept 2023</span>
-          </div>
-          <div class="body">
-            <div class="ty-stat"><span class="l">Activities</span><span class="v">3</span></div>
-            <div class="ty-stat"><span class="l">Hours logged</span><span class="v">22h</span></div>
-            <div class="ty-stat"><span class="l">Verified</span><span class="v">3 of 3</span></div>
-            <div class="ty-stat"><span class="l">Growth Score</span><span class="v">38</span></div>
-            <div class="focus"><strong>Focus</strong> · first volunteer hours, school club, first verifier asked</div>
-          </div>
-        </article>
-
-        <!-- Grade 10 -->
-        <article class="ty-card">
-          <div class="head">
-            <span class="grade">Grade 10</span>
-            <span class="age">Age 15 · Sept 2024</span>
-          </div>
-          <div class="body">
-            <div class="ty-stat"><span class="l">Activities</span><span class="v">5</span></div>
-            <div class="ty-stat"><span class="l">Hours logged</span><span class="v">58h</span></div>
-            <div class="ty-stat"><span class="l">Verified</span><span class="v">5 of 5</span></div>
-            <div class="ty-stat"><span class="l">Growth Score</span><span class="v">52</span></div>
-            <div class="focus"><strong>Focus</strong> · Ontario 40h cleared, summer job started, robotics joined</div>
-          </div>
-        </article>
-
-        <!-- Grade 11 (now) -->
-        <article class="ty-card now">
-          <div class="head">
-            <span class="grade">Grade 11</span>
-            <span class="now-tag">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle></svg>
-              Now
-            </span>
-          </div>
-          <div class="body">
-            <div class="ty-stat"><span class="l">Activities</span><span class="v">8</span></div>
-            <div class="ty-stat"><span class="l">Hours logged</span><span class="v">103h</span></div>
-            <div class="ty-stat"><span class="l">Verified</span><span class="v">5 of 6</span></div>
-            <div class="ty-stat"><span class="l">Growth Score</span><span class="v">67</span></div>
-            <div class="focus"><strong>Focus</strong> · deeper hours, build lead role, 14-day streak</div>
-          </div>
-        </article>
-
-        <!-- Grade 12 -->
-        <article class="ty-card future">
-          <div class="head">
-            <span class="grade">Grade 12</span>
-            <span class="age">Age 17 · Sept 2026</span>
-          </div>
-          <div class="body">
-            <div class="ty-stat"><span class="l">Activities</span><span class="v">+</span></div>
-            <div class="ty-stat"><span class="l">Hours logged</span><span class="v">160h+</span></div>
-            <div class="ty-stat"><span class="l">Verified</span><span class="v">In progress</span></div>
-            <div class="ty-stat"><span class="l">Growth Score</span><span class="v">Target 78</span></div>
-            <div class="focus"><strong>Focus</strong> · deepest hours, applications open, record ready</div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS (deepNavy) -->
-  <section id="how-it-works" class="bg-deepNavy section-pad-lg" data-screen-label="05 How it works">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">For families</span>
-        <h2>How families fit in</h2>
-        <p class="lead">Families are invited in. The student stays in control.</p>
-      </div>
-
-      <div class="pflow">
-        <div class="pflow-step">
-          <div class="n">01</div>
-          <div class="ic" id="pf-1-ic"></div>
-          <h4>Your child invites you</h4>
-          <p>They decide what to share with family.</p>
-        </div>
-        <div class="pflow-step">
-          <div class="n">02</div>
-          <div class="ic" id="pf-2-ic"></div>
-          <h4>You see what they share</h4>
-          <p>View hours, activities, and confirmed progress.</p>
-        </div>
-        <div class="pflow-step">
-          <div class="n">03</div>
-          <div class="ic" id="pf-3-ic"></div>
-          <h4>You can confirm too</h4>
-          <p>If you directly saw the activity, you can confirm it like any other verifier.</p>
-        </div>
-        <div class="pflow-step">
-          <div class="n">04</div>
-          <div class="ic" id="pf-4-ic"></div>
-          <h4>The record stays theirs</h4>
-          <p>They carry it forward after graduation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRIVACY (lightTeal) -->
-  <section class="bg-lightTeal section-pad-lg" data-screen-label="06 Privacy">
-    <div class="container">
-      <div class="privacy-grid">
-
-        <div>
-          <span class="eyebrow">Privacy by default</span>
-          <h2 class="mt-16">Built so your child stays in charge</h2>
-          <p class="lead mt-16">Data lives in Canada.<br>The student decides what is shared.<br>Y2O is built for visibility, not surveillance.</p>
-
-          <ul class="privacy-list">
-            <li>
-              <span class="ic" id="pv-1-ic"></span>
-              <div>
-                <h4>Student-owned record</h4>
-                <p>Your child owns the record and controls access.</p>
-              </div>
-            </li>
-            <li>
-              <span class="ic" id="pv-2-ic"></span>
-              <div>
-                <h4>Granular sharing</h4>
-                <p>Share full profiles, snapshots, or selected verified activity.</p>
-              </div>
-            </li>
-            <li>
-              <span class="ic" id="pv-3-ic"></span>
-              <div>
-                <h4>Canadian data</h4>
-                <p>Data stays in Canada and follows applicable privacy requirements.</p>
-              </div>
-            </li>
-            <li>
-              <span class="ic" id="pv-4-ic"></span>
-              <div>
-                <h4>No ads. No selling.</h4>
-                <p>We do not sell personal data.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="privacy-img" aria-label="Sharing controls preview">
-          <div class="privacy-mock">
-            <div class="privacy-mock-head">
-              <span class="tag"><span class="dot"></span> Sharing controls</span>
-              <span class="who">Owned by Aanya</span>
+          <div class="clarity-grid">
+            <div class="clarity-card">
+              <div class="ic" id="cl-1-ic"></div>
+              <h3>No more chasing paper forms</h3>
+              <p>
+                Every confirmation lives in the record and can be found when
+                needed.
+              </p>
             </div>
-            <div class="privacy-mock-body">
-              <div class="pm-row">
-                <span class="ic" id="pm-1-ic"></span>
-                <div>
-                  <div class="t">Family view</div>
-                  <div class="s">Mom and Dad · read-only</div>
-                </div>
-                <span class="pill on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Shared</span>
-              </div>
-              <div class="pm-row">
-                <span class="ic" id="pm-2-ic"></span>
-                <div>
-                  <div class="t">Term snapshot</div>
-                  <div class="s">Hours, activities, verified count</div>
-                </div>
-                <span class="pill on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Visible</span>
-              </div>
-              <div class="pm-row">
-                <span class="ic" id="pm-3-ic"></span>
-                <div>
-                  <div class="t">Personal notes</div>
-                  <div class="s">Private to Aanya</div>
-                </div>
-                <span class="pill off">Private</span>
-              </div>
-              <div class="pm-row">
-                <span class="ic" id="pm-4-ic"></span>
-                <div>
-                  <div class="t">Scholarship export</div>
-                  <div class="s">Verified hours only</div>
-                </div>
-                <span class="pill on">On request</span>
-              </div>
+            <div class="clarity-card">
+              <div class="ic" id="cl-2-ic"></div>
+              <h3>No more rebuilding from memory</h3>
+              <p>Activities are logged when they happen, not years later.</p>
             </div>
-            <div class="privacy-mock-foot">
-              <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Data lives in Canada</span>
-              <span>No ads. No selling.</span>
+            <div class="clarity-card">
+              <div class="ic" id="cl-3-ic"></div>
+              <h3>No more Grade 12 panic</h3>
+              <p>The record is already there before deadlines arrive.</p>
+            </div>
+            <div class="clarity-card">
+              <div class="ic" id="cl-4-ic"></div>
+              <h3>Application ready</h3>
+              <p>
+                Verified hours and activities are easier to organize and share.
+              </p>
             </div>
           </div>
         </div>
+      </section>
 
-      </div>
-    </div>
-  </section>
+      <!-- FOUR-YEAR TIMELINE (white) — NEW -->
+      <section
+        class="bg-white section-pad-lg"
+        data-screen-label="04 Four-year timeline"
+      >
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Grades 9 to 12</span>
+            <h2>Aanya’s record across four high school years</h2>
+            <p class="lead">
+              The record grows over time.<br />Each year adds verified work,
+              hours, and skills.
+            </p>
+          </div>
 
-  <!-- FAQ (white) -->
-  <section id="faq" class="bg-white section-pad-lg faq-section" data-screen-label="07 FAQ">
-    <div class="container">
-      <div class="layout">
-        <div>
-          <span class="eyebrow">Common questions</span>
-          <h2 class="mt-16">For parents and families</h2>
-          <p class="lead">Clear answers about visibility, privacy, and how families stay in the loop.</p>
-          <a href="contact.html" class="btn-secondary" style="margin-top: 24px;">Ask a question</a>
+          <div class="ty-grid">
+            <!-- Grade 9 -->
+            <article class="ty-card">
+              <div class="head">
+                <span class="grade">Grade 9</span>
+                <span class="age">Age 14 · Sept 2023</span>
+              </div>
+              <div class="body">
+                <div class="ty-stat">
+                  <span class="l">Activities</span><span class="v">3</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Hours logged</span><span class="v">22h</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Verified</span><span class="v">3 of 3</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Growth Score</span><span class="v">38</span>
+                </div>
+                <div class="focus">
+                  <strong>Focus</strong> · first volunteer hours, school club,
+                  first verifier asked
+                </div>
+              </div>
+            </article>
+
+            <!-- Grade 10 -->
+            <article class="ty-card">
+              <div class="head">
+                <span class="grade">Grade 10</span>
+                <span class="age">Age 15 · Sept 2024</span>
+              </div>
+              <div class="body">
+                <div class="ty-stat">
+                  <span class="l">Activities</span><span class="v">5</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Hours logged</span><span class="v">58h</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Verified</span><span class="v">5 of 5</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Growth Score</span><span class="v">52</span>
+                </div>
+                <div class="focus">
+                  <strong>Focus</strong> · Ontario 40h cleared, summer job
+                  started, robotics joined
+                </div>
+              </div>
+            </article>
+
+            <!-- Grade 11 (now) -->
+            <article class="ty-card now">
+              <div class="head">
+                <span class="grade">Grade 11</span>
+                <span class="now-tag">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  Now
+                </span>
+              </div>
+              <div class="body">
+                <div class="ty-stat">
+                  <span class="l">Activities</span><span class="v">8</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Hours logged</span><span class="v">103h</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Verified</span><span class="v">5 of 6</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Growth Score</span><span class="v">67</span>
+                </div>
+                <div class="focus">
+                  <strong>Focus</strong> · deeper hours, build lead role, 14-day
+                  streak
+                </div>
+              </div>
+            </article>
+
+            <!-- Grade 12 -->
+            <article class="ty-card future">
+              <div class="head">
+                <span class="grade">Grade 12</span>
+                <span class="age">Age 17 · Sept 2026</span>
+              </div>
+              <div class="body">
+                <div class="ty-stat">
+                  <span class="l">Activities</span><span class="v">+</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Hours logged</span
+                  ><span class="v">160h+</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Verified</span
+                  ><span class="v">In progress</span>
+                </div>
+                <div class="ty-stat">
+                  <span class="l">Growth Score</span
+                  ><span class="v">Target 78</span>
+                </div>
+                <div class="focus">
+                  <strong>Focus</strong> · deepest hours, applications open,
+                  record ready
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
-        <div id="faq-list"></div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- FINAL CTA (deepNavy) -->
-  <section class="bg-deepNavy section-pad-md final-cta" data-screen-label="08 Final CTA">
-    <div class="container">
-      <span class="eyebrow">Help your child start</span>
-      <h2 class="mt-16">Give your teen a head start</h2>
-      <p class="lead">Grades 9 to 12 is the right time to begin.<br>Join the waitlist and we’ll share next steps for the GTA launch.</p>
-      <div class="row">
-        <a href="contact.html" class="btn-primary">Join the waitlist</a>
-        <a href="about.html" class="btn-secondary">About Y2O</a>
-      </div>
-    </div>
-  </section>
+      <!-- HOW IT WORKS (deepNavy) -->
+      <section
+        id="how-it-works"
+        class="bg-deepNavy section-pad-lg"
+        data-screen-label="05 How it works"
+      >
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">For families</span>
+            <h2>How families fit in</h2>
+            <p class="lead">
+              Families are invited in. The student stays in control.
+            </p>
+          </div>
 
-</main>
+          <div class="pflow">
+            <div class="pflow-step">
+              <div class="n">01</div>
+              <div class="ic" id="pf-1-ic"></div>
+              <h4>Your child invites you</h4>
+              <p>They decide what to share with family.</p>
+            </div>
+            <div class="pflow-step">
+              <div class="n">02</div>
+              <div class="ic" id="pf-2-ic"></div>
+              <h4>You see what they share</h4>
+              <p>View hours, activities, and confirmed progress.</p>
+            </div>
+            <div class="pflow-step">
+              <div class="n">03</div>
+              <div class="ic" id="pf-3-ic"></div>
+              <h4>You can confirm too</h4>
+              <p>
+                If you directly saw the activity, you can confirm it like any
+                other verifier.
+              </p>
+            </div>
+            <div class="pflow-step">
+              <div class="n">04</div>
+              <div class="ic" id="pf-4-ic"></div>
+              <h4>The record stays theirs</h4>
+              <p>They carry it forward after graduation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<div data-footer></div>
+      <!-- PRIVACY (lightTeal) -->
+      <section
+        class="bg-lightTeal section-pad-lg"
+        data-screen-label="06 Privacy"
+      >
+        <div class="container">
+          <div class="privacy-grid">
+            <div>
+              <span class="eyebrow">Privacy by default</span>
+              <h2 class="mt-16">Built so your child stays in charge</h2>
+              <p class="lead mt-16">
+                Data lives in Canada.<br />The student decides what is
+                shared.<br />Y2O is built for visibility, not surveillance.
+              </p>
 
-<script src="icons.js"></script>
-<script src="partials.js"></script>
-<script src="faq.js"></script>
-<script src="data.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    function setIcon(id, name, size) {
-      var el = document.getElementById(id);
-      if (el && window.icon) el.innerHTML = window.icon(name, size || 20);
-    }
-    function setHTML(id, html) {
-      var el = document.getElementById(id);
-      if (el) el.innerHTML = html;
-    }
+              <ul class="privacy-list">
+                <li>
+                  <span class="ic" id="pv-1-ic"></span>
+                  <div>
+                    <h4>Student-owned record</h4>
+                    <p>Your child owns the record and controls access.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="ic" id="pv-2-ic"></span>
+                  <div>
+                    <h4>Granular sharing</h4>
+                    <p>
+                      Share full profiles, snapshots, or selected verified
+                      activity.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <span class="ic" id="pv-3-ic"></span>
+                  <div>
+                    <h4>Canadian data</h4>
+                    <p>
+                      Data stays in Canada and follows applicable privacy
+                      requirements.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <span class="ic" id="pv-4-ic"></span>
+                  <div>
+                    <h4>No ads. No selling.</h4>
+                    <p>We do not sell personal data.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
 
-    setHTML("tp-1", window.icon("eye",         14) + " Read-only by default");
-    setHTML("tp-2", window.icon("lock",        14) + " Canadian data");
-    setHTML("tp-3", window.icon("badge-check", 14) + " Verified by people");
+            <div class="privacy-img" aria-label="Sharing controls preview">
+              <div class="privacy-mock">
+                <div class="privacy-mock-head">
+                  <span class="tag"
+                    ><span class="dot"></span> Sharing controls</span
+                  >
+                  <span class="who">Owned by Aanya</span>
+                </div>
+                <div class="privacy-mock-body">
+                  <div class="pm-row">
+                    <span class="ic" id="pm-1-ic"></span>
+                    <div>
+                      <div class="t">Family view</div>
+                      <div class="s">Mom and Dad · read-only</div>
+                    </div>
+                    <span class="pill on"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      Shared</span
+                    >
+                  </div>
+                  <div class="pm-row">
+                    <span class="ic" id="pm-2-ic"></span>
+                    <div>
+                      <div class="t">Term snapshot</div>
+                      <div class="s">Hours, activities, verified count</div>
+                    </div>
+                    <span class="pill on"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      Visible</span
+                    >
+                  </div>
+                  <div class="pm-row">
+                    <span class="ic" id="pm-3-ic"></span>
+                    <div>
+                      <div class="t">Personal notes</div>
+                      <div class="s">Private to Aanya</div>
+                    </div>
+                    <span class="pill off">Private</span>
+                  </div>
+                  <div class="pm-row">
+                    <span class="ic" id="pm-4-ic"></span>
+                    <div>
+                      <div class="t">Scholarship export</div>
+                      <div class="s">Verified hours only</div>
+                    </div>
+                    <span class="pill on">On request</span>
+                  </div>
+                </div>
+                <div class="privacy-mock-foot">
+                  <span class="lock"
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Data lives in Canada</span
+                  >
+                  <span>No ads. No selling.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    setIcon("pm-1-ic", "users",      18);
-    setIcon("pm-2-ic", "trending-up",18);
-    setIcon("pm-3-ic", "lock",       18);
-    setIcon("pm-4-ic", "award",      18);
+      <!-- FAQ (white) -->
+      <section
+        id="faq"
+        class="bg-white section-pad-lg faq-section"
+        data-screen-label="07 FAQ"
+      >
+        <div class="container">
+          <div class="layout">
+            <div>
+              <span class="eyebrow">Common questions</span>
+              <h2 class="mt-16">For parents and families</h2>
+              <p class="lead">
+                Clear answers about visibility, privacy, and how families stay
+                in the loop.
+              </p>
+              <a
+                href="contact.html"
+                class="btn-secondary"
+                style="margin-top: 24px"
+                >Ask a question</a
+              >
+            </div>
+            <div id="faq-list"></div>
+          </div>
+        </div>
+      </section>
 
-    setIcon("nf-1-ic", "book-open", 16);
-    setIcon("nf-2-ic", "briefcase", 16);
-    setIcon("nf-3-ic", "trending-up", 16);
-    setHTML("nf-1-vb", window.icon("check-circle", 11) + " Verified");
-    setHTML("nf-2-vb", window.icon("check-circle", 11) + " Verified");
-    setHTML("nf-3-pb", window.icon("clock",        11) + " Pending");
+      <!-- FINAL CTA (deepNavy) -->
+      <section
+        class="bg-deepNavy section-pad-md final-cta"
+        data-screen-label="08 Final CTA"
+      >
+        <div class="container">
+          <span class="eyebrow">Help your child start</span>
+          <h2 class="mt-16">Give your teen a head start</h2>
+          <p class="lead">
+            Grades 9 to 12 is the right time to begin.<br />Join the waitlist
+            and we’ll share next steps for the GTA launch.
+          </p>
+          <div class="row">
+            <a href="contact.html" class="btn-primary">Join the waitlist</a>
+            <a href="about.html" class="btn-secondary">About Y2O</a>
+          </div>
+        </div>
+      </section>
+    </main>
 
-    setIcon("cl-1-ic", "file-text", 22);
-    setIcon("cl-2-ic", "clock",     22);
-    setIcon("cl-3-ic", "calendar",  22);
-    setIcon("cl-4-ic", "award",     22);
+    <div data-footer></div>
 
-    setIcon("pf-1-ic", "send",        22);
-    setIcon("pf-2-ic", "eye",         22);
-    setIcon("pf-3-ic", "badge-check", 22);
-    setIcon("pf-4-ic", "shield",      22);
+    <script src="icons.js"></script>
+    <script src="partials.js"></script>
+    <script src="faq.js"></script>
+    <script src="data.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function setIcon(id, name, size) {
+          var el = document.getElementById(id);
+          if (el && window.icon) el.innerHTML = window.icon(name, size || 20);
+        }
+        function setHTML(id, html) {
+          var el = document.getElementById(id);
+          if (el) el.innerHTML = html;
+        }
 
-    setIcon("pv-1-ic", "user",   20);
-    setIcon("pv-2-ic", "layers", 20);
-    setIcon("pv-3-ic", "shield", 20);
-    setIcon("pv-4-ic", "lock",   20);
+        setHTML("tp-1", window.icon("eye", 14) + " Read-only by default");
+        setHTML("tp-2", window.icon("lock", 14) + " Canadian data");
+        setHTML("tp-3", window.icon("badge-check", 14) + " Verified by people");
 
-    if (window.buildFAQ && window.FAQ && window.FAQ.parents) {
-      window.buildFAQ("#faq-list", window.FAQ.parents);
-    }
-  });
-</script>
-</body>
+        setIcon("pm-1-ic", "users", 18);
+        setIcon("pm-2-ic", "trending-up", 18);
+        setIcon("pm-3-ic", "lock", 18);
+        setIcon("pm-4-ic", "award", 18);
+
+        setIcon("nf-1-ic", "book-open", 16);
+        setIcon("nf-2-ic", "briefcase", 16);
+        setIcon("nf-3-ic", "trending-up", 16);
+        setHTML("nf-1-vb", window.icon("check-circle", 11) + " Verified");
+        setHTML("nf-2-vb", window.icon("check-circle", 11) + " Verified");
+        setHTML("nf-3-pb", window.icon("clock", 11) + " Pending");
+
+        setIcon("cl-1-ic", "file-text", 22);
+        setIcon("cl-2-ic", "clock", 22);
+        setIcon("cl-3-ic", "calendar", 22);
+        setIcon("cl-4-ic", "award", 22);
+
+        setIcon("pf-1-ic", "send", 22);
+        setIcon("pf-2-ic", "eye", 22);
+        setIcon("pf-3-ic", "badge-check", 22);
+        setIcon("pf-4-ic", "shield", 22);
+
+        setIcon("pv-1-ic", "user", 20);
+        setIcon("pv-2-ic", "layers", 20);
+        setIcon("pv-3-ic", "shield", 20);
+        setIcon("pv-4-ic", "lock", 20);
+
+        if (window.buildFAQ && window.FAQ && window.FAQ.parents) {
+          window.buildFAQ("#faq-list", window.FAQ.parents);
+        }
+      });
+    </script>
+    <script src="/persist-ref.js"></script>
+  </body>
 </html>
