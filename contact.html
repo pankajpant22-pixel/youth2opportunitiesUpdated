@@ -677,6 +677,7 @@
             // don't preventDefault here — let the form POST normally
             form.style.display = "none";
             success.classList.add("show");
+            sessionStorage.removeItem("ref");
           });
         }
 
