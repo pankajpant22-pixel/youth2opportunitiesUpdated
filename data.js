@@ -16,8 +16,8 @@
         a: "Y2O is a student-owned verified growth record for high school students. It helps students track, confirm, and share what they do beyond grades.",
       },
       {
-        q: "Is Y2O live now?",
-        a: "Y2O is in early launch preparation. Students, families, partners, and institutions can join the waitlist as access opens in stages across the GTA.",
+        q: "Is Y2O live now",
+        a: "Yes · 50+ students across Ontario are building their records · opportunities feed is live for both students and partners · sign up today",
       },
       {
         q: "What will Y2O cost?",

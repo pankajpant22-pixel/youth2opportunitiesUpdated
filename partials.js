@@ -6,13 +6,18 @@
 (function () {
   "use strict";
 
+  // Web app URL. Any <a data-app-link> opens it in a new tab.
+  var APP_URL = "https://youth2opportunities-web-app.vercel.app/";
+
   var NAV_ITEMS = [
     { href: "index.html", label: "Home" },
     { href: "students.html", label: "Students" },
     { href: "parents.html", label: "Parents" },
     { href: "partners.html", label: "Partners" },
     { href: "institutions.html", label: "Institutions" },
+    { href: "opportunities.html", label: "Opportunities" },
     { href: "about.html", label: "About" },
+    { href: "contact.html", label: "Contact" },
   ];
 
   function currentPage() {
@@ -47,7 +52,7 @@
       );
     }).join("");
 
-    var cta = '<a href="contact.html" class="nav-cta">Join the waitlist</a>';
+    var cta = '<a href="contact.html" data-app-link class="nav-cta">Create Account</a>';
 
     var hamburger =
       '<button class="nav-toggle" aria-label="Open menu" aria-expanded="false">' +
@@ -58,15 +63,26 @@
       "</svg>" +
       "</button>";
 
+    var announcement =
+      '<div class="announcement-bar" id="announcement-bar">' +
+      '<div class="announcement-inner">' +
+      '<span class="pulse-dot"></span>' +
+      "<span><strong>Live in Ontario</strong> · 50+ students building their records · Opportunities feed now open for students and partners</span>" +
+      '<a href="opportunities.html" class="announcement-link">See opportunities →</a>' +
+      '<button class="announcement-close" onclick="document.getElementById(\'announcement-bar\').style.display=\'none\'" aria-label="Dismiss">×</button>' +
+      "</div>" +
+      "</div>";
+
     var topbar =
       '<div class="topbar">' +
       '<div class="container topbar-inner">' +
       '<span class="topbar-dot" aria-hidden="true"></span>' +
-      '<span class="topbar-text">Built in Canada <span class="topbar-sep">·</span> Launching first across the GTA</span>' +
+      '<span class="topbar-text">Built in Canada <span class="topbar-sep">·</span> Live in Ontario · starting with the GTA</span>' +
       "</div>" +
       "</div>";
 
     host.innerHTML =
+      announcement +
       topbar +
       '<nav class="nav" role="navigation" aria-label="Primary">' +
       '<div class="container nav-inner">' +
@@ -144,7 +160,7 @@
       "<span>© " +
       year +
       " Y2O Growth Inc.</span>" +
-      '<span class="footer-tag">For early access, join the waitlist.</span>' +
+      '<span class="footer-tag">For early access, Create your account.</span>' +
       "</div>" +
       "</div>" +
       "</footer>";
@@ -152,9 +168,19 @@
     host.innerHTML = html;
   }
 
+  function wireAppLinks() {
+    var links = document.querySelectorAll("[data-app-link]");
+    for (var i = 0; i < links.length; i++) {
+      links[i].href = APP_URL;
+      links[i].target = "_blank";
+      links[i].rel = "noopener noreferrer";
+    }
+  }
+
   function init() {
     buildNavbar();
     buildFooter();
+    wireAppLinks();
   }
 
   if (document.readyState === "loading") {
@@ -167,4 +193,5 @@
   window.Y2O = window.Y2O || {};
   window.Y2O.buildNavbar = buildNavbar;
   window.Y2O.buildFooter = buildFooter;
+  window.Y2O.APP_URL = APP_URL;
 })();
