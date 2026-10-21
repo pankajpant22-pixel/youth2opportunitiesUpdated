@@ -1,993 +1,564 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Growth Score · Y2O</title>
-    <meta
-      name="description"
-      content="See your Growth Score · four quick questions show how strong your record looks today · Y2O is the verified growth record for high school students"
-    />
-    <link rel="stylesheet" href="brand.css" />
-    <style>
-      .s-hero {
-        position: relative;
-        overflow: hidden;
-      }
-      .s-hero::before {
-        content: "";
-        position: absolute;
-        top: -180px;
-        right: -180px;
-        width: 520px;
-        height: 520px;
-        background: radial-gradient(
-          closest-side,
-          rgba(26, 158, 143, 0.1),
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .s-hero .container {
-        position: relative;
-      }
-      .s-hero h1 {
-        margin-top: 16px;
-        max-width: 16ch;
-      }
-      .s-hero .lead {
-        margin-top: 20px;
-        max-width: 56ch;
-      }
-      .s-hero .center {
-        text-align: center;
-        max-width: 760px;
-        margin: 0 auto;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Growth Score · Y2O</title>
+<meta name="description" content="Estimate your Y2O Growth Score in five quick questions. Four factors, measured against a fixed standard. Never grades, never a ranking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#7B2D26;--maroon-dark:#61221D;--maroon-tint:#F7EDEB;
+  --navy:#1F2B6C;--navy-deep:#141B47;--navy-tint:#EEF1FA;--blue:#2541B2;
+  --teal:#0D9488;--teal-tint:#E3F4F1;--gold:#D4A843;--sun:#FFC845;
+  --ink:#121633;--text:#2B2F4A;--muted:#646A84;--line:#E6E8F0;--soft:#F7F7FA;
+  --h:'Sora',system-ui,-apple-system,'Segoe UI',sans-serif;--b:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:#fff;color:var(--text);font-family:var(--b);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#fff;z-index:200}
+h1,h2,h3,h4{font-family:var(--h);color:var(--ink);margin:0;font-weight:600;letter-spacing:-0.03em;line-height:1.1;text-wrap:balance}
+p{margin:0}a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.sec{padding:104px 0}
+.soft{background:var(--soft)}
+@media(max-width:800px){.sec{padding:72px 0}.wrap{padding:0 22px}}
 
-      /* Quiz card */
-      .quiz-wrap {
-        max-width: 880px;
-        margin: 0 auto;
-      }
-      .quiz-card {
-        background: var(--white);
-        border: 1px solid var(--coolGrey);
-        border-radius: 24px;
-        padding: 32px;
-        box-shadow:
-          0 24px 60px -24px rgba(21, 29, 72, 0.18),
-          0 8px 24px rgba(31, 43, 108, 0.06);
-      }
-      @media (min-width: 768px) {
-        .quiz-card {
-          padding: 48px;
-        }
-      }
+/* Callout pill: one style everywhere (maroon + yellow dot) */
+.tag{display:inline-flex;align-items:center;gap:10px;padding:7px 16px 7px 12px;border-radius:999px;background:var(--teal-tint);color:#0B7A70;font-size:14px;font-weight:700;letter-spacing:.01em;margin-bottom:18px}
+.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.2)}
+.tag.on-dark{background:var(--teal-tint);color:#0B7A70}
+.h2{font-size:clamp(2.1rem,4vw,3.3rem)}
+.lead{font-size:20px;color:var(--muted);margin-top:16px;max-width:720px;text-wrap:pretty}
+.center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
 
-      .progress-bar {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 40px;
-      }
-      .progress-seg {
-        flex: 1;
-        height: 6px;
-        background: var(--coolGrey);
-        border-radius: 999px;
-        transition: background 0.3s ease;
-      }
-      .progress-seg.active {
-        background: var(--teal);
-      }
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 30px;border-radius:999px;font-weight:700;font-size:17px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .2s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--maroon);color:#fff;box-shadow:0 10px 24px rgba(123,45,38,.22)}
+.btn-primary:hover{background:var(--maroon-dark)}
+.btn-ghost{background:var(--sun);color:var(--navy-deep);box-shadow:0 10px 24px rgba(212,168,67,.28)}
+.btn-ghost:hover{background:#F5B92E}
+.btn-line-light{background:var(--sun);color:var(--navy-deep)}
+.btn-line-light:hover{background:#F5B92E}
 
-      .quiz-step {
-        display: none;
-        min-height: 280px;
-      }
-      .quiz-step.active {
-        display: block;
-      }
+/* Announcement */
+.announce{background:var(--navy-deep);color:rgba(255,255,255,.85);font-size:14px;font-weight:500;text-align:center;padding:10px 56px;position:relative}
+.announce .live{display:inline-flex;align-items:center;gap:8px;background:var(--sun);color:var(--navy-deep);font-weight:700;padding:3px 12px 3px 9px;border-radius:999px;margin-right:10px;font-size:13px}
+.announce .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--maroon)}
+.announce a{color:#fff;font-weight:700;margin-left:10px;border-bottom:1px solid rgba(255,255,255,.35)}
+.announce button{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:18px;cursor:pointer;line-height:1}
+.announce button:hover{background:rgba(255,255,255,.2)}
 
-      .step-eyebrow {
-        font-family: var(--font-heading);
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--teal);
-        margin-bottom: 12px;
-      }
-      .step-q {
-        font-family: var(--font-heading);
-        font-weight: 700;
-        color: var(--deepNavy);
-        font-size: clamp(1.375rem, 1vw + 1rem, 1.75rem);
-        line-height: 1.25;
-        margin-bottom: 8px;
-      }
-      .step-sub {
-        color: var(--warmGrey);
-        font-size: 0.9375rem;
-        margin-bottom: 28px;
-      }
+/* Nav: standard full-width bar */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:80px}
+.logo img{height:40px;width:auto;display:block}
+.links{display:flex;gap:30px}
+.links a{font-size:16px;font-weight:700;color:var(--navy);position:relative;padding:6px 0;transition:color .2s ease}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--maroon);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.links a:hover{color:var(--maroon)}.links a:hover::after{transform:scaleX(1)}
+.nav .btn{height:48px;padding:0 24px;font-size:15px}
+.menu{display:none;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center;color:var(--navy)}
+.mobile{display:none}
+@media(max-width:1100px){.links,.nav .btn{display:none}.menu{display:flex}
+ .mobile.open{display:grid;gap:2px;padding:12px 22px 22px;border-top:1px solid var(--line);background:#fff}
+ .mobile a{padding:13px 4px;font-weight:700;color:var(--navy);border-bottom:1px solid var(--line)}
+ .mobile .btn{margin-top:14px;border:0;color:#fff}}
 
-      /* Option grids */
-      .opt-grid {
-        display: grid;
-        gap: 12px;
-      }
-      .opt-grid.cols-5 {
-        grid-template-columns: repeat(5, 1fr);
-      }
-      .opt-grid.cols-4 {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .opt-grid.cols-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      @media (max-width: 768px) {
-        .opt-grid.cols-5,
-        .opt-grid.cols-4 {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        .opt-grid.cols-3 {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
+/* Hero */
+.hero{position:relative;padding:84px 0 0;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-160px -10% auto;height:900px;background:radial-gradient(38% 40% at 22% 30%,rgba(123,45,38,.09),transparent 70%),radial-gradient(38% 40% at 80% 25%,rgba(37,65,178,.09),transparent 70%);pointer-events:none;z-index:-1}
+.hero h1{font-size:clamp(3rem,7vw,6rem);max-width:1000px;margin:0 auto;letter-spacing:-0.045em;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--maroon)}
+.motto{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:26px;font-family:var(--h);font-weight:600;font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--blue)}
+.motto span{display:inline-flex;align-items:center;gap:14px}
+.motto span:not(:last-child)::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--sun)}
+.hero .sub{font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--muted);margin:22px auto 0;max-width:860px}
+.hero .actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:42px}
+.stage{perspective:1600px;margin-top:72px;padding-bottom:80px}
+.product{max-width:1060px;margin:0 auto;transform-origin:50% 0;transform:rotateX(16deg) scale(.95);will-change:transform;position:relative}
+.panel{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:0 50px 100px rgba(18,22,51,.13),0 10px 30px rgba(18,22,51,.05);overflow:hidden;text-align:left}
+.ptop{display:flex;align-items:center;justify-content:space-between;padding:18px 26px;border-bottom:1px solid var(--line)}
+.who{display:flex;align-items:center;gap:12px}
+.av{width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--h);font-weight:600;display:flex;align-items:center;justify-content:center}
+.who b{display:block;color:var(--ink);font-size:16px}.who span{font-size:13px;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:6px 12px 6px 10px;border-radius:999px;background:var(--sun);color:var(--navy-deep)}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--maroon)}
+.pbody{display:grid;grid-template-columns:1.1fr 1fr}
+.score{padding:32px;border-right:1px solid var(--line)}
+.score-top{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.ring{position:relative;width:150px;height:150px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .bg{fill:none;stroke:var(--navy-tint);stroke-width:12}
+.ring .fg{fill:none;stroke:var(--maroon);stroke-width:12;stroke-linecap:round;stroke-dasharray:440;stroke-dashoffset:440;transition:stroke-dashoffset 1.6s var(--ease)}
+.ring .n{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .n b{font-family:var(--h);font-size:44px;font-weight:600;color:var(--ink);letter-spacing:-0.04em;line-height:1}
+.ring .n span{font-size:12px;color:var(--muted);font-weight:600}
+.ring .n i{font-style:normal;margin-top:6px;font-size:11px;font-weight:700;color:var(--maroon);background:var(--maroon-tint);padding:2px 8px;border-radius:999px}
+.facs h4{font-size:17px;margin-bottom:4px}.facs small{display:block;font-size:13px;color:var(--muted);margin-bottom:14px}
+.fac{display:grid;grid-template-columns:118px 1fr 38px;gap:10px;align-items:center;font-size:14px;margin-bottom:10px}
+.fac span{font-weight:600}
+.fac i{height:6px;background:var(--navy-tint);border-radius:6px;overflow:hidden}
+.fac i em{display:block;height:100%;width:0;background:var(--navy);border-radius:6px;transition:width 1.4s var(--ease)}
+.fac b{text-align:right;color:var(--ink);font-size:13px}
+.disc{margin-top:20px;font-size:14px;color:var(--muted);background:var(--soft);border-radius:14px;padding:12px 14px}
+.disc b{color:var(--ink)}
+.feed{padding:26px 30px}
+.feed h4{font-size:14px;font-family:var(--b);font-weight:700;color:var(--muted);margin-bottom:10px}
+.act{display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.act:last-child{border-bottom:0}
+.act .ic{width:40px;height:40px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--navy)}
+.act svg{width:19px;height:19px}
+.act b{display:block;font-size:15px;color:var(--ink)}.act small{font-size:13px;color:var(--muted)}
+.st{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.st.ok{background:var(--teal-tint);color:var(--teal)}.st.wait{background:#FFF6DC;color:#8A6200}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);background:var(--soft)}
+.stats div{padding:18px 26px;border-right:1px solid var(--line)}.stats div:last-child{border-right:0}
+.stats b{display:block;font-family:var(--h);font-size:26px;font-weight:600;color:var(--ink);letter-spacing:-0.03em}
+.stats span{font-size:13px;color:var(--muted);font-weight:600}
+.float{position:absolute;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 40px rgba(18,22,51,.12);padding:14px 16px;display:flex;align-items:center;gap:12px;text-align:left;opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.float.on{opacity:1;transform:none}
+.float .fi{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--teal-tint);color:var(--teal)}
+.float b{display:block;color:var(--ink);font-size:14px}.float small{color:var(--muted);font-size:12px}
+.f1{left:-46px;top:40%}
+@media(max-width:1100px){.f1{left:12px;top:auto;bottom:-26px}}
+@media(max-width:860px){.pbody{grid-template-columns:1fr}.score{border-right:0;border-bottom:1px solid var(--line)}.score-top{grid-template-columns:1fr;justify-items:center}.facs{width:100%}.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(2){border-right:0}.float{display:none}}
 
-      .opt-btn {
-        padding: 22px 16px;
-        background: var(--white);
-        border: 1.5px solid var(--coolGrey);
-        border-radius: var(--radius-md);
-        font-family: var(--font-heading);
-        font-weight: 600;
-        font-size: 0.9375rem;
-        color: var(--deepNavy);
-        cursor: pointer;
-        transition: all 0.18s ease;
-        text-align: center;
-        min-height: 64px;
-      }
-      .opt-btn:hover {
-        border-color: var(--teal);
-        background: var(--lightTeal);
-      }
-      .opt-btn.selected {
-        border-color: var(--teal);
-        background: var(--lightTeal);
-        color: var(--teal);
-      }
+/* Research strip */
+.research{padding:72px 0;text-align:center;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.research h2{font-size:clamp(1.5rem,2.4vw,2rem)}
+.research .lead{font-size:18px;margin-top:12px}
+.src{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:30px}
+.src a{font-family:var(--h);font-weight:600;font-size:16px;color:var(--muted);background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:999px;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.src a:hover{background:var(--teal-tint);border-color:#BFE6E0;color:var(--maroon)}
+.research .fine{font-size:13px;color:var(--muted);margin-top:24px}
 
-      .step-nav {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        margin-top: 32px;
-      }
-      .step-nav .back-btn {
-        background: transparent;
-        color: var(--warmGrey);
-        border: 0;
-        font-family: var(--font-heading);
-        font-weight: 600;
-        font-size: 0.875rem;
-        padding: 12px 4px;
-        cursor: pointer;
-      }
-      .step-nav .back-btn:hover {
-        color: var(--deepNavy);
-      }
-      .step-nav .next-btn {
-        min-width: 160px;
-      }
+/* Views (bento) */
+.views{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.view{border-radius:30px;padding:36px 32px 32px;display:flex;flex-direction:column;transition:transform .4s var(--ease)}
+.view:hover{transform:translateY(-4px)}
+.view .vn{font-family:var(--h);font-weight:600;font-size:14px;margin-bottom:18px;opacity:.6}
+.view h3{font-size:26px;margin-bottom:10px}
+.view p{font-size:17px;margin-bottom:28px}
+.vui{margin-top:auto;border-radius:20px;padding:18px}
+.v1{background:var(--navy);color:rgba(255,255,255,.8)}.v1 h3{color:#fff}.v1 .vui{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.v2{background:var(--maroon-tint)}.v2 .vui{background:#fff}
+.v3{background:var(--soft);border:1px solid var(--line)}.v3 .vui{background:#fff;border:1px solid var(--line)}
+.r{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:15px}
+.r b{font-family:var(--h);font-size:18px;color:inherit}
+.v1 .r b{color:#fff}.v2 .r b,.v3 .r b{color:var(--ink)}
+.mini-score{display:flex;align-items:center;gap:14px;padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.12)}
+.mini-score b{font-family:var(--h);font-size:40px;color:#fff;letter-spacing:-0.04em;line-height:1}
+.mini-score span{font-size:13px}
+.confirm{display:grid;gap:4px}
+.confirm b{font-size:15px;color:var(--ink)}.confirm small{font-size:13px;color:var(--muted)}
+.confirm button{margin-top:12px;height:42px;border:0;border-radius:999px;background:var(--maroon);color:#fff;font-weight:700;font-family:var(--b);font-size:15px}
+@media(max-width:960px){.views{grid-template-columns:1fr}}
 
-      /* Result screen */
-      .result {
-        text-align: center;
-        padding-top: 8px;
-      }
-      .result-ring {
-        position: relative;
-        width: 220px;
-        height: 220px;
-        margin: 0 auto 28px;
-      }
-      .result-ring svg {
-        transform: rotate(-90deg);
-        display: block;
-      }
-      .result-ring .center {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 0 24px;
-        gap: 2px;
-      }
-      .result-ring .num {
-        font-family: var(--font-heading);
-        font-weight: 700;
-        color: var(--deepNavy);
-        font-size: 3.5rem;
-        line-height: 1;
-        letter-spacing: -0.02em;
-      }
-      .result-ring .out {
-        font-family: var(--font-heading);
-        font-weight: 500;
-        font-size: 0.8125rem;
-        color: var(--warmGrey);
-        line-height: 1;
-        margin-top: 6px;
-      }
-      .result-ring .band {
-        font-family: var(--font-heading);
-        font-weight: 600;
-        font-size: 0.9375rem;
-        color: var(--navy);
-        line-height: 1;
-        margin-top: 8px;
-      }
+/* Flow: 5 steps */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:60px;position:relative}
+.flow::before{content:"";position:absolute;top:35px;left:9%;right:9%;height:2px;background:linear-gradient(90deg,var(--navy),var(--maroon),var(--sun));opacity:.3}
+.fs{text-align:center;position:relative}
+.fs .ic{width:70px;height:70px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 30px rgba(18,22,51,.08);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;color:var(--navy);position:relative}
+.fs .ic svg{width:27px;height:27px}
+.fs .no{position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;background:var(--maroon);color:var(--sun);font-family:var(--h);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.fs h4{font-size:19px;margin-bottom:8px}
+.fs p{font-size:16px;color:var(--muted);max-width:200px;margin:0 auto}
+@media(max-width:960px){.flow{grid-template-columns:1fr 1fr;gap:48px 18px}.flow::before{display:none}}
+@media(max-width:520px){.flow{grid-template-columns:1fr}}
 
-      .result-summary {
-        font-family: var(--font-heading);
-        font-weight: 600;
-        font-size: 1rem;
-        color: var(--deepNavy);
-        margin-bottom: 24px;
-        max-width: 44ch;
-        margin-left: auto;
-        margin-right: auto;
-      }
+/* Messy record */
+.messy-head{max-width:760px;margin-bottom:48px}
+.messy{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:stretch}
+.pts{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px 24px}
+.pts h4{font-size:18px;margin-bottom:6px}.pts p{font-size:16px;color:var(--muted)}
+.pts div{border-top:2px solid var(--maroon);padding-top:18px}
+.ba{display:grid;grid-template-rows:1fr 1fr;gap:16px}
+.box{border-radius:26px;padding:28px}
+.box h4{font-size:15px;font-family:var(--b);font-weight:700;margin-bottom:4px}
+.box p{font-family:var(--h);font-weight:600;font-size:21px;letter-spacing:-0.02em;margin-bottom:18px}
+.box ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.box li{font-size:14px;font-weight:600;padding:7px 13px;border-radius:999px}
+.before{background:#fff;border:1px dashed #CDD1DE}.before h4{color:var(--muted)}.before p{color:var(--muted)}.before li{background:var(--soft);color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(123,45,38,.5)}
+.after{background:var(--navy);color:#fff}.after h4{color:var(--sun)}.after p{color:#fff}.after li{background:rgba(255,255,255,.1);color:#fff}
+@media(max-width:960px){.messy{grid-template-columns:1fr;gap:40px}.pts,.ba{grid-template-rows:auto}}
+@media(max-width:520px){.pts{grid-template-columns:1fr}}
 
-      .result-bars {
-        max-width: 380px;
-        margin: 0 auto 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        text-align: left;
-      }
-      .result-bar .top {
-        display: flex;
-        justify-content: space-between;
-        font-family: var(--font-heading);
-        font-weight: 600;
-        font-size: 0.8125rem;
-        color: var(--deepNavy);
-        margin-bottom: 6px;
-      }
-      .result-bar .top span:last-child {
-        color: var(--warmGrey);
-        font-weight: 500;
-      }
-      .result-bar .track {
-        height: 6px;
-        background: var(--coolGrey);
-        border-radius: 999px;
-        overflow: hidden;
-      }
-      .result-bar .fill {
-        height: 100%;
-        border-radius: 999px;
-        transition: width 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
-        width: 0;
-      }
-      .result-bar.hours .fill {
-        background: var(--teal);
-      }
-      .result-bar.variety .fill {
-        background: var(--maroon);
-      }
-      .result-bar.confirm .fill {
-        background: var(--gold);
-      }
-      .result-bar.consistency .fill {
-        background: var(--navy);
-      }
+/* All of it counts */
+.counts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.ct{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 24px;transition:transform .35s var(--ease),border-color .2s ease,box-shadow .35s var(--ease)}
+.ct:hover{transform:translateY(-4px);border-color:#D4D8E4;box-shadow:0 18px 40px rgba(18,22,51,.07)}
+.ct .ic{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.ct .ic svg{width:21px;height:21px}
+.ct h4{font-size:18px;margin-bottom:4px;letter-spacing:-0.02em}
+.ct p{font-size:15px;color:var(--muted)}
+.ct:nth-child(4n+1) .ic{background:var(--navy-tint);color:var(--navy)}
+.ct:nth-child(4n+2) .ic{background:var(--teal-tint);color:var(--teal)}
+.ct:nth-child(4n+3) .ic{background:var(--maroon-tint);color:var(--maroon)}
+.ct:nth-child(4n+4) .ic{background:#FFF6DC;color:#9A7300}
+@media(max-width:960px){.counts{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.counts{grid-template-columns:1fr}}
 
-      .result-disclaimer {
-        font-size: 0.875rem;
-        color: var(--warmGrey);
-        font-style: italic;
-        margin-bottom: 28px;
-        max-width: 52ch;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .result-actions {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+/* What's changing (dark) */
+.dark{background:var(--navy-deep);color:rgba(255,255,255,.8);position:relative;overflow:hidden}
+.dark::before{content:"";position:absolute;width:760px;height:760px;right:-240px;top:-260px;background:radial-gradient(circle,rgba(123,45,38,.45),transparent 65%);pointer-events:none}
+.dark h2,.dark h4{color:#fff}.dark .lead{color:rgba(255,255,255,.7)}
+.changes{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;position:relative}
+.chg{border-top:1px solid rgba(255,255,255,.2);padding-top:26px}
+.chg .big{font-family:var(--h);font-weight:600;font-size:clamp(2.4rem,4vw,3.3rem);color:#fff;letter-spacing:-0.045em;line-height:1;margin-bottom:18px}
+.chg .big em{font-style:normal;color:var(--sun)}
+.chg h4{font-size:18px;margin-bottom:8px}
+.chg p{font-size:16px;color:rgba(255,255,255,.75)}
+.chg a{display:inline-block;margin-top:14px;font-size:13px;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.2)}
+.chg a:hover{color:#fff}
+@media(max-width:960px){.changes{grid-template-columns:1fr 1fr;gap:44px 20px}}
+@media(max-width:520px){.changes{grid-template-columns:1fr}}
 
-      /* How score works */
-      .score-pillars {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-top: 56px;
-      }
-      @media (max-width: 980px) {
-        .score-pillars {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 520px) {
-        .score-pillars {
-          grid-template-columns: 1fr;
-        }
-      }
+/* Opportunities */
+.opp{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.opp .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px}
+.feedcard{background:#fff;border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 40px 80px rgba(18,22,51,.09)}
+.feedcard .top{display:flex;justify-content:space-between;align-items:center;padding:6px 6px 14px}
+.feedcard .top b{font-family:var(--h);font-weight:600;color:var(--ink)}.feedcard .top small{color:var(--muted);font-size:13px}
+.oi{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:16px;border-radius:18px;transition:background .2s ease}
+.oi:hover{background:var(--soft)}
+.oi .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.oi .ic svg{width:22px;height:22px}
+.oi b{display:block;font-size:16px;color:var(--ink)}.oi small{font-size:14px;color:var(--muted)}
+.oi .fit{font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.note{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}
+@media(max-width:960px){.opp{grid-template-columns:1fr;gap:50px}}
 
-      .pillar-card {
-        background: var(--white);
-        border: 1px solid var(--coolGrey);
-        border-radius: 18px;
-        padding: 32px 26px;
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.2s ease,
-          border-color 0.2s ease;
-      }
-      .pillar-card:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-card-hover);
-        border-color: rgba(26, 158, 143, 0.4);
-      }
-      .pillar-card .ic {
-        width: 56px;
-        height: 56px;
-        border-radius: 14px;
-        background: var(--lightTeal);
-        color: var(--teal);
-        display: grid;
-        place-items: center;
-        margin-bottom: 20px;
-      }
-      .pillar-card .ic svg {
-        width: 28px;
-        height: 28px;
-      }
-      .pillar-card h4 {
-        color: var(--deepNavy);
-        font-size: 1.0625rem;
-        margin-bottom: 8px;
-        line-height: 1.3;
-      }
-      .pillar-card p {
-        font-size: 0.9375rem;
-        color: var(--warmGrey);
-        line-height: 1.5;
-        margin: 0;
-      }
-      .pillars-note {
-        margin-top: 28px;
-        font-size: 0.8125rem;
-        color: var(--warmGrey);
-        font-style: italic;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div data-navbar></div>
+/* Why Y2O */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:52px}
+.why div{border-top:3px solid var(--navy);padding-top:24px}
+.why div:nth-child(2){border-color:var(--teal)}.why div:nth-child(3){border-color:var(--sun)}.why div:nth-child(4){border-color:var(--maroon)}
+.why span{font-family:var(--h);font-weight:600;font-size:14px;color:var(--muted)}
+.why h4{font-size:21px;margin:10px 0 10px}
+.why p{font-size:17px;color:var(--muted)}
+@media(max-width:960px){.why{grid-template-columns:1fr 1fr;gap:40px 28px}}
+@media(max-width:520px){.why{grid-template-columns:1fr}}
 
-    <main>
-      <!-- Hero -->
-      <section
-        class="s-hero bg-warmIvory section-pad-md"
-        data-screen-label="01 Score hero"
-      >
-        <div class="container">
-          <div class="center">
-            <span class="eyebrow">Growth Check</span>
-            <h1>What&rsquo;s your Growth Score?</h1>
-            <p class="lead">
-              Answer four quick questions to estimate the strength of your
-              current record.
-            </p>
-          </div>
-        </div>
-      </section>
+/* FAQ */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;padding:26px 0;font-family:var(--h);font-weight:600;font-size:19px;color:var(--ink);display:flex;justify-content:space-between;gap:20px;letter-spacing:-0.02em}
+.qa summary::-webkit-details-marker{display:none}
+.qa .pl{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--maroon-tint);display:flex;align-items:center;justify-content:center;color:var(--maroon);transition:transform .3s var(--ease)}
+.qa details[open] .pl{transform:rotate(45deg)}
+.qa details p{padding:0 50px 26px 0;color:var(--muted);font-size:17px}
+@media(max-width:900px){.faq{grid-template-columns:1fr;gap:40px}}
 
-      <!-- Quiz -->
-      <section
-        class="bg-warmIvory"
-        style="padding-bottom: 96px"
-        data-screen-label="02 Score quiz"
-      >
-        <div class="container">
-          <div class="quiz-wrap">
-            <div class="quiz-card">
-              <div class="progress-bar" aria-label="Quiz progress">
-                <div class="progress-seg active"></div>
-                <div class="progress-seg"></div>
-                <div class="progress-seg"></div>
-                <div class="progress-seg"></div>
-              </div>
+/* Final CTA */
+.cta{background:var(--navy-deep);border-radius:40px;padding:90px 70px;display:grid;grid-template-columns:1.3fr auto;gap:40px;align-items:end;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;width:620px;height:620px;left:-160px;bottom:-360px;background:radial-gradient(circle,rgba(123,45,38,.55),transparent 65%)}
+.cta > *{position:relative;z-index:1}
+.cta h2{color:#fff;font-size:clamp(2.2rem,4.2vw,3.4rem)}
+.cta p{color:rgba(255,255,255,.72);font-size:19px;margin-top:16px;max-width:640px}
+.cta .actions{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){.cta{grid-template-columns:1fr;padding:60px 30px;border-radius:28px}}
 
-              <!-- Step 1: Hours -->
-              <div class="quiz-step active" data-step="1">
-                <div class="step-eyebrow">Step 01 · Hours</div>
-                <h2 class="step-q">
-                  How many hours have you completed outside school?
-                </h2>
-                <p class="step-sub">
-                  Across work, volunteering, clubs, sports, side projects, and
-                  community activities.
-                </p>
-                <div class="opt-grid cols-5" id="opt-hours">
-                  <button type="button" class="opt-btn" data-val="5">
-                    0 to 20
-                  </button>
-                  <button type="button" class="opt-btn" data-val="12">
-                    21 to 50
-                  </button>
-                  <button type="button" class="opt-btn" data-val="25">
-                    51 to 100
-                  </button>
-                  <button type="button" class="opt-btn" data-val="35">
-                    101 to 200
-                  </button>
-                  <button type="button" class="opt-btn" data-val="40">
-                    200 or more
-                  </button>
-                </div>
-                <div class="step-nav">
-                  <span></span>
-                  <button
-                    type="button"
-                    class="btn-primary next-btn"
-                    data-next
-                    disabled
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
+/* Footer */
+footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:80px 0 40px;margin-top:80px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-260px;background:radial-gradient(circle,rgba(123,45,38,.45),transparent 65%);pointer-events:none}
+footer .wrap{position:relative}
+.ft{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.ft img{height:46px;margin-bottom:18px}
+.ft p{color:rgba(255,255,255,.65);font-size:16px;max-width:300px}
+.ft h4{font-family:var(--b);font-size:13px;font-weight:700;margin-bottom:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--sun)}
+.ft a{display:block;color:rgba(255,255,255,.78);font-size:16px;margin-bottom:10px;transition:color .2s ease}
+.ft a:hover{color:#fff}
+.fb{margin-top:56px;padding-top:28px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px;color:rgba(255,255,255,.55)}
+@media(max-width:800px){.ft{grid-template-columns:1fr 1fr}}
 
-              <!-- Step 2: Variety -->
-              <div class="quiz-step" data-step="2">
-                <div class="step-eyebrow">Step 02 · Activity Variety</div>
-                <h2 class="step-q">What kinds of things have you done?</h2>
-                <p class="step-sub">Tap all that apply.</p>
-                <div class="opt-grid cols-3" id="opt-types">
-                  <button type="button" class="opt-btn" data-val="Volunteering">
-                    Volunteering
-                  </button>
-                  <button type="button" class="opt-btn" data-val="Work">
-                    Work
-                  </button>
-                  <button type="button" class="opt-btn" data-val="Clubs">
-                    Clubs
-                  </button>
-                  <button
-                    type="button"
-                    class="opt-btn"
-                    data-val="Sports and Competitions"
-                  >
-                    Sports and Competitions
-                  </button>
-                  <button
-                    type="button"
-                    class="opt-btn"
-                    data-val="Side Projects"
-                  >
-                    Side Projects
-                  </button>
-                  <button type="button" class="opt-btn" data-val="Community">
-                    Community
-                  </button>
-                </div>
-                <div class="step-nav">
-                  <button type="button" class="back-btn" data-back>
-                    ← Back
-                  </button>
-                  <button
-                    type="button"
-                    class="btn-primary next-btn"
-                    data-next
-                    disabled
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}.product{transform:none!important}.float{opacity:1;transform:none}}
 
-              <!-- Step 3: Confirmation -->
-              <div class="quiz-step" data-step="3">
-                <div class="step-eyebrow">Step 03 · Confirmation</div>
-                <h2 class="step-q">How much of it can someone else confirm?</h2>
-                <p class="step-sub">
-                  A coach, employer, teacher, supervisor, or club lead who saw
-                  the work.
-                </p>
-                <div class="opt-grid cols-4" id="opt-confirm">
-                  <button type="button" class="opt-btn" data-val="0">
-                    None yet
-                  </button>
-                  <button type="button" class="opt-btn" data-val="10">
-                    Some of it
-                  </button>
-                  <button type="button" class="opt-btn" data-val="20">
-                    Most of it
-                  </button>
-                  <button type="button" class="opt-btn" data-val="30">
-                    All of it
-                  </button>
-                </div>
-                <div class="step-nav">
-                  <button type="button" class="back-btn" data-back>
-                    ← Back
-                  </button>
-                  <button
-                    type="button"
-                    class="btn-primary next-btn"
-                    data-next
-                    disabled
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
+.faq{display:block;max-width:860px;margin:0 auto}
+.faq > div:first-child{text-align:center;margin-bottom:28px}
+.faq > div:first-child .lead{margin-left:auto;margin-right:auto}
+/* shared extras for inner pages */
+.links a.cur{color:var(--maroon)}.links a.cur::after{transform:scaleX(1)}
+.hero h1{font-size:clamp(2.5rem,5vw,4.4rem);max-width:1120px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+@media(max-width:960px){.split{grid-template-columns:1fr;gap:44px}}
+.gets{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+@media(max-width:960px){.gets{grid-template-columns:1fr 1fr}}@media(max-width:480px){.gets{grid-template-columns:1fr}}
+.dk-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px;position:relative}
+.dk{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:26px 24px}
+.dk .ic{width:44px;height:44px;border-radius:14px;background:rgba(255,200,69,.14);color:var(--sun);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.dk h4{font-size:18px;margin-bottom:6px}.dk p{font-size:15px;color:rgba(255,255,255,.72)}
+@media(max-width:960px){.dk-cards{grid-template-columns:1fr 1fr}}@media(max-width:480px){.dk-cards{grid-template-columns:1fr}}
+.cta-sub{font-size:15px;color:rgba(255,255,255,.6);margin-top:10px}
+/* consistency pass: one-line headings, centered section heads, same rhythm */
+.h2{font-size:clamp(2rem,3.5vw,2.9rem);max-width:none}
+.lead{max-width:980px}
+.head{text-align:center;max-width:1000px;margin:0 auto}
+.head .lead{margin-left:auto;margin-right:auto}
+.faq{display:block;max-width:860px;margin:0 auto}
+.faq > div:first-child{text-align:center;margin-bottom:28px}
+.faq > div:first-child .lead{margin-left:auto;margin-right:auto}
+/* step cards with arrows */
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:52px}
+.sc{position:relative;background:#fff;border:1px solid var(--line);border-top:5px solid var(--navy);border-radius:22px;padding:26px 24px 28px}
+.sc:nth-child(2){border-top-color:var(--teal)}.sc:nth-child(3){border-top-color:var(--maroon)}.sc:nth-child(4){border-top-color:var(--sun)}
+.sc .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.sc:nth-child(1) .ic{background:var(--navy-tint);color:var(--navy)}.sc:nth-child(2) .ic{background:var(--teal-tint);color:var(--teal)}.sc:nth-child(3) .ic{background:var(--maroon-tint);color:var(--maroon)}.sc:nth-child(4) .ic{background:#FFF6DC;color:#9A7300}
+.sc .lb{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.sc h4{font-size:19px;margin-bottom:6px}.sc p{font-size:15px;color:var(--muted)}
+.sc:not(:last-child)::after{content:"";position:absolute;right:-34px;top:50%;width:28px;height:28px;transform:translateY(-50%);border-radius:50%;background:var(--sun) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F2B6C' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/16px no-repeat;z-index:1}
+@media(max-width:960px){.steps4{grid-template-columns:1fr 1fr}.sc:not(:last-child)::after{display:none}}
+@media(max-width:520px){.steps4{grid-template-columns:1fr}}
+/* simple icon cards */
+.simple{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.si{text-align:center;background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px 22px}
+.si .ic{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.si:nth-child(1) .ic{background:var(--navy-tint);color:var(--navy)}.si:nth-child(2) .ic{background:var(--teal-tint);color:var(--teal)}.si:nth-child(3) .ic{background:var(--maroon-tint);color:var(--maroon)}.si:nth-child(4) .ic{background:#FFF6DC;color:#9A7300}
+.si h4{font-size:20px;margin-bottom:6px}.si p{font-size:15px;color:var(--muted)}
+@media(max-width:960px){.simple{grid-template-columns:1fr 1fr}}@media(max-width:480px){.simple{grid-template-columns:1fr}}
+/* privacy list */
+.priv{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.plist{display:grid;gap:12px}
+.prow{display:grid;grid-template-columns:52px 1fr;gap:18px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 22px}
+.prow .ic{width:52px;height:52px;border-radius:16px;background:var(--teal-tint);color:var(--teal);display:flex;align-items:center;justify-content:center}
+.prow h4{font-size:18px;margin-bottom:2px}.prow p{font-size:15px;color:var(--muted)}
+@media(max-width:960px){.priv{grid-template-columns:1fr;gap:36px}}
 
-              <!-- Step 4: Consistency -->
-              <div class="quiz-step" data-step="4">
-                <div class="step-eyebrow">Step 04 · Consistency</div>
-                <h2 class="step-q">
-                  How long have you been building this record?
-                </h2>
-                <p class="step-sub">
-                  A longer run shows commitment beyond a single year.
-                </p>
-                <div class="opt-grid cols-4" id="opt-time">
-                  <button type="button" class="opt-btn" data-val="0">
-                    Just started
-                  </button>
-                  <button type="button" class="opt-btn" data-val="4">
-                    6 months
-                  </button>
-                  <button type="button" class="opt-btn" data-val="7">
-                    1 year
-                  </button>
-                  <button type="button" class="opt-btn" data-val="10">
-                    2 or more years
-                  </button>
-                </div>
-                <div class="step-nav">
-                  <button type="button" class="back-btn" data-back>
-                    ← Back
-                  </button>
-                  <button
-                    type="button"
-                    class="btn-primary next-btn"
-                    data-next
-                    disabled
-                  >
-                    See my score
-                  </button>
-                </div>
-              </div>
 
-              <!-- Result -->
-              <div class="quiz-step" data-step="5">
-                <div class="result">
-                  <div class="result-ring">
-                    <svg width="220" height="220" viewBox="0 0 220 220">
-                      <circle
-                        cx="110"
-                        cy="110"
-                        r="96"
-                        fill="none"
-                        stroke="#E5E9F2"
-                        stroke-width="14"
-                      ></circle>
-                      <circle
-                        id="result-ring-fill"
-                        cx="110"
-                        cy="110"
-                        r="96"
-                        fill="none"
-                        stroke="#1F2B6C"
-                        stroke-width="14"
-                        stroke-linecap="round"
-                        stroke-dasharray="603.19"
-                        stroke-dashoffset="603.19"
-                        style="
-                          transition: stroke-dashoffset 0.9s
-                            cubic-bezier(0.4, 0.2, 0.2, 1);
-                        "
-                      ></circle>
-                    </svg>
-                    <div class="center">
-                      <div class="num" id="result-num">0</div>
-                      <div class="out">of 100</div>
-                      <div class="band" id="result-band">Developing</div>
-                    </div>
-                  </div>
+.steps3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:960px){.steps3{grid-template-columns:1fr}}
+.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.role{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 24px;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.role:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(18,22,51,.07)}
+.role .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.role:nth-child(1) .ic{background:var(--navy-tint);color:var(--navy)}.role:nth-child(2) .ic{background:var(--teal-tint);color:var(--teal)}.role:nth-child(3) .ic{background:var(--maroon-tint);color:var(--maroon)}.role:nth-child(4) .ic{background:#FFF6DC;color:#9A7300}
+.role h4{font-size:19px;margin-bottom:6px}.role p{font-size:15px;color:var(--muted)}
+.role small{display:block;margin-top:12px;font-size:13px;font-weight:700;color:var(--navy)}
+@media(max-width:960px){.roles{grid-template-columns:1fr 1fr}}@media(max-width:480px){.roles{grid-template-columns:1fr}}
+.andmore{text-align:center;margin-top:30px;font-size:17px;color:var(--muted)}
+.andmore b{color:var(--maroon)}
 
-                  <p class="result-summary">
-                    Your estimate reflects activity, variety, confirmation, and
-                    consistency.
-                  </p>
-                  <p
-                    class="result-disclaimer"
-                    style="
-                      font-style: normal;
-                      margin-top: -16px;
-                      margin-bottom: 28px;
-                    "
-                  >
-                    A real Y2O profile grows as activities are logged and
-                    confirmed.
-                  </p>
+.est{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;margin-top:64px;text-align:left;align-items:start}
+.qbox{background:#fff;border:1px solid var(--line);border-radius:28px;padding:34px;box-shadow:0 40px 80px rgba(18,22,51,.10)}
+.prog{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:26px}
+.prog i{height:6px;border-radius:6px;background:var(--navy-tint);transition:background .3s ease}
+.prog i.on{background:var(--maroon)}
+.q .lbq{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.q h2{font-size:clamp(1.5rem,2.6vw,2rem);margin:6px 0 4px}
+.q .hint{color:var(--muted);font-size:16px;margin-bottom:20px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.opt{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:16px;text-align:left;font-family:var(--b);font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .15s ease}
+.opt:hover{border-color:var(--teal);transform:translateY(-2px)}
+.opt[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-tint)}
+.opt small{display:block;font-weight:600;color:var(--muted);font-size:14px;margin-top:2px}
+.qnav{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.qnav button{height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:16px;font-family:var(--b);cursor:pointer;border:0}
+.qnav .back{background:var(--soft);color:var(--muted)}
+.qnav .next{background:var(--maroon);color:#fff}
+.qnav .next:disabled{opacity:.35;cursor:not-allowed}
+.live{position:sticky;top:110px;background:var(--navy);color:rgba(255,255,255,.8);border-radius:28px;padding:30px;box-shadow:0 40px 80px rgba(20,27,71,.25)}
+.live .lt{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.live .lt b{font-family:var(--h);color:#fff;font-size:17px}
+.ring2{position:relative;width:180px;aspect-ratio:1;margin:0 auto 22px}
+.ring2 svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring2 .bg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:14}
+.ring2 .fg{fill:none;stroke:var(--sun);stroke-width:14;stroke-linecap:round;stroke-dasharray:565;stroke-dashoffset:565;transition:stroke-dashoffset .6s var(--ease)}
+.ring2 .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring2 .num b{font-family:var(--h);font-size:52px;font-weight:600;color:#fff;letter-spacing:-0.05em;line-height:1}
+.ring2 .num span{font-size:13px;font-weight:600}
+.fc{margin-bottom:12px}
+.fc div{display:flex;justify-content:space-between;font-size:14px;font-weight:700;color:#fff}
+.fc div small{font-weight:600;color:rgba(255,255,255,.6)}
+.fc .tr{height:6px;background:rgba(255,255,255,.12);border-radius:6px;margin-top:6px;overflow:hidden}
+.fc .tr i{display:block;height:100%;width:0;background:#7FE3D6;border-radius:6px;transition:width .5s var(--ease)}
+.tip{margin-top:18px;background:rgba(255,255,255,.08);border-radius:16px;padding:14px 16px;font-size:14px;color:#fff}
+.tip b{display:block;color:var(--sun);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.result{text-align:center;padding:12px 0}
+.result .lbq{display:inline-block;margin-bottom:8px}
+.pg{margin-top:18px;border:1px solid var(--line);border-radius:18px;padding:14px 16px;background:var(--soft)}
+.pg summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--navy)}
+.pg summary::-webkit-details-marker{display:none}
+.pg .i{width:22px;height:22px;border-radius:50%;background:var(--sun);color:var(--navy-deep);display:inline-flex;align-items:center;justify-content:center;font-family:var(--h);font-size:13px;font-weight:700}
+.pg[open] .i{background:var(--maroon);color:#fff}
+.pgg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.pgg div{background:#fff;border-radius:14px;padding:14px}
+.pgg b{display:block;font-family:var(--h);color:var(--ink);font-size:16px}
+.pgg p{font-size:14px;color:var(--muted);margin:4px 0 8px}
+.pgg small{font-size:12px;color:var(--text);line-height:1.5}
+@media(max-width:700px){.pgg{grid-template-columns:1fr}}
+.result h2{font-size:clamp(1.8rem,3.2vw,2.4rem);margin-bottom:8px}
+.result p{color:var(--muted);margin:0 auto 24px;max-width:460px}
+.result .lbq{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.sw div{border-radius:18px;padding:18px;text-align:left}
+.sw small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.sw b{font-family:var(--h);font-size:18px;color:var(--ink)}
+.sw .up{background:var(--teal-tint)}.sw .up small{color:#0B7A70}
+.sw .dn{background:#FFF6DC}.sw .dn small{color:#8A6200}
+.result .acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+@media(max-width:960px){.est{grid-template-columns:1fr}.live{position:static}}
+.pinfos{margin-top:18px;display:grid;gap:10px}
+.pinfo{border:1px solid var(--line);border-radius:16px;padding:12px 16px;background:var(--soft)}
+.pinfo summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--navy)}
+.pinfo summary::-webkit-details-marker{display:none}
+.pinfo summary .i{width:22px;height:22px;border-radius:50%;background:var(--sun);color:var(--navy-deep);display:inline-flex;align-items:center;justify-content:center;font-family:var(--h);font-size:13px;font-weight:700}
+.pinfo[open] summary .i{background:var(--maroon);color:#fff}
+.pinfo p{font-size:15px;color:var(--muted);margin:10px 0}
+.pinfo .chips{display:flex;flex-wrap:wrap;gap:6px}
+.pinfo .chips span{font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.wfac{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.wf{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 24px}
+.wf .w{font-family:var(--h);font-size:40px;font-weight:600;letter-spacing:-0.04em;line-height:1;margin-bottom:12px}
+.wf:nth-child(1) .w{color:var(--maroon)}.wf:nth-child(2) .w{color:var(--navy)}.wf:nth-child(3) .w{color:var(--teal)}.wf:nth-child(4) .w{color:#9A7300}
+.wf h4{font-size:19px;margin-bottom:6px}.wf p{font-size:15px;color:var(--muted)}
+@media(max-width:960px){.wfac{grid-template-columns:1fr 1fr}}@media(max-width:480px){.wfac{grid-template-columns:1fr}}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+@media(max-width:960px){.rules{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
 
-                  <div class="result-bars" id="result-bars">
-                    <div class="result-bar hours">
-                      <div class="top">
-                        <span>Hours</span><span id="hb-val"></span>
-                      </div>
-                      <div class="track">
-                        <div class="fill" data-pct="0"></div>
-                      </div>
-                    </div>
-                    <div class="result-bar variety">
-                      <div class="top">
-                        <span>Activity Variety</span><span id="vb-val"></span>
-                      </div>
-                      <div class="track">
-                        <div class="fill" data-pct="0"></div>
-                      </div>
-                    </div>
-                    <div class="result-bar confirm">
-                      <div class="top">
-                        <span>Confirmation</span><span id="cb-val"></span>
-                      </div>
-                      <div class="track">
-                        <div class="fill" data-pct="0"></div>
-                      </div>
-                    </div>
-                    <div class="result-bar consistency">
-                      <div class="top">
-                        <span>Consistency</span><span id="tb-val"></span>
-                      </div>
-                      <div class="track">
-                        <div class="fill" data-pct="0"></div>
-                      </div>
-                    </div>
-                  </div>
+<div class="announce" id="announce"><span class="live">Live Now</span>50+ students across Ontario are building their records. Opportunities are open.<a href="opportunities.html">See opportunities</a><button aria-label="Close announcement" onclick="document.getElementById('announce').remove()">×</button></div>
 
-                  <div class="result-actions">
-                    <button
-                      type="button"
-                      class="btn-secondary"
-                      id="restart-btn"
-                    >
-                      Start over
-                    </button>
-                    <a href="contact.html" class="btn-primary"
-                      >Join the waitlist</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/y2o-logo.png" alt="Y2O"></a>
+    <div class="links"><a href="students.html">Students</a><a href="parents.html">Parents</a><a href="partners.html">Partners</a><a href="institutions.html">Institutions</a><a href="opportunities.html">Opportunities</a><a href="research.html">Research</a><a href="about.html">About</a></div>
+    <a class="btn btn-primary" href="contact.html">Create account</a>
+    <button class="menu" aria-label="Open menu" onclick="document.getElementById('mob').classList.toggle('open')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="mobile" id="mob"><a href="students.html">Students</a><a href="parents.html">Parents</a><a href="partners.html">Partners</a><a href="institutions.html">Institutions</a><a href="opportunities.html">Opportunities</a><a href="research.html">Research</a><a href="about.html">About</a><a class="btn btn-primary" href="contact.html">Create account</a></div>
+</nav>
 
-      <!-- How the score works -->
-      <section
-        class="bg-white section-pad-lg"
-        data-screen-label="03 How the score works"
-      >
-        <div class="container">
-          <div class="section-header center">
-            <span class="eyebrow">How the score works</span>
-            <h2>Four pillars. One score.</h2>
-            <p class="lead">
-              The Y2O Growth Score looks at hours, activity variety,
-              confirmation, and consistency.
-            </p>
-          </div>
+<header class="hero" style="padding-bottom:100px">
+  <div class="wrap">
+    <span class="tag rv">Growth Score estimator</span>
+    <h1 class="rv d1">What's your <em>Growth Score?</em></h1>
+    <p class="sub rv d2">Five quick questions. Watch it build as you answer. Nothing is saved.</p>
+    <div class="est rv d3" id="est">
+      <div class="qbox">
+        <div class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i></div>
+        <div id="qwrap"></div>
+        <div class="qnav" id="qnav"><button class="back" id="back">Back</button><button class="next" id="next" disabled>Next</button></div>
+      </div>
+      <aside class="live" aria-live="polite">
+        <div class="lt"><b>Your estimate</b><span class="chip">Live</span></div>
+        <div class="ring2"><svg viewBox="0 0 200 200"><circle class="bg" cx="100" cy="100" r="90"/><circle class="fg" id="fg" cx="100" cy="100" r="90"/></svg><div class="num"><b id="tot">0</b><span>of 100</span></div></div>
+        <div class="fc"><div>Competency Depth <small>35%</small></div><div class="tr"><i id="f-depth"></i></div></div>
+        <div class="fc"><div>Hours Breadth <small>25%</small></div><div class="tr"><i id="f-breadth"></i></div></div>
+        <div class="fc"><div>Profile Credibility <small>25%</small></div><div class="tr"><i id="f-cred"></i></div></div>
+        <div class="fc"><div>Consistency Over Time <small>15%</small></div><div class="tr"><i id="f-cons"></i></div></div>
+        <div class="tip"><b>Next best move</b><span id="tip">Answer the first question to start.</span></div>
+      </aside>
+    </div>
+  </div>
+</header>
 
-          <div class="score-pillars">
-            <div class="pillar-card">
-              <div class="ic" id="p-1-ic"></div>
-              <h4>Hours</h4>
-              <p>How much experience you have built outside school.</p>
-            </div>
-            <div class="pillar-card">
-              <div class="ic" id="p-2-ic"></div>
-              <h4>Activity Variety</h4>
-              <p>
-                How many different kinds of activity show up in your record.
-              </p>
-            </div>
-            <div class="pillar-card">
-              <div class="ic" id="p-3-ic"></div>
-              <h4>Confirmation</h4>
-              <p>How much of your record has been confirmed by others.</p>
-            </div>
-            <div class="pillar-card">
-              <div class="ic" id="p-4-ic"></div>
-              <h4>Consistency</h4>
-              <p>How steadily your record is built over time.</p>
-            </div>
-          </div>
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv"><span class="tag">How it's calculated</span><h2 class="h2">Four factors, one score out of 100</h2><p class="lead">Measured against a fixed standard. A 67 today means the same as a 67 next year.</p></div>
+    <div class="wfac">
+      <div class="wf rv"><div class="w">35%</div><h4>Competency Depth</h4><p>Skills built across the three pillars.</p></div>
+      <div class="wf rv d1"><div class="w">25%</div><h4>Hours Breadth</h4><p>Hours across different kinds of activity.</p></div>
+      <div class="wf rv d2"><div class="w">25%</div><h4>Profile Credibility</h4><p>How much someone has confirmed.</p></div>
+      <div class="wf rv d3"><div class="w">15%</div><h4>Consistency Over Time</h4><p>Showing up, month after month.</p></div>
+    </div>
+  </div>
+</section>
 
-          <p class="pillars-note">
-            The detailed scoring formula is proprietary and may evolve as Y2O
-            develops.
-          </p>
-        </div>
-      </section>
+<section class="sec">
+  <div class="wrap">
+    <div class="head rv"><span class="tag">Ground rules</span><h2 class="h2">What the score is, and isn't</h2></div>
+    <div class="rules">
+      <div class="si rv"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></div><h4>Never grades</h4><p>School marks are never part of it.</p></div>
+      <div class="si rv d1"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><h4>Never a ranking</h4><p>You against a standard, not each other.</p></div>
+      <div class="si rv d2"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div><h4>Confirmed counts more</h4><p>Supervisor confirmation carries the most weight.</p></div>
+    </div>
+  </div>
+</section>
 
-      <!-- Final CTA -->
-      <section
-        class="bg-deepNavy section-pad-md final-cta"
-        data-screen-label="04 Final CTA"
-      >
-        <div class="container">
-          <span class="eyebrow">Make it real</span>
-          <h2 class="mt-16">Turn the estimate into a verified record</h2>
-          <p class="lead">
-            Join the waitlist and we&rsquo;ll share next steps as Y2O becomes
-            available.
-          </p>
-          <div
-            class="row"
-            style="
-              margin-top: 28px;
-              display: flex;
-              gap: 12px;
-              justify-content: center;
-              flex-wrap: wrap;
-            "
-          >
-            <a href="contact.html" class="btn-primary">Join the waitlist</a>
-            <a href="students.html" class="btn-secondary">For students</a>
-          </div>
-        </div>
-      </section>
-    </main>
+<section style="padding:0 0 40px">
+  <div class="wrap"><div class="cta rv">
+    <div><span class="tag on-dark">Build the real thing</span><h2>Your real score starts here</h2><p>Log activities and get them confirmed.</p></div>
+    <div class="actions"><a class="btn btn-primary" href="contact.html">Create your account</a><a class="btn btn-line-light" href="students.html">How it works</a></div>
+  </div></div>
+</section>
+<script>
+(function(){
+  var Q=[
+    {k:'breadth',multi:true,t:'What kinds of things do you do?',h:'Pick all that apply.',o:[['Volunteering'],['Work or a job'],['Clubs'],['Sports or competitions'],['Side projects'],['Community or caregiving']]},
+    {k:'hours',t:'About how many hours in total?',h:'Across everything, roughly.',o:[['Under 20','Just starting',20],['20 to 50','Building',45],['50 to 100','Solid base',70],['100 to 200','Deep record',88],['Over 200','Serious commitment',100]]},
+    {k:'depth',multi:true,t:'What skills are you building?',h:'Pick all that apply. Not sure? Open a pillar below.',o:[['Think Sharp','How you think'],['People Strong','How you connect'],['Future Ready','How you show up']],info:[['Think Sharp','How you think and work through problems.','Problem-solving,Critical thinking,Creativity,Curiosity,Analytical thinking,Tech literacy'],['People Strong','How you work with and lead others.','Leadership,Teamwork,Communication,Understanding others,Handling conflict,Community awareness'],['Future Ready','How you show up and follow through.','Self-management,Initiative,Resilience,Reliability,Environmental care,Growth mindset']]},
+    {k:'cred',t:'How much could someone confirm?',h:'A coach, manager, teacher, or organizer.',o:[['Most of it','',90],['Some of it','',60],['Not much yet','',25]]},
+    {k:'cons',t:'How long have you been at it?',h:'Doing these activities regularly.',o:[['Just started','',20],['A few months','',45],['About a year','',70],['Two years or more','',95]]}
+  ];
+  var PG='<details class="pg"><summary><span class="i">i</span>What are the three pillars?</summary><div class="pgg"><div><b>Think Sharp</b><p>How you think and work through problems.</p><small>Problem-solving · Critical thinking · Creativity · Curiosity · Analytical thinking · Tech literacy</small></div><div><b>People Strong</b><p>How you work with and lead others.</p><small>Leadership · Teamwork · Communication · Understanding others · Handling conflict · Community awareness</small></div><div><b>Future Ready</b><p>How you show up and follow through.</p><small>Self-management · Initiative · Resilience · Reliability · Environmental care · Growth mindset</small></div></div></details>';
+  var A={breadth:[],hours:null,depth:[],cred:null,cons:null},step=0,$=function(i){return document.getElementById(i)};
+  function calc(){
+    var breadth=Math.min(100,A.breadth.length/4*70+(A.hours||0)*.3);
+    var depth=Math.min(100,A.depth.length/3*80+(A.hours||0)*.2);
+    var cred=A.cred||0,cons=A.cons||0;
+    var tot=Math.round(depth*.35+breadth*.25+cred*.25+cons*.15);window.__f={'Competency Depth':depth,'Hours Breadth':breadth,'Profile Credibility':cred,'Consistency Over Time':cons};
+    $('tot').textContent=tot;$('fg').style.strokeDashoffset=565-565*tot/100;
+    $('f-depth').style.width=depth+'%';$('f-breadth').style.width=breadth+'%';$('f-cred').style.width=cred+'%';$('f-cons').style.width=cons+'%';
+    var tip='Answer the first question to start.';
+    if(A.breadth.length){tip=cred&&cred<60?'Ask one supervisor to confirm an activity. Credibility moves fastest.':A.breadth.length<3?'Try one activity from a new category.':A.depth.length<3&&step>=2?'Pick something that builds a pillar you haven’t touched.':'Keep showing up. Consistency builds over time.'}
+    $('tip').textContent=tip;return tot;
+  }
+  function render(){
+    var bars=$('prog').children;for(var i=0;i<5;i++)bars[i].classList.toggle('on',i<=Math.min(step,4));
+    if(step>=Q.length){var t=calc(),F=window.__f,ks=Object.keys(F).sort(function(a,b){return F[b]-F[a]});
+      $('qwrap').innerHTML='<div class="result"><span class="lbq">All done</span><h2>Here’s where you’re strongest</h2><div class="sw"><div class="up"><small>Strongest</small><b>'+ks[0]+'</b></div><div class="dn"><small>Room to grow</small><b>'+ks[3]+'</b></div></div><p>Your real score builds as you log activities and people confirm them.</p><div class="acts"><a class="btn btn-primary" href="contact.html">Create your account</a><button class="btn btn-ghost" id="again" style="border:0;cursor:pointer">Start over</button></div></div>';
+      $('qnav').style.display='none';
+      $('again').onclick=function(){A={breadth:[],hours:null,depth:[],cred:null,cons:null};step=0;$('qnav').style.display='flex';render();calc()};return}
+    var q=Q[step],h='<div class="q"><span class="lbq">Question '+(step+1)+' of 5</span><h2>'+q.t+'</h2><p class="hint">'+q.h+'</p><div class="opts">';
+    q.o.forEach(function(o,i){var on=q.multi?A[q.k].indexOf(i)>-1:A[q.k]===o[2];h+='<button class="opt" data-i="'+i+'" aria-pressed="'+on+'">'+o[0]+(o[1]?'<small>'+o[1]+'</small>':'')+'</button>'});
+    h+='</div>'+(q.info?PG:'');
+    $('qwrap').innerHTML=h+'</div>';
+    $('qwrap').querySelectorAll('.opt').forEach(function(b){b.onclick=function(){var i=+b.getAttribute('data-i');if(q.multi){var a=A[q.k],p=a.indexOf(i);p>-1?a.splice(p,1):a.push(i)}else{A[q.k]=q.o[i][2]}render();calc()}});
+    $('back').style.visibility=step?'visible':'hidden';
+    $('next').disabled=q.multi?!A[q.k].length:A[q.k]===null;$('next').textContent=step===Q.length-1?'Done':'Next';
+  }
+  $('next').onclick=function(){step++;render();calc()};$('back').onclick=function(){if(step)step--;render()};
+  render();
+})();
+</script>
 
-    <div data-footer></div>
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div><img src="assets/y2o-logo-white.png" alt="Y2O"><p>The student-owned verified growth record. Built in Canada, live now in Ontario.</p></div>
+      <div><h4>For</h4><a href="students.html">Students</a><a href="parents.html">Parents</a><a href="partners.html">Partners</a><a href="institutions.html">Institutions</a></div>
+      <div><h4>Explore</h4><a href="opportunities.html">Opportunities</a><a href="score.html">Growth Score</a><a href="research.html">Research</a><a href="about.html">About</a></div>
+      <div><h4>Contact</h4><a href="mailto:info@youth2opportunities.ca">info@youth2opportunities.ca</a><a href="mailto:privacy@youth2opportunities.ca">privacy@youth2opportunities.ca</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+    </div>
+    <div class="fb"><span>© 2026 Y2O Growth Inc.</span><span>Every effort matters</span></div>
+  </div>
+</footer>
 
-    <script src="icons.js"></script>
-    <script src="partials.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        function setIcon(id, name, size) {
-          var el = document.getElementById(id);
-          if (el && window.icon) el.innerHTML = window.icon(name, size || 22);
-        }
-        setIcon("p-1-ic", "clock", 28);
-        setIcon("p-2-ic", "layers", 28);
-        setIcon("p-3-ic", "badge-check", 28);
-        setIcon("p-4-ic", "calendar", 28);
-
-        /* State */
-        var state = {
-          step: 1,
-          hours: null, // single value
-          types: [], // array
-          confirm: null,
-          time: null,
-        };
-
-        var steps = document.querySelectorAll(".quiz-step");
-        var segs = document.querySelectorAll(".progress-seg");
-
-        function showStep(n) {
-          state.step = n;
-          steps.forEach(function (s) {
-            s.classList.toggle(
-              "active",
-              parseInt(s.getAttribute("data-step"), 10) === n,
-            );
-          });
-          segs.forEach(function (seg, i) {
-            seg.classList.toggle("active", i < n);
-          });
-          if (n === 5) animateResult();
-        }
-
-        function gateNext(stepEl, ok) {
-          var btn = stepEl.querySelector("[data-next]");
-          if (btn) btn.disabled = !ok;
-        }
-
-        /* Step 1 — single-select Hours */
-        var hoursStep = document.querySelector('.quiz-step[data-step="1"]');
-        document.querySelectorAll("#opt-hours .opt-btn").forEach(function (b) {
-          b.addEventListener("click", function () {
-            document
-              .querySelectorAll("#opt-hours .opt-btn")
-              .forEach(function (x) {
-                x.classList.remove("selected");
-              });
-            b.classList.add("selected");
-            state.hours = parseInt(b.getAttribute("data-val"), 10);
-            gateNext(hoursStep, true);
-          });
-        });
-
-        /* Step 2 — multi-select Types */
-        var typesStep = document.querySelector('.quiz-step[data-step="2"]');
-        document.querySelectorAll("#opt-types .opt-btn").forEach(function (b) {
-          b.addEventListener("click", function () {
-            var v = b.getAttribute("data-val");
-            var idx = state.types.indexOf(v);
-            if (idx >= 0) {
-              state.types.splice(idx, 1);
-              b.classList.remove("selected");
-            } else {
-              state.types.push(v);
-              b.classList.add("selected");
-            }
-            gateNext(typesStep, state.types.length > 0);
-          });
-        });
-
-        /* Step 3 — Confirmation */
-        var confirmStep = document.querySelector('.quiz-step[data-step="3"]');
-        document
-          .querySelectorAll("#opt-confirm .opt-btn")
-          .forEach(function (b) {
-            b.addEventListener("click", function () {
-              document
-                .querySelectorAll("#opt-confirm .opt-btn")
-                .forEach(function (x) {
-                  x.classList.remove("selected");
-                });
-              b.classList.add("selected");
-              state.confirm = parseInt(b.getAttribute("data-val"), 10);
-              gateNext(confirmStep, true);
-            });
-          });
-
-        /* Step 4 — Consistency */
-        var timeStep = document.querySelector('.quiz-step[data-step="4"]');
-        document.querySelectorAll("#opt-time .opt-btn").forEach(function (b) {
-          b.addEventListener("click", function () {
-            document
-              .querySelectorAll("#opt-time .opt-btn")
-              .forEach(function (x) {
-                x.classList.remove("selected");
-              });
-            b.classList.add("selected");
-            state.time = parseInt(b.getAttribute("data-val"), 10);
-            gateNext(timeStep, true);
-          });
-        });
-
-        /* Next / Back navigation */
-        document.querySelectorAll("[data-next]").forEach(function (b) {
-          b.addEventListener("click", function () {
-            if (state.step < 5) showStep(state.step + 1);
-          });
-        });
-        document.querySelectorAll("[data-back]").forEach(function (b) {
-          b.addEventListener("click", function () {
-            if (state.step > 1) showStep(state.step - 1);
-          });
-        });
-
-        /* Score computation */
-        function computeScore() {
-          var h = state.hours || 0; // max 40
-          var v = state.types.length; // 0–6
-          var c = state.confirm || 0; // max 30
-          var t = state.time || 0; // max 10
-
-          var hScore = (h / 40) * 35;
-          var vScore = Math.min(v * 5, 25);
-          var cScore = c;
-          var tScore = t;
-
-          return Math.min(Math.round(hScore + vScore + cScore + tScore), 100);
-        }
-
-        function animateResult() {
-          var score = computeScore();
-          var num = document.getElementById("result-num");
-          var ring = document.getElementById("result-ring-fill");
-          var band = document.getElementById("result-band");
-          var total = 603.19;
-          ring.style.strokeDashoffset = total * (1 - score / 100);
-
-          /* Band label + ring colour */
-          var bandLabel, ringColor;
-          if (score <= 40) {
-            bandLabel = "Building";
-            ringColor = "#1A9E8F";
-          } else if (score <= 70) {
-            bandLabel = "Developing";
-            ringColor = "#1F2B6C";
-          } else {
-            bandLabel = "Strong";
-            ringColor = "#D4A843";
-          }
-          if (band) band.textContent = bandLabel;
-          if (ring) ring.setAttribute("stroke", ringColor);
-
-          /* Animate counter */
-          var start = 0;
-          var dur = 800;
-          var t0 = performance.now();
-          function tick(now) {
-            var p = Math.min((now - t0) / dur, 1);
-            var eased = 1 - Math.pow(1 - p, 3);
-            num.textContent = Math.round(start + (score - start) * eased);
-            if (p < 1) requestAnimationFrame(tick);
-            else num.textContent = score;
-          }
-          requestAnimationFrame(tick);
-
-          /* Pillar bars */
-          var pcts = [
-            Math.min(((state.hours || 0) / 40) * 100, 100),
-            Math.min((state.types.length / 5) * 100, 100),
-            Math.min(((state.confirm || 0) / 30) * 100, 100),
-            Math.min(((state.time || 0) / 10) * 100, 100),
-          ];
-          var labels = [
-            (state.hours || 0) + " h",
-            state.types.length + " kinds",
-            (state.confirm || 0) + "%",
-            ["Just started", "6 months", "1 year", "2+ years"][
-              [0, 4, 7, 10].indexOf(state.time)
-            ] || "—",
-          ];
-          var ids = ["hb-val", "vb-val", "cb-val", "tb-val"];
-          ids.forEach(function (id, i) {
-            var el = document.getElementById(id);
-            if (el) el.textContent = labels[i];
-          });
-
-          var fills = document.querySelectorAll("#result-bars .fill");
-          setTimeout(function () {
-            fills.forEach(function (f, i) {
-              f.style.width = pcts[i] + "%";
-            });
-          }, 60);
-        }
-
-        /* Restart */
-        document
-          .getElementById("restart-btn")
-          .addEventListener("click", function () {
-            state = {
-              step: 1,
-              hours: null,
-              types: [],
-              confirm: null,
-              time: null,
-            };
-            document.querySelectorAll(".opt-btn").forEach(function (b) {
-              b.classList.remove("selected");
-            });
-            document.querySelectorAll("[data-next]").forEach(function (b) {
-              b.disabled = true;
-            });
-            document
-              .querySelectorAll("#result-bars .fill")
-              .forEach(function (f) {
-                f.style.width = "0%";
-              });
-            var ring = document.getElementById("result-ring-fill");
-            if (ring) ring.style.strokeDashoffset = "603.19";
-            showStep(1);
-          });
-      });
-    </script>
-    <script src="/persist-ref.js"></script>
-  </body>
+<script>
+(function(){
+ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+ var p=document.getElementById('product');
+ if(p){function tilt(){var r=p.getBoundingClientRect(),vh=innerHeight,t=Math.min(1,Math.max(0,(vh-r.top)/(vh*.75)));p.style.transform='rotateX('+(16*(1-t))+'deg) scale('+(.95+.05*t)+')'}
+  if(!reduce){tilt();addEventListener('scroll',tilt,{passive:true});addEventListener('resize',tilt)}else{p.style.transform='none'}
+  new IntersectionObserver(function(es,o){if(!es[0].isIntersecting)return;o.disconnect();
+   document.querySelectorAll('[data-w]').forEach(function(e){e.style.width=e.dataset.w+'%'});
+   document.querySelectorAll('[data-delay]').forEach(function(e){setTimeout(function(){e.classList.add('on')},reduce?0:+e.dataset.delay)});
+  },{threshold:.3}).observe(p);}
+ document.querySelectorAll('[data-wv]').forEach(function(e){new IntersectionObserver(function(es,o){if(es[0].isIntersecting){e.style.width=e.dataset.wv+'%';o.disconnect()}},{threshold:.4}).observe(e)});
+})();
+</script>
+</body>
 </html>
