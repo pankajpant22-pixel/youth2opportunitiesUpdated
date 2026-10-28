@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>No Small Feat · Y2O</title>
+<meta name="description" content="A first job. Caring for siblings. A club you kept alive. Tell us about the growth that happens where no one is watching, or nominate a student you know. Grades 9–12.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#7B2D26;--maroon-dark:#61221D;--maroon-tint:#F7EDEB;
+  --navy:#1F2B6C;--navy-deep:#141B47;--navy-tint:#EEF1FA;--blue:#2541B2;
+  --teal:#0D9488;--teal-tint:#E3F4F1;--gold:#D4A843;--sun:#FFC845;
+  --ink:#121633;--text:#2B2F4A;--muted:#646A84;--line:#E6E8F0;--soft:#F7F7FA;
+  --h:'Sora',system-ui,-apple-system,'Segoe UI',sans-serif;--b:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:#fff;color:var(--text);font-family:var(--b);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#fff;z-index:200}
+h1,h2,h3,h4{font-family:var(--h);color:var(--ink);margin:0;font-weight:600;letter-spacing:-0.03em;line-height:1.1;text-wrap:balance}
+p{margin:0}a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.sec{padding:104px 0}
+.soft{background:var(--soft)}
+@media(max-width:800px){.sec{padding:72px 0}.wrap{padding:0 22px}}
+
+/* Callout pill: one style everywhere (maroon + yellow dot) */
+.tag{display:inline-flex;align-items:center;gap:10px;padding:7px 16px 7px 12px;border-radius:999px;background:var(--teal-tint);color:#0B7A70;font-size:14px;font-weight:700;letter-spacing:.01em;margin-bottom:18px}
+.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.2)}
+.tag.on-dark{background:var(--teal-tint);color:#0B7A70}
+.h2{font-size:clamp(2.1rem,4vw,3.3rem)}
+.lead{font-size:20px;color:var(--muted);margin-top:16px;max-width:720px;text-wrap:pretty}
+.center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 30px;border-radius:999px;font-weight:700;font-size:17px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .2s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--maroon);color:#fff;box-shadow:0 10px 24px rgba(123,45,38,.22)}
+.btn-primary:hover{background:var(--maroon-dark)}
+.btn-ghost{background:var(--sun);color:var(--navy-deep);box-shadow:0 10px 24px rgba(212,168,67,.28)}
+.btn-ghost:hover{background:#F5B92E}
+.btn-line-light{background:var(--sun);color:var(--navy-deep)}
+.btn-line-light:hover{background:#F5B92E}
+
+/* Announcement */
+.announce{background:var(--navy-deep);color:rgba(255,255,255,.85);font-size:14px;font-weight:500;text-align:center;padding:10px 56px;position:relative}
+.announce .live{display:inline-flex;align-items:center;gap:8px;background:var(--sun);color:var(--navy-deep);font-weight:700;padding:3px 12px 3px 9px;border-radius:999px;margin-right:10px;font-size:13px}
+.announce .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--maroon)}
+.announce a{color:#fff;font-weight:700;margin-left:10px;border-bottom:1px solid rgba(255,255,255,.35)}
+.announce button{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:18px;cursor:pointer;line-height:1}
+.announce button:hover{background:rgba(255,255,255,.2)}
+
+/* Nav: standard full-width bar */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:80px}
+.logo img{height:40px;width:auto;display:block}
+.links{display:flex;gap:30px}
+.links a{font-size:16px;font-weight:700;color:var(--navy);position:relative;padding:6px 0;transition:color .2s ease}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--maroon);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.links a:hover{color:var(--maroon)}.links a:hover::after{transform:scaleX(1)}
+.nav .btn{height:48px;padding:0 24px;font-size:15px}
+.menu{display:none;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center;color:var(--navy)}
+.mobile{display:none}
+@media(max-width:1100px){.links,.nav .btn{display:none}.menu{display:flex}
+ .mobile.open{display:grid;gap:2px;padding:12px 22px 22px;border-top:1px solid var(--line);background:#fff}
+ .mobile a{padding:13px 4px;font-weight:700;color:var(--navy);border-bottom:1px solid var(--line)}
+ .mobile .btn{margin-top:14px;border:0;color:#fff}}
+
+/* Hero */
+.hero{position:relative;padding:84px 0 0;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-160px -10% auto;height:900px;background:radial-gradient(38% 40% at 22% 30%,rgba(123,45,38,.09),transparent 70%),radial-gradient(38% 40% at 80% 25%,rgba(37,65,178,.09),transparent 70%);pointer-events:none;z-index:-1}
+.hero h1{font-size:clamp(3rem,7vw,6rem);max-width:1000px;margin:0 auto;letter-spacing:-0.045em;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--maroon)}
+.hero .sub{font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--muted);margin:22px auto 0;max-width:860px}
+/* Footer */
+footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:80px 0 40px;margin-top:80px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-260px;background:radial-gradient(circle,rgba(123,45,38,.45),transparent 65%);pointer-events:none}
+footer .wrap{position:relative}
+.ft{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.ft img{height:46px;margin-bottom:18px}
+.ft p{color:rgba(255,255,255,.65);font-size:16px;max-width:300px}
+.ft h4{font-family:var(--b);font-size:13px;font-weight:700;margin-bottom:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--sun)}
+.ft a{display:block;color:rgba(255,255,255,.78);font-size:16px;margin-bottom:10px;transition:color .2s ease}
+.ft a:hover{color:#fff}
+.fb{margin-top:56px;padding-top:28px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px;color:rgba(255,255,255,.55)}
+@media(max-width:800px){.ft{grid-template-columns:1fr 1fr}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}.product{transform:none!important}.float{opacity:1;transform:none}}
+/* shared extras for inner pages */
+.links a.cur{color:var(--maroon)}.links a.cur::after{transform:scaleX(1)}
+.hero h1{font-size:clamp(2.5rem,5vw,4.4rem);max-width:1120px}
+/* No Small Feat */
+.hero .lead{margin:22px auto 0;max-width:760px;color:var(--text)}
+.story{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:28px;padding:36px 32px;box-shadow:0 30px 70px rgba(18,22,51,.08)}
+.story iframe{display:block;border:0}
+.story noscript a{color:var(--maroon);font-weight:700}
+@media(max-width:800px){.story{padding:24px 16px;border-radius:22px}}
+</style>
+</head>
+<body>
+
+<div class="announce" id="announce"><a class="live" href="share-your-story.html" style="display:flex;width:fit-content;margin:0 auto 6px;border-bottom:0">No Small Feat: share a real story beyond grades. Share yours →</a>50+ students across Ontario are building their records. Opportunities are open.<a href="opportunities.html">See opportunities</a><button aria-label="Close announcement" onclick="document.getElementById('announce').remove()">×</button></div>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/y2o-logo.png" alt="Y2O"></a>
+    <div class="links"><a href="students.html">Students</a><a href="parents.html">Parents</a><a href="partners.html">Partners</a><a href="institutions.html">Institutions</a><a href="opportunities.html">Opportunities</a><a href="research.html">Research</a><a href="about.html">About</a></div>
+    <a class="btn btn-primary" href="contact.html">Create account</a>
+    <button class="menu" aria-label="Open menu" onclick="document.getElementById('mob').classList.toggle('open')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="mobile" id="mob"><a href="students.html">Students</a><a href="parents.html">Parents</a><a href="partners.html">Partners</a><a href="institutions.html">Institutions</a><a href="opportunities.html">Opportunities</a><a href="research.html">Research</a><a href="about.html">About</a><a class="btn btn-primary" href="contact.html">Create account</a></div>
+</nav>
+
+<header class="hero" style="padding-bottom:72px">
+  <div class="wrap">
+    <span class="tag rv">Grades 9–12</span>
+    <h1 class="rv d1">No Small Feat</h1>
+    <p class="sub rv d2">Your experience. Your story.</p>
+    <p class="lead rv d3">A first job. Caring for siblings. A club you kept alive. A project that failed. Some of the best growth happens where no one is watching. Tell us about yours, or nominate a student you know.</p>
+  </div>
+</header>
+
+<section class="sec" id="form" style="padding-top:0">
+  <div class="wrap">
+    <div class="story rv">
+      <iframe data-tally-src="https://tally.so/embed/e557Zo?alignLeft=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="900" frameborder="0" title="No Small Feat — Share Your Story"></iframe>
+      <noscript><p>The form needs JavaScript. <a href="https://tally.so/r/e557Zo" target="_blank" rel="noopener">Open it on Tally</a>.</p></noscript>
+    </div>
+  </div>
+</section>
+<script src="https://tally.so/widgets/embed.js" async></script>
+
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div><img src="assets/y2o-logo-white.png" alt="Y2O"><p>The student-owned verified growth record. Built in Canada, live now in Ontario.</p></div>
+      <div><h4>For</h4><a href="students.html">Students</a><a href="parents.html">Parents</a><a href="partners.html">Partners</a><a href="institutions.html">Institutions</a></div>
+      <div><h4>Explore</h4><a href="opportunities.html">Opportunities</a><a href="score.html">Growth Score</a><a href="research.html">Research</a><a href="about.html">About</a><a href="share-your-story.html">Share your story</a></div>
+      <div><h4>Contact</h4><a href="mailto:info@youth2opportunities.ca">info@youth2opportunities.ca</a><a href="mailto:privacy@youth2opportunities.ca">privacy@youth2opportunities.ca</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+    </div>
+    <div class="fb"><span>© 2026 Y2O Growth Inc.</span><span>Every effort matters</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+})();
+</script>
+<script src="assets/social.js"></script>
+</body>
+</html>
