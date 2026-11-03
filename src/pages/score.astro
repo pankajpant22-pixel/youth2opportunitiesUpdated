@@ -1,0 +1,396 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/score.css";
+---
+
+<Base title={"Growth Score · Y2O"} description={"Estimate your Y2O Growth Score in five quick questions. Four factors, measured against a fixed standard. Never grades, never a ranking."}>
+<header class="hero" style="padding-bottom: 100px">
+  <div class="wrap">
+    <span class="tag rv">Growth Score estimator</span>
+    <h1 class="rv d1">What's your <em>Growth Score?</em></h1>
+    <p class="sub rv d2">
+      Five quick questions. Watch it build as you answer. Nothing is saved.
+    </p>
+    <div class="est rv d3" id="est">
+      <div class="qbox">
+        <div class="prog" id="prog">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div id="qwrap"></div>
+        <div class="qnav" id="qnav">
+          <button class="back" id="back">Back</button
+          ><button class="next" id="next" disabled>Next</button>
+        </div>
+      </div>
+      <aside class="live" aria-live="polite">
+        <div class="lt">
+          <b>Your estimate</b><span class="chip">Live</span>
+        </div>
+        <div class="ring2">
+          <svg viewBox="0 0 200 200">
+            <circle class="bg" cx="100" cy="100" r="90" />
+            <circle class="fg" id="fg" cx="100" cy="100" r="90" />
+          </svg>
+          <div class="num"><b id="tot">0</b><span>of 100</span></div>
+        </div>
+        <div class="fc">
+          <div>Competency Depth <small>35%</small></div>
+          <div class="tr"><i id="f-depth"></i></div>
+        </div>
+        <div class="fc">
+          <div>Hours Breadth <small>25%</small></div>
+          <div class="tr"><i id="f-breadth"></i></div>
+        </div>
+        <div class="fc">
+          <div>Profile Credibility <small>25%</small></div>
+          <div class="tr"><i id="f-cred"></i></div>
+        </div>
+        <div class="fc">
+          <div>Consistency Over Time <small>15%</small></div>
+          <div class="tr"><i id="f-cons"></i></div>
+        </div>
+        <div class="tip">
+          <b>Next best move</b
+          ><span id="tip">Answer the first question to start.</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">How it's calculated</span>
+      <h2 class="h2">Four factors, one score out of 100</h2>
+      <p class="lead">
+        Measured against a fixed standard. A 67 today means the same as a 67
+        next year.
+      </p>
+    </div>
+    <div class="wfac">
+      <div class="wf rv">
+        <div class="w">35%</div>
+        <h4>Competency Depth</h4>
+        <p>Skills built across the three pillars.</p>
+      </div>
+      <div class="wf rv d1">
+        <div class="w">25%</div>
+        <h4>Hours Breadth</h4>
+        <p>Hours across different kinds of activity.</p>
+      </div>
+      <div class="wf rv d2">
+        <div class="w">25%</div>
+        <h4>Profile Credibility</h4>
+        <p>How much someone has confirmed.</p>
+      </div>
+      <div class="wf rv d3">
+        <div class="w">15%</div>
+        <h4>Consistency Over Time</h4>
+        <p>Showing up, month after month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">Ground rules</span>
+      <h2 class="h2">What the score is, and isn't</h2>
+    </div>
+    <div class="rules">
+      <div class="si rv">
+        <div class="ic">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </div>
+        <h4>Never grades</h4>
+        <p>School marks are never part of it.</p>
+      </div>
+      <div class="si rv d1">
+        <div class="ic">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+          </svg>
+        </div>
+        <h4>Never a ranking</h4>
+        <p>You against a standard, not each other.</p>
+      </div>
+      <div class="si rv d2">
+        <div class="ic">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 12l2 2 4-4" />
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+        </div>
+        <h4>Confirmed counts more</h4>
+        <p>Supervisor confirmation carries the most weight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 40px">
+  <div class="wrap">
+    <div class="cta rv">
+      <div>
+        <span class="tag on-dark">Build the real thing</span>
+        <h2>Your real score starts here</h2>
+        <p>Log activities and get them confirmed.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="contact.html"
+          >Create your account</a
+        ><a class="btn btn-line-light" href="students.html">How it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script is:inline>
+  (function () {
+    var Q = [
+      {
+        k: "breadth",
+        multi: true,
+        t: "What kinds of things do you do?",
+        h: "Pick all that apply.",
+        o: [
+          ["Volunteering"],
+          ["Work or a job"],
+          ["Clubs"],
+          ["Sports or competitions"],
+          ["Side projects"],
+          ["Community or caregiving"],
+        ],
+      },
+      {
+        k: "hours",
+        t: "About how many hours in total?",
+        h: "Across everything, roughly.",
+        o: [
+          ["Under 20", "Just starting", 20],
+          ["20 to 50", "Building", 45],
+          ["50 to 100", "Solid base", 70],
+          ["100 to 200", "Deep record", 88],
+          ["Over 200", "Serious commitment", 100],
+        ],
+      },
+      {
+        k: "depth",
+        multi: true,
+        t: "What skills are you building?",
+        h: "Pick all that apply. Not sure? Open a pillar below.",
+        o: [
+          ["Think Sharp", "How you think"],
+          ["People Strong", "How you connect"],
+          ["Future Ready", "How you show up"],
+        ],
+        info: [
+          [
+            "Think Sharp",
+            "How you think and work through problems.",
+            "Problem-solving,Critical thinking,Creativity,Curiosity,Analytical thinking,Tech literacy",
+          ],
+          [
+            "People Strong",
+            "How you work with and lead others.",
+            "Leadership,Teamwork,Communication,Understanding others,Handling conflict,Community awareness",
+          ],
+          [
+            "Future Ready",
+            "How you show up and follow through.",
+            "Self-management,Initiative,Resilience,Reliability,Environmental care,Growth mindset",
+          ],
+        ],
+      },
+      {
+        k: "cred",
+        t: "How much could someone confirm?",
+        h: "A coach, manager, teacher, or organizer.",
+        o: [
+          ["Most of it", "", 90],
+          ["Some of it", "", 60],
+          ["Not much yet", "", 25],
+        ],
+      },
+      {
+        k: "cons",
+        t: "How long have you been at it?",
+        h: "Doing these activities regularly.",
+        o: [
+          ["Just started", "", 20],
+          ["A few months", "", 45],
+          ["About a year", "", 70],
+          ["Two years or more", "", 95],
+        ],
+      },
+    ];
+    var PG =
+      '<details class="pg"><summary><span class="i">i</span>What are the three pillars?</summary><div class="pgg"><div><b>Think Sharp</b><p>How you think and work through problems.</p><small>Problem-solving · Critical thinking · Creativity · Curiosity · Analytical thinking · Tech literacy</small></div><div><b>People Strong</b><p>How you work with and lead others.</p><small>Leadership · Teamwork · Communication · Understanding others · Handling conflict · Community awareness</small></div><div><b>Future Ready</b><p>How you show up and follow through.</p><small>Self-management · Initiative · Resilience · Reliability · Environmental care · Growth mindset</small></div></div></details>';
+    var A = { breadth: [], hours: null, depth: [], cred: null, cons: null },
+      step = 0,
+      $ = function (i) {
+        return document.getElementById(i);
+      };
+    function calc() {
+      var breadth = Math.min(
+        100,
+        (A.breadth.length / 4) * 70 + (A.hours || 0) * 0.3,
+      );
+      var depth = Math.min(
+        100,
+        (A.depth.length / 3) * 80 + (A.hours || 0) * 0.2,
+      );
+      var cred = A.cred || 0,
+        cons = A.cons || 0;
+      var tot = Math.round(
+        depth * 0.35 + breadth * 0.25 + cred * 0.25 + cons * 0.15,
+      );
+      window.__f = {
+        "Competency Depth": depth,
+        "Hours Breadth": breadth,
+        "Profile Credibility": cred,
+        "Consistency Over Time": cons,
+      };
+      $("tot").textContent = tot;
+      $("fg").style.strokeDashoffset = 565 - (565 * tot) / 100;
+      $("f-depth").style.width = depth + "%";
+      $("f-breadth").style.width = breadth + "%";
+      $("f-cred").style.width = cred + "%";
+      $("f-cons").style.width = cons + "%";
+      var tip = "Answer the first question to start.";
+      if (A.breadth.length) {
+        tip =
+          cred && cred < 60
+            ? "Ask one supervisor to confirm an activity. Credibility moves fastest."
+            : A.breadth.length < 3
+              ? "Try one activity from a new category."
+              : A.depth.length < 3 && step >= 2
+                ? "Pick something that builds a pillar you haven’t touched."
+                : "Keep showing up. Consistency builds over time.";
+      }
+      $("tip").textContent = tip;
+      return tot;
+    }
+    function render() {
+      var bars = $("prog").children;
+      for (var i = 0; i < 5; i++)
+        bars[i].classList.toggle("on", i <= Math.min(step, 4));
+      if (step >= Q.length) {
+        var t = calc(),
+          F = window.__f,
+          ks = Object.keys(F).sort(function (a, b) {
+            return F[b] - F[a];
+          });
+        $("qwrap").innerHTML =
+          '<div class="result"><span class="lbq">All done</span><h2>Here’s where you’re strongest</h2><div class="sw"><div class="up"><small>Strongest</small><b>' +
+          ks[0] +
+          '</b></div><div class="dn"><small>Room to grow</small><b>' +
+          ks[3] +
+          '</b></div></div><p>Your real score builds as you log activities and people confirm them.</p><div class="acts"><a class="btn btn-primary" href="contact.html">Create your account</a><button class="btn btn-ghost" id="again" style="border:0;cursor:pointer">Start over</button></div></div>';
+        $("qnav").style.display = "none";
+        $("again").onclick = function () {
+          A = {
+            breadth: [],
+            hours: null,
+            depth: [],
+            cred: null,
+            cons: null,
+          };
+          step = 0;
+          $("qnav").style.display = "flex";
+          render();
+          calc();
+        };
+        return;
+      }
+      var q = Q[step],
+        h =
+          '<div class="q"><span class="lbq">Question ' +
+          (step + 1) +
+          " of 5</span><h2>" +
+          q.t +
+          '</h2><p class="hint">' +
+          q.h +
+          '</p><div class="opts">';
+      q.o.forEach(function (o, i) {
+        var on = q.multi ? A[q.k].indexOf(i) > -1 : A[q.k] === o[2];
+        h +=
+          '<button class="opt" data-i="' +
+          i +
+          '" aria-pressed="' +
+          on +
+          '">' +
+          o[0] +
+          (o[1] ? "<small>" + o[1] + "</small>" : "") +
+          "</button>";
+      });
+      h += "</div>" + (q.info ? PG : "");
+      $("qwrap").innerHTML = h + "</div>";
+      $("qwrap")
+        .querySelectorAll(".opt")
+        .forEach(function (b) {
+          b.onclick = function () {
+            var i = +b.getAttribute("data-i");
+            if (q.multi) {
+              var a = A[q.k],
+                p = a.indexOf(i);
+              p > -1 ? a.splice(p, 1) : a.push(i);
+            } else {
+              A[q.k] = q.o[i][2];
+            }
+            render();
+            calc();
+          };
+        });
+      $("back").style.visibility = step ? "visible" : "hidden";
+      $("next").disabled = q.multi ? !A[q.k].length : A[q.k] === null;
+      $("next").textContent = step === Q.length - 1 ? "Done" : "Next";
+    }
+    $("next").onclick = function () {
+      step++;
+      render();
+      calc();
+    };
+    $("back").onclick = function () {
+      if (step) step--;
+      render();
+    };
+    render();
+  })();
+</script>
+  <Reveal slot="scripts" />
+</Base>

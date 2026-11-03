@@ -1,0 +1,466 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/research.css";
+---
+
+<Base title={"Research · Y2O"} description={"The public data behind Y2O: grades compressing, skills shifting, youth pathways under pressure. Every number links to its source."} current="/research">
+<header class="hero" style="padding-bottom: 90px">
+  <div class="wrap">
+    <span class="tag rv">Research base</span>
+    <h1 class="rv d1">
+      The numbers shaping <em>youth, school, and work</em>
+    </h1>
+    <p class="sub rv d2">
+      Y2O is a product, not a study. Every claim on this site links to a
+      public source.
+    </p>
+    <div class="actions rv d3">
+      <a class="btn btn-primary" href="contact.html">Create your account</a
+      ><a class="btn btn-ghost" href="#sources">See the sources</a>
+    </div>
+    <div class="src-strip rv d3">
+      <a
+        href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
+        target="_blank"
+        rel="noopener"
+        >World Economic Forum</a
+      >
+      <a href="https://www.oecd.org/pisa/" target="_blank" rel="noopener"
+        >OECD</a
+      >
+      <a
+        href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005"
+        target="_blank"
+        rel="noopener"
+        >Government of Canada</a
+      >
+      <a
+        href="https://www.ontario.ca/page/get-your-high-school-volunteer-hours"
+        target="_blank"
+        rel="noopener"
+        >Ontario Ministry of Education</a
+      >
+      <a
+        href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+        target="_blank"
+        rel="noopener"
+        >Fraser Institute</a
+      >
+      <a
+        href="https://uwaterloo.ca/engineering/future-students"
+        target="_blank"
+        rel="noopener"
+        >University of Waterloo</a
+      >
+    </div>
+  </div>
+</header>
+
+<section class="sec dark">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag on-dark">The case</span>
+      <h2 class="h2">What the public data shows</h2>
+      <p class="lead">Four numbers we keep coming back to.</p>
+    </div>
+    <div class="four">
+      <div class="chg rv">
+        <div class="big">914<em>K</em></div>
+        <h4>Youth off track</h4>
+        <p>Canadians 15 to 29 not in school, work, or training.</p>
+        <a
+          href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005"
+          target="_blank"
+          rel="noopener"
+          >Government of Canada / ESDC, 2025</a
+        >
+      </div>
+      <div class="chg rv d1">
+        <div class="big">39<em>%</em></div>
+        <h4>Skills are changing</h4>
+        <p>Of workers' core skills, by 2030.</p>
+        <a
+          href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
+          target="_blank"
+          rel="noopener"
+          >World Economic Forum, 2025</a
+        >
+      </div>
+      <div class="chg rv d2">
+        <div class="big">87<em>%</em></div>
+        <h4>Grades compressed</h4>
+        <p>UBC average entrance grade, up from 70%.</p>
+        <a
+          href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+          target="_blank"
+          rel="noopener"
+          >Fraser Institute, 2024</a
+        >
+      </div>
+      <div class="chg rv d3">
+        <div class="big">40<em>h</em></div>
+        <h4>The legal floor</h4>
+        <p>Community involvement needed to graduate in Ontario.</p>
+        <a
+          href="https://www.ontario.ca/page/get-your-high-school-volunteer-hours"
+          target="_blank"
+          rel="noopener"
+          >Ontario Ministry of Education</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">The shift</span>
+      <h2 class="h2">Grades compress, so the record has to do more</h2>
+      <p class="lead">
+        When top grades all look the same, what students did beyond class
+        carries the weight.
+      </p>
+    </div>
+    <div class="shift">
+      <div class="rv">
+        <p class="body">
+          Twenty years ago the average admitted student at UBC had 70%.
+          Today it's 87%. The same shift shows up at most major Canadian
+          universities.
+        </p>
+        <p class="quote">
+          When the top quarter of grades all look the same, the record has
+          to separate them.
+        </p>
+        <p class="body">
+          Universities now adjust grades by school and look harder at
+          confirmed work. Employers do the same. The record has to start
+          earlier.
+        </p>
+      </div>
+      <div
+        class="chart rv d1"
+        aria-label="UBC average entrance grade, 70 percent in 2004, 87 percent in 2024"
+      >
+        <h4>UBC average entrance grade</h4>
+        <p class="s">Then vs now, twenty years apart</p>
+        <div class="bars">
+          <div class="bcol"><b>70%</b><i data-h="56"></i></div>
+          <div class="bcol now"><b>87%</b><i data-h="70"></i></div>
+        </div>
+        <div class="blab"><span>2004</span><span>2024</span></div>
+        <span class="delta">+17 points</span>
+        <small>Source: Fraser Institute, 2024</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">The grades problem</span>
+      <h2 class="h2">Why grades alone no longer work</h2>
+      <p class="lead">
+        The data has moved in one direction for two decades.
+      </p>
+    </div>
+    <div class="trio">
+      <div class="tr3 rv">
+        <div class="k">Adj.</div>
+        <span class="kl">Applied school by school</span>
+        <h4>Admissions adjustment</h4>
+        <p>
+          Waterloo Engineering adjusts grades to compare high schools
+          fairly.
+        </p>
+        <a
+          href="https://uwaterloo.ca/engineering/future-students"
+          target="_blank"
+          rel="noopener"
+          >University of Waterloo</a
+        >
+      </div>
+      <div class="tr3 rv d1">
+        <div class="k">+17</div>
+        <span class="kl">UBC entrance grade, 20 years</span>
+        <h4>Grade inflation</h4>
+        <p>From 70% to 87%. The same trend shows up across Canada.</p>
+        <a
+          href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+          target="_blank"
+          rel="noopener"
+          >Fraser Institute, 2024</a
+        >
+      </div>
+      <div class="tr3 rv d2">
+        <div class="k">−35</div>
+        <span class="kl">PISA points, 2003 to 2022</span>
+        <h4>Achievement decline</h4>
+        <p>Math scores fell about a full grade level while grades rose.</p>
+        <a href="https://www.oecd.org/pisa/" target="_blank" rel="noopener"
+          >OECD PISA, via Fraser Institute</a
+        >
+      </div>
+    </div>
+    <p class="short rv">
+      <b>The short version:</b> grades went up, measured achievement went
+      down. The record students build outside class fills the gap.
+    </p>
+  </div>
+</section>
+
+<section class="sec dark">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag on-dark">Future of work</span>
+      <h2 class="h2">What's rising, and what's falling</h2>
+      <p class="lead">
+        The rising skills are about thinking, leading, and learning. Not
+        specific tools.
+      </p>
+    </div>
+    <div class="rf">
+      <div class="rfc up rv">
+        <h4>
+          Rising by 2030
+          <small
+            style="
+              font-family: var(--b);
+              font-size: 12px;
+              font-weight: 700;
+              padding: 3px 9px;
+              border-radius: 999px;
+              background: rgba(255, 255, 255, 0.12);
+              color: #fff;
+            "
+            >Illustrative</small
+          >
+        </h4>
+        <ul>
+          <li>
+            <span>AI and big data</span><i><em data-wv="92"></em></i>
+          </li>
+          <li>
+            <span>Creative thinking</span><i><em data-wv="80"></em></i>
+          </li>
+          <li>
+            <span>Resilience and flexibility</span
+            ><i><em data-wv="74"></em></i>
+          </li>
+          <li>
+            <span>Leadership</span><i><em data-wv="68"></em></i>
+          </li>
+        </ul>
+      </div>
+      <div class="rfc down rv d1">
+        <h4>
+          Falling by 2030
+          <small
+            style="
+              font-family: var(--b);
+              font-size: 12px;
+              font-weight: 700;
+              padding: 3px 9px;
+              border-radius: 999px;
+              background: rgba(255, 255, 255, 0.12);
+              color: #fff;
+            "
+            >Illustrative</small
+          >
+        </h4>
+        <ul>
+          <li>
+            <span>Customer service</span><i><em data-wv="40"></em></i>
+          </li>
+          <li>
+            <span>Manual dexterity</span><i><em data-wv="55"></em></i>
+          </li>
+          <li>
+            <span>Routine reading and writing</span
+            ><i><em data-wv="62"></em></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p class="rf-note rv">
+      Skill direction from the World Economic Forum, Future of Jobs 2025.
+      Bar lengths are illustrative, not WEF figures.
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="sources">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">Sources we cite</span>
+      <h2 class="h2">The reports behind Y2O</h2>
+      <p class="lead">
+        All public. No paywalls between you and the source.
+      </p>
+    </div>
+    <div class="srcs">
+      <div class="sx rv d0">
+        <div class="top"><span>Skills</span><b>39%</b></div>
+        <h4>World Economic Forum</h4>
+        <small>Future of Jobs Report · 2025</small>
+        <p>Core skills expected to change by 2030.</p>
+        <a
+          href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
+          target="_blank"
+          rel="noopener"
+          >weforum.org →</a
+        >
+      </div>
+      <div class="sx rv d1">
+        <div class="top"><span>Youth</span><b>914K</b></div>
+        <h4>Government of Canada / ESDC</h4>
+        <small>Labour market · 2025</small>
+        <p>Youth 15 to 29 not in school, work, or training.</p>
+        <a
+          href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005"
+          target="_blank"
+          rel="noopener"
+          >canada.ca →</a
+        >
+      </div>
+      <div class="sx rv d2">
+        <div class="top"><span>Admissions</span><b>87%</b></div>
+        <h4>Fraser Institute</h4>
+        <small>Entrance grade report · 2024</small>
+        <p>UBC average entrance grade, up from 70%.</p>
+        <a
+          href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+          target="_blank"
+          rel="noopener"
+          >fraserinstitute.org →</a
+        >
+      </div>
+      <div class="sx rv d0">
+        <div class="top"><span>Ontario</span><b>40h</b></div>
+        <h4>Ontario Ministry of Education</h4>
+        <small>Secondary School Diploma</small>
+        <p>
+          Community involvement needed to graduate. The floor, not the
+          ceiling.
+        </p>
+        <a
+          href="https://www.ontario.ca/page/get-your-high-school-volunteer-hours"
+          target="_blank"
+          rel="noopener"
+          >ontario.ca →</a
+        >
+      </div>
+      <div class="sx rv d1">
+        <div class="top"><span>Admissions</span><b>Adj.</b></div>
+        <h4>University of Waterloo</h4>
+        <small>Engineering admissions</small>
+        <p>School-by-school adjustment to incoming grades.</p>
+        <a
+          href="https://uwaterloo.ca/engineering/future-students"
+          target="_blank"
+          rel="noopener"
+          >uwaterloo.ca →</a
+        >
+      </div>
+      <div class="sx rv d2">
+        <div class="top"><span>Achievement</span><b>−35</b></div>
+        <h4>OECD PISA</h4>
+        <small>2003 to 2022 · math</small>
+        <p>Canadian math scores down about a full grade level.</p>
+        <a href="https://www.oecd.org/pisa/" target="_blank" rel="noopener"
+          >oecd.org →</a
+        >
+      </div>
+    </div>
+    <p class="disc rv">
+      <b>Informed by, not endorsed by.</b> These organizations are not
+      affiliated with Y2O and do not endorse it.
+    </p>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap faq">
+    <div class="rv">
+      <span class="tag">FAQ</span>
+      <h2 class="h2">Questions about the research</h2>
+      <p class="lead" style="font-size: 18px">
+        Still wondering?
+        <a
+          href="mailto:info@youth2opportunities.ca"
+          style="color: var(--maroon); font-weight: 700"
+          >info@youth2opportunities.ca</a
+        >
+      </p>
+    </div>
+    <div class="qa rv d1">
+      <details open>
+        <summary>
+          Do these organizations endorse Y2O?<span class="pl">+</span>
+        </summary>
+        <p>
+          No. We cite their public research. They are not affiliated with
+          Y2O.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Do you commission your own research?<span class="pl">+</span>
+        </summary>
+        <p>
+          No. We don't commission reports and then quote them as
+          independent.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Why include grade inflation?<span class="pl">+</span>
+        </summary>
+        <p>
+          It shows why grades alone are a weaker signal than they used to
+          be.
+        </p>
+      </details>
+      <details>
+        <summary>Are the sources linked?<span class="pl">+</span></summary>
+        <p>Yes. Every number on this page links to its public source.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 40px">
+  <div class="wrap">
+    <div class="cta rv">
+      <div>
+        <span class="tag on-dark">Build with the data in mind</span>
+        <h2>Start before the record is needed</h2>
+        <p>Live now across Ontario.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="contact.html"
+          >Create your account</a
+        ><a class="btn btn-line-light" href="about.html">About Y2O</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script is:inline>
+  document.querySelectorAll("[data-h]").forEach(function (e) {
+    new IntersectionObserver(
+      function (es, o) {
+        if (es[0].isIntersecting) {
+          e.style.height = e.dataset.h + "%";
+          o.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    ).observe(e);
+  });
+</script>
+  <Reveal slot="scripts" />
+</Base>

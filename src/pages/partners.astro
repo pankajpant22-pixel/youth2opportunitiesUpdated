@@ -1,0 +1,682 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/partners.css";
+---
+
+<Base title={"Partners · Y2O"} description={"Confirm what students did with you in one tap. Free organization accounts to assign supervisors, manage requests, and post opportunities."} current="/partners">
+<header class="hero">
+  <div class="wrap">
+    <span class="tag rv"
+      >For coaches, employers, clubs, charities, and programs</span
+    >
+    <h1 class="rv d1">Your role <em>matters</em></h1>
+    <div class="motto rv d2">
+      <span>Track it</span><span>Verify it</span
+      ><span>Carry it forward</span>
+    </div>
+    <p class="sub rv d2">
+      Students already come to you. Confirm what you saw in one tap so they
+      carry the proof for life.
+    </p>
+    <div class="actions rv d3">
+      <a class="btn btn-primary" href="contact.html"
+        >Create an organization account</a
+      ><a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+  </div>
+  <div class="wrap stage">
+    <div class="product narrow" id="product">
+      <div class="panel">
+        <div class="ptop">
+          <div class="who">
+            <div class="av">Y</div>
+            <div><b>Confirmation request</b><span>2 min ago</span></div>
+          </div>
+          <span class="chip">Needs You</span>
+        </div>
+        <div class="req-p">
+          <p class="hi">Hi Ellen,</p>
+          <div class="req-card">
+            <div class="stu">
+              <div class="av">PS</div>
+              <div><b>Priya S.</b><small>Grade 11 student</small></div>
+            </div>
+            <h4>Reading buddy session</h4>
+            <div class="rr">
+              <span>Where</span><b>Oakville Public Library</b>
+            </div>
+            <div class="rr"><span>When</span><b>Saturday, May 9</b></div>
+            <div class="rr">
+              <span>Hours</span><b>3h this session · 24h total</b>
+            </div>
+            <div class="wit">
+              You witnessed this. Priya says you signed her in at the desk.
+            </div>
+            <div class="rbtn">
+              <div class="c">Confirm</div>
+              <div class="d">Decline</div>
+            </div>
+          </div>
+        </div>
+        <div class="req-foot">
+          <span>No account required</span><span>Takes under a minute</span>
+        </div>
+      </div>
+      <div class="float fr" data-delay="1300">
+        <div class="fi">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 12l2 2 4-4" />
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+        </div>
+        <div>
+          <b>Confirmed in 42 sec</b><small>Priya's record updated</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">Who counts as a partner</span>
+      <h2 class="h2">If you saw the work, you can confirm it</h2>
+      <p class="lead">
+        No formal program needed. Y2O works for everyone students learn
+        from.
+      </p>
+    </div>
+    <div class="roles">
+      <div class="role rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="8" r="6" />
+            <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+          </svg>
+        </div>
+        <h4>Coaches and team leads</h4>
+        <p>Sports, music, debate, robotics, drama, dance.</p>
+        <small>Practices · games · tournaments</small>
+      </div>
+      <div class="role rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+          </svg>
+        </div>
+        <h4>Employers and supervisors</h4>
+        <p>Cafés, retail, summer jobs, co-op placements.</p>
+        <small>Shifts · projects · references</small>
+      </div>
+      <div class="role rv d2">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          </svg>
+        </div>
+        <h4>Teachers and program leads</h4>
+        <p>Clubs, libraries, after-school programs, faith groups.</p>
+        <small>Sessions · events · weekly programs</small>
+      </div>
+      <div class="role rv d3">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"
+            />
+          </svg>
+        </div>
+        <h4>Community organizers</h4>
+        <p>Charities, councils, tutoring, neighbourhood projects.</p>
+        <small>Drives · events · ongoing service</small>
+      </div>
+    </div>
+    <p class="andmore rv">
+      Food banks, libraries, arts programs, tutoring services, mentorship
+      programs, <b>and more.</b>
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">How it works</span>
+      <h2 class="h2">From request to confirmation in under a minute</h2>
+      <p class="lead">No extra software. No paper.</p>
+    </div>
+    <div class="steps4">
+      <div class="sc rv">
+        <div class="ic">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+          </svg>
+        </div>
+        <span class="lb">Step 1</span>
+        <h4>Student logs it</h4>
+        <p>They name you as the person who saw it.</p>
+      </div>
+      <div class="sc rv d1">
+        <div class="ic">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-10 6L2 7" />
+          </svg>
+        </div>
+        <span class="lb">Step 2</span>
+        <h4>You get a request</h4>
+        <p>By email or text. No account needed.</p>
+      </div>
+      <div class="sc rv d2">
+        <div class="ic">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="m16 11 2 2 4-4" />
+          </svg>
+        </div>
+        <span class="lb">Step 3</span>
+        <h4>Confirm or decline</h4>
+        <p>One tap. You see only the activity.</p>
+      </div>
+      <div class="sc rv d3">
+        <div class="ic">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 7 13.5 15.5l-5-5L2 17" />
+            <path d="M16 7h6v6" />
+          </svg>
+        </div>
+        <span class="lb">Step 4</span>
+        <h4>The record updates</h4>
+        <p>Your name stays on the entry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">Organization accounts</span>
+      <h2 class="h2">Run your whole program from one place</h2>
+      <p class="lead">
+        Free accounts for organizations working with high schoolers.
+      </p>
+    </div>
+    <div class="orgsplit">
+      <div class="feats rv">
+        <div class="feat">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+              <path
+                d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"
+              />
+            </svg>
+          </div>
+          <div>
+            <h4>Create your organization</h4>
+            <p>One account for your team.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M19 8v6M22 11h-6" />
+            </svg>
+          </div>
+          <div>
+            <h4>Assign supervisors</h4>
+            <p>Requests go to the person who saw the work.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M3 9h18M9 21V9" />
+            </svg>
+          </div>
+          <div>
+            <h4>One dashboard</h4>
+            <p>Every request, waiting or confirmed.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </div>
+          <div>
+            <h4>Post opportunities</h4>
+            <p>Reach students whose record fits.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-10 6L2 7" />
+            </svg>
+          </div>
+          <div>
+            <h4>Add or invite youth</h4>
+            <p>Bring in the students you already work with.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              />
+            </svg>
+          </div>
+          <div>
+            <h4>Leave comments</h4>
+            <p>A note on what they did well, kept on their record.</p>
+          </div>
+        </div>
+        <span class="more"
+          ><svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"
+            /></svg
+          >More tools on the way</span
+        >
+      </div>
+      <div class="inbox rv d1">
+        <div class="ib-top">
+          <div class="who">
+            <div class="av">OL</div>
+            <div>
+              <b>Oakville Public Library</b
+              ><span>Reading buddy program · 14 students</span>
+            </div>
+          </div>
+          <span class="chip">6 Pending</span>
+        </div>
+        <div class="ib-stats">
+          <div><b>6</b><span>Waiting</span></div>
+          <div><b>41</b><span>Confirmed</span></div>
+          <div><b>3</b><span>Supervisors</span></div>
+        </div>
+        <div class="ib-row">
+          <div><b>Priya S.</b><small>Reading buddy · session 9</small></div>
+          <span class="h">3h</span><span class="cf">Confirm</span>
+        </div>
+        <div class="ib-row">
+          <div>
+            <b>Marcus L.</b><small>Tech help desk · drop-in</small
+            ><span class="cm"
+              ><svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                /></svg
+              >Great with seniors this week</span
+            >
+          </div>
+          <span class="h">2h</span><span class="cf">Confirm</span>
+        </div>
+        <div class="ib-row">
+          <div><b>Amira H.</b><small>Story time setup</small></div>
+          <span class="h">1.5h</span><span class="cf">Confirm</span>
+        </div>
+        <div class="ib-foot">
+          <span>3 of 6 shown</span><span>Confirm all visible</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap priv">
+    <div class="rv">
+      <span class="tag">Privacy for partners</span>
+      <h2 class="h2">You only see what you witnessed</h2>
+      <p class="lead">
+        Confirming never opens up the rest of a student's record.
+      </p>
+    </div>
+    <div class="plist">
+      <div class="prow rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M9.9 4.2A10 10 0 0 1 12 4c7 0 10 8 10 8a17 17 0 0 1-2.2 3.3M6.6 6.6A17 17 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"
+            />
+            <path d="m2 2 20 20" />
+          </svg>
+        </div>
+        <div>
+          <h4>No full profile access</h4>
+          <p>Only the activity in the request.</p>
+        </div>
+      </div>
+      <div class="prow rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="m16 11 2 2 4-4" />
+          </svg>
+        </div>
+        <div>
+          <h4>Confirm or decline</h4>
+          <p>If something's off, decline. It stays self-reported.</p>
+        </div>
+      </div>
+      <div class="prow rv d2">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+          </svg>
+        </div>
+        <div>
+          <h4>Audit trail kept</h4>
+          <p>Your name and date stay on it. Students can't edit it.</p>
+        </div>
+      </div>
+      <div class="prow rv d3">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7" />
+            <path
+              d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7ZM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z"
+            />
+          </svg>
+        </div>
+        <div>
+          <h4>Free for partners</h4>
+          <p>We don't sell your data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap faq">
+    <div class="rv">
+      <span class="tag">FAQ</span>
+      <h2 class="h2">Questions partners ask</h2>
+      <p class="lead" style="font-size: 18px">
+        Still wondering?
+        <a
+          href="mailto:info@youth2opportunities.ca"
+          style="color: var(--maroon); font-weight: 700"
+          >info@youth2opportunities.ca</a
+        >
+      </p>
+    </div>
+    <div class="qa rv d1">
+      <details open>
+        <summary>
+          Do I need an account to confirm?<span class="pl">+</span>
+        </summary>
+        <p>
+          No. You get a secure link by email or text. Organization accounts
+          are optional and free.
+        </p>
+      </details>
+      <details>
+        <summary>
+          What do I see when I confirm?<span class="pl">+</span>
+        </summary>
+        <p>
+          Only the activity the student asked you to confirm. Not their
+          grades, contact info, or other activities.
+        </p>
+      </details>
+      <details>
+        <summary>
+          What if the details are wrong?<span class="pl">+</span>
+        </summary>
+        <p>
+          Decline it. The activity stays self-reported on the student's
+          record.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Can my supervisors confirm for our organization?<span class="pl"
+            >+</span
+          >
+        </summary>
+        <p>
+          Yes. Assign supervisors in your organization account and requests
+          go to them.
+        </p>
+      </details>
+      <details>
+        <summary>Does it cost anything?<span class="pl">+</span></summary>
+        <p>
+          No. Confirming, organization accounts, and posting opportunities
+          are free.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 40px">
+  <div class="wrap">
+    <div class="cta rv">
+      <div>
+        <span class="tag on-dark">Run a program in Ontario</span>
+        <h2>Confirm the work. The rest stays with the student.</h2>
+        <p>For clubs, teams, charities, programs, and businesses.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="contact.html"
+          >Create an organization account</a
+        ><a
+          class="btn btn-line-light"
+          href="mailto:info@youth2opportunities.ca"
+          >Talk to us</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+  <Reveal slot="scripts" />
+</Base>

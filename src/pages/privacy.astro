@@ -1,0 +1,131 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/privacy.css";
+---
+
+<Base title={"Privacy · Y2O"} description={"How Y2O handles student information. Students own their record. Student data is never sold."}>
+<header class="hero" style="padding-bottom: 60px">
+  <div class="wrap">
+    <span class="tag rv">Privacy</span>
+    <h1 class="rv d1">How we handle <em>your information</em></h1>
+    <p class="sub rv d2">
+      Students own their record. Student data is never sold.
+    </p>
+  </div>
+</header>
+<section class="sec" style="padding-top: 20px">
+  <div class="wrap legal">
+    <div class="draft">
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /></svg
+      >A plain-language summary while our full policy is reviewed by legal
+      counsel.
+    </div>
+    <div class="short">
+      <h3>The short version</h3>
+      <ul>
+        <li>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" /></svg
+          >Students own their record
+        </li>
+        <li>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" /></svg
+          >Nobody sees it unless the student shares it
+        </li>
+        <li>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" /></svg
+          >Student data is never sold
+        </li>
+        <li>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" /></svg
+          >Data is stored in Canada
+        </li>
+      </ul>
+    </div>
+    <h2>What we collect</h2>
+    <p>
+      Account details you give us, such as your name, email, and role. The
+      activities students log. Confirmations from supervisors and
+      organizations. Opportunities organizations post. Basic usage data so
+      we can improve Y2O.
+    </p>
+    <h2>Who sees what</h2>
+    <p>
+      Students decide what is shared and with whom. Parents see what their
+      teen shares through a link. Organizations see only the activities
+      connected to them. Partner institutions see anonymised data, and a
+      named record only when a student chooses to share it.
+    </p>
+    <h2>What we never do</h2>
+    <p>
+      We never sell student data, show ads to students, share a named record
+      without the student's permission, or let anyone other than the student
+      change what's on it.
+    </p>
+    <h2>Your choices</h2>
+    <p>
+      Students can edit, export, or delete their record at any time, and
+      stop sharing with anyone at any time.
+    </p>
+    <h2>Contact</h2>
+    <p>
+      Questions about privacy:
+      <a href="mailto:privacy@youth2opportunities.ca"
+        >privacy@youth2opportunities.ca</a
+      >
+    </p>
+  </div>
+</section>
+  <Reveal slot="scripts" />
+</Base>

@@ -1,0 +1,13 @@
+---
+// External (`link`) and internal (`internalLink`) annotations in a post body.
+// Internal links carry the referenced post's current slug (resolved in the query), so they survive slug changes.
+import { postHref } from "../sanity/posts";
+
+const { node } = Astro.props;
+const def = node.markDef ?? {};
+const internal = node.markType === "internalLink";
+const href = internal ? (def.slug ? postHref(def.slug) : undefined) : def.href;
+const rel = internal ? undefined : [def.rel, def.blank && "noopener noreferrer"].filter(Boolean).join(" ") || undefined;
+---
+
+{href ? <a href={href} target={!internal && def.blank ? "_blank" : undefined} rel={rel}><slot /></a> : <slot />}

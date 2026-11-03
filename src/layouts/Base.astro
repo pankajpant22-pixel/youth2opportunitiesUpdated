@@ -1,0 +1,115 @@
+---
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_NAME, ORG_NAME, LOGO, SOCIAL, cleanPath, absolute, jsonLd } from "../site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Nav href to mark as the current page, e.g. "/about". */
+  current?: string;
+  /** Canonical URL; defaults to this page's own URL. */
+  canonical?: string;
+  /** Social share image (absolute URL); defaults to the logo. */
+  image?: string;
+  /** Open Graph type. */
+  type?: "website" | "article";
+  /** Keep the page out of search results (also drops the canonical tag). */
+  noindex?: boolean;
+  /** Extra JSON-LD objects for this page. */
+  schema?: object[];
+}
+const { title, description, current, canonical, image, type = "website", noindex = false, schema = [] } = Astro.props;
+
+const url = canonical ?? absolute(cleanPath(Astro.url.pathname), Astro.site);
+const ogImage = image ?? absolute(LOGO, Astro.site);
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: ORG_NAME,
+  alternateName: SITE_NAME,
+  url: absolute("/", Astro.site),
+  logo: absolute(LOGO, Astro.site),
+  sameAs: SOCIAL,
+};
+
+// Set in the Vercel project's environment variables; each tag is left out when its variable is empty.
+const gaId = import.meta.env.PUBLIC_GA_ID;
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={url} />}
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="alternate" type="application/rss+xml" title="Y2O Blog" href="/rss.xml" />
+    {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+    {bingVerification && <meta name="msvalidate.01" content={bingVerification} />}
+
+    {[organization, ...schema].map((s) => <script type="application/ld+json" set:html={jsonLd(s)} />)}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    {
+      gaId && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+          <script is:inline define:vars={{ gaId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", gaId);
+            window.gtag = gtag;
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body>
+    <Nav current={current} />
+    <slot />
+    <Footer />
+    <slot name="scripts" />
+    <script is:inline src="/assets/social.js"></script>
+    <script is:inline>
+      // Conversion tracking: every link to the sign-up (/contact) or score (/score) page, including ones
+      // added later by page scripts, sends a cta_click event with which CTA and where it was clicked.
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest("a[href]");
+        if (!a || !window.gtag) return;
+        var path = new URL(a.href, location.href).pathname.replace(/\.html$/, "");
+        var cta = path === "/contact" ? "create_account" : path === "/score" ? "see_your_score" : null;
+        if (!cta || path === location.pathname.replace(/\.html$/, "")) return;
+        window.gtag("event", "cta_click", {
+          cta: cta,
+          cta_text: a.textContent.trim().slice(0, 60),
+          page_path: location.pathname,
+        });
+      });
+    </script>
+    <slot name="end" />
+  </body>
+</html>

@@ -1,0 +1,31 @@
+---
+// Post card used on the blog list, category and author pages, and related posts.
+import { postHref, summary, formatDate, type Post } from "../sanity/posts";
+
+interface Props {
+  post: Post;
+  /** Heading level for the title, so cards under an existing H2 use H3. */
+  heading?: "h2" | "h3";
+}
+const { post: p, heading: H = "h2" } = Astro.props;
+---
+
+<a class="post-card rv" href={postHref(p.slug)}>
+  {
+    p.image && (
+      <img
+        src={`${p.image.url}?w=800&h=450&fit=crop&auto=format`}
+        width="800"
+        height="450"
+        alt={p.image.alt ?? ""}
+        loading="lazy"
+      />
+    )
+  }
+  <div class="pc-body">
+    <time datetime={p.publishedAt ?? undefined}>{formatDate(p.publishedAt)}</time>
+    <H>{p.title}</H>
+    <p>{summary(p)}</p>
+    <span class="more">Read post →</span>
+  </div>
+</a>

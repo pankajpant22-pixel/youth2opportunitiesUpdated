@@ -1,0 +1,847 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/institutions.css";
+---
+
+<Base title={"Institutions · Y2O"} description={"When a student shares their Y2O record, you see confirmed work, named verifiers, hours, and skills alongside the application."} current="/institutions">
+<header class="hero">
+  <div class="wrap">
+    <span class="tag rv"
+      >For universities, colleges, employers, and scholarship teams</span
+    >
+    <h1 class="rv d1">See the growth <em>behind the grades</em></h1>
+    <div class="motto rv d2">
+      <span>Track it</span><span>Verify it</span
+      ><span>Carry it forward</span>
+    </div>
+    <p class="sub rv d2">
+      Anonymised insight on verified student growth across Ontario. Full
+      named records when a student chooses to share.
+    </p>
+    <div class="actions rv d3">
+      <a
+        class="btn btn-primary"
+        href="mailto:info@youth2opportunities.ca?subject=Institutional%20partnership"
+        >Become a partner</a
+      ><a class="btn btn-ghost" href="#access">See institutional access</a>
+    </div>
+  </div>
+  <div class="wrap stage">
+    <div class="product narrow" id="product">
+      <div class="panel">
+        <div class="ptop">
+          <div class="who">
+            <div class="av">PS</div>
+            <div><b>Priya S.</b><span>Grade 11 · Ontario</span></div>
+          </div>
+          <span class="chip">Verified Record</span>
+        </div>
+        <div class="rec-stats">
+          <div><b>67</b><span>Growth Score</span></div>
+          <div><b>103h</b><span>Verified</span></div>
+          <div><b>8</b><span>Activities</span></div>
+          <div><b>5/6</b><span>Confirmed</span></div>
+        </div>
+        <div class="rec-list">
+          <h4>Confirmed activities · sample</h4>
+          <div class="ra">
+            <div class="ic">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            </div>
+            <div>
+              <b>Reading buddy · library</b
+              ><small>Confirmed by Ellen Marwick · Programs Lead</small>
+            </div>
+            <span class="h">24h</span>
+          </div>
+          <div class="ra">
+            <div class="ic">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+              </svg>
+            </div>
+            <div>
+              <b>Saturday shift · Café Rosa</b
+              ><small>Confirmed by D. Costa · Manager</small>
+            </div>
+            <span class="h">48h</span>
+          </div>
+          <div class="ra">
+            <div class="ic">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 10 12 5 2 10l10 5 10-5Z" />
+                <path d="M6 12v5c3 2.5 9 2.5 12 0v-5" />
+              </svg>
+            </div>
+            <div>
+              <b>Robotics build lead</b
+              ><small>Confirmed by Ms Pham · Teacher advisor</small>
+            </div>
+            <span class="h">31h</span>
+          </div>
+        </div>
+        <div class="rec-foot">
+          <span>Shared by the student · read-only · 7-day link</span
+          ><span
+            ><svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg
+            >Private link</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec dark">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag on-dark">Why now</span>
+      <h2 class="h2">Why the record matters more than ever</h2>
+      <p class="lead">
+        Skills are turning over and grades have compressed. All four numbers
+        are public.
+      </p>
+    </div>
+    <div class="four">
+      <div class="chg rv">
+        <div class="big">39<em>%</em></div>
+        <h4>Skills are changing</h4>
+        <p>Of workers' core skills, by 2030.</p>
+        <a
+          href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
+          target="_blank"
+          rel="noopener"
+          >World Economic Forum, 2025</a
+        >
+      </div>
+      <div class="chg rv d1">
+        <div class="big">914<em>K</em></div>
+        <h4>Youth off track</h4>
+        <p>Canadians 15 to 29 not in school, work, or training.</p>
+        <a
+          href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005"
+          target="_blank"
+          rel="noopener"
+          >Government of Canada / ESDC, 2025</a
+        >
+      </div>
+      <div class="chg rv d2">
+        <div class="big">87<em>%</em></div>
+        <h4>Grades compressed</h4>
+        <p>UBC average entrance grade, up from 70%.</p>
+        <a
+          href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+          target="_blank"
+          rel="noopener"
+          >Fraser Institute, 2024</a
+        >
+      </div>
+      <div class="chg rv d3">
+        <div class="big">Adj<em>.</em></div>
+        <h4>Grades adjusted</h4>
+        <p>Waterloo Engineering adjusts grades school by school.</p>
+        <a
+          href="https://uwaterloo.ca/engineering/future-students"
+          target="_blank"
+          rel="noopener"
+          >University of Waterloo</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">Who uses Y2O records</span>
+      <h2 class="h2">Six teams short on confirmed work</h2>
+      <p class="lead">
+        Each one decides about students based on paper. Y2O adds the
+        confirmed side.
+      </p>
+    </div>
+    <div class="teams">
+      <div class="tm rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="8" r="6" />
+            <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+          </svg>
+        </div>
+        <h4>Scholarship teams</h4>
+        <p>Verified hours, named confirmers, effort over years.</p>
+        <small><span>Decision context</span></small>
+      </div>
+      <div class="tm rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+          </svg>
+        </div>
+        <h4>Awards offices</h4>
+        <p>Match candidates to awards on what was confirmed.</p>
+        <small><span>Selection</span></small>
+      </div>
+      <div class="tm rv d2">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+          </svg>
+        </div>
+        <h4>Co-op and career teams</h4>
+        <p>Skills, hours, and confirmed work in hand.</p>
+        <small><span>Placement</span></small>
+      </div>
+      <div class="tm rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="4" y="2" width="16" height="20" rx="2" />
+            <path
+              d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"
+            />
+          </svg>
+        </div>
+        <h4>Employers</h4>
+        <p>Proof of reliability, teamwork, and initiative.</p>
+        <small><span>Hiring</span></small>
+      </div>
+      <div class="tm rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 10 12 5 2 10l10 5 10-5Z" />
+            <path d="M6 12v5c3 2.5 9 2.5 12 0v-5" />
+          </svg>
+        </div>
+        <h4>Admissions teams</h4>
+        <p>The activity side of an application, confirmed.</p>
+        <small><span>Application context</span></small>
+      </div>
+      <div class="tm rv d2">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 7 13.5 15.5l-5-5L2 17" />
+            <path d="M16 7h6v6" />
+          </svg>
+        </div>
+        <h4>Youth employment programs</h4>
+        <p>A verified record from Grade 9 onward.</p>
+        <small><span>Program design</span></small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="access">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">Institutional access</span>
+      <h2 class="h2">Anonymised insight. Named records by consent.</h2>
+      <p class="lead">
+        What partner institutions get. Students stay in control of their
+        identity.
+      </p>
+    </div>
+    <div class="acc">
+      <div class="ac a1 rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 3v18h18" />
+            <path d="M7 15l4-4 3 3 5-6" />
+          </svg>
+        </div>
+        <span class="lvl">Always anonymised</span>
+        <h4>Growth insights</h4>
+        <p>
+          De-identified trends across verified student activity in Ontario.
+        </p>
+        <ul>
+          <li>Verified hours by activity type</li>
+          <li>Competency strengths by pillar</li>
+          <li>Trends by region and pathway</li>
+        </ul>
+      </div>
+      <div class="ac a2 rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </div>
+        <span class="lvl">Coming soon</span>
+        <h4>Opt-in discovery</h4>
+        <p>
+          Soon: reach students who choose to be visible for programs and
+          scholarships.
+        </p>
+        <ul>
+          <li>Matched to your criteria</li>
+          <li>Only students who said yes</li>
+          <li>Invite them to apply</li>
+        </ul>
+      </div>
+      <div class="ac a3 rv d2">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </div>
+        <span class="lvl">Student shares</span>
+        <h4>Verified records</h4>
+        <p>The full named record when a student sends it to you.</p>
+        <ul>
+          <li>Named verifiers on every entry</li>
+          <li>Growth Score and skills</li>
+          <li>Locked, read-only link</li>
+        </ul>
+      </div>
+    </div>
+    <p class="acc-note rv">
+      Institutional access is a <b>paid partnership</b> for universities,
+      colleges, and employers. Early partners welcome.
+    </p>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">When a student shares</span>
+      <h2 class="h2">Confirmed work, alongside the application</h2>
+      <p class="lead">
+        A read-only, time-limited link. Nothing the student didn't choose to
+        share.
+      </p>
+    </div>
+    <div class="shared">
+      <div class="plist rv">
+        <div class="prow">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <div>
+            <h4>Named verifier on every entry</h4>
+            <p>Their role and the date they confirmed.</p>
+          </div>
+        </div>
+        <div class="prow">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+          </div>
+          <div>
+            <h4>Hours, sessions, and dates</h4>
+            <p>What was done, when, and for how long.</p>
+          </div>
+        </div>
+        <div class="prow">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 3v18h18" />
+              <path d="M7 15l4-4 3 3 5-6" />
+            </svg>
+          </div>
+          <div>
+            <h4>Growth Score and skills</h4>
+            <p>Four weighted factors and the skills built.</p>
+          </div>
+        </div>
+        <div class="prow">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <div>
+            <h4>Locked when shared</h4>
+            <p>Students can't edit confirmed entries.</p>
+          </div>
+        </div>
+      </div>
+      <div class="sr rv d1">
+        <div class="sr-top">
+          <div class="big">67</div>
+          <div><span>Growth Score · of 100</span><b>103h verified</b></div>
+        </div>
+        <div class="fac2">
+          <span
+            >Hours Breadth
+            <small style="color: var(--muted); font-weight: 600"
+              >· 25%</small
+            ></span
+          ><i><em data-wv="75"></em></i><b>75%</b>
+        </div>
+        <div class="fac2">
+          <span
+            >Competency Depth
+            <small style="color: var(--muted); font-weight: 600"
+              >· 35%</small
+            ></span
+          ><i><em data-wv="62"></em></i><b>62%</b>
+        </div>
+        <div class="fac2">
+          <span
+            >Profile Credibility
+            <small style="color: var(--muted); font-weight: 600"
+              >· 25%</small
+            ></span
+          ><i><em data-wv="72"></em></i><b>72%</b>
+        </div>
+        <div class="fac2">
+          <span
+            >Consistency Over Time
+            <small style="color: var(--muted); font-weight: 600"
+              >· 15%</small
+            ></span
+          ><i><em data-wv="75"></em></i><b>75%</b>
+        </div>
+        <small
+          >Sample shared record · Grade 11 · weights shown next to each
+          factor</small
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">What Y2O is, and isn't</span>
+      <h2 class="h2">A record, not an admissions tool</h2>
+      <p class="lead">
+        Y2O doesn't score students for you or replace your process. It adds
+        the confirmed side.
+      </p>
+    </div>
+    <div class="isnot">
+      <div class="col is rv">
+        <h3>Y2O is</h3>
+        <ul>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" /></svg></i
+            >A verified record students own and control
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" /></svg></i
+            >Confirmed by named coaches, employers, and teachers
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" /></svg></i
+            >Anonymised insight for partner institutions
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" /></svg></i
+            >Named records only when a student opts in
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" /></svg></i
+            >Portable across schools and after graduation
+          </li>
+        </ul>
+      </div>
+      <div class="col not rv d1">
+        <h3>Y2O is not</h3>
+        <ul>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18M6 6l12 12" /></svg></i
+            >An admissions, hiring, or ranking tool
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18M6 6l12 12" /></svg></i
+            >A grades, transcript, or SIS replacement
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18M6 6l12 12" /></svg></i
+            >A way to see named students without consent
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18M6 6l12 12" /></svg></i
+            >An AI tool. The value is human confirmation
+          </li>
+          <li>
+            <i
+              ><svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18M6 6l12 12" /></svg></i
+            >Student data sold to advertisers
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap faq">
+    <div class="rv">
+      <span class="tag">FAQ</span>
+      <h2 class="h2">Questions institutions ask</h2>
+      <p class="lead" style="font-size: 18px">
+        Still wondering?
+        <a
+          href="mailto:info@youth2opportunities.ca"
+          style="color: var(--maroon); font-weight: 700"
+          >info@youth2opportunities.ca</a
+        >
+      </p>
+    </div>
+    <div class="qa rv d1">
+      <details open>
+        <summary>
+          What do institutions get access to?<span class="pl">+</span>
+        </summary>
+        <p>
+          Anonymised insight across verified student activity and full
+          records when a student shares one with you. Opt-in discovery is
+          coming soon.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Can we trust what's on it?<span class="pl">+</span>
+        </summary>
+        <p>
+          Every confirmed entry shows who confirmed it, their role, and the
+          date. Self-logged activity is marked as unconfirmed.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Does the Growth Score rank students?<span class="pl">+</span>
+        </summary>
+        <p>
+          No. It measures each student against a fixed standard, not against
+          each other.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Does it replace transcripts?<span class="pl">+</span>
+        </summary>
+        <p>
+          No. Grades still matter. Y2O adds confirmed context beyond them.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Can we see named students?<span class="pl">+</span>
+        </summary>
+        <p>
+          Only students who opt in or share their record with you.
+          Everything else is anonymised.
+        </p>
+      </details>
+      <details>
+        <summary>Is this a paid service?<span class="pl">+</span></summary>
+        <p>
+          Yes. Institutional access is a paid partnership. Early partners
+          help shape what it includes.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 40px">
+  <div class="wrap">
+    <div class="cta rv">
+      <div>
+        <span class="tag on-dark">For institutions</span>
+        <h2>See the growth behind the grades</h2>
+        <p>
+          Universities, colleges, employers, and scholarship teams welcome.
+        </p>
+      </div>
+      <div class="actions">
+        <a
+          class="btn btn-primary"
+          href="mailto:info@youth2opportunities.ca?subject=Institutional%20partnership"
+          >Become a partner</a
+        ><a class="btn btn-line-light" href="research.html"
+          >Research base</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+  <Reveal slot="scripts" />
+</Base>

@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import PostCard from "../components/PostCard.astro";
+import { getPosts, indexable } from "../sanity/posts";
+import { breadcrumbs } from "../site";
+import "../styles/base.css";
+import "../styles/pages/blog.css";
+
+const posts = indexable(await getPosts());
+---
+
+<Base
+  title="Blog · Y2O"
+  description="Stories, updates and ideas from Y2O on youth, school and work."
+  current="/blog"
+  schema={[breadcrumbs([{ name: "Blog", path: "/blog" }], Astro.site)]}
+>
+  <header class="hero" style="padding-bottom: 60px">
+    <div class="wrap">
+      <span class="tag rv">Blog</span>
+      <h1 class="rv d1">Notes on <em>growth beyond grades</em></h1>
+      <p class="sub rv d2">Stories, updates and ideas from the Y2O team.</p>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="wrap">
+      {posts.length === 0 && <p class="lead">No posts yet. Check back soon.</p>}
+      <div class="posts">
+        {posts.map((p) => <PostCard post={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <Reveal slot="scripts" />
+</Base>

@@ -1,0 +1,56 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Reveal from "../../../components/Reveal.astro";
+import PostCard from "../../../components/PostCard.astro";
+import { getPosts, getCategories, indexable, categoryHref, type Category, type Post } from "../../../sanity/posts";
+import { breadcrumbs } from "../../../site";
+import "../../../styles/base.css";
+import "../../../styles/pages/blog.css";
+
+export async function getStaticPaths() {
+  const [categories, posts] = await Promise.all([getCategories(), getPosts()]);
+  return categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { category, posts: indexable(posts).filter((p) => p.categories.some((c) => c.slug === category.slug)) },
+  }));
+}
+
+const { category, posts } = Astro.props as { category: Category; posts: Post[] };
+const description =
+  category.description?.slice(0, 160) ?? `Y2O blog posts about ${category.title.toLowerCase()}.`;
+---
+
+<Base
+  title={`${category.title} · Y2O Blog`}
+  description={description}
+  current="/blog"
+  noindex={posts.length === 0}
+  schema={[
+    breadcrumbs(
+      [
+        { name: "Blog", path: "/blog" },
+        { name: category.title, path: categoryHref(category.slug) },
+      ],
+      Astro.site,
+    ),
+  ]}
+>
+  <header class="hero" style="padding-bottom: 60px">
+    <div class="wrap">
+      <nav class="tag rv" aria-label="Breadcrumb"><a href="/blog">Blog</a> / Category</nav>
+      <h1 class="rv d1">{category.title}</h1>
+      {category.description && <p class="sub rv d2">{category.description}</p>}
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="wrap">
+      {posts.length === 0 && <p class="lead">No posts in this category yet.</p>}
+      <div class="posts">
+        {posts.map((p) => <PostCard post={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <Reveal slot="scripts" />
+</Base>

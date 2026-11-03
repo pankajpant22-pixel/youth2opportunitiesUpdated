@@ -1,0 +1,9 @@
+---
+// Inline image inside a post body (astro-portabletext passes the block as `node`).
+import { sized } from "../sanity/posts";
+
+const { node } = Astro.props;
+const img = node.url && sized(node, 1200);
+---
+
+{img && <img src={img.src} width={img.width} height={img.height} alt={node.alt ?? ""} loading="lazy" />}

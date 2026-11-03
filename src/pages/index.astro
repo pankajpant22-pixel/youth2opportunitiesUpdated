@@ -1,0 +1,828 @@
+---
+import Base from "../layouts/Base.astro";
+import "../styles/pages/index.css";
+---
+
+<Base title={"Y2O · Every effort matters"} description={"Y2O is the student-owned verified growth record for Canadian high schoolers. Track what you do, confirm it with the people who saw the work, carry it forward."}>
+<header class="hero">
+  <div class="wrap">
+    <span class="tag rv">Student-owned growth record</span>
+    <h1 class="rv d1">Every effort <em>matters</em></h1>
+    <div class="motto rv d2">
+      <span>Track it</span><span>Verify it</span
+      ><span>Carry it forward</span>
+    </div>
+    <p class="sub rv d2">
+      One trusted record for what students do beyond grades.
+    </p>
+    <div class="actions rv d3">
+      <a class="btn btn-primary" href="contact.html">Create your account</a>
+      <a class="btn btn-ghost" href="score.html">See your score</a>
+    </div>
+  </div>
+  <div class="wrap stage">
+    <div class="product" id="product">
+      <div class="panel">
+        <div class="ptop">
+          <div class="who">
+            <div class="av">Y</div>
+            <div><b>Your record</b><span>Grade 11 · Ontario</span></div>
+          </div>
+          <span class="chip">Live Preview</span>
+        </div>
+        <div class="pbody">
+          <div class="score">
+            <div class="score-top">
+              <div class="ring">
+                <svg viewBox="0 0 160 160">
+                  <circle class="bg" cx="80" cy="80" r="70" />
+                  <circle class="fg" id="ringfg" cx="80" cy="80" r="70" />
+                </svg>
+                <div class="n">
+                  <b id="scoreN">0</b><span>of 100</span><i>Developing</i>
+                </div>
+              </div>
+              <div class="facs">
+                <h4>Growth Score</h4>
+                <small>Four factors</small>
+                <div class="fac">
+                  <span>Hours Breadth</span><i><em data-w="75"></em></i
+                  ><b>75%</b>
+                </div>
+                <div class="fac">
+                  <span>Competency Depth</span><i><em data-w="62"></em></i
+                  ><b>62%</b>
+                </div>
+                <div class="fac">
+                  <span>Profile Credibility</span
+                  ><i><em data-w="72"></em></i><b>72%</b>
+                </div>
+                <div class="fac">
+                  <span>Consistency Over Time</span
+                  ><i><em data-w="75"></em></i><b>75%</b>
+                </div>
+              </div>
+            </div>
+            <p class="disc">
+              Your Y2O Score reflects <b>verified activity</b>, breadth,
+              consistency, and competency growth. Not a grade or academic
+              assessment.
+            </p>
+          </div>
+          <div class="feed">
+            <h4>Latest activity</h4>
+            <div class="act">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </div>
+              <div>
+                <b>Reading buddy · Public library</b
+                ><small>24h logged</small>
+              </div>
+              <span class="st ok">Verified</span>
+            </div>
+            <div class="act">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="7" width="20" height="14" rx="2" />
+                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                </svg>
+              </div>
+              <div>
+                <b>Saturday shift · Café Rosa</b><small>48h logged</small>
+              </div>
+              <span class="st ok">Verified</span>
+            </div>
+            <div class="act">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+                </svg>
+              </div>
+              <div>
+                <b>Math competition</b><small>Awaiting confirmation</small>
+              </div>
+              <span class="st wait">In review</span>
+            </div>
+          </div>
+        </div>
+        <div class="stats">
+          <div><b>103</b><span>Hours</span></div>
+          <div><b>8</b><span>Activities</span></div>
+          <div><b>5</b><span>Verified</span></div>
+          <div><b>1</b><span>In review</span></div>
+        </div>
+      </div>
+      <div class="float f1" id="f1">
+        <div class="fi">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </div>
+        <div>
+          <b>Confirmed by Maria</b><small>Manager, Café Rosa</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="research">
+  <div class="wrap rv">
+    <span class="tag">Research base</span>
+    <h2>Built on research shaping learning and work</h2>
+    <p class="lead" style="margin-left: auto; margin-right: auto">
+      Y2O is shaped by research on skills, youth pathways, learning, and the
+      future of work.
+    </p>
+    <div class="src">
+      <a
+        href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
+        target="_blank"
+        rel="noopener"
+        >World Economic Forum</a
+      >
+      <a
+        href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005"
+        target="_blank"
+        rel="noopener"
+        >Government of Canada / ESDC</a
+      >
+      <a
+        href="https://www.ontario.ca/page/get-your-high-school-volunteer-hours"
+        target="_blank"
+        rel="noopener"
+        >Ontario Ministry of Education</a
+      >
+      <a
+        href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+        target="_blank"
+        rel="noopener"
+        >Fraser Institute</a
+      >
+      <a
+        href="https://macleans.ca/education/student-hub/getting-in/canadas-university-admissions-process-is-burning-students-out/"
+        target="_blank"
+        rel="noopener"
+        >Maclean's</a
+      >
+    </div>
+    <p class="fine">
+      Informed by public research · Not endorsed by these organizations
+    </p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="tag">Who Y2O helps</span>
+      <h2 class="h2">Y2O is for everyone</h2>
+      <p class="lead">
+        Students build the record · Families see progress · Partners confirm
+        the work
+      </p>
+    </div>
+    <div class="views">
+      <a class="view v1 rv" href="students.html"
+        ><span class="vn">01</span>
+        <h3>Student view</h3>
+        <p>
+          A confirmed record of what you do beyond grades, owned by you.
+        </p>
+        <div class="vui">
+          <div class="mini-score">
+            <b>67</b><span>My record<br />Growth Score · live</span>
+          </div>
+          <div class="r"><span>Verified</span><b>5</b></div>
+          <div class="r"><span>In review</span><b>1</b></div>
+        </div></a
+      >
+      <a class="view v2 rv d1" href="parents.html"
+        ><span class="vn">02</span>
+        <h3>Family view</h3>
+        <p>
+          See progress as it happens, without hovering or chasing forms.
+        </p>
+        <div class="vui">
+          <div class="r"><span>Hours this month</span><b>28h</b></div>
+          <div class="r"><span>New activities</span><b>3</b></div>
+          <div class="r"><span>Newly verified</span><b>2</b></div>
+        </div></a
+      >
+      <a class="view v3 rv d2" href="partners.html"
+        ><span class="vn">03</span>
+        <h3>Partner view</h3>
+        <p>
+          Confirm what you witnessed in one tap, without full profile
+          access.
+        </p>
+        <div class="vui confirm">
+          <b>Math competition · regional</b
+          ><small>Apr 18 · Grade 11 student</small
+          ><button tabindex="-1">Confirm</button>
+        </div></a
+      >
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="tag">The flow</span>
+      <h2 class="h2">From activity to confirmed profile</h2>
+      <p class="lead">A simple path from activity to record.</p>
+    </div>
+    <div class="flow">
+      <div class="fs rv">
+        <div class="ic">
+          <span class="no">1</span
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+          </svg>
+        </div>
+        <h4>Log it</h4>
+        <p>What, where, and how long.</p>
+      </div>
+      <div class="fs rv d1">
+        <div class="ic">
+          <span class="no">2</span
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m22 2-7 20-4-9-9-4Z" />
+            <path d="M22 2 11 13" />
+          </svg>
+        </div>
+        <h4>Send a request</h4>
+        <p>Choose the person who saw the work.</p>
+      </div>
+      <div class="fs rv d2">
+        <div class="ic">
+          <span class="no">3</span
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="m16 11 2 2 4-4" />
+          </svg>
+        </div>
+        <h4>They confirm</h4>
+        <p>One tap. No account needed.</p>
+      </div>
+      <div class="fs rv d3">
+        <div class="ic">
+          <span class="no">4</span
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 7 13.5 15.5l-5-5L2 17" />
+            <path d="M16 7h6v6" />
+          </svg>
+        </div>
+        <h4>Profile updates</h4>
+        <p>Hours, skills, proof, and history move into the record.</p>
+      </div>
+      <div class="fs rv d4">
+        <div class="ic">
+          <span class="no">5</span
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <path d="m16 6-4-4-4 4" />
+            <path d="M12 2v13" />
+          </svg>
+        </div>
+        <h4>Share when ready</h4>
+        <p>You decide when and where to use the profile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="messy-head rv">
+      <span class="tag">Before deadlines</span>
+      <h2 class="h2">The record gets messy fast</h2>
+      <p class="lead">
+        Forms, screenshots, dates, hours, and emails pile up before students
+        need them.
+      </p>
+    </div>
+    <div class="messy">
+      <div class="pts rv">
+        <div>
+          <h4>No more chasing forms</h4>
+          <p>Every confirmation lives in the record.</p>
+        </div>
+        <div>
+          <h4>No more rebuilding from memory</h4>
+          <p>Activities are logged while the details are fresh.</p>
+        </div>
+        <div>
+          <h4>No more Grade 12 panic</h4>
+          <p>Students start before deadlines arrive.</p>
+        </div>
+        <div>
+          <h4>Ready when needed</h4>
+          <p>Verified activity is easier to use when opportunities open.</p>
+        </div>
+      </div>
+      <div class="ba rv d1">
+        <div class="box before">
+          <h4>Before Y2O</h4>
+          <p>Scattered across the house</p>
+          <ul>
+            <li>Paper forms</li>
+            <li>Screenshots</li>
+            <li>Email threads</li>
+            <li>Forgotten dates</li>
+          </ul>
+        </div>
+        <div class="box after">
+          <h4>With Y2O</h4>
+          <p>One student-owned record</p>
+          <ul>
+            <li>Logged activity</li>
+            <li>Verifier confirmation</li>
+            <li>Skills and hours</li>
+            <li>Student-owned profile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="tag">Beyond volunteering</span>
+      <h2 class="h2">All of it counts</h2>
+      <p class="lead">
+        Not just volunteering. Not just grades. One record beyond report
+        cards.
+      </p>
+    </div>
+    <div class="counts" id="counts"></div>
+  </div>
+</section>
+
+<section class="sec dark">
+  <div class="wrap">
+    <div class="rv">
+      <span class="tag on-dark">Why now</span>
+      <h2 class="h2">What students are asked to show is changing</h2>
+      <p class="lead">
+        Grades still matter. Skills, experience, proof, and consistency are
+        becoming harder to ignore.
+      </p>
+    </div>
+    <div class="changes">
+      <div class="chg rv">
+        <div class="big">39<em>%</em></div>
+        <h4>Skills are changing</h4>
+        <p>Of workers' core skills are expected to change by 2030.</p>
+        <a
+          href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
+          target="_blank"
+          rel="noopener"
+          >World Economic Forum, Future of Jobs 2025</a
+        >
+      </div>
+      <div class="chg rv d1">
+        <div class="big">914<em>K</em></div>
+        <h4>Youth pathways are under pressure</h4>
+        <p>
+          Canadian youth aged 15 to 29 are not in education, employment, or
+          training.
+        </p>
+        <a
+          href="https://search.open.canada.ca/qpnotes/record/esdc-edsc%2CFCY_JUN2025_005"
+          target="_blank"
+          rel="noopener"
+          >Government of Canada / ESDC, 2025</a
+        >
+      </div>
+      <div class="chg rv d2">
+        <div class="big">87<em>%</em></div>
+        <h4>Grades are under more scrutiny</h4>
+        <p>
+          Grade inflation can make it harder to understand readiness from
+          marks alone.
+        </p>
+        <a
+          href="https://www.fraserinstitute.org/commentary/grade-inflation-gives-students-false-sense-of-their-academic-abilities"
+          target="_blank"
+          rel="noopener"
+          >Fraser Institute, 2024</a
+        >
+      </div>
+      <div class="chg rv d3">
+        <div class="big">↑</div>
+        <h4>Admissions pressure is rising</h4>
+        <p>
+          Students report pressure around marks, applications, and what it
+          takes to stand out.
+        </p>
+        <a
+          href="https://macleans.ca/education/student-hub/getting-in/canadas-university-admissions-process-is-burning-students-out/"
+          target="_blank"
+          rel="noopener"
+          >Maclean's, 2025</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap opp">
+    <div class="rv">
+      <span class="tag">Matched to your record</span>
+      <h2 class="h2">Opportunities are live</h2>
+      <p class="lead">
+        Volunteering, jobs, programs, and scholarships from Ontario
+        organizations, matched to what you've already built.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="opportunities.html"
+          >Browse opportunities</a
+        ><a class="btn btn-ghost" href="partners.html">For organizations</a>
+      </div>
+    </div>
+    <div class="rv d1">
+      <div class="feedcard">
+        <div class="top">
+          <b>For you</b><small>Based on your record</small>
+        </div>
+        <div class="oi">
+          <div
+            class="ic"
+            style="background: var(--teal-tint); color: var(--teal)"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"
+              />
+            </svg>
+          </div>
+          <div>
+            <b>Event volunteer</b
+            ><small>Community food drive · weekends</small>
+          </div>
+          <span class="fit">Good fit</span>
+        </div>
+        <div class="oi">
+          <div
+            class="ic"
+            style="background: var(--navy-tint); color: var(--navy)"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+            </svg>
+          </div>
+          <div>
+            <b>Summer camp counsellor</b
+            ><small>Paid · July and August</small>
+          </div>
+          <span class="fit">Good fit</span>
+        </div>
+        <div class="oi">
+          <div
+            class="ic"
+            style="background: var(--maroon-tint); color: var(--maroon)"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="8" r="6" />
+              <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+            </svg>
+          </div>
+          <div>
+            <b>Youth leadership award</b
+            ><small>Scholarship · apply by spring</small>
+          </div>
+          <span class="fit">Good fit</span>
+        </div>
+      </div>
+      <p class="note">Examples of the kinds of listings in the feed</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="rv">
+      <span class="tag">Why Y2O</span>
+      <h2 class="h2">One record students can build on</h2>
+      <p class="lead">
+        One student-owned record for activities, proof, skills, and growth.
+      </p>
+    </div>
+    <div class="why">
+      <div class="rv">
+        <span>01</span>
+        <h4>Single source of truth</h4>
+        <p>One record for activities, hours, skills, and proof.</p>
+      </div>
+      <div class="rv d1">
+        <span>02</span>
+        <h4>Confirmed by people</h4>
+        <p>
+          Coaches, employers, teachers, and organizers confirm what they
+          saw.
+        </p>
+      </div>
+      <div class="rv d2">
+        <span>03</span>
+        <h4>Built beyond grades</h4>
+        <p>Y2O shows the work report cards and transcripts miss.</p>
+      </div>
+      <div class="rv d3">
+        <span>04</span>
+        <h4>Ready when needed</h4>
+        <p>
+          Verified activity and hours are easier to use when opportunities
+          open.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap faq">
+    <div class="rv">
+      <span class="tag">FAQ</span>
+      <h2 class="h2">Questions people ask</h2>
+      <p class="lead" style="font-size: 18px">
+        Still wondering?
+        <a
+          href="mailto:info@youth2opportunities.ca"
+          style="color: var(--maroon); font-weight: 700"
+          >info@youth2opportunities.ca</a
+        >
+      </p>
+    </div>
+    <div class="qa rv d1">
+      <details open>
+        <summary>Is Y2O live?<span class="pl">+</span></summary>
+        <p>
+          Yes. More than 50 students across Ontario are building their
+          records now, and the opportunities feed is open.
+        </p>
+      </details>
+      <details>
+        <summary>Is it free?<span class="pl">+</span></summary>
+        <p>
+          Free for students. Free for organizations to confirm work and post
+          opportunities.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Is this only for volunteer hours?<span class="pl">+</span>
+        </summary>
+        <p>
+          No. Work, clubs, sports, side projects, community, and skills all
+          count.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Who confirms an activity?<span class="pl">+</span>
+        </summary>
+        <p>
+          The person who saw the work: a coach, employer, teacher, or
+          organizer. One tap, no account needed.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Does Y2O replace transcripts?<span class="pl">+</span>
+        </summary>
+        <p>
+          No. Grades still matter. Y2O adds the confirmed record of
+          everything beyond them.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 40px">
+  <div class="wrap">
+    <div class="cta rv">
+      <div>
+        <span class="tag on-dark">Join Y2O</span>
+        <h2>Start before you need it</h2>
+        <p>Join students, families, and partners across Ontario.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="contact.html"
+          >Create your account</a
+        ><a class="btn btn-line-light" href="score.html">See your score</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script is:inline slot="scripts">
+      (function () {
+        var reduce = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        var I = {
+          work: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>',
+          vol: '<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/>',
+          club: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+          sport:
+            '<circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/>',
+          side: '<path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/>',
+          comm: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+          skill:
+            '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+          more: '<path d="M12 5v14M5 12h14"/>',
+        };
+        var C = [
+          ["work", "Work", "Part-time jobs, shifts, paid roles."],
+          ["vol", "Volunteering", "Service hours, events, community support."],
+          ["club", "Clubs", "School clubs, teams, leadership roles."],
+          [
+            "sport",
+            "Sports and competitions",
+            "Training, tournaments, challenges.",
+          ],
+          [
+            "side",
+            "Side projects",
+            "Personal projects, creative work, ventures.",
+          ],
+          ["comm", "Community", "Local involvement and contribution."],
+          ["skill", "Skills", "Practice, learning, certificates."],
+          ["more", "More coming", "New activity types as Y2O grows."],
+        ];
+        document.getElementById("counts").innerHTML = C.map(function (c, i) {
+          return (
+            '<div class="ct rv d' +
+            (i % 4) +
+            '"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            I[c[0]] +
+            "</svg></div><h4>" +
+            c[1] +
+            "</h4><p>" +
+            c[2] +
+            "</p></div>"
+          );
+        }).join("");
+
+        var io = new IntersectionObserver(
+          function (es) {
+            es.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+        );
+        document.querySelectorAll(".rv").forEach(function (el) {
+          io.observe(el);
+        });
+
+        var p = document.getElementById("product");
+        function tilt() {
+          var r = p.getBoundingClientRect(),
+            vh = window.innerHeight,
+            t = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.75)));
+          p.style.transform =
+            "rotateX(" + 16 * (1 - t) + "deg) scale(" + (0.95 + 0.05 * t) + ")";
+        }
+        if (!reduce) {
+          tilt();
+          addEventListener("scroll", tilt, { passive: true });
+          addEventListener("resize", tilt);
+        } else {
+          p.style.transform = "none";
+        }
+        var played = false;
+        new IntersectionObserver(
+          function (es, o) {
+            if (!es[0].isIntersecting || played) return;
+            played = true;
+            o.disconnect();
+            document.getElementById("ringfg").style.strokeDashoffset =
+              440 - 440 * 0.67;
+            document.querySelectorAll(".fac em").forEach(function (e) {
+              e.style.width = e.dataset.w + "%";
+            });
+            var el = document.getElementById("scoreN"),
+              n = 0;
+            if (reduce) {
+              el.textContent = 67;
+            } else {
+              var t = setInterval(function () {
+                el.textContent = ++n;
+                if (n >= 67) clearInterval(t);
+              }, 22);
+            }
+            setTimeout(
+              function () {
+                document.getElementById("f1").classList.add("on");
+              },
+              reduce ? 0 : 1300,
+            );
+          },
+          { threshold: 0.35 },
+        ).observe(p);
+      })();
+    </script>
+</Base>

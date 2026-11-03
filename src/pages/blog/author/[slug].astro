@@ -1,0 +1,87 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Reveal from "../../../components/Reveal.astro";
+import PostCard from "../../../components/PostCard.astro";
+import { getPosts, getAuthors, indexable, authorHref, sized, type Author, type Post } from "../../../sanity/posts";
+import { absolute, breadcrumbs } from "../../../site";
+import "../../../styles/base.css";
+import "../../../styles/pages/blog.css";
+
+export async function getStaticPaths() {
+  const [authors, posts] = await Promise.all([getAuthors(), getPosts()]);
+  return authors.map((author) => ({
+    params: { slug: author.slug },
+    props: { author, posts: indexable(posts).filter((p) => p.author?.slug === author.slug) },
+  }));
+}
+
+const { author, posts } = Astro.props as { author: Author; posts: Post[] };
+const path = authorHref(author.slug!);
+const photo = author.image && sized(author.image, 240);
+const description = author.bio?.slice(0, 160) ?? `Posts by ${author.name} on the Y2O blog.`;
+
+const person = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: author.name,
+    url: absolute(path, Astro.site),
+    ...(author.role && { jobTitle: author.role }),
+    ...(author.bio && { description: author.bio }),
+    ...(author.image && { image: `${author.image.url}?w=400&auto=format` }),
+    ...(author.links?.length && { sameAs: author.links }),
+  },
+};
+---
+
+<Base
+  title={`${author.name} · Y2O Blog`}
+  description={description}
+  current="/blog"
+  noindex={posts.length === 0}
+  schema={[
+    person,
+    breadcrumbs(
+      [
+        { name: "Blog", path: "/blog" },
+        { name: author.name, path },
+      ],
+      Astro.site,
+    ),
+  ]}
+>
+  <header class="hero" style="padding-bottom: 60px">
+    <div class="wrap author-head">
+      {photo && <img class="author-photo rv" src={photo.src} width="120" height="120" alt="" />}
+      <div>
+        <nav class="tag rv" aria-label="Breadcrumb"><a href="/blog">Blog</a> / Author</nav>
+        <h1 class="rv d1">{author.name}</h1>
+        {author.role && <p class="author-role rv d1">{author.role}</p>}
+        {author.bio && <p class="sub rv d2">{author.bio}</p>}
+        {
+          author.links?.length ? (
+            <p class="author-links rv d2">
+              {author.links.map((l) => (
+                <a href={l} rel="me noopener" target="_blank">
+                  {new URL(l).hostname.replace(/^www\./, "")}
+                </a>
+              ))}
+            </p>
+          ) : null
+        }
+      </div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="wrap">
+      {posts.length === 0 && <p class="lead">No posts yet.</p>}
+      <div class="posts">
+        {posts.map((p) => <PostCard post={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <Reveal slot="scripts" />
+</Base>

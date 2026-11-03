@@ -1,0 +1,18 @@
+---
+// FAQ block inside a post body. FAQPage JSON-LD for it is still to be added.
+const { node } = Astro.props;
+const items = (node.items ?? []).filter((i: { question?: string; answer?: string }) => i.question && i.answer);
+---
+
+{
+  items.length > 0 && (
+    <section class="faq">
+      {items.map((i: { question: string; answer: string }) => (
+        <details>
+          <summary>{i.question}</summary>
+          <p>{i.answer}</p>
+        </details>
+      ))}
+    </section>
+  )
+}

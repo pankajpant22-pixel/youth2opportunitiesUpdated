@@ -1,0 +1,9 @@
+---
+// Callout block inside a post body (tone: info, tip or warning).
+const { node } = Astro.props;
+---
+
+<aside class:list={["callout", `callout-${node.tone ?? "info"}`]}>
+  {node.title && <strong>{node.title}</strong>}
+  <p>{node.body}</p>
+</aside>

@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/404.css";
+---
+
+<Base title={"Page not found · Y2O"} description={"This page does not exist."} noindex>
+<header class="hero nf">
+  <div class="wrap">
+    <div class="code rv">404</div>
+    <h1
+      class="rv d1"
+      style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 16px"
+    >
+      This page doesn't exist
+    </h1>
+    <p class="sub rv d2">It may have moved. Your record is still safe.</p>
+    <div class="actions rv d3">
+      <a class="btn btn-primary" href="index.html">Go to the homepage</a
+      ><a class="btn btn-ghost" href="contact.html">Create your account</a>
+    </div>
+  </div>
+</header>
+  <Reveal slot="scripts" />
+</Base>

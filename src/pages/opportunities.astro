@@ -1,0 +1,489 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/opportunities.css";
+---
+
+<Base title={"Opportunities · Y2O"} description={"Volunteering, jobs, programs, and scholarships from Ontario organizations, matched to what students have already built."} current="/opportunities">
+<header class="hero">
+  <div class="wrap">
+    <span class="tag rv">Opportunities</span>
+    <h1 class="rv d1">Opportunities that <em>fit you</em></h1>
+    <div class="motto rv d2">
+      <span>Volunteering</span><span>Jobs</span><span>Programs</span
+      ><span>Scholarships</span>
+    </div>
+    <p class="sub rv d2">
+      From Ontario organizations, matched to what you've already built.
+    </p>
+    <div class="actions rv d3">
+      <a class="btn btn-primary" href="contact.html">Create your account</a
+      ><a class="btn btn-ghost" href="#orgs">For organizations</a>
+    </div>
+  </div>
+  <div class="wrap stage">
+    <div class="product narrow" id="product">
+      <div class="panel">
+        <div class="ptop">
+          <div class="who">
+            <div class="av">Y</div>
+            <div><b>For you</b><span>Based on your record</span></div>
+          </div>
+          <span class="chip">Live Now</span>
+        </div>
+        <div class="feedp">
+          <div class="filters">
+            <span class="on">All</span><span>Volunteering</span
+            ><span>Jobs</span><span>Programs</span><span>Scholarships</span>
+          </div>
+          <div class="oi j new" data-delay="1100">
+            <div class="ic">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+              </svg>
+            </div>
+            <div>
+              <b>Summer camp counsellor</b
+              ><small>Paid · July and August</small
+              ><span class="why">Fits your coaching hours</span>
+            </div>
+            <span class="fit">New</span>
+          </div>
+          <div class="oi v">
+            <div class="ic">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"
+                />
+              </svg>
+            </div>
+            <div>
+              <b>Event volunteer</b
+              ><small>Community food drive · weekends</small
+              ><span class="why">Fits your community hours</span>
+            </div>
+            <span class="fit">Good fit</span>
+          </div>
+          <div class="oi s">
+            <div class="ic">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="8" r="6" />
+                <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+              </svg>
+            </div>
+            <div>
+              <b>Youth leadership award</b
+              ><small>Scholarship · apply by spring</small
+              ><span class="why">Fits your People Strong progress</span>
+            </div>
+            <span class="fit">Good fit</span>
+          </div>
+          <div class="oi p">
+            <div class="ic">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"
+                />
+              </svg>
+            </div>
+            <div>
+              <b>Summer coding workshop</b><small>Free · two weeks</small
+              ><span class="why">Fits your Think Sharp progress</span>
+            </div>
+            <span class="fit">Good fit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">In the feed</span>
+      <h2 class="h2">Four kinds of opportunities</h2>
+      <p class="lead">
+        All from organizations that confirm student work on Y2O.
+      </p>
+    </div>
+    <div class="cats">
+      <div class="cat v rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"
+            />
+          </svg>
+        </div>
+        <h4>Volunteering</h4>
+        <p>Events, programs, and ongoing roles.</p>
+        <small>Food drives · tutoring · libraries</small>
+      </div>
+      <div class="cat j rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+          </svg>
+        </div>
+        <h4>Jobs</h4>
+        <p>Part-time and summer work.</p>
+        <small>Camps · retail · cafés</small>
+      </div>
+      <div class="cat s rv d2">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="8" r="6" />
+            <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+          </svg>
+        </div>
+        <h4>Scholarships</h4>
+        <p>Awards with deadlines you won't miss.</p>
+        <small>Leadership · community</small>
+      </div>
+      <div class="cat p rv d3">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"
+            />
+          </svg>
+        </div>
+        <h4>Programs</h4>
+        <p>Workshops, camps, and courses.</p>
+        <small>Coding · arts · leadership</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">For students</span>
+      <h2 class="h2">How matching works</h2>
+      <p class="lead">The more you log, the better the matches.</p>
+    </div>
+    <div class="steps4 steps3">
+      <div class="sc rv">
+        <div class="ic">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+          </svg>
+        </div>
+        <span class="lb">Step 1</span>
+        <h4>Build your record</h4>
+        <p>Log what you do and get it confirmed.</p>
+      </div>
+      <div class="sc rv d1">
+        <div class="ic">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+          </svg>
+        </div>
+        <span class="lb">Step 2</span>
+        <h4>See what fits</h4>
+        <p>Matched to your hours, skills, and interests.</p>
+      </div>
+      <div class="sc rv d2">
+        <div class="ic">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 12l2 2 4-4" />
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+        </div>
+        <span class="lb">Step 3</span>
+        <h4>Do it, get it confirmed</h4>
+        <p>It goes straight onto your record.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">What's different</span>
+      <h2 class="h2">Not another job board</h2>
+      <p class="lead">
+        Built on confirmed student records and trusted organizations.
+      </p>
+    </div>
+    <div class="cmp">
+      <div class="cm rv">
+        <div class="vs"><span>Job boards</span><b>Y2O</b></div>
+        <h4>Matched, not mass-posted</h4>
+        <p>You see what fits the record you've built.</p>
+      </div>
+      <div class="cm rv d1">
+        <div class="vs"><span>Volunteer sites</span><b>Y2O</b></div>
+        <h4>Proof, not just hours</h4>
+        <p>Finishing an opportunity adds confirmed proof.</p>
+      </div>
+      <div class="cm rv d2">
+        <div class="vs"><span>Bulletin boards</span><b>Y2O</b></div>
+        <h4>Trusted organizations</h4>
+        <p>Every listing comes from an organization on Y2O.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark" id="orgs">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag on-dark">For organizations</span>
+      <h2 class="h2">Have a role for young people?</h2>
+      <p class="lead">Post it from your free organization account.</p>
+    </div>
+    <div class="orgrow">
+      <div class="dk rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </div>
+        <h4>Post from your account</h4>
+        <p>Role, dates, location, and who it's for.</p>
+      </div>
+      <div class="dk rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+          </svg>
+        </div>
+        <h4>We match it</h4>
+        <p>Students whose record fits will see it.</p>
+      </div>
+      <div class="dk rv d2">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 12l2 2 4-4" />
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+        </div>
+        <h4>Confirm their work</h4>
+        <p>One tap when they're done.</p>
+      </div>
+    </div>
+    <div class="orgcta rv">
+      <a class="btn btn-primary" href="contact.html"
+        >Create an organization account</a
+      ><a class="btn btn-line-light" href="partners.html"
+        >More for partners</a
+      >
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap faq">
+    <div class="rv">
+      <span class="tag">FAQ</span>
+      <h2 class="h2">Questions about opportunities</h2>
+      <p class="lead" style="font-size: 18px">
+        Still wondering?
+        <a
+          href="mailto:info@youth2opportunities.ca"
+          style="color: var(--maroon); font-weight: 700"
+          >info@youth2opportunities.ca</a
+        >
+      </p>
+    </div>
+    <div class="qa rv d1">
+      <details open>
+        <summary>Is the feed live?<span class="pl">+</span></summary>
+        <p>
+          Yes. Students and organizations across Ontario are using it now.
+        </p>
+      </details>
+      <details>
+        <summary>
+          How are opportunities matched?<span class="pl">+</span>
+        </summary>
+        <p>
+          By what's on your record: your activities, hours, and the skills
+          you're building.
+        </p>
+      </details>
+      <details>
+        <summary>Who can post?<span class="pl">+</span></summary>
+        <p>
+          Organizations with a Y2O account: charities, employers, camps,
+          programs, and scholarship providers.
+        </p>
+      </details>
+      <details>
+        <summary>Does it cost anything?<span class="pl">+</span></summary>
+        <p>
+          No. Browsing is free for students. Posting is free for
+          organizations.
+        </p>
+      </details>
+      <details>
+        <summary>
+          What happens when I finish one?<span class="pl">+</span>
+        </summary>
+        <p>
+          The organization confirms it and it's added to your record as
+          verified.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 40px">
+  <div class="wrap">
+    <div class="cta rv">
+      <div>
+        <span class="tag on-dark">Live now</span>
+        <h2>Find your next thing</h2>
+        <p>Build your record and see what fits.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="contact.html"
+          >Create your account</a
+        ><a class="btn btn-line-light" href="partners.html"
+          >I'm an organization</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+  <Reveal slot="scripts" />
+</Base>

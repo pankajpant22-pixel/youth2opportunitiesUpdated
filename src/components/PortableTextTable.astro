@@ -1,0 +1,27 @@
+---
+// Table block inside a post body; the first row becomes the header when headerRow is set.
+const { node } = Astro.props;
+const rows: string[][] = (node.rows ?? []).map((r: { cells?: string[] }) => r.cells ?? []);
+const head = node.headerRow ? rows[0] : undefined;
+const body = head ? rows.slice(1) : rows;
+---
+
+{
+  rows.length > 0 && (
+    <div class="table-wrap">
+      <table>
+        {node.caption && <caption>{node.caption}</caption>}
+        {head && (
+          <thead>
+            <tr>{head.map((c) => <th scope="col">{c}</th>)}</tr>
+          </thead>
+        )}
+        <tbody>
+          {body.map((r) => (
+            <tr>{r.map((c) => <td>{c}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}

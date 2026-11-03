@@ -1,0 +1,404 @@
+---
+import Base from "../layouts/Base.astro";
+import Reveal from "../components/Reveal.astro";
+import "../styles/base.css";
+import "../styles/pages/contact.css";
+---
+
+<Base title={"Create your account · Y2O"} description={"Create your free Y2O account as a student or organization. Institutions can become partners. Parents get a link from their teen."}>
+<header class="hero" style="padding-bottom: 100px">
+  <div class="wrap">
+    <span class="tag rv">Live now in Ontario</span>
+    <h1 class="rv d1">Create your <em>account</em></h1>
+    <p class="sub rv d2">Pick who you are. Setup takes about a minute.</p>
+    <div class="roles4">
+      <div class="rc s rv">
+        <div class="top">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 10 12 5 2 10l10 5 10-5Z" />
+              <path d="M6 12v5c3 2.5 9 2.5 12 0v-5" />
+            </svg>
+          </div>
+          <span class="lv">Free</span>
+        </div>
+        <h3>Student</h3>
+        <p>Grade 9 to 12. Build your record.</p>
+        <ul>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Log activities
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Get them confirmed
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >See matched opportunities
+          </li>
+        </ul>
+        <a class="btn btn-primary" data-signup="student" href="#"
+          >Create student account</a
+        >
+      </div>
+      <div class="rc o rv d1">
+        <div class="top">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+              <path
+                d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"
+              />
+            </svg>
+          </div>
+          <span class="lv">Free</span>
+        </div>
+        <h3>Organization</h3>
+        <p>Confirm youth work and post opportunities.</p>
+        <ul>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Assign supervisors
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >One dashboard
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Post opportunities
+          </li>
+        </ul>
+        <a class="btn btn-ghost" data-signup="organization" href="#"
+          >Create organization account</a
+        >
+      </div>
+      <div class="rc i rv d2">
+        <div class="top">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="8" r="6" />
+              <path d="M15.5 13 17 22l-5-3-5 3 1.5-9" />
+            </svg>
+          </div>
+          <span class="lv">Partnership</span>
+        </div>
+        <h3>Institution</h3>
+        <p>Universities, colleges, employers, scholarships.</p>
+        <ul>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Anonymised insights
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Opt-in discovery (coming soon)
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Shared records
+          </li>
+        </ul>
+        <a
+          class="btn btn-ghost"
+          href="mailto:info@youth2opportunities.ca?subject=Institutional%20partnership"
+          >Become a partner</a
+        >
+      </div>
+      <div class="rc p rv d3">
+        <div class="top">
+          <div class="ic">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+              <path d="M9 22V12h6v10" />
+            </svg>
+          </div>
+          <span class="lv">No sign-up</span>
+        </div>
+        <h3>Parent</h3>
+        <p>Follow your teen's record.</p>
+        <ul>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Your teen sends a link
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >Read-only view
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" /></svg
+            >No account needed
+          </li>
+        </ul>
+        <div class="note">
+          Ask your teen to share their record with you from their Y2O
+          account.
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec soft">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="tag">Get in touch</span>
+      <h2 class="h2">Other ways to reach us</h2>
+    </div>
+    <div class="reach">
+      <div class="rh rv">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-10 6L2 7" />
+          </svg>
+        </div>
+        <div>
+          <h4>General questions</h4>
+          <p>Students, families, schools, media.</p>
+          <a href="mailto:info@youth2opportunities.ca"
+            >info@youth2opportunities.ca</a
+          >
+        </div>
+      </div>
+      <div class="rh rv d1">
+        <div class="ic">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </div>
+        <div>
+          <h4>Privacy</h4>
+          <p>Your data and your record.</p>
+          <a href="mailto:privacy@youth2opportunities.ca"
+            >privacy@youth2opportunities.ca</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap faq">
+    <div class="rv">
+      <span class="tag">FAQ</span>
+      <h2 class="h2">Before you sign up</h2>
+    </div>
+    <div class="qa rv d1">
+      <details open>
+        <summary>Is it free for students?<span class="pl">+</span></summary>
+        <p>Yes. Building and sharing your record is free.</p>
+      </details>
+      <details>
+        <summary>
+          How do parents get access?<span class="pl">+</span>
+        </summary>
+        <p>
+          Parents don't sign up. Your teen sends you a secure link to their
+          record.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Is it free for organizations?<span class="pl">+</span>
+        </summary>
+        <p>
+          Yes. Organization accounts, confirming, and posting opportunities
+          are free.
+        </p>
+      </details>
+      <details>
+        <summary>Where is Y2O available?<span class="pl">+</span></summary>
+        <p>Live now in Ontario, built for students across Canada.</p>
+      </details>
+    </div>
+  </div>
+</section>
+<script is:inline>
+  var SIGNUP_URL = "https://youth2opportunities-web-app.vercel.app";
+  document.querySelectorAll("[data-signup]").forEach(function (a) {
+    a.href = SIGNUP_URL + "?role=" + a.getAttribute("data-signup");
+    // a.target = "_blank";
+    a.rel = "noopener noreferrer";
+  });
+</script>
+  <Reveal slot="scripts" />
+</Base>

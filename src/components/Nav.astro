@@ -1,0 +1,30 @@
+---
+import { NAV_ITEMS } from "../nav";
+
+interface Props {
+  current?: string;
+}
+const { current } = Astro.props;
+---
+
+<div class="announce" id="announce">
+  <a class="live" href="/share-your-story" style="display:flex;width:fit-content;margin:0 auto;border-bottom:0">No Small Feat: share a real story beyond grades. Share yours →</a>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="/"><img src="/assets/y2o-logo.png" alt="Y2O" /></a>
+    <div class="links">
+      {NAV_ITEMS.map((i) => <a class:list={[{ cur: current === i.href }]} href={i.href}>{i.label}</a>)}
+    </div>
+    <a class="btn btn-primary" href="/contact">Create account</a>
+    <button class="menu" aria-label="Open menu" onclick="document.getElementById('mob').classList.toggle('open')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile" id="mob">
+    {NAV_ITEMS.map((i) => <a href={i.href}>{i.label}</a>)}<a class="btn btn-primary" href="/contact">Create account</a>
+  </div>
+</nav>
