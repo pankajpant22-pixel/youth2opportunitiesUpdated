@@ -6,6 +6,6 @@ export const NAV_ITEMS = [
   { href: "/institutions", label: "Institutions" },
   { href: "/opportunities", label: "Opportunities" },
   { href: "/research", label: "Insights" },
-  { href: "/blog", label: "Blog" },
+  // { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];
